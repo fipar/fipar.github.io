@@ -1,0 +1,18 @@
+#+TITLE: fipar.github.io 
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.css" />
+* Contact 
+You can email me at fipar(at)acm(dot)org, or find me on freenode as
+fipar or nandix.  
+* Work
+I currently work at Percona as a [[https://www.percona.com/about-us/our-team/fernando-ipar
+][Senior Consultant]]
+* Blog 
+I have a [[http://fernandoipar.com][personal blog]] (with mostly technical oriented content), and I
+also contributed to [[https://www.percona.com/blog/author/fernando/][Percona's Blog]]
+* Code
+I have not been working as a full time programmer for a few years now,
+but you can still find some repos with my code here: 
+- http://github.com/fipar/ 
+- https://launchpad.net/~fipar
+- http://www.ohloh.net/accounts/nandix
+- http://sourceforge.net/users/fipar/ (unmaintained)
