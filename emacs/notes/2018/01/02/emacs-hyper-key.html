@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Expanding your keyboard on emacs with the Hyper key</title>
+  <meta name="description" content=""Tell my wife I love her very much, she knows"
+" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="canonical" href="http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html">
+
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+<!--  <link rel="stylesheet" href=""> -->
+  <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+
+<!-- header end -->
+
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">Expanding your keyboard on emacs with the Hyper key</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">Fernando Ipar</h4>
+              on
+              <time datetime="2018-01-02T00:00:00-06:00">02 Jan 2018</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p>I recently stumbled upon the hyper and super keys on emacs <a href="http://ergoemacs.org/emacs/emacs_hyper_super_keys.html">here</a>. </p>
+
+<p>What I like about this setup is that I rarely use the Function key in my day to day usage, so this is making good use of a key that&#39;s both mostly unused and conveniently located in my keyboard, to the effect of running potentially complex tasks (like exporting the currently selected org mode subtree to a pdf and opening it) with just two keys. </p>
+
+<p><img src="/assets/images/emacs-hyper-key.png" alt="Because every blog post needs a Featured Image"></p>
+
+<p>Here&#39;s my current configuration:</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">;; hyper key shortcuts: http://ergoemacs.org/emacs/emacs_hyper_super_keys.html
+(setq ns-function-modifier &#39;hyper)  ; make Fn key do Hyper
+
+(global-set-key (kbd &quot;H-a&quot;) &#39;org-agenda)
+(global-set-key (kbd &quot;H-d&quot;) &#39;delete-other-windows)
+(global-set-key (kbd &quot;H-i&quot;) &#39;org-clock-in)
+(global-set-key (kbd &quot;H-o&quot;) &#39;org-clock-out)
+(global-set-key (kbd &quot;H-s&quot;) &#39;org-schedule)
+(global-set-key (kbd &quot;H-b&quot;) &#39;ido-switch-buffer)
+(global-set-key (kbd &quot;H-r&quot;) &#39;org-archive-subtree-default)
+(global-set-key (kbd &quot;H-m&quot;) &#39;evil-mc-make-all-cursors)
+(global-set-key (kbd &quot;H-n&quot;) &#39;evil-mc-undo-all-cursors)
+(global-set-key (kbd &quot;H-k&quot;) &#39;epa-encrypt-region)
+(global-set-key (kbd &quot;H-l&quot;) &#39;epa-decrypt-region)
+(global-set-key (kbd &quot;H-j&quot;) &#39;eww)
+(global-set-key (kbd &quot;H-v&quot;) &#39;darkroom-mode)
+(global-set-key (kbd &quot;H-x&quot;) &#39;toggle-frame-fullscreen)
+
+
+(defun open-ansi-term-localhost ()
+(interactive)
+(ansi-term &quot;/bin/bash&quot; &quot;localhost&quot;))
+
+(global-set-key (kbd &quot;H-t&quot;) &#39;open-ansi-term-localhost)
+;; C-c C-e C-s l o  export current subtree to latex pdf and open
+(global-set-key (kbd &quot;H-e&quot;) (kbd &quot;C-c C-e C-s l o&quot;))
+;; same, but html buffer and open
+(global-set-key (kbd &quot;H-w&quot;) (kbd &quot;C-c C-e C-s h H&quot;))
+;; same, but ascii and open
+(global-set-key (kbd &quot;H-q&quot;) (kbd &quot;C-c C-e C-s t A&quot;))
+;; plain org export
+(global-set-key (kbd &quot;H-y&quot;) &#39;org-export-dispatch) 
+;; org capture
+(global-set-key (kbd &quot;H-c&quot;) &#39;org-capture) 
+;; eval lisp
+(global-set-key (kbd &quot;H-z&quot;) &#39;org-ctrl-c-ctrl-c)
+</code></pre></figure>
+<p>Something interesting here is that the target can be a function or another keyboard combination. The latter is useful if you can&#39;t easily find the function you want, or if you want to pass arguments along with it, like I am doing in my org export shortcuts.</p>
+
+<p>As for how to keep up with the growing amount of hyper key based shortcuts, I am using the old school technology of little sticker labels with a descriptive text on each key. It&#39;s cheap and works wonders until I build the corresponding muscle memory. </p>
+
+<p>Nothing groundbreaking for seasoned emacs users but I thought it could be useful to newbies such as myself (I have been using the editor in one form or another for several years already, but with evil-mode, and using only a small subset of its features). </p>
+
+        </section>
+<!-- fi-posts -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'fipar';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a
+    href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+    powered by Disqus.</a></noscript>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4>Fernando Ipar</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2018-01-02 00:00">02 Jan 2018</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Fernando Ipar</a> &copy; 2018<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url(/assets/images/horizon.jpg)">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fernando Ipar</h1>
+        <h2 class="blog-description">"Tell my wife I love her very much, she knows"
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+
+  </body>
+</html>

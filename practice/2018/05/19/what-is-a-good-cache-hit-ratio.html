@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>What is a good cache hit ratio?</title>
+  <meta name="description" content=""Tell my wife I love her very much, she knows"
+" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="canonical" href="http://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html">
+
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+<!--  <link rel="stylesheet" href=""> -->
+  <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+
+<!-- header end -->
+
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">What is a good cache hit ratio?</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">Fernando Ipar</h4>
+              on
+              <time datetime="2018-05-19T00:00:00-05:00">19 May 2018</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p>What is a good cache hit ratio?</p>
+
+<p>Taking MySQL as an example: what is a good query cache hit ratio?</p>
+
+<p>At the time of writing this, I get over 600 results if I enter that question into Google and limit the results to stackexchange.com. If I change &#39;ratio&#39; to &#39;rate,&#39; that increases to over 3000 results, which makes sense, as most people argue that it&#39;s the rate what you usually want to know about.</p>
+
+<p>There are several answers to any of these questions, but I prefer to borrow from <a href="https://en.wikipedia.org/wiki/G%C3%B6del,_Escher,_Bach">Hofstadter&#39;s</a> and <a href="https://en.wikipedia.org/wiki/Zen_and_the_Art_of_Motorcycle_Maintenance">Pirsig&#39;s</a> interpretation of a Zen Koan and answer <a href="https://en.wikipedia.org/wiki/Mu_(negative)#%22Unasking%22_the_question">&#39;Mu&#39;</a>: unask the question.</p>
+
+<p>What that means to me (and I am aware this is my interpretation of other people&#39;s interpretation of a concept in a culture foreign to them) is that it does not make sense to answer the question given the context. To be more specific, I don&#39;t think a (MySQL query) cache hit ratio can be good or bad. It can tell us something about a workload but nothing more. Additionally, what it tells us is aggregate information about this workload.</p>
+
+<p>Let&#39;s say the hit rate is 60% hits over an hour. It does not tell us which queries were hits and which misses, nor what is the range of response time for a given query fingerprint (to borrow <a href="https://www.percona.com/doc/percona-toolkit/LATEST/pt-query-digest.html">pt-query-digest&#39;s</a> term). Without this info, it does not tell us if the query cache is beneficial for the workload or not. The same applies for a hit rate of 90% hits over an hour, by the way, as explained by Peter Zaitsev for memcached in <a href="https://www.percona.com/blog/2010/05/19/beyond-great-cache-hit-ratio/">this post</a>. </p>
+
+<p>The reason I think this is not a valid question, at least not in a broad performance optimization/application health check context is that it tells us nothing about the things that actually matter about a database: is work being done at the rate and response time the client (or users) expect? Quoting <a href="http://shop.oreilly.com/product/9780596005276.do">Cary Millsap</a>, there are only three acceptable units for (database) statistics that make sense to end users:</p>
+
+<ul>
+<li><p>your local currency</p></li>
+<li><p>The duration by which you’ll improve someone’s response time</p></li>
+<li><p>The number of business actions per unit of time by which you’ll improve someone’s throughput</p></li>
+</ul>
+
+<p>A cache hit rate is measured in hits by time, which is none of the above because such a ratio tells you nothing useful about costs (or savings), response time or throughput.</p>
+
+        </section>
+<!-- fi-posts -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'fipar';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a
+    href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+    powered by Disqus.</a></noscript>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4>Fernando Ipar</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2018-05-19 00:00">19 May 2018</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Fernando Ipar</a> &copy; 2018<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url(/assets/images/horizon.jpg)">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fernando Ipar</h1>
+        <h2 class="blog-description">"Tell my wife I love her very much, she knows"
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+
+  </body>
+</html>

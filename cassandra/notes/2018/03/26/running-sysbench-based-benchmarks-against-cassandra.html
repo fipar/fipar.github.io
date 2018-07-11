@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Running sysbench-based benchmarks against Cassandra</title>
+  <meta name="description" content=""Tell my wife I love her very much, she knows"
+" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="canonical" href="http://fernandoipar.com/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html">
+
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+<!--  <link rel="stylesheet" href=""> -->
+  <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+
+<!-- header end -->
+
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">Running sysbench-based benchmarks against Cassandra</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">Fernando Ipar</h4>
+              on
+              <time datetime="2018-03-26T00:00:00-05:00">26 Mar 2018</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p><em>This article is a cross post from <a href="https://blog.pythian.com/running-sysbench-based-benchmarks-against-cassandra/">Pythian&#39;s blog</a></em></p>
+
+<p>I was recently discussing benchmarking options for Cassandra with some colleagues and given my background with MySQL, sysbench was the first tool I thought of.</p>
+
+<p>Sysbench is a high performance and flexible benchmark tool that can be used to run both Database and Operating System based experiments. In case you’re not familiar with it, there’s an excellent introduction to it by my colleague Martin Arrieta here.</p>
+
+<p>One interesting thing about this tool is that while it includes out of the box support for MySQL and PostgreSQL, it uses Lua for scripting so other databases can be supported provided there’s a Lua driver for it.</p>
+
+<p>Naturally, that means my quest for a way to run sysbench against Cassandra started with the search for a Cassandra Lua driver, which led me to https://github.com/thibaultcha/lua-cassandra</p>
+
+<p>The next task was looking for a simple way to deploy benchmark clients without the need to install dependencies on the host OS. These days my answer to that involves Docker and what I found for this was a handy image from Severalnines: https://hub.docker.com/r/severalnines/sysbench/</p>
+
+<p>This image was a good starting point but did not fully support my use case as I need to install custom Lua modules on the container, which requires installing some additional packages on it.</p>
+
+<p>Given my full stack for this is Open Source I went ahead and modified the Dockerfile for this image to add what I needed.
+I felt this was a change that could benefit others too as I’m probably not the only one using sysbench to run experiments against databases that don’t have a driver bundled with it, so I submitted the following PR which has been merged already: https://github.com/ashraf-s9s/sysbench-docker/pull/1</p>
+
+<p>Putting it all together, I can now launch sysbench against a Cassandra cluster to test the performance of different schemas and workloads.</p>
+
+<p>To give a simple example let’s consider the following Lua script:</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">    #!/usr/bin/env sysbench
+
+    function event()
+    local cassandra = require &quot;cassandra&quot;
+
+    local peer= assert(cassandra.new {
+    host = &quot;172.17.0.2&quot;,
+    port = 9042,
+    keyspace = &quot;test&quot;
+    })
+
+    assert(peer:connect())
+
+    assert(peer:execute(&quot;select * from user&quot;))
+    peer:close()
+    end
+</code></pre></figure>
+<p>A couple of comments about the script:</p>
+
+<p>172.17.0.2 is the IP address of the Cassandra node I want to connect to. In my case, this is another container, but be sure to change this as needed if you want to reproduce this test (or refer to this gist to see how I ran mine).
+For the script to work, the Cluster must have a ‘test’ keyspace with a ‘user’ table on it (as you can see from the query, the table structure does not matter here).
+We can use sysbench to execute it via docker like so:</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">    telecaster:sysbench-docker fipar$ docker run -v ~/src/:/src/ --name=sb -it severalnines/sysbench bash -c &#39;luarocks install lua-cassandra --local; luarocks install luasocket --local; /src/tmp/benchmark1.lua run&#39;
+    Warning: The directory &#39;/root/.cache/luarocks&#39; or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing /usr/local/lib/luarocks/rocks/luarocks/2.4.3-1/bin/luarocks with sudo, you may want sudo&#39;s -H flag.
+    Installing https://luarocks.org/lua-cassandra-1.2.3-0.rockspec
+    ...snip...
+    Installing https://luarocks.org/luasocket-3.0rc1-2.src.rock
+    ...snip...
+    sysbench 1.0.13 (using bundled LuaJIT 2.1.0-beta2)
+
+    Running the test with following options:
+    Number of threads: 1
+    Initializing random number generator from current time
+
+
+    Initializing worker threads...
+
+    Threads started!
+
+
+    General statistics:
+    total time:                          10.0017s
+    total number of events:              2792
+
+    Latency (ms):
+        min:                                    2.17
+        avg:                                    3.57
+        max:                                   48.12
+        95th percentile:                        4.65
+        sum:                                 9958.60
+
+    Threads fairness:
+    events (avg/stddev):           2792.0000/0.00
+    execution time (avg/stddev):   9.9586/0.00
+</code></pre></figure>
+<p>You can see I am installing the required Lua modules when starting the container. If a benchmark will be executed several times (which is usually the case) a better approach would be to further customize the Dockerfile to include the necessary modules. I have not done that in the PR though because I think that would bloat the existing image. You can also see that I’m making my machine’s src directory available on the container via the -v ~/src/:/src/. That’s why I can then execute the script from /src/ on the container. Be sure to adjust this as needed to point to a directory tree where the lua script can be found on your machine.</p>
+
+<p>In conclusion, if you have benchmarking needs and have not considered sysbench, don’t be put off if your database of choice is not listed as supported: as long as there’s a Lua driver for it there’s a good chance that you will be able to use sysbench for the task!</p>
+
+        </section>
+<!-- fi-posts -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'fipar';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a
+    href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+    powered by Disqus.</a></noscript>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4>Fernando Ipar</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2018-03-26 00:00">26 Mar 2018</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Fernando Ipar</a> &copy; 2018<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url(/assets/images/horizon.jpg)">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fernando Ipar</h1>
+        <h2 class="blog-description">"Tell my wife I love her very much, she knows"
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+
+  </body>
+</html>

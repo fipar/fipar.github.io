@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Intrusion detection at the application level, for PHP</title>
+  <meta name="description" content=""Tell my wife I love her very much, she knows"
+" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="canonical" href="http://fernandoipar.com/programming/2009/01/19/intrusion-detection-at-the-application-level-for-php.html">
+
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+<!--  <link rel="stylesheet" href=""> -->
+  <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+
+<!-- header end -->
+
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">Intrusion detection at the application level, for PHP</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">Fernando Ipar</h4>
+              on
+              <time datetime="2009-01-19T19:19:54-06:00">19 Jan 2009</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p>Here's <a title="Intrusion Detection System for PHP" href="http://php-ids.org/" target="_self">phpids</a>, an Intrusion Detection System for PHP.</p>
+
+<p>According to the site, it aims to counter XSS, SQL Injection, header injection, directory traversal, RFE/LFI, DoS and LDAP attacks, and unknown attack patterns,  through it's Centrifuge component.</p>
+
+<p>Installation is simple. Just download it, copy the lib directory to a directory in your project structure, or add it to your <code>include_path</code>.</p>
+
+<p>I actually chose a mix of both ways, so it's automatically included when I distribute my applications.</p>
+
+<p>Here's how to use it:</p>
+
+<p><code><br />
+ini_set('include_path',ini_get('include_path').PATH_SEPARATOR.PRIVATE_ROOT.DIRECTORY_SEPARATOR.'phpids'.DIRECTORY_SEPARATOR.'lib');<br />
+</code><br />
+Here we're just modifying the include path in order to add phpids.<br />
+PRIVATE_ROOT is a constant that I've defined in my app, which defines the root of the application. This is not accessible from the web server (following the recommendation of the <a href="http://phpsec.org/projects/guide/1.html#1.4.1">Dispatch</a> method, from the <a href="http://phpsec.org">PHP Security Consortium</a>. However, this is a particular case, in most situations, I'd recommend using a framework that already takes a similar pattern into account, like <a href="http://cakephp.org/">CakePHP</a>).<br />
+phpids is where I've copied this IDS. The downloaded package has a similar root directory name, like phpids-x.y.n, depending on the version number.</p>
+
+<p><code><br />
+require_once 'IDS/Init.php';<br />
+</code></p>
+
+<p>Require the Init.php file</p>
+
+<p>Then, whenever you need to access the request variables (in my case, this was just in one point in my application so I just had to modify one function), add something like this:</p>
+
+<p><code><br />
+$request = array(<br />
+'REQUEST' =&gt; $_REQUEST,<br />
+'GET' =&gt; $_GET,<br />
+'POST' =&gt; $_POST,<br />
+'COOKIE' =&gt; $_COOKIE<br />
+);<br />
+$init = IDS_Init::init(PRIVATE_ROOT. DIRECTORY_SEPARATOR .'phpids'.DIRECTORY_SEPARATOR.'lib/IDS/Config/Config.ini');</code></p>
+
+<p>$ids = new IDS_Monitor($request, $init);<br />
+$result = $ids-&gt;run();</p>
+
+<p>if (!$result-&gt;isEmpty()) {<br />
+trigger_error($result);<br />
+}</p>
+
+<p>If the $result object is not empty, the IDS detected an attack attempt and therefore you should stop processing the request.</p>
+
+<p>And now the fun part.</p>
+
+<p>In order to test this, I set up a very simple, very insecure test page.<br />
+Here's the php code:</p>
+
+<pre>error_reporting(E_ALL);
+ini_set('include_path',ini_get('include_path').':'.'../src/phpids/lib');
+require 'IDS/Init.php';
+function checkIds()
+{
+   $request = array(
+     'REQUEST' =&gt; $_REQUEST,
+     'GET' =&gt; $_GET,
+     'POST' =&gt; $_POST,
+     'COOKIE' =&gt; $_COOKIE
+);
+
+$init = IDS_Init::init('/home/fipar/workspace/at-intranet/src/phpids/lib/IDS/Config/Config.ini');
+$ids = new IDS_Monitor($request,$init);
+$result = $ids-&gt;run();
+if (!$result-&gt;isEmpty()) {
+     trigger_error($result);
+}
+}
+
+if (isset($_REQUEST['sql'])) {
+     checkIds();
+     $sql = $_REQUEST['sql'];
+     print 'Form says '.$sql.'
+';
+}</pre>
+
+<p>The html page has just an input type text with the name 'sql', and a submit button.</p>
+
+<p>I tried the following inputs:</p>
+
+<ul>
+<li>Hello, which goes by ok</li>
+<li>' and 1, which generates errors for the REQUEST and POST variables, stating<br />
+<blockquote><p>Detects classic SQL injection probings 1/2 | Tags: sqli, id, lfi | ID: 42</p></blockquote>
+</li>
+<li>&lt;a href="http://www.google.com"&gt;www.google.com&lt;/a&gt;, which generates errors for the REQUEST and POST variables, stating<br />
+<blockquote>
+<ul>
+<li>finds html breaking injections including whitespace attacks | Tags: xss, csrf | ID: 1</li>
+<li>Detects JavaScript object properties and methods | Tags: xss, csrf, id, rfe | ID: 17</li>
+<li>Detects basic SQL authentication bypass attempts 2/3 | Tags: sqli, id, lfi | ID: 45</li>
+</ul>
+
+<p></blockquote>
+</li>
+</ul></p>
+
+        </section>
+<!-- fi-posts -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'fipar';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a
+    href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+    powered by Disqus.</a></noscript>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4>Fernando Ipar</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2009-01-19 19:19">19 Jan 2009</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Fernando Ipar</a> &copy; 2018<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url(/assets/images/horizon.jpg)">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fernando Ipar</h1>
+        <h2 class="blog-description">"Tell my wife I love her very much, she knows"
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+
+  </body>
+</html>

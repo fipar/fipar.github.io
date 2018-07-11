@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fernando Ipar</title>
+    <description>&quot;Tell my wife I love her very much, she knows&quot;
+</description>
+    <link>http://fernandoipar.com/</link>
+    <atom:link href="http://fernandoipar.com/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Fri, 25 May 2018 19:15:12 -0500</pubDate>
+    <lastBuildDate>Fri, 25 May 2018 19:15:12 -0500</lastBuildDate>
+    <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>What is a good cache hit ratio?</title>
+        <description>&lt;p&gt;What is a good cache hit ratio?&lt;/p&gt;
+
+&lt;p&gt;Taking MySQL as an example: what is a good query cache hit ratio?&lt;/p&gt;
+
+&lt;p&gt;At the time of writing this, I get over 600 results if I enter that question into Google and limit the results to stackexchange.com. If I change &amp;#39;ratio&amp;#39; to &amp;#39;rate,&amp;#39; that increases to over 3000 results, which makes sense, as most people argue that it&amp;#39;s the rate what you usually want to know about.&lt;/p&gt;
+
+&lt;p&gt;There are several answers to any of these questions, but I prefer to borrow from &lt;a href=&quot;https://en.wikipedia.org/wiki/G%C3%B6del,_Escher,_Bach&quot;&gt;Hofstadter&amp;#39;s&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/Zen_and_the_Art_of_Motorcycle_Maintenance&quot;&gt;Pirsig&amp;#39;s&lt;/a&gt; interpretation of a Zen Koan and answer &lt;a href=&quot;https://en.wikipedia.org/wiki/Mu_(negative)#%22Unasking%22_the_question&quot;&gt;&amp;#39;Mu&amp;#39;&lt;/a&gt;: unask the question.&lt;/p&gt;
+
+&lt;p&gt;What that means to me (and I am aware this is my interpretation of other people&amp;#39;s interpretation of a concept in a culture foreign to them) is that it does not make sense to answer the question given the context. To be more specific, I don&amp;#39;t think a (MySQL query) cache hit ratio can be good or bad. It can tell us something about a workload but nothing more. Additionally, what it tells us is aggregate information about this workload.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#39;s say the hit rate is 60% hits over an hour. It does not tell us which queries were hits and which misses, nor what is the range of response time for a given query fingerprint (to borrow &lt;a href=&quot;https://www.percona.com/doc/percona-toolkit/LATEST/pt-query-digest.html&quot;&gt;pt-query-digest&amp;#39;s&lt;/a&gt; term). Without this info, it does not tell us if the query cache is beneficial for the workload or not. The same applies for a hit rate of 90% hits over an hour, by the way, as explained by Peter Zaitsev for memcached in &lt;a href=&quot;https://www.percona.com/blog/2010/05/19/beyond-great-cache-hit-ratio/&quot;&gt;this post&lt;/a&gt;. &lt;/p&gt;
+
+&lt;p&gt;The reason I think this is not a valid question, at least not in a broad performance optimization/application health check context is that it tells us nothing about the things that actually matter about a database: is work being done at the rate and response time the client (or users) expect? Quoting &lt;a href=&quot;http://shop.oreilly.com/product/9780596005276.do&quot;&gt;Cary Millsap&lt;/a&gt;, there are only three acceptable units for (database) statistics that make sense to end users:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;your local currency&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The duration by which you’ll improve someone’s response time&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The number of business actions per unit of time by which you’ll improve someone’s throughput&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A cache hit rate is measured in hits by time, which is none of the above because such a ratio tells you nothing useful about costs (or savings), response time or throughput.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 19 May 2018 00:00:00 -0500</pubDate>
+        <link>http://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</guid>
+        
+        <category>practice</category>
+        
+        <category>performance analysis</category>
+        
+        <category>databases</category>
+        
+        
+        <category>practice</category>
+        
+      </item>
+    
+      <item>
+        <title>Running sysbench-based benchmarks against Cassandra</title>
+        <description>&lt;p&gt;&lt;em&gt;This article is a cross post from &lt;a href=&quot;https://blog.pythian.com/running-sysbench-based-benchmarks-against-cassandra/&quot;&gt;Pythian&amp;#39;s blog&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I was recently discussing benchmarking options for Cassandra with some colleagues and given my background with MySQL, sysbench was the first tool I thought of.&lt;/p&gt;
+
+&lt;p&gt;Sysbench is a high performance and flexible benchmark tool that can be used to run both Database and Operating System based experiments. In case you’re not familiar with it, there’s an excellent introduction to it by my colleague Martin Arrieta here.&lt;/p&gt;
+
+&lt;p&gt;One interesting thing about this tool is that while it includes out of the box support for MySQL and PostgreSQL, it uses Lua for scripting so other databases can be supported provided there’s a Lua driver for it.&lt;/p&gt;
+
+&lt;p&gt;Naturally, that means my quest for a way to run sysbench against Cassandra started with the search for a Cassandra Lua driver, which led me to https://github.com/thibaultcha/lua-cassandra&lt;/p&gt;
+
+&lt;p&gt;The next task was looking for a simple way to deploy benchmark clients without the need to install dependencies on the host OS. These days my answer to that involves Docker and what I found for this was a handy image from Severalnines: https://hub.docker.com/r/severalnines/sysbench/&lt;/p&gt;
+
+&lt;p&gt;This image was a good starting point but did not fully support my use case as I need to install custom Lua modules on the container, which requires installing some additional packages on it.&lt;/p&gt;
+
+&lt;p&gt;Given my full stack for this is Open Source I went ahead and modified the Dockerfile for this image to add what I needed.
+I felt this was a change that could benefit others too as I’m probably not the only one using sysbench to run experiments against databases that don’t have a driver bundled with it, so I submitted the following PR which has been merged already: https://github.com/ashraf-s9s/sysbench-docker/pull/1&lt;/p&gt;
+
+&lt;p&gt;Putting it all together, I can now launch sysbench against a Cassandra cluster to test the performance of different schemas and workloads.&lt;/p&gt;
+
+&lt;p&gt;To give a simple example let’s consider the following Lua script:&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    #!/usr/bin/env sysbench
+
+    function event()
+    local cassandra = require &amp;quot;cassandra&amp;quot;
+
+    local peer= assert(cassandra.new {
+    host = &amp;quot;172.17.0.2&amp;quot;,
+    port = 9042,
+    keyspace = &amp;quot;test&amp;quot;
+    })
+
+    assert(peer:connect())
+
+    assert(peer:execute(&amp;quot;select * from user&amp;quot;))
+    peer:close()
+    end
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;A couple of comments about the script:&lt;/p&gt;
+
+&lt;p&gt;172.17.0.2 is the IP address of the Cassandra node I want to connect to. In my case, this is another container, but be sure to change this as needed if you want to reproduce this test (or refer to this gist to see how I ran mine).
+For the script to work, the Cluster must have a ‘test’ keyspace with a ‘user’ table on it (as you can see from the query, the table structure does not matter here).
+We can use sysbench to execute it via docker like so:&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    telecaster:sysbench-docker fipar$ docker run -v ~/src/:/src/ --name=sb -it severalnines/sysbench bash -c &amp;#39;luarocks install lua-cassandra --local; luarocks install luasocket --local; /src/tmp/benchmark1.lua run&amp;#39;
+    Warning: The directory &amp;#39;/root/.cache/luarocks&amp;#39; or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing /usr/local/lib/luarocks/rocks/luarocks/2.4.3-1/bin/luarocks with sudo, you may want sudo&amp;#39;s -H flag.
+    Installing https://luarocks.org/lua-cassandra-1.2.3-0.rockspec
+    ...snip...
+    Installing https://luarocks.org/luasocket-3.0rc1-2.src.rock
+    ...snip...
+    sysbench 1.0.13 (using bundled LuaJIT 2.1.0-beta2)
+
+    Running the test with following options:
+    Number of threads: 1
+    Initializing random number generator from current time
+
+
+    Initializing worker threads...
+
+    Threads started!
+
+
+    General statistics:
+    total time:                          10.0017s
+    total number of events:              2792
+
+    Latency (ms):
+        min:                                    2.17
+        avg:                                    3.57
+        max:                                   48.12
+        95th percentile:                        4.65
+        sum:                                 9958.60
+
+    Threads fairness:
+    events (avg/stddev):           2792.0000/0.00
+    execution time (avg/stddev):   9.9586/0.00
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;You can see I am installing the required Lua modules when starting the container. If a benchmark will be executed several times (which is usually the case) a better approach would be to further customize the Dockerfile to include the necessary modules. I have not done that in the PR though because I think that would bloat the existing image. You can also see that I’m making my machine’s src directory available on the container via the -v ~/src/:/src/. That’s why I can then execute the script from /src/ on the container. Be sure to adjust this as needed to point to a directory tree where the lua script can be found on your machine.&lt;/p&gt;
+
+&lt;p&gt;In conclusion, if you have benchmarking needs and have not considered sysbench, don’t be put off if your database of choice is not listed as supported: as long as there’s a Lua driver for it there’s a good chance that you will be able to use sysbench for the task!&lt;/p&gt;
+</description>
+        <pubDate>Mon, 26 Mar 2018 00:00:00 -0500</pubDate>
+        <link>http://fernandoipar.com/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</guid>
+        
+        <category>cassandra</category>
+        
+        <category>notes</category>
+        
+        <category>pythian</category>
+        
+        
+        <category>cassandra</category>
+        
+        <category>notes</category>
+        
+      </item>
+    
+      <item>
+        <title>Measuring the potential overhead of pmm-client on MySQL workloads</title>
+        <description>&lt;p&gt;&lt;em&gt;This article is a cross post from &lt;a href=&quot;https://blog.pythian.com/measuring-potential-overhead-pmm-client-mysql-workloads/&quot;&gt;Pythian&amp;#39;s blog&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Having good historial metrics monitoring in place is critical for properly operating, maintaining and troubleshooting database systems, and &lt;a href=&quot;https://www.percona.com/doc/percona-monitoring-and-management/index.html&quot;&gt;Percona Monitoring and Management&lt;/a&gt; is one of the options we recommend to our clients for this.&lt;/p&gt;
+
+&lt;p&gt;One common concern among potential users is how using this may impact their database’s performance. As I could not find any conclusive information about this, I set out to do some basic tests and this post shows my results.&lt;/p&gt;
+
+&lt;p&gt;To begin, let me describe my setup. I used the following Google Cloud instances:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;One 4 vCPU instance for the MySQL server&lt;/li&gt;
+&lt;li&gt;One 2 vCPU instance for the sysbench client&lt;/li&gt;
+&lt;li&gt;One 1 vCPU instance for the PMM server&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I used Percona Server 5.7 and PMM 1.5.3 installed via Docker. Slow query log was enabled with long&lt;em&gt;query&lt;/em&gt;time set to 0 for all tests.&lt;/p&gt;
+
+&lt;p&gt;I ran sysbench with 200k, 1M and 10M rows using the legacy oltp script with the pareto and special distributions, and up to 64 client threads. After several runs and reviews of the results, I settled on 1M rows with pareto for extended tests, as other combinations showed minor variations on the results from this one.&lt;/p&gt;
+
+&lt;p&gt;I am well aware a synthetic workload is not representative but I think the results are still useful, though I would love to measure this on a real life workload (do let me know in the comments if you have done this already).&lt;/p&gt;
+
+&lt;p&gt;In a nutshell, I found some impact in performance (measured as throughput in transactions per second) when running sysbench with the PMM exporters which in my case was eliminated when I configured them to serve their metrics by HTTP instead of HTTPS.&lt;/p&gt;
+
+&lt;p&gt;The following graph shows box plots for throughput for pmm enabled or disabled, for a different number of threads, with and without ssl:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/Boxplot-pmm-client-overhead.png&quot; alt=&quot;throughput with pmm enabled or disabled, per threads, with and without ssl&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;We can see that with SSL enabled there is a noticeable drop in throughput when the exporters are running, while this is not the case when SSL is disabled.&lt;/p&gt;
+
+&lt;p&gt;I arrived at the conclusion that it was worth repeating the tests with SSL disabled after creating &lt;a href=&quot;https://github.com/brendangregg/FlameGraph&quot;&gt;Flame Graphs&lt;/a&gt; from perf captures during sample runs. On them, the only significant increases were due to the exporters (mysqld&lt;em&gt;exporter and node&lt;/em&gt;exporter, the qan exporter did not have any noticeable impact during my tests). The results from the tests show that this analysis pointed me in the right direction so while they are worth of separate blog posts, it is worth to at least recommend our readers to get familiar with this performance analysis tool.&lt;/p&gt;
+
+&lt;p&gt;Next is a scatter plot of throughput over time with ssl enabled:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/with-ssl-pareto-1000000-plot.png&quot; alt=&quot;throughput per threads, pmm enabled or disabled, with ssl&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;On it we get a more clear picture of the impact of having the exporters running during the test.&lt;/p&gt;
+
+&lt;p&gt;Next is the same graphs but with SSL disabled:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/without-ssl-pareto-1000000-plot.png&quot; alt=&quot;throughput per threads, pmm enabled or disabled, without ssl&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Now it is much more difficult to differentiate the runs.&lt;/p&gt;
+
+&lt;p&gt;This is confirmed if we look at the 99 percentile of throughput for each case (here for 32 threads):&lt;/p&gt;
+
+&lt;table style=&quot;width: 90%; cell-padding: 2px; border: 2px solid black; text-align: center;&quot;&gt;
+&lt;tbody&gt;
+&lt;tr bgcolor=&quot;%9b9b9b&quot;&gt;
+&lt;td style=&quot;border: 0px solid black;&quot;&gt;&lt;strong&gt;PMM&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&quot;border: 0px solid black;&quot;&gt;&lt;strong&gt;SSL&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&quot;border: 0px solid black;&quot;&gt;&lt;strong&gt;tps (p99)&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr bgcolor=&quot;%efefef&quot;&gt;
+&lt;td style=&quot;border: 0px solid black;&quot;&gt;enabled&lt;/td&gt;
+&lt;td style=&quot;border: 0px solid black;&quot;&gt;enabled&lt;/td&gt;
+&lt;td style=&quot;border: 0px solid black;&quot;&gt;1167.518&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;border: 0px solid black;&quot;&gt;enabled&lt;/td&gt;
+&lt;td style=&quot;border: 0px solid black;&quot;&gt;disabled&lt;/td&gt;
+&lt;td style=&quot;border: 0px solid black;&quot;&gt;1397.397&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr bgcolor=&quot;%efefef&quot;&gt;
+&lt;td style=&quot;border: 0px solid black;&quot;&gt;disabled&lt;/td&gt;
+&lt;td style=&quot;border: 0px solid black;&quot;&gt;disabled&lt;/td&gt;
+&lt;td style=&quot;border: 0px solid black;&quot;&gt;1429.097&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Conclusion
+PMM is a very good Open Source option for monitoring but as every instrumentation and monitoring layer you add to your stack, it won’t come for free. My very simple tests show that its impact may be significant under some scenarios, yet if it’s bad enough it may be mitigated by using HTTP instead of HTTPS for the exporters. Given the events that are unfolding in IT security as I type this, it may seem reckless to recommend disabling SSL as an “optimization”, but I think good engineering is all about informed tradeoffs and if you’re running this on a secure private network, how risky is it to expose monitoring metrics over HTTP instead of HTTPS? I would love to read answers to this question in the comments!&lt;/p&gt;
+
+&lt;p&gt;Finally, I think a similar cost is probably paid for the TLS layer on the pmm-server end. It would be very interesting to see an experiment like this repeated but on a different scenario: one pmm-server with several monitored clients.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 22 Jan 2018 00:00:00 -0600</pubDate>
+        <link>http://fernandoipar.com/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</guid>
+        
+        <category>mysql</category>
+        
+        <category>notes</category>
+        
+        <category>pythian</category>
+        
+        
+        <category>mysql</category>
+        
+        <category>notes</category>
+        
+      </item>
+    
+      <item>
+        <title>Expanding your keyboard on emacs with the Hyper key</title>
+        <description>&lt;p&gt;I recently stumbled upon the hyper and super keys on emacs &lt;a href=&quot;http://ergoemacs.org/emacs/emacs_hyper_super_keys.html&quot;&gt;here&lt;/a&gt;. &lt;/p&gt;
+
+&lt;p&gt;What I like about this setup is that I rarely use the Function key in my day to day usage, so this is making good use of a key that&amp;#39;s both mostly unused and conveniently located in my keyboard, to the effect of running potentially complex tasks (like exporting the currently selected org mode subtree to a pdf and opening it) with just two keys. &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/emacs-hyper-key.png&quot; alt=&quot;Because every blog post needs a Featured Image&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Here&amp;#39;s my current configuration:&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;;; hyper key shortcuts: http://ergoemacs.org/emacs/emacs_hyper_super_keys.html
+(setq ns-function-modifier &amp;#39;hyper)  ; make Fn key do Hyper
+
+(global-set-key (kbd &amp;quot;H-a&amp;quot;) &amp;#39;org-agenda)
+(global-set-key (kbd &amp;quot;H-d&amp;quot;) &amp;#39;delete-other-windows)
+(global-set-key (kbd &amp;quot;H-i&amp;quot;) &amp;#39;org-clock-in)
+(global-set-key (kbd &amp;quot;H-o&amp;quot;) &amp;#39;org-clock-out)
+(global-set-key (kbd &amp;quot;H-s&amp;quot;) &amp;#39;org-schedule)
+(global-set-key (kbd &amp;quot;H-b&amp;quot;) &amp;#39;ido-switch-buffer)
+(global-set-key (kbd &amp;quot;H-r&amp;quot;) &amp;#39;org-archive-subtree-default)
+(global-set-key (kbd &amp;quot;H-m&amp;quot;) &amp;#39;evil-mc-make-all-cursors)
+(global-set-key (kbd &amp;quot;H-n&amp;quot;) &amp;#39;evil-mc-undo-all-cursors)
+(global-set-key (kbd &amp;quot;H-k&amp;quot;) &amp;#39;epa-encrypt-region)
+(global-set-key (kbd &amp;quot;H-l&amp;quot;) &amp;#39;epa-decrypt-region)
+(global-set-key (kbd &amp;quot;H-j&amp;quot;) &amp;#39;eww)
+(global-set-key (kbd &amp;quot;H-v&amp;quot;) &amp;#39;darkroom-mode)
+(global-set-key (kbd &amp;quot;H-x&amp;quot;) &amp;#39;toggle-frame-fullscreen)
+
+
+(defun open-ansi-term-localhost ()
+(interactive)
+(ansi-term &amp;quot;/bin/bash&amp;quot; &amp;quot;localhost&amp;quot;))
+
+(global-set-key (kbd &amp;quot;H-t&amp;quot;) &amp;#39;open-ansi-term-localhost)
+;; C-c C-e C-s l o  export current subtree to latex pdf and open
+(global-set-key (kbd &amp;quot;H-e&amp;quot;) (kbd &amp;quot;C-c C-e C-s l o&amp;quot;))
+;; same, but html buffer and open
+(global-set-key (kbd &amp;quot;H-w&amp;quot;) (kbd &amp;quot;C-c C-e C-s h H&amp;quot;))
+;; same, but ascii and open
+(global-set-key (kbd &amp;quot;H-q&amp;quot;) (kbd &amp;quot;C-c C-e C-s t A&amp;quot;))
+;; plain org export
+(global-set-key (kbd &amp;quot;H-y&amp;quot;) &amp;#39;org-export-dispatch) 
+;; org capture
+(global-set-key (kbd &amp;quot;H-c&amp;quot;) &amp;#39;org-capture) 
+;; eval lisp
+(global-set-key (kbd &amp;quot;H-z&amp;quot;) &amp;#39;org-ctrl-c-ctrl-c)
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;Something interesting here is that the target can be a function or another keyboard combination. The latter is useful if you can&amp;#39;t easily find the function you want, or if you want to pass arguments along with it, like I am doing in my org export shortcuts.&lt;/p&gt;
+
+&lt;p&gt;As for how to keep up with the growing amount of hyper key based shortcuts, I am using the old school technology of little sticker labels with a descriptive text on each key. It&amp;#39;s cheap and works wonders until I build the corresponding muscle memory. &lt;/p&gt;
+
+&lt;p&gt;Nothing groundbreaking for seasoned emacs users but I thought it could be useful to newbies such as myself (I have been using the editor in one form or another for several years already, but with evil-mode, and using only a small subset of its features). &lt;/p&gt;
+</description>
+        <pubDate>Tue, 02 Jan 2018 00:00:00 -0600</pubDate>
+        <link>http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html</guid>
+        
+        <category>emacs</category>
+        
+        <category>notes</category>
+        
+        
+        <category>emacs</category>
+        
+        <category>notes</category>
+        
+      </item>
+    
+      <item>
+        <title>Opening urls from emacs using Google Chrome on MacOS</title>
+        <description>&lt;p&gt;I recently broke my emacs (aquamacs) setup. Fixing it was a very good learning experience that showed me how little I knew about how it actually worked!&lt;/p&gt;
+
+&lt;p&gt;As part of that process, I transitioned from aquamacs (a great project to which I made a small donation at some point) to just plain emacs. The big goal here is that since I spent most of my time in a text editor, I would like to be able to easily migrate myself to another platform supported by emacs with little need to adjust my habits (this has become an important requirement should I ever decide that Macs move too far away from the needs of users like me that I decide to switch back to FreeBSD or GNU/Linux).&lt;/p&gt;
+
+&lt;p&gt;I won&amp;#39;t document the whole thing here, but I thought one little nugget of duck-tape-fixing was worth of making my blog-post-of-the-year on my personal blog, so here it is.&lt;/p&gt;
+
+&lt;p&gt;The scenario:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;I use Google Chrome for work as we have some customizer scripts that don&amp;#39;t work in Safari.&lt;/li&gt;
+&lt;li&gt;I do not want to make Chrome my default browser as I still use Safari for any browsing that does not involve my work email or my work&amp;#39;s ticketing system.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;My way to achieve this is by this emacs config line:&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;(setq browse-url-browser-function &amp;#39;browse-url-chromium)
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;That requires the &amp;#39;chromium&amp;#39; command to be available on your path.
+Now, at some point in the recent past, after a minor OS upgrade, emacs stopped being able to open URLs. After some digging, I tracked this down to the chromium command failing with this error:&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;stratocaster:bin fipar$ chromium http://localhost
+dlopen /usr/local/bin/../Versions/65.0.3295.0/Chromium Framework.framework/Chromium Framework: dlopen(/usr/local/bin/../Versions/65.0.3295.0/Chromium Framework.framework/Chromium Framework, 261): image not found
+Abort trap: 6
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;I attempted reinstalling chromium (available on mac via homebrew or as a nightly build) but neither approach worked. After some thought, I realized I only need this so that emacs can open urls in Google, I don&amp;#39;t use the chromium command for anything else. With that in mind, my duck tape solution was to create a chromium script somewhere on my PATH with the following contents:&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#!/bin/bash
+open -a &amp;#39;Google Chrome&amp;#39; $*
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;That just open the standard MacOS way to open files with a specific application from the command line. Now I don&amp;#39;t have the &amp;#39;chromium&amp;#39; command installed, and I can open urls from emacs using Google Chrome just the same.&lt;/p&gt;
+
+&lt;p&gt;If you think this is a lazy approach to troubleshooting and that any self respected hacker would have instead spent time figuring out how to resolve the actual error, you&amp;#39;re right. However, life is all about balancing needs and I just can&amp;#39;t spend time tracking down how to fix a problem in a program I don&amp;#39;t really need, so the lazy fix is enough for me at this point.&lt;/p&gt;
+
+&lt;p&gt;There&amp;#39;s a lesson here for people like my younger past self: once you move into &amp;#39;The Workforce&amp;#39;, tech work is not about solving problems per se, but about adding to your client&amp;#39;s revenue or cutting down from their costs. Doing this effectively requires, among other things, knowing when to stop because a solution is &amp;#39;good enough&amp;#39; for the business need at hand, to the point where the benefits of continuing work on it no longer offset the costs involved.  &lt;/p&gt;
+</description>
+        <pubDate>Tue, 26 Dec 2017 00:00:00 -0600</pubDate>
+        <link>http://fernandoipar.com/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html</guid>
+        
+        <category>emacs</category>
+        
+        <category>notes</category>
+        
+        
+        <category>emacs</category>
+        
+        <category>notes</category>
+        
+      </item>
+    
+      <item>
+        <title>MySQL can be evil</title>
+        <description>&lt;p&gt;Ok, maybe evil is too strong a word, but MySQL can certainly be deceiving. &lt;/p&gt;
+
+&lt;p&gt;To some extent, and in some circles, MySQL still suffers from a bad reputation as a database. In fact, I have personally tried to &lt;a href=&quot;http://fernandoipar.com/mysql/2015/03/11/ongoing-mysql-myths.html&quot;&gt;fight that reputation&lt;/a&gt; in the past. However, I&amp;#39;ll be honest and say that, sometimes, it deserves it.&lt;/p&gt;
+
+&lt;p&gt;As an example, take the ASC|DESC keyword in index creation. &lt;a href=&quot;http://mysqlserverteam.com/mysql-8-0-labs-descending-indexes-in-mysql/&quot;&gt;MySQL 8.0 support those&lt;/a&gt;, thanks for that! But what happens in older versions? Let me quote the &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.7/en/create-index.html&quot;&gt;Fine Manual&lt;/a&gt;:&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;   An index_col_name specification can end with ASC or DESC. These keywords are permitted
+   for future extensions for specifying ascending or descending index value storage. Currently,
+   they are parsed but ignored; index values are always stored in ascending order.
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;Pretty clear, and obvious to anyone who has been working with MySQL enough time. We just have this kind of knowledge almost built-in. So built-in, in fact, that it never occurred to me to check what happens when you create an index that way. So I put myself in the shoes of a DBA coming into MySQL from another engine today, and here&amp;#39;s what our DBA would see:&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;   mysql&amp;gt; create index index_t_on_y on t(y desc);
+   Query OK, 0 rows affected (0.02 sec)
+   Records: 0  Duplicates: 0  Warnings: 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;And that&amp;#39;s it. Not even a warning, and our DBA is left with the impression that, since the create index statement succeeded, producing no errors and no warnings, then a descending ordered index on y was created on table t. And we know how that impression will end.&lt;/p&gt;
+
+&lt;p&gt;Granted, this won&amp;#39;t cause anyone to lose data, but still, things like this make me think that, sometimes, MySQL deserves its reputation.  &lt;/p&gt;
+</description>
+        <pubDate>Fri, 04 Nov 2016 00:00:00 -0500</pubDate>
+        <link>http://fernandoipar.com/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</guid>
+        
+        <category>mysql</category>
+        
+        
+        <category>planetmysql</category>
+        
+        <category>mysql</category>
+        
+      </item>
+    
+      <item>
+        <title>A new name and a wider scope for South America's favourite MySQL-related conference</title>
+        <description>&lt;p&gt;Next November I&amp;#39;ll once again take the ferry to my neighbour city of Buenos Aires to enjoy two days of learning, networking, and presenting, at &lt;a href=&quot;http://www.dataops.la/&quot;&gt;DataOps LA 2015&lt;/a&gt;, the first incarnation of what used to be the &lt;a href=&quot;http://mysqlnosqlcloud.com/&quot;&gt;MySQL, NoSQL, Cloud&lt;/a&gt; Conference organized by &lt;a href=&quot;http://binlogic.com/&quot;&gt;BinLogic&lt;/a&gt; in Buenos Aires. &lt;/p&gt;
+
+&lt;p&gt;The change in name reflects a change in scope, now including Operations, Infrastructure and Development tracks, besides the familiar Database one (with lots of MySQL content, but other systems covered too!). &lt;/p&gt;
+
+&lt;p&gt;The agenda is not yet confirmed and, in fact, the &lt;a href=&quot;http://www.dataops.la/callforpapers.php&quot;&gt;Call for Papers&lt;/a&gt; is open, so if you want and can afford to go, I encourage you to submit proposals. Of course, if you also want and can afford to sponsor, there are &lt;a href=&quot;http://www.dataops.la/sponsors.php&quot;&gt;a few plans&lt;/a&gt; available, and I would encourage you to do so too. I am personally very happy that, once again, Percona is supporting this project this year. &lt;/p&gt;
+
+&lt;p&gt;I&amp;#39;m looking forward to seeing old friends and making new ones in this wide (and growing) community we have!&lt;/p&gt;
+</description>
+        <pubDate>Sat, 03 Oct 2015 00:00:00 -0500</pubDate>
+        <link>http://fernandoipar.com/planetmysql/mysql/2015/10/03/dataops-la.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/planetmysql/mysql/2015/10/03/dataops-la.html</guid>
+        
+        <category>mysql</category>
+        
+        <category>community</category>
+        
+        
+        <category>planetmysql</category>
+        
+        <category>mysql</category>
+        
+      </item>
+    
+      <item>
+        <title>Some thoughts on org-mode/babel</title>
+        <description>&lt;p&gt;Lately I&amp;#39;ve been playing around with mongodb, specifically with the idea of having a script to summarize data that could be useful to have when troubleshooting, in a way like &lt;a href=&quot;https://www.percona.com/doc/percona-toolkit/2.1/pt-mysql-summary.html&quot;&gt;Percona Toolkit&amp;#39;s pt-mysql-summary&lt;/a&gt; works for MySQL. &lt;/p&gt;
+
+&lt;p&gt;Unrelated to this, I have been using &lt;a href=&quot;http://orgmode.org/&quot;&gt;org-mode&lt;/a&gt; to, well, organize my work, for a few years now. As part of my day to day job I write a lot of code snippets, usually in bash or SQL, sometimes in other languages, and for this I make heavy use of &lt;a href=&quot;http://orgmode.org/manual/Working-With-Source-Code.html#Working-With-Source-Code&quot;&gt;code blocks&lt;/a&gt;. Over time, this has become one of my favourite org-mode&amp;#39;s features, as it lets me keep code relevant to a customer issue on the same place as other information (like output from that code, output from text files, stack traces, notes from my calls with the customer, etc). &lt;/p&gt;
+
+&lt;p&gt;Back to mongodb and my desire to work on some basic tools as a learning opportunity, I saw this as a good chance for trying to do some programming in the &lt;a href=&quot;http://www.literateprogramming.com/&quot;&gt;literate&lt;/a&gt; style. &lt;/p&gt;
+
+&lt;p&gt;My first tests can be seen &lt;a href=&quot;https://github.com/fipar/playground/blob/master/tools-for-mongodb/mongo-summary.org&quot;&gt;here&lt;/a&gt;. I understand completely this is a very small and simple project that is not the best to expose the potential benefits of this approach to programming, but it is what I can do now given my work/personal life obligations. It is my goal to start working on something bigger on the personal side, and I plan to use a similar approach to it, so I may know more after that. &lt;/p&gt;
+
+&lt;p&gt;That said, one benefit I have already been able to appreciate is that literate programming with org-mode shines when your project combines different languages. If you look at the test functions, like the test for a sharded cluster of replica sets, you can see how org-mode lets me interweave bash and javascript as I explain what I am trying to achieve, in a way that&amp;#39;s independent of how the code will be tangled (as each block will go to a file for the corresponding language). One benefit of this is improved readability (as the alternative would be to have cross-comments in the js and bash scripts, which I think would be less clear to follow), but another, potentially even bigger benefit, IMO, is that this makes it easier to combine different languages in a same project, which gives you more reasons to try and use the best tool for each job. If you don&amp;#39;t need to generate a distributable &amp;#39;executable&amp;#39; project (as is my goal here, I want people to be able to just run the generated code using the wrappers), then org-mode gives you even more features to combine different languages, by using result blocks associated with code blocks. I don&amp;#39;t have a personal example for this right now, but you can read more about it &lt;a href=&quot;http://orgmode.org/manual/Evaluating-code-blocks.html#Evaluating-code-blocks&quot;&gt;here&lt;/a&gt;. &lt;/p&gt;
+</description>
+        <pubDate>Tue, 09 Jun 2015 00:00:00 -0500</pubDate>
+        <link>http://fernandoipar.com/programming/2015/06/09/org-mode-babel-thoughts.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/programming/2015/06/09/org-mode-babel-thoughts.html</guid>
+        
+        <category>programming</category>
+        
+        <category>emacs</category>
+        
+        <category>org-mode</category>
+        
+        <category>babel</category>
+        
+        
+        <category>programming</category>
+        
+      </item>
+    
+      <item>
+        <title>Migrating to jekyll</title>
+        <description>&lt;p&gt;After years of service, my wordpress installation was compromised sometime last week, with all php files replaced by a link to some external site. 
+I estimate losses on my part to about $.01, but the impact on my reputation may be more difficult to quantify! &lt;/p&gt;
+
+&lt;p&gt;I was meaning to migrate to some static site generator based workload, since I don&amp;#39;t have time to be up to date on wordpress updates, security patches, etc, and I guess this provided the ideal opportunity. &lt;/p&gt;
+
+&lt;p&gt;Most posts are back online, with redirects to maintain the original urls, and I&amp;#39;m in the process of importing comments into disqus (so none are showing at the time of writing this). &lt;/p&gt;
+
+&lt;p&gt;Not that much people care, but I expect to be back to normal in a few days, including recovering all comments.&lt;/p&gt;
+
+&lt;p&gt;Thanks. &lt;/p&gt;
+</description>
+        <pubDate>Thu, 16 Apr 2015 00:00:00 -0500</pubDate>
+        <link>http://fernandoipar.com/mysql/planetmysql/2015/04/16/migrating-to-jekyll.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/mysql/planetmysql/2015/04/16/migrating-to-jekyll.html</guid>
+        
+        <category>MySQL</category>
+        
+        
+        <category>MySQL</category>
+        
+        <category>PlanetMySQL</category>
+        
+      </item>
+    
+      <item>
+        <title>Ongoing MySQL myths</title>
+        <description>&lt;p&gt;There's an interesting post over at &lt;a href=&quot;http://developer.olery.com/blog/goodbye-mongodb-hello-postgresql/&quot;&gt;Olery&lt;/a&gt;'s blog about a successful migration story from using MySQL/MongoDB to PostgreSQL as the persistence layer for applications that, however, lists a couple of cons of using MySQL that I personally think are no longer valid complaints (or at least not as big as they used to be). I did not find a way to reply to the post so, hopefully for the benefit of people who are new to MySQL and may hear the same recycled myths, I am doing so here.&lt;/p&gt;
+
+&lt;p&gt;Now I am aware that PostgreSQL has feature MySQL lacks (bitmap indexes are a personal favourite), but still, it is frustrating that instead of using actual arguments consisting of actual use cases in which one database is better than another, these old stories get recycled. I think it's a disservice to both MySQL and PostgreSQL.&lt;/p&gt;
+
+&lt;p&gt;The first paragraph that caught my attention is:&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;MySQL was the first candidate as we were already using it for some small chunks of critical data. MySQL however is not without its problems. For example, when defining a field as &lt;code&gt;int(11)&lt;/code&gt; you can just happily insert textual data and MySQL will &lt;em&gt;try&lt;/em&gt; to convert it.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;The &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/sql-mode.html&quot;&gt;sql_mode&lt;/a&gt; variable is available since at least &lt;a href=&quot;http://dev.mysql.com/doc/refman/4.1/en/sql-mode.html&quot;&gt;4.0&lt;/a&gt; (GA in 2004 if I'm not mistaken, which is over a decade ago) and while yes, the default value is permissive, and any evil programmer will be able to change the value for the variable (Roland made &lt;a href=&quot;http://rpbouman.blogspot.com/2009/01/mysqls-sqlmode-my-suggestions.html&quot;&gt;very good suggestions&lt;/a&gt; about this some time ago), in my experience it has provided people with enough protection against this kind of data integrity problems.&lt;/p&gt;
+
+&lt;p&gt;And here's the second one:&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Another problem with MySQL is that any table modification (e.g. adding a column) will result in the table being locked for &lt;em&gt;both&lt;/em&gt; reading and writing. This means that &lt;em&gt;any&lt;/em&gt; operation using such a table will have to wait until the modification has completed.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;Innodb supports &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/innodb-online-ddl.html&quot;&gt;some online DDL&lt;/a&gt; operations starting with MySQL 5.6 (GA in February 2013, over two years ago) and of course, there's always &lt;a href=&quot;http://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html&quot;&gt;pt-online-schema-change&lt;/a&gt;, which can usually help in the cases were online DDL is still not supported, or when the impact on replica lag makes that approach unfeasible.&lt;/p&gt;
+
+&lt;p&gt;To wrap up, my message is that it's a big world out there, with different technologies that all have cons and pros. You need to make your due diligence and investigate the biggest of each when evaluating one technology, or comparing a few of them, to make sure you pick the best tool for the job (and for your context, because tools are not context-free. A kitchen knife is not a very good screwdriver, but a few times in my life I found myself in the situation of using it, and with success!), but most importantly, please base your decision on actually experience-verified facts, and not on things you've heard others say, or that perhaps you experienced a long time ago.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 11 Mar 2015 07:45:07 -0500</pubDate>
+        <link>http://fernandoipar.com/mysql/2015/03/11/ongoing-mysql-myths.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/mysql/2015/03/11/ongoing-mysql-myths.html</guid>
+        
+        <category>MySQL</category>
+        
+        
+        <category>MySQL</category>
+        
+      </item>
+    
+  </channel>
+</rss>

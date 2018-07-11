@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Rewriting Highbase in Erlang</title>
+  <meta name="description" content=""Tell my wife I love her very much, she knows"
+" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="canonical" href="http://fernandoipar.com/highbase/2009/01/27/rewriting-highbase-in-erlang.html">
+
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+<!--  <link rel="stylesheet" href=""> -->
+  <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+
+<!-- header end -->
+
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">Rewriting Highbase in Erlang</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">Fernando Ipar</h4>
+              on
+              <time datetime="2009-01-27T21:28:42-06:00">27 Jan 2009</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <h1>Why?</h1>
+
+<p><a title="Highbase : High availability for MySQL" href="http://highbase.seriema-systems.com">Highbase</a> is currently comprised of several shell scripts  and some C code. It's actually a good project (talk about self promotion) that hasn't reached a stable release yet just because</p>
+
+<ol>
+<li>It hasn't been tested enough in production environments</li>
+<li>I've been amazingly busy during the last years. Lots of work, and lots of parenting in the last two and a half years in particular.</li>
+</ol>
+
+<p>Still, it's real close to a release candidate, and I will continue testing and fixing the main branch. However, I believe writing a new version in <a title="Erlang. Concurrent, distributed, fault tolerant programming" href="http://www.erlang.org">Erlang</a> has many advantages:</p>
+
+<ol>
+<li>Erlang was designed from the ground up with reliability in mind (among other things. It's quite popular now due to it's multi-core-friendlyness, but that's not really useful for a project like this), so it's only natural to use it to develop a high availability solution (you know, the "best tool for the job" mentality)</li>
+<li>Except for the mysql service verification (I wouldn't want to go with odbc), and perhaps gratuitious ARP (I'm not sure at this point), rewriting in Erlang would remove all other dependencies in third party packages. In general, it would make the solution more mantainable and hence more reliable (see point 1).</li>
+</ol>
+
+<p>I already wrote a first draft in Erlang about a year ago, but this was when I was just learning the language, so I didn't take advantage of it's best features for reliability. Actually, the problem was I wrote my version using 'pure' Erlang, dismissing the OTP part. Erlang as a language is OK (it has anything you need to write reliable,concurrent software). Erlang/OTP is a powerful thing, in the sense that it abstracts you, as a programmer, from the low level chores of distributed, concurrent and fault tolerant programming. You just have to focus on your programming logic, and by following some conventions (Behaviours, which for OO people could loosely be related to Interfaces and Base Clases) you get a lot of extra functionality for free.</p>
+
+<h1>How?</h1>
+
+<p>This new rewrite will be done using the gen_server behaviour, together with events. All this free to use from OTP.</p>
+
+<p>Here's a state diagram with an initial draft of the slave routine (done with <a title="Visual Paradigm. Modeling tools. " href="http://www.visual-paradigm.com/">Visual Paradigm</a>):</p>
+
+<div class="mceTemp">
+<dl id="attachment_69" class="wp-caption alignnone" style="width: 676px;">
+<dt class="wp-caption-dt"></dt>
+<dd class="wp-caption-dd">Highbase's state diagram</dd>
+<dt class="wp-caption-dt"><a href="http://fernandoipar.com/wp-content/uploads/2009/01/highbase.jpg"><img class="size-full wp-image-69" title="State diagram" src="http://fernandoipar.com/wp-content/uploads/2009/01/highbase.jpg" alt="Highbase's state diagram" width="666" height="416" /></a></dt>
+</dl>
+</div>
+
+<p><strong></strong></p>
+
+<p>Without reading a line of code, here you can get a grasp of the power of OTP. The slave routine is, in it's normal state, just waiting for an event. So far, I've identified the following events:</p>
+
+<ul>
+<li>service down</li>
+<li>link down (erlang link down, would probably be due to the master node being down)</li>
+<li>shutdown request</li>
+</ul>
+
+<p>In the first case, just as today, we first attempt to restart the service, and if this fails, we go for a takeover. If restart fails, we first to a failover (i.e., shutdown of the master node, this is the same algorithm executed on our <a title="Highbase - the current trunk" href="http://highbase.svn.sourceforge.net/viewvc/highbase/trunk/highbase/">current code branch</a>).</p>
+
+<p>In the second case, if the node is down, it's just a takeover. If the node is up, we do a takeover with ARP spoofing, because we assume there's something weird with the other node. This part of the algorithm can be improved (we could do another verification, go back to the waiting for event state for N times, etc., this is just a draft).</p>
+
+<p>Still, one of the improvements over the current version is that I don't have to handle any loops, OTP handles that for me, all I have to do is write the callback functions (waiting_for_event, restarting_service, etc). Less code = less chance of errors.</p>
+
+<h1><strong>When?</strong></h1>
+
+<p>I'm currently revewing the design of the new algorithm. I hope to have a draft in two weeks (this is a slow week for me, my daughter is starting preschool education next week and hence my house is kinda crazy).</p>
+
+<p>I'm also overdue with regular Highbase releases so I'll try to get up to date with both trees.</p>
+
+<p>The current erlang tree is <a title="Highbase: the old erlang tree" href="http://highbase.svn.sourceforge.net/viewvc/highbase/trunk/mysql-ha-erl/">mysql-ha-erl</a> (legacy name, before the trademark issues). I'll surely be creating a new tree, highbase-erl, during the next few days. Official release news will be broadcasted here from the official site.</p>
+
+        </section>
+<!-- fi-posts -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'fipar';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a
+    href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+    powered by Disqus.</a></noscript>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4>Fernando Ipar</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2009-01-27 21:28">27 Jan 2009</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Fernando Ipar</a> &copy; 2018<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url(/assets/images/horizon.jpg)">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fernando Ipar</h1>
+        <h2 class="blog-description">"Tell my wife I love her very much, she knows"
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+
+  </body>
+</html>

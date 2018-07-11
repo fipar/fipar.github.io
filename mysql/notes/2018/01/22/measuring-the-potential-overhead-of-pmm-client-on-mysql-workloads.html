@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Measuring the potential overhead of pmm-client on MySQL workloads</title>
+  <meta name="description" content=""Tell my wife I love her very much, she knows"
+" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="canonical" href="http://fernandoipar.com/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html">
+
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+<!--  <link rel="stylesheet" href=""> -->
+  <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+
+<!-- header end -->
+
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">Measuring the potential overhead of pmm-client on MySQL workloads</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">Fernando Ipar</h4>
+              on
+              <time datetime="2018-01-22T00:00:00-06:00">22 Jan 2018</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p><em>This article is a cross post from <a href="https://blog.pythian.com/measuring-potential-overhead-pmm-client-mysql-workloads/">Pythian&#39;s blog</a></em></p>
+
+<p>Having good historial metrics monitoring in place is critical for properly operating, maintaining and troubleshooting database systems, and <a href="https://www.percona.com/doc/percona-monitoring-and-management/index.html">Percona Monitoring and Management</a> is one of the options we recommend to our clients for this.</p>
+
+<p>One common concern among potential users is how using this may impact their database’s performance. As I could not find any conclusive information about this, I set out to do some basic tests and this post shows my results.</p>
+
+<p>To begin, let me describe my setup. I used the following Google Cloud instances:</p>
+
+<ul>
+<li>One 4 vCPU instance for the MySQL server</li>
+<li>One 2 vCPU instance for the sysbench client</li>
+<li>One 1 vCPU instance for the PMM server</li>
+</ul>
+
+<p>I used Percona Server 5.7 and PMM 1.5.3 installed via Docker. Slow query log was enabled with long<em>query</em>time set to 0 for all tests.</p>
+
+<p>I ran sysbench with 200k, 1M and 10M rows using the legacy oltp script with the pareto and special distributions, and up to 64 client threads. After several runs and reviews of the results, I settled on 1M rows with pareto for extended tests, as other combinations showed minor variations on the results from this one.</p>
+
+<p>I am well aware a synthetic workload is not representative but I think the results are still useful, though I would love to measure this on a real life workload (do let me know in the comments if you have done this already).</p>
+
+<p>In a nutshell, I found some impact in performance (measured as throughput in transactions per second) when running sysbench with the PMM exporters which in my case was eliminated when I configured them to serve their metrics by HTTP instead of HTTPS.</p>
+
+<p>The following graph shows box plots for throughput for pmm enabled or disabled, for a different number of threads, with and without ssl:</p>
+
+<p><img src="/assets/images/Boxplot-pmm-client-overhead.png" alt="throughput with pmm enabled or disabled, per threads, with and without ssl"></p>
+
+<p>We can see that with SSL enabled there is a noticeable drop in throughput when the exporters are running, while this is not the case when SSL is disabled.</p>
+
+<p>I arrived at the conclusion that it was worth repeating the tests with SSL disabled after creating <a href="https://github.com/brendangregg/FlameGraph">Flame Graphs</a> from perf captures during sample runs. On them, the only significant increases were due to the exporters (mysqld<em>exporter and node</em>exporter, the qan exporter did not have any noticeable impact during my tests). The results from the tests show that this analysis pointed me in the right direction so while they are worth of separate blog posts, it is worth to at least recommend our readers to get familiar with this performance analysis tool.</p>
+
+<p>Next is a scatter plot of throughput over time with ssl enabled:</p>
+
+<p><img src="/assets/images/with-ssl-pareto-1000000-plot.png" alt="throughput per threads, pmm enabled or disabled, with ssl"></p>
+
+<p>On it we get a more clear picture of the impact of having the exporters running during the test.</p>
+
+<p>Next is the same graphs but with SSL disabled:</p>
+
+<p><img src="/assets/images/without-ssl-pareto-1000000-plot.png" alt="throughput per threads, pmm enabled or disabled, without ssl"></p>
+
+<p>Now it is much more difficult to differentiate the runs.</p>
+
+<p>This is confirmed if we look at the 99 percentile of throughput for each case (here for 32 threads):</p>
+
+<table style="width: 90%; cell-padding: 2px; border: 2px solid black; text-align: center;">
+<tbody>
+<tr bgcolor="%9b9b9b">
+<td style="border: 0px solid black;"><strong>PMM</strong></td>
+<td style="border: 0px solid black;"><strong>SSL</strong></td>
+<td style="border: 0px solid black;"><strong>tps (p99)</strong></td>
+</tr>
+<tr bgcolor="%efefef">
+<td style="border: 0px solid black;">enabled</td>
+<td style="border: 0px solid black;">enabled</td>
+<td style="border: 0px solid black;">1167.518</td>
+</tr>
+<tr>
+<td style="border: 0px solid black;">enabled</td>
+<td style="border: 0px solid black;">disabled</td>
+<td style="border: 0px solid black;">1397.397</td>
+</tr>
+<tr bgcolor="%efefef">
+<td style="border: 0px solid black;">disabled</td>
+<td style="border: 0px solid black;">disabled</td>
+<td style="border: 0px solid black;">1429.097</td>
+</tr>
+</tbody>
+</table>
+
+<p>Conclusion
+PMM is a very good Open Source option for monitoring but as every instrumentation and monitoring layer you add to your stack, it won’t come for free. My very simple tests show that its impact may be significant under some scenarios, yet if it’s bad enough it may be mitigated by using HTTP instead of HTTPS for the exporters. Given the events that are unfolding in IT security as I type this, it may seem reckless to recommend disabling SSL as an “optimization”, but I think good engineering is all about informed tradeoffs and if you’re running this on a secure private network, how risky is it to expose monitoring metrics over HTTP instead of HTTPS? I would love to read answers to this question in the comments!</p>
+
+<p>Finally, I think a similar cost is probably paid for the TLS layer on the pmm-server end. It would be very interesting to see an experiment like this repeated but on a different scenario: one pmm-server with several monitored clients.</p>
+
+        </section>
+<!-- fi-posts -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'fipar';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a
+    href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+    powered by Disqus.</a></noscript>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4>Fernando Ipar</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2018-01-22 00:00">22 Jan 2018</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Fernando Ipar</a> &copy; 2018<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url(/assets/images/horizon.jpg)">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fernando Ipar</h1>
+        <h2 class="blog-description">"Tell my wife I love her very much, she knows"
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+
+  </body>
+</html>

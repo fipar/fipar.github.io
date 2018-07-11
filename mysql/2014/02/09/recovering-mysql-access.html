@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Recovering MySQL access</title>
+  <meta name="description" content=""Tell my wife I love her very much, she knows"
+" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="canonical" href="http://fernandoipar.com/mysql/2014/02/09/recovering-mysql-access.html">
+
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+<!--  <link rel="stylesheet" href=""> -->
+  <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+
+<!-- header end -->
+
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">Recovering MySQL access</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">Fernando Ipar</h4>
+              on
+              <time datetime="2014-02-09T07:33:47-06:00">09 Feb 2014</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p>Ever found yourself working on a MySQL server where root's password is unavailable? It has happened to me a few times, always because the person who set up the DB left the place long ago, and this information was not documented anywhere.</p>
+
+<p>If you have root access to the OS, MySQL lets you restart the server bypassing access checks, using the <a href="http://dev.mysql.com/doc/refman/5.6/en/server-options.html#option_mysqld_skip-grant-tables">skip-grant-tables</a> option, which requires a service restart.</p>
+
+<p>However, if you need to regain root access and want to minimize service impact, you can take advantage of the way the server responds to <a href="http://dev.mysql.com/doc/refman/5.6/en/server-signal-response.html">SIGHUP</a> signals and the fact that access credentials are stored on a MyISAM table.</p>
+
+<p>MySQL uses a few tables to store credentials and privileges for users (you can find more about this <a href="https://dev.mysql.com/doc/refman/5.5/en/grant-table-structure.html">here</a>), but for this procedure, we only need to work with the mysql.user table.</p>
+
+<p>Specifically, we will work with the columns 'user', 'host' and 'password' from this table.</p>
+
+<p>Here's an example of how this can look on a server:</p>
+
+<pre>mysql&gt; select user,host,password from mysql.user;
++-----------+-----------+-------------------------------------------+
+| user      | host      | password                                  |
++-----------+-----------+-------------------------------------------+
+| root      | localhost | *1BD9C328233CF457571A4BB5DB8D32892AB8EDBF |
+| root      | mysql     | *1BD9C328233CF457571A4BB5DB8D32892AB8EDBF |
+| root      | 127.0.0.1 | *1BD9C328233CF457571A4BB5DB8D32892AB8EDBF |
+| root      | ::1       | *1BD9C328233CF457571A4BB5DB8D32892AB8EDBF |
+|           | localhost |                                           |
+|           | mysql     |                                           |
+| dba       | %         | *4FC8D8270BEC4364C78799065996F5306139B412 |
+| readwrite | localhost | *202273E75BD11D06FBE2F057BFA1B1BB2B26549C |
+| readonly  | localhost | *FC69E042CE30D92E2952335F690CF2345C812E36 |
++-----------+-----------+-------------------------------------------+
+9 rows in set (0.00 sec)</pre>
+
+<p>To start, we'll need to make a copy of this table to a database where we can change it. On this example server, this means the 'test' schema, as the 'readwrite' user has write privileges on it. Even if root's password was lost, you can typically get a less privileged MySQL account by checking the applications that connects to this database. If for some reason this is not the case, you can achieve the same results by copying this table to another server, and copying it back after the necessary changes have been made.</p>
+
+<p>The following command happen on the datadir:</p>
+
+<pre>[root@mysql mysql]# cp mysql/user.* test/; chown mysql.mysql test/user.*</pre>
+
+<p><strong>Please don't overwrite an existing table</strong> when doing this! Rename the copied files as needed instead ...</p>
+
+<p>Now you should be able to access (and write) to this table:</p>
+
+<pre>[root@mysql mysql]# mysql -ureadwrite -p test
+Enter password: 
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 34
+Server version: 5.6.16 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql&gt; select user,host,password from user;
++-----------+-----------+-------------------------------------------+
+| user      | host      | password                                  |
++-----------+-----------+-------------------------------------------+
+| root      | localhost | *1BD9C328233CF457571A4BB5DB8D32892AB8EDBF |
+| root      | mysql     | *1BD9C328233CF457571A4BB5DB8D32892AB8EDBF |
+| root      | 127.0.0.1 | *1BD9C328233CF457571A4BB5DB8D32892AB8EDBF |
+| root      | ::1       | *1BD9C328233CF457571A4BB5DB8D32892AB8EDBF |
+|           | localhost |                                           |
+|           | mysql     |                                           |
+| dba       | %         | *4FC8D8270BEC4364C78799065996F5306139B412 |
+| readonly  | %         | *FC69E042CE30D92E2952335F690CF2345C812E36 |
+| readwrite | %         | *202273E75BD11D06FBE2F057BFA1B1BB2B26549C |
++-----------+-----------+-------------------------------------------+
+9 rows in set (0.00 sec)</pre>
+
+<p>By now you've probably figured out what I'll do: update test.user, changing the password column for user 'root' and host 'localhost' to the result of running the PASSWORD() function with some string of my choice, then copying this table back, and then sending SIGHUP to the server.</p>
+
+<p>A couple of caveats:</p>
+
+<ul>
+<li>Either make a copy of the original table file, (and?) or write down the original hash for root (the one you will replace)</li>
+<li>Even if nobody on the customer's current team knows how to get you MySQL's root password, that does not mean they don't have some old app someone has forgotten about that uses the root account to connect. If this is the case, access will break for this app. You can follow the same steps outlined here, but instead of permanently changing root's password, use your regained access to create a new super user account, and then replace root's hash with the one you saved (and flush privileges!)</li>
+</ul>
+
+<p>For completion, here's the rest of the process:</p>
+
+<pre>mysql&gt; update test.user set password=password('newpass but this is insecure so dont use') where user = 'root' and host = 'localhost';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql&gt; select user,host,password from test.user where user='root';
++------+-----------+-------------------------------------------+
+| user | host      | password                                  |
++------+-----------+-------------------------------------------+
+| root | localhost | *0A131BF1166FB756A61317A40F272D6FFDD281E9 |
+| root | mysql     | *1BD9C328233CF457571A4BB5DB8D32892AB8EDBF |
+| root | 127.0.0.1 | *1BD9C328233CF457571A4BB5DB8D32892AB8EDBF |
+| root | ::1       | *1BD9C328233CF457571A4BB5DB8D32892AB8EDBF |
++------+-----------+-------------------------------------------+
+4 rows in set (0.00 sec)
+
+mysql&gt;</pre>
+
+<p>Time to copy the table back and reload the grant tables:</p>
+
+<pre>[root@mysql mysql]# 'cp' test/user.MY* mysql/
+[root@mysql mysql]# kill -SIGHUP $(pidof mysqld)</pre>
+
+<p>And now you should be able to get back in:</p>
+
+<pre>[root@mysql mysql]# mysql -p'newpass but this is insecure so dont use'
+Warning: Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 35
+Server version: 5.6.16 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql&gt; show grants;
++----------------------------------------------------------------------------------------------------------------------------------------+
+| Grants for root@localhost                                                                                                              |
++----------------------------------------------------------------------------------------------------------------------------------------+
+| GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY PASSWORD '*0A131BF1166FB756A61317A40F272D6FFDD281E9' WITH GRANT OPTION |
+| GRANT PROXY ON ''@'' TO 'root'@'localhost' WITH GRANT OPTION                                                                           |
++----------------------------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)</pre>
+
+<p>There you go. We've regained root access to MySQL without restarting the service!</p>
+
+<p>I hope you find this useful, and I'll leave opinions on MySQL's security as an exercise to the reader ...</p>
+
+        </section>
+<!-- fi-posts -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'fipar';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a
+    href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+    powered by Disqus.</a></noscript>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4>Fernando Ipar</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2014-02-09 07:33">09 Feb 2014</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Fernando Ipar</a> &copy; 2018<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url(/assets/images/horizon.jpg)">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fernando Ipar</h1>
+        <h2 class="blog-description">"Tell my wife I love her very much, she knows"
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+
+  </body>
+</html>
