@@ -6,9 +6,88 @@
 </description>
     <link>http://fernandoipar.com/</link>
     <atom:link href="http://fernandoipar.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 22 Jan 2019 14:49:24 -0600</pubDate>
-    <lastBuildDate>Tue, 22 Jan 2019 14:49:24 -0600</lastBuildDate>
+    <pubDate>Wed, 23 Jan 2019 13:30:59 -0600</pubDate>
+    <lastBuildDate>Wed, 23 Jan 2019 13:30:59 -0600</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>My org-mode workflow</title>
+        <description>&lt;p&gt;A &lt;a href=&quot;https://news.ycombinator.com/item?id=18891069&quot;&gt;recent Hacker News discussion&lt;/a&gt; inspired me to write a short post on my org-mode workflow, with the hope that it may help others. &lt;/p&gt;
+
+&lt;p&gt;The thing I like the most about org-mode is that it supports heavy customization. This is not surprising, since Emacs itself is all about customization. You don&amp;#39;t just use an editor, you build the editor you want using this Text Editing Framework, so to speak. &lt;/p&gt;
+
+&lt;p&gt;I came to emacs precisely because of org-mode, after enough people recommended it. I came from vim and the first turn-down for me where the keyboard shortcuts. I partially improved that by using evil-mode, which in my view gives you the best of two worlds: the power of Emacs and the ergonomics of VIM. That is, of course, if you think VIM is an ergonomic text editor (I do). &lt;/p&gt;
+
+&lt;p&gt;The second huge improvement to the usability of Emacs (and org-mode) for me came via the Hyper key. I have written about this &lt;a href=&quot;http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html&quot;&gt;before&lt;/a&gt; and while my setup has changed a bit since that was written, the idea still holds. &lt;/p&gt;
+
+&lt;p&gt;I use a Kinesis Freestyle2 Blue keyboard and combined with heavy use of the Hyper key (all but 7 keys on my keyboard are currently mapped as hyper key shortcuts!) and slight typing changes (Never use the pinky for Shift, remap Caps-Lock as Control, that kind of thing), I can spend my typing time without incurring in physical pain. &lt;/p&gt;
+
+&lt;p&gt;So enough for the intro, here&amp;#39;s how I use org-mode to manage my work and personal life: &lt;/p&gt;
+
+&lt;h2&gt;Capture templates and a global Inbox&lt;/h2&gt;
+
+&lt;p&gt;I use org-mode&amp;#39;s &lt;a href=&quot;https://orgmode.org/manual/Capture-templates.html&quot;&gt;capture templates&lt;/a&gt; to create new entries whenever I need to get something off my head but without losing track of it. Typically that means creating follow-up To Do items after checking my email, getting a new ticket assigned to me, etc. This lets me go through my backlog at the start of the day (I have a daily &amp;quot;check-in&amp;quot; routine for this) and triage every item in the queue to make sure I don&amp;#39;t drop the ball on anything that&amp;#39;s urgent, while still allowing me not to waste mental space trying to track all tasks. &lt;/p&gt;
+
+&lt;p&gt;When going through the backlog, I classify things in three categories: &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;What I can do right now because I expect it to be fast. &amp;quot;Fast&amp;quot; is a subjective concept here. I never read the book, but from talking with others that have, my approach is inspired by &lt;a href=&quot;https://en.wikipedia.org/wiki/Getting_Things_Done&quot;&gt;Getting Things Done&lt;/a&gt;, and I believe the author sets the threshold at something that takes 5 minutes or less. &lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;What I don&amp;#39;t need to do right now but I must do at some specific time. Things with a deadline. These go to a ToDo entry that is scheduled and has a deadline (Going back to my comment about shortcuts, I have Hyper keys setup to do both these things). It&amp;#39;s important to set this properly so that I can feel confident that once I&amp;#39;m done with the capture process, I can move on to the next item in the backlog and forget about this one, while still knowing I won&amp;#39;t drop the ball on it. &lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;What I would like to do eventually, would be nice if I do, etc. Things that fall in this category tend to be ideas to improve a project, write a blog post, learn something new. Stuff I&amp;#39;d like to remember as &amp;quot;I would love to do this Some Day&amp;quot; but that is not time sensitive. I typically go to these items whenever I&amp;#39;m stuck, or I find myself procrastinating. &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;By default, my capture templates go to the global Inbox. This is a heading in my Todo.org file. I&amp;#39;ll talk more about files in the next section but for now what matters is that I will usually refile items to their file, or to their header in the global one. &lt;/p&gt;
+
+&lt;p&gt;By the end of this process, I have a better picture of how my day (and upcoming days) will look like, and I can plan how to tackle it accordingly. &lt;/p&gt;
+
+&lt;h2&gt;My org files&lt;/h2&gt;
+
+&lt;p&gt;As mentioned, I have a Todo.org file, which I call my &amp;quot;global&amp;quot; file. It holds my Inbox, my Personal heading (where I file anything personal that doesn&amp;#39;t merit a file of its own) and a Trashcan. I borrowed the idea of a Trashcan for ideas as opposed to just deleting the &amp;quot;bad ones&amp;quot; right away from Robert Pirsig&amp;#39;s description of his workflow in &lt;a href=&quot;https://en.wikipedia.org/wiki/Lila:_An_Inquiry_into_Morals&quot;&gt;Lila&lt;/a&gt;. He used cards and my analogy is an org-mode heading (or subheading, etc) is the equivalent to one of his cards. &lt;/p&gt;
+
+&lt;p&gt;Besides this, I have some things in their own org file. Examples include: 
+- Community.org to track work on community contributions, including ideas of the &amp;quot;would be nice to do&amp;quot; type, but also work with (usually soft) deadlines on bug reports and blog posts. 
+- One file per each large-enough project I&amp;#39;m involved in at the moment, and/or for each active client. When going through my email, if I have a request from a client, after capturing it I will refile it to the appropriate file. 
+- On-demand ephemeral files for things that I need on the spot. Say I need to hop on a call on short notice. I used to add a headline to an existing file and work there. Now I just create a file only for this, work there, and if needed, refile whatever is important to another place when the call is done. Otherwise, it&amp;#39;s easy to move the file to the Attic and be done with it. One of the goals of my setup is that I can both minimize &amp;quot;waste&amp;quot;, which I define as things that I don&amp;#39;t need and clutter my attention, while still letting me keep track of where I&amp;#39;ve been (something important so you have a decent chance of getting to where you&amp;#39;re going). I refer to this exit-target as Attic instead of Trashcan because I typically don&amp;#39;t delete things, unless I&amp;#39;m done with a client and the contract requires that I remove all information about this. Otherwise, having a history of my work as back as I have been doing it is quite useful to plan new things. Org-mode is all about text files so with today&amp;#39;s drives, there&amp;#39;s no way you can ever have disk-space problems because you have too many org files. &lt;/p&gt;
+
+&lt;h2&gt;My snippets&lt;/h2&gt;
+
+&lt;p&gt;I make use of snippets (via &lt;a href=&quot;https://github.com/joaotavora/yasnippet&quot;&gt;yasnippet&lt;/a&gt;) to help me work faster and avoid errors in repetitive work, but also to keep track of my steps. 
+Specifically, on this last item, I have a &amp;#39;tsnow&amp;#39; snippet that expands to the current timestamp (date + time) and when working on a case (say, a bug report), I will create an org header with a brief description of what I&amp;#39;m doing and then invoke the snippet. This creates a worklog that I can go back to when needed and is immensely helpful to me, especially if I need to interrupt my work for some time and then go back to it. When this happens, I also create a special log header called &amp;quot;Status at &amp;lt;tsnow&amp;gt;&amp;quot; where I do a short brain dump of what I&amp;#39;ve found so far and what I think my next steps should be. A nice side effect is that I can export the worklog in plain text (or HTML or PDF too) and upload it to a ticketing system. &lt;/p&gt;
+
+&lt;p&gt;Within each timestamped header I also make use of snippets to create EXAMPLE and SRC blocks as needed, to include code snippets and console output of what I have been doing. For more info on these type of blocks, I refer you to &lt;a href=&quot;https://orgmode.org/manual/Working-with-source-code.html&quot;&gt;the fine manual&lt;/a&gt;. &lt;/p&gt;
+
+&lt;p&gt;Quite often, these worklogs become narratives with code interweaved. I like to think of this as &amp;quot;Literate Troubleshooting&amp;quot;, but that may be just because I am a heavy Knuth fan :) &lt;/p&gt;
+
+&lt;h2&gt;Agenda&lt;/h2&gt;
+
+&lt;p&gt;Org provides an agenda view and while by default it works fine, I have a custom view that shows me anything that is scheduled for today (or for another day in the week, in the weekly view) in the IN PROGRESS, TODO, and SCHEDULED states. In org mode, headers can have a state, and those are useful to &lt;a href=&quot;https://orgmode.org/guide/Multi_002dstate-workflows.html&quot;&gt;organize your workflow&lt;/a&gt;. Mine are: TODO, IN PROGRESS, SCHEDULED,DONE, WAITING FOR FEEDBACK, WAITING ON CUSTOMER, SUSPENDED, REASSIGNED, and CANCELLED. &lt;/p&gt;
+
+&lt;h2&gt;Focusing&lt;/h2&gt;
+
+&lt;p&gt;While org-mode is very nice to organize your thoughts, tasks, and many other things, multi-header org files can get cluttered quickly. If this becomes too much cognitive noise to you (it does to me at times) I recommend using the focus and widen options. I have each of this assigned to a Hyper key so that I can easily make anything except that heading I&amp;#39;m currently interested in, disappear, and then reappear as needed. &lt;/p&gt;
+
+&lt;h2&gt;Tracking time&lt;/h2&gt;
+
+&lt;p&gt;If tracking time is important for you, org&amp;#39;s &lt;a href=&quot;https://orgmode.org/manual/Clocking-work-time.html&quot;&gt;clock&lt;/a&gt; will come in handy. I basically run with the clock on all the time, and just have it switch automatically as I go from heading to heading, which is kind of saying from task to ask. Off for lunch? No problem, I just use my &amp;quot;Interruption&amp;quot; capture template before going afk. As a result, at the end of the week, I can get a nice report of where I&amp;#39;ve spent my time. &lt;/p&gt;
+
+&lt;p&gt;I hope you found this useful, and I hope you give Emacs and org-mode a chance. They&amp;#39;re both beautiful software that can help you get a lot done. &lt;/p&gt;
+</description>
+        <pubDate>Wed, 23 Jan 2019 00:00:00 -0600</pubDate>
+        <link>http://fernandoipar.com/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</guid>
+        
+        <category>practice</category>
+        
+        <category>notes</category>
+        
+        <category>emacs</category>
+        
+        
+        <category>emacs</category>
+        
+        <category>notes</category>
+        
+      </item>
     
       <item>
         <title>What is a good cache hit ratio?</title>
@@ -466,39 +545,6 @@ I estimate losses on my part to about $.01, but the impact on my reputation may 
         <category>MySQL</category>
         
         <category>PlanetMySQL</category>
-        
-      </item>
-    
-      <item>
-        <title>Ongoing MySQL myths</title>
-        <description>&lt;p&gt;There's an interesting post over at &lt;a href=&quot;http://developer.olery.com/blog/goodbye-mongodb-hello-postgresql/&quot;&gt;Olery&lt;/a&gt;'s blog about a successful migration story from using MySQL/MongoDB to PostgreSQL as the persistence layer for applications that, however, lists a couple of cons of using MySQL that I personally think are no longer valid complaints (or at least not as big as they used to be). I did not find a way to reply to the post so, hopefully for the benefit of people who are new to MySQL and may hear the same recycled myths, I am doing so here.&lt;/p&gt;
-
-&lt;p&gt;Now I am aware that PostgreSQL has feature MySQL lacks (bitmap indexes are a personal favourite), but still, it is frustrating that instead of using actual arguments consisting of actual use cases in which one database is better than another, these old stories get recycled. I think it's a disservice to both MySQL and PostgreSQL.&lt;/p&gt;
-
-&lt;p&gt;The first paragraph that caught my attention is:&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;p&gt;MySQL was the first candidate as we were already using it for some small chunks of critical data. MySQL however is not without its problems. For example, when defining a field as &lt;code&gt;int(11)&lt;/code&gt; you can just happily insert textual data and MySQL will &lt;em&gt;try&lt;/em&gt; to convert it.&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;p&gt;The &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/sql-mode.html&quot;&gt;sql_mode&lt;/a&gt; variable is available since at least &lt;a href=&quot;http://dev.mysql.com/doc/refman/4.1/en/sql-mode.html&quot;&gt;4.0&lt;/a&gt; (GA in 2004 if I'm not mistaken, which is over a decade ago) and while yes, the default value is permissive, and any evil programmer will be able to change the value for the variable (Roland made &lt;a href=&quot;http://rpbouman.blogspot.com/2009/01/mysqls-sqlmode-my-suggestions.html&quot;&gt;very good suggestions&lt;/a&gt; about this some time ago), in my experience it has provided people with enough protection against this kind of data integrity problems.&lt;/p&gt;
-
-&lt;p&gt;And here's the second one:&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;p&gt;Another problem with MySQL is that any table modification (e.g. adding a column) will result in the table being locked for &lt;em&gt;both&lt;/em&gt; reading and writing. This means that &lt;em&gt;any&lt;/em&gt; operation using such a table will have to wait until the modification has completed.&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;p&gt;Innodb supports &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/innodb-online-ddl.html&quot;&gt;some online DDL&lt;/a&gt; operations starting with MySQL 5.6 (GA in February 2013, over two years ago) and of course, there's always &lt;a href=&quot;http://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html&quot;&gt;pt-online-schema-change&lt;/a&gt;, which can usually help in the cases were online DDL is still not supported, or when the impact on replica lag makes that approach unfeasible.&lt;/p&gt;
-
-&lt;p&gt;To wrap up, my message is that it's a big world out there, with different technologies that all have cons and pros. You need to make your due diligence and investigate the biggest of each when evaluating one technology, or comparing a few of them, to make sure you pick the best tool for the job (and for your context, because tools are not context-free. A kitchen knife is not a very good screwdriver, but a few times in my life I found myself in the situation of using it, and with success!), but most importantly, please base your decision on actually experience-verified facts, and not on things you've heard others say, or that perhaps you experienced a long time ago.&lt;/p&gt;
-
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 11 Mar 2015 07:45:07 -0500</pubDate>
-        <link>http://fernandoipar.com/mysql/2015/03/11/ongoing-mysql-myths.html</link>
-        <guid isPermaLink="true">http://fernandoipar.com/mysql/2015/03/11/ongoing-mysql-myths.html</guid>
-        
-        <category>MySQL</category>
-        
-        
-        <category>MySQL</category>
         
       </item>
     
