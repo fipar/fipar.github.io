@@ -6,8 +6,8 @@
 </description>
     <link>http://fernandoipar.com/</link>
     <atom:link href="http://fernandoipar.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 23 Jan 2019 13:30:59 -0600</pubDate>
-    <lastBuildDate>Wed, 23 Jan 2019 13:30:59 -0600</lastBuildDate>
+    <pubDate>Wed, 23 Jan 2019 16:37:44 -0600</pubDate>
+    <lastBuildDate>Wed, 23 Jan 2019 16:37:44 -0600</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -44,10 +44,13 @@
 
 &lt;p&gt;As mentioned, I have a Todo.org file, which I call my &amp;quot;global&amp;quot; file. It holds my Inbox, my Personal heading (where I file anything personal that doesn&amp;#39;t merit a file of its own) and a Trashcan. I borrowed the idea of a Trashcan for ideas as opposed to just deleting the &amp;quot;bad ones&amp;quot; right away from Robert Pirsig&amp;#39;s description of his workflow in &lt;a href=&quot;https://en.wikipedia.org/wiki/Lila:_An_Inquiry_into_Morals&quot;&gt;Lila&lt;/a&gt;. He used cards and my analogy is an org-mode heading (or subheading, etc) is the equivalent to one of his cards. &lt;/p&gt;
 
-&lt;p&gt;Besides this, I have some things in their own org file. Examples include: 
-- Community.org to track work on community contributions, including ideas of the &amp;quot;would be nice to do&amp;quot; type, but also work with (usually soft) deadlines on bug reports and blog posts. 
-- One file per each large-enough project I&amp;#39;m involved in at the moment, and/or for each active client. When going through my email, if I have a request from a client, after capturing it I will refile it to the appropriate file. 
-- On-demand ephemeral files for things that I need on the spot. Say I need to hop on a call on short notice. I used to add a headline to an existing file and work there. Now I just create a file only for this, work there, and if needed, refile whatever is important to another place when the call is done. Otherwise, it&amp;#39;s easy to move the file to the Attic and be done with it. One of the goals of my setup is that I can both minimize &amp;quot;waste&amp;quot;, which I define as things that I don&amp;#39;t need and clutter my attention, while still letting me keep track of where I&amp;#39;ve been (something important so you have a decent chance of getting to where you&amp;#39;re going). I refer to this exit-target as Attic instead of Trashcan because I typically don&amp;#39;t delete things, unless I&amp;#39;m done with a client and the contract requires that I remove all information about this. Otherwise, having a history of my work as back as I have been doing it is quite useful to plan new things. Org-mode is all about text files so with today&amp;#39;s drives, there&amp;#39;s no way you can ever have disk-space problems because you have too many org files. &lt;/p&gt;
+&lt;p&gt;Besides this, I have some things in their own org file. Examples include: &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Community.org to track work on community contributions, including ideas of the &amp;quot;would be nice to do&amp;quot; type, but also work with (usually soft) deadlines on bug reports and blog posts. &lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;One file per each large-enough project I&amp;#39;m involved in at the moment, and/or for each active client. When going through my email, if I have a request from a client, after capturing it I will refile it to the appropriate file. &lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;On-demand ephemeral files for things that I need on the spot. Say I need to hop on a call on short notice. I used to add a headline to an existing file and work there. Now I just create a file only for this, work there, and if needed, refile whatever is important to another place when the call is done. Otherwise, it&amp;#39;s easy to move the file to the Attic and be done with it. One of the goals of my setup is that I can both minimize &amp;quot;waste&amp;quot;, which I define as things that I don&amp;#39;t need and clutter my attention, while still letting me keep track of where I&amp;#39;ve been (something important so you have a decent chance of getting to where you&amp;#39;re going). I refer to this exit-target as Attic instead of Trashcan because I typically don&amp;#39;t delete things, unless I&amp;#39;m done with a client and the contract requires that I remove all information about this. Otherwise, having a history of my work as back as I have been doing it is quite useful to plan new things. Org-mode is all about text files so with today&amp;#39;s drives, there&amp;#39;s no way you can ever have disk-space problems because you have too many org files. &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2&gt;My snippets&lt;/h2&gt;
 
