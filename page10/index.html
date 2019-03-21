@@ -17,7 +17,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/page10/">
+  <link rel="canonical" href="http://0.0.0.0:4000/page10/">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -33,7 +33,7 @@
 
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -50,7 +50,7 @@
 
 <header class="blog-header">
     
-      <a class="blog-logo" href="http://fernandoipar.com" style="background-image: url('/assets/images/df_logo.jpg')">Fernando Ipar</a>
+      <a class="blog-logo" href="http://0.0.0.0:4000" style="background-image: url('/assets/images/df_logo.jpg')">Fernando Ipar</a>
     
     <h1 class="blog-title">Fernando Ipar</h1>
     <h2 class="blog-description">"Tell my wife I love her very much, she knows"
@@ -65,7 +65,8 @@
         
       
       <a href="/about/">About</a>&vert;
-      <a href="/presentations/">Presentations</a>
+      <a href="/presentations/">Presentations</a>&vert;
+      <a href="/everything/">All posts</a>
     </div>
 </header>
 
@@ -110,7 +111,7 @@
               <h2 class="post-title" itemprop="name"><a href="/programming/2009/01/12/running-commands-from-the-shell-with-a-timeout-pt-2.html" itemprop="url">Running commands from the shell with a timeout (pt 2)</a></h2>
             </header>
             <section class="post-excerpt" itemprop="description">
-              <p>Here's an improved version of the safecmd script. This one doesn't always wait for $timeout seconds even if the command you're running exits successfully. In that case, it kills the monitor script and ends at the proper time. Here's the code: #!/bin/bash timeout=$1 command=$2 shift 2 check_pid_name() { command=$1 childpid=$2...</p>
+              <p>EDIT: This can be safely replaced by timeout Here's an improved version of the safecmd script. This one doesn't always wait for $timeout seconds even if the command you're running exits successfully. In that case, it kills the monitor script and ends at the proper time. Here's the code: #!/bin/bash...</p>
             </section>
             <div class="post-meta">
               <time datetime="12 January 2009">12 January 2009</time>
@@ -124,24 +125,10 @@
               <h2 class="post-title" itemprop="name"><a href="/programming/2009/01/09/running-commands-from-the-shell-with-a-timeout.html" itemprop="url">Running commands from the shell with a timeout</a></h2>
             </header>
             <section class="post-excerpt" itemprop="description">
-              <p>Sometimes, in a shell script, you need to run a command that might go on forever (or an amount of time long enough to be called forever) due to poor coding of the software and wrong external conditions (network down or overloaded, overloaded system, a changed private key, etc). In...</p>
+              <p>EDIT: This can be safely replaced by timeout Sometimes, in a shell script, you need to run a command that might go on forever (or an amount of time long enough to be called forever) due to poor coding of the software and wrong external conditions (network down or overloaded,...</p>
             </section>
             <div class="post-meta">
               <time datetime="09 January 2009">09 January 2009</time>
-            </div>
-          </div>
-        </article>
-      
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
-          <div class="article-item">
-            <header class="post-header">
-              <h2 class="post-title" itemprop="name"><a href="/startups/music/2009/01/08/scriptlance-for-musicians.html" itemprop="url">Scriptlance for musicians?</a></h2>
-            </header>
-            <section class="post-excerpt" itemprop="description">
-              <p>I don't know if this will work or not, but at least it shows that people are always coming up with new and interesting ideas. The folks over at Minimum Noise have created a collaboration site for musicians, where one can either seek help to complete a music project, or...</p>
-            </section>
-            <div class="post-meta">
-              <time datetime="08 January 2009">08 January 2009</time>
             </div>
           </div>
         </article>
