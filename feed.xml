@@ -4,10 +4,10 @@
     <title>Fernando Ipar</title>
     <description>&quot;Tell my wife I love her very much, she knows&quot;
 </description>
-    <link>http://0.0.0.0:4000/</link>
-    <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 08 Apr 2019 06:48:56 -0500</pubDate>
-    <lastBuildDate>Mon, 08 Apr 2019 06:48:56 -0500</lastBuildDate>
+    <link>http://fernandoipar.com/</link>
+    <atom:link href="http://fernandoipar.com/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Wed, 24 Apr 2019 06:50:48 -0500</pubDate>
+    <lastBuildDate>Wed, 24 Apr 2019 06:50:48 -0500</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -76,8 +76,8 @@ Specifically, on this last item, I have a &amp;#39;tsnow&amp;#39; snippet that e
 &lt;p&gt;I hope you found this useful, and I hope you give Emacs and org-mode a chance. They&amp;#39;re both beautiful software that can help you get a lot done. &lt;/p&gt;
 </description>
         <pubDate>Wed, 23 Jan 2019 00:00:00 -0600</pubDate>
-        <link>http://0.0.0.0:4000/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</guid>
+        <link>http://fernandoipar.com/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</guid>
         
         <category>practice</category>
         
@@ -117,8 +117,8 @@ Specifically, on this last item, I have a &amp;#39;tsnow&amp;#39; snippet that e
 &lt;p&gt;A cache hit rate is measured in hits by time, which is none of the above because such a ratio tells you nothing useful about costs (or savings), response time or throughput.&lt;/p&gt;
 </description>
         <pubDate>Sat, 19 May 2018 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</guid>
+        <link>http://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</guid>
         
         <category>practice</category>
         
@@ -213,8 +213,8 @@ We can use sysbench to execute it via docker like so:&lt;/p&gt;
 &lt;p&gt;In conclusion, if you have benchmarking needs and have not considered sysbench, don’t be put off if your database of choice is not listed as supported: as long as there’s a Lua driver for it there’s a good chance that you will be able to use sysbench for the task!&lt;/p&gt;
 </description>
         <pubDate>Mon, 26 Mar 2018 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</guid>
+        <link>http://fernandoipar.com/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</guid>
         
         <category>cassandra</category>
         
@@ -306,8 +306,8 @@ PMM is a very good Open Source option for monitoring but as every instrumentatio
 &lt;p&gt;Finally, I think a similar cost is probably paid for the TLS layer on the pmm-server end. It would be very interesting to see an experiment like this repeated but on a different scenario: one pmm-server with several monitored clients.&lt;/p&gt;
 </description>
         <pubDate>Mon, 22 Jan 2018 00:00:00 -0600</pubDate>
-        <link>http://0.0.0.0:4000/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</guid>
+        <link>http://fernandoipar.com/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</guid>
         
         <category>mysql</category>
         
@@ -375,8 +375,8 @@ PMM is a very good Open Source option for monitoring but as every instrumentatio
 &lt;p&gt;Nothing groundbreaking for seasoned emacs users but I thought it could be useful to newbies such as myself (I have been using the editor in one form or another for several years already, but with evil-mode, and using only a small subset of its features). &lt;/p&gt;
 </description>
         <pubDate>Tue, 02 Jan 2018 00:00:00 -0600</pubDate>
-        <link>http://0.0.0.0:4000/emacs/notes/2018/01/02/emacs-hyper-key.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/emacs/notes/2018/01/02/emacs-hyper-key.html</guid>
+        <link>http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html</guid>
         
         <category>emacs</category>
         
@@ -424,8 +424,8 @@ open -a &amp;#39;Google Chrome&amp;#39; $*
 &lt;p&gt;There&amp;#39;s a lesson here for people like my younger past self: once you move into &amp;#39;The Workforce&amp;#39;, tech work is not about solving problems per se, but about adding to your client&amp;#39;s revenue or cutting down from their costs. Doing this effectively requires, among other things, knowing when to stop because a solution is &amp;#39;good enough&amp;#39; for the business need at hand, to the point where the benefits of continuing work on it no longer offset the costs involved.  &lt;/p&gt;
 </description>
         <pubDate>Tue, 26 Dec 2017 00:00:00 -0600</pubDate>
-        <link>http://0.0.0.0:4000/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html</guid>
+        <link>http://fernandoipar.com/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html</guid>
         
         <category>emacs</category>
         
@@ -459,8 +459,8 @@ open -a &amp;#39;Google Chrome&amp;#39; $*
 &lt;p&gt;Granted, this won&amp;#39;t cause anyone to lose data, but still, things like this make me think that, sometimes, MySQL deserves its reputation.  &lt;/p&gt;
 </description>
         <pubDate>Fri, 04 Nov 2016 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</guid>
+        <link>http://fernandoipar.com/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</guid>
         
         <category>mysql</category>
         
@@ -482,8 +482,8 @@ open -a &amp;#39;Google Chrome&amp;#39; $*
 &lt;p&gt;I&amp;#39;m looking forward to seeing old friends and making new ones in this wide (and growing) community we have!&lt;/p&gt;
 </description>
         <pubDate>Sat, 03 Oct 2015 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/planetmysql/mysql/2015/10/03/dataops-la.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/planetmysql/mysql/2015/10/03/dataops-la.html</guid>
+        <link>http://fernandoipar.com/planetmysql/mysql/2015/10/03/dataops-la.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/planetmysql/mysql/2015/10/03/dataops-la.html</guid>
         
         <category>mysql</category>
         
@@ -509,8 +509,8 @@ open -a &amp;#39;Google Chrome&amp;#39; $*
 &lt;p&gt;That said, one benefit I have already been able to appreciate is that literate programming with org-mode shines when your project combines different languages. If you look at the test functions, like the test for a sharded cluster of replica sets, you can see how org-mode lets me interweave bash and javascript as I explain what I am trying to achieve, in a way that&amp;#39;s independent of how the code will be tangled (as each block will go to a file for the corresponding language). One benefit of this is improved readability (as the alternative would be to have cross-comments in the js and bash scripts, which I think would be less clear to follow), but another, potentially even bigger benefit, IMO, is that this makes it easier to combine different languages in a same project, which gives you more reasons to try and use the best tool for each job. If you don&amp;#39;t need to generate a distributable &amp;#39;executable&amp;#39; project (as is my goal here, I want people to be able to just run the generated code using the wrappers), then org-mode gives you even more features to combine different languages, by using result blocks associated with code blocks. I don&amp;#39;t have a personal example for this right now, but you can read more about it &lt;a href=&quot;http://orgmode.org/manual/Evaluating-code-blocks.html#Evaluating-code-blocks&quot;&gt;here&lt;/a&gt;. &lt;/p&gt;
 </description>
         <pubDate>Tue, 09 Jun 2015 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/programming/2015/06/09/org-mode-babel-thoughts.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/programming/2015/06/09/org-mode-babel-thoughts.html</guid>
+        <link>http://fernandoipar.com/programming/2015/06/09/org-mode-babel-thoughts.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/programming/2015/06/09/org-mode-babel-thoughts.html</guid>
         
         <category>programming</category>
         
@@ -539,8 +539,8 @@ I estimate losses on my part to about $.01, but the impact on my reputation may 
 &lt;p&gt;Thanks. &lt;/p&gt;
 </description>
         <pubDate>Thu, 16 Apr 2015 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/mysql/planetmysql/2015/04/16/migrating-to-jekyll.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/mysql/planetmysql/2015/04/16/migrating-to-jekyll.html</guid>
+        <link>http://fernandoipar.com/mysql/planetmysql/2015/04/16/migrating-to-jekyll.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/mysql/planetmysql/2015/04/16/migrating-to-jekyll.html</guid>
         
         <category>MySQL</category>
         
