@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/mysql/2009/08/12/indexing-text-columns-in-mysql.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/mysql/2009/08/12/indexing-text-columns-in-mysql.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -57,13 +57,13 @@
             <span class="post-reading-time"></span> read
           </div>
           <a name="topofpage"></a>
-          <p><P>This time, I'm talking about indexes for string typed columns. In particular, I'll show a procedure I find useful while looking for good index length values for these columns.<br />
-</P><br />
-<P>I'll use a sample table called people.<br />
-</P><br />
-<P>Here's what it looks like:<br />
-</P><br />
-<PRE>mysql&gt; desc people;<br />
+          <p><p>This time, I'm talking about indexes for string typed columns. In particular, I'll show a procedure I find useful while looking for good index length values for these columns.<br />
+</p><br />
+<p>I'll use a sample table called people.<br />
+</p><br />
+<p>Here's what it looks like:<br />
+</p><br />
+<pre>mysql&gt; desc people;<br />
 +------------+------------------+------+-----+---------+----------------+<br />
 | Field      | Type             | Null | Key | Default | Extra          |<br />
 +------------+------------------+------+-----+---------+----------------+<br />
@@ -72,8 +72,7 @@
 | city       | varchar(250)     | NO   |     | NULL    |                |<br />
 | occupation | varchar(250)     | NO   |     | NULL    |                |<br />
 +------------+------------------+------+-----+---------+----------------+<br />
-4 rows in set (0.00 sec)</p>
-
+4 rows in set (0.00 sec)&lt;/p&gt;
 <p>mysql&gt; select count(*) from people;<br />
 +----------+<br />
 | count(*) |<br />
@@ -81,15 +80,14 @@
 |   150000 |<br />
 +----------+<br />
 1 row in set (0.00 sec)</p>
-
-<p>mysql&gt; </PRE><P><br />
+<p>mysql&gt; &lt;/PRE&gt;<p><br />
 We'll start by using procedure analyse to get some useful information<br />
 about our data. Unless you know some fields are good candidates for<br />
 use with the ENUM datatype, invoke procedure analyse with arguments<br />
 (0,0) in order to prevent mysql from suggesting huge ENUMs for string<br />
 columns.<br />
-</P><br />
-<PRE>mysql&gt; select * from people procedure analyse(0,0)\G<br />
+</p><br />
+<pre>mysql&gt; select * from people procedure analyse(0,0)\G<br />
 *************************** 1. row ***************************<br />
              Field_name: test.people.id<br />
               Min_value: 1<br />
@@ -134,31 +132,28 @@ Avg_value_or_avg_length: 17.4861<br />
 Avg_value_or_avg_length: 0.0000<br />
                     Std: NULL<br />
       Optimal_fieldtype: CHAR(0) NOT NULL<br />
-4 rows in set (0.19 sec)</p>
-
-<p>mysql&gt; </PRE><P><br />
+4 rows in set (0.19 sec)&lt;/p&gt;
+<p>mysql&gt; &lt;/PRE&gt;<p><br />
 The id column is numeric, and is actually already indexed. We can't<br />
 see this right here (though I showed an example of how you can use<br />
 the output of procedure analyse and extend it to suit your needs, in<br />
 which I did include an 'Indexed' column in the output), but we can<br />
 see this, and gan more information from the table, with the following<br />
 statement:<br />
-</P><br />
-<PRE>mysql&gt; show index from people;<br />
+</p><br />
+<pre>mysql&gt; show index from people;<br />
 +--------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+<br />
 | Table  | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment |<br />
 +--------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+<br />
 | people |          0 | PRIMARY  |            1 | id          | A         |      150000 |     NULL | NULL   |      | BTREE      |         |<br />
 +--------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+<br />
-1 row in set (0.00 sec)</p>
-
+1 row in set (0.00 sec)&lt;/p&gt;
 <p>mysql&gt;<br />
-</PRE><P><br />
+&lt;/PRE&gt;<p><br />
 In order to create a good index for title, we can use the following query. I used 95 as a starting point, since it's reported by procedure analyse as the average data length of this column.<br />
-</P></p>
-
+</p></p>
 <pre>
-mysql> select count(distinct(substr(title,1,95))) / count(distinct(title)) * 100 from people;
+mysql&gt; select count(distinct(substr(title,1,95))) / count(distinct(title)) * 100 from people;
 +--------------------------------------------------------------------+
 | count(distinct(substr(title,1,95))) / count(distinct(title)) * 100 |
 +--------------------------------------------------------------------+
@@ -166,18 +161,16 @@ mysql> select count(distinct(substr(title,1,95))) / count(distinct(title)) * 100
 +--------------------------------------------------------------------+
 1 row in set (1.42 sec)
 
-mysql> 
+mysql&gt; 
 
 </pre>
-
-<p><P><br />
+<p><p><br />
 As you can see, with 95 chars, we can get an index that covers 100% of the rows (i.e., get distinct values for all of them). Still, it's a big number. Using this query, we<br />
 can begin to play a little bit with the index size, until we get to a good compromise between enough distinct values and an index that's small enough to be processed fast and<br />
 maybe even loaded into memory.<br />
-</P></p>
-
+</p></p>
 <pre>
-mysql> select count(distinct(substr(title,1,20))) / count(distinct(title)) * 100 from people;
+mysql&gt; select count(distinct(substr(title,1,20))) / count(distinct(title)) * 100 from people;
 +--------------------------------------------------------------------+
 | count(distinct(substr(title,1,20))) / count(distinct(title)) * 100 |
 +--------------------------------------------------------------------+
@@ -185,16 +178,14 @@ mysql> select count(distinct(substr(title,1,20))) / count(distinct(title)) * 100
 +--------------------------------------------------------------------+
 1 row in set (1.15 sec)
 
-mysql> 
+mysql&gt; 
 </pre>
-
-<p><P><br />
+<p><p><br />
 As it turns out, my data set doesn't require too many characters in order to be differentiated. Actually, I'm kind of cheating here, for a table this size, since I used a data generator to populate this tables, and it<br />
 generated a lot of random text. Real world data would probably require a larger prefix in order to get such good differentiation. Anyway, let's push it a little bit more.<br />
-</P></p>
-
+</p></p>
 <pre>
-mysql> select count(distinct(substr(title,1,15))) / count(distinct(title)) * 100 from people;
+mysql&gt; select count(distinct(substr(title,1,15))) / count(distinct(title)) * 100 from people;
 +--------------------------------------------------------------------+
 | count(distinct(substr(title,1,15))) / count(distinct(title)) * 100 |
 +--------------------------------------------------------------------+
@@ -202,7 +193,7 @@ mysql> select count(distinct(substr(title,1,15))) / count(distinct(title)) * 100
 +--------------------------------------------------------------------+
 1 row in set (1.18 sec)
 
-mysql> select count(distinct(substr(title,1,14))) / count(distinct(title)) * 100 from people;
+mysql&gt; select count(distinct(substr(title,1,14))) / count(distinct(title)) * 100 from people;
 +--------------------------------------------------------------------+
 | count(distinct(substr(title,1,14))) / count(distinct(title)) * 100 |
 +--------------------------------------------------------------------+
@@ -210,13 +201,11 @@ mysql> select count(distinct(substr(title,1,14))) / count(distinct(title)) * 100
 +--------------------------------------------------------------------+
 1 row in set (1.13 sec)
 </pre>
-
-<p><P><br />
+<p><p><br />
 Here's the turning point for me. A jumb between 94% and 97% of index coverage in just 1 character. So I'm sticking with 15. Let's test this with some queries.<br />
-</P></p>
-
+</p></p>
 <pre>
-mysql> select title from people limit 40;
+mysql&gt; select title from people limit 40;
 +----------------------------------------------------------------------------------------------------------------------------------------------------+
 | title                                                                                                                                              |
 +----------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -263,15 +252,13 @@ mysql> select title from people limit 40;
 +----------------------------------------------------------------------------------------------------------------------------------------------------+
 40 rows in set (0.00 sec)
 
-mysql> 
+mysql&gt; 
 </pre>
-
-<p><P><br />
+<p><p><br />
 That should give you an idea of what type of needles we're looking for :)<br />
-</P></p>
-
+</p></p>
 <pre>
-mysql> select * from people where title like 'taxi%';
+mysql&gt; select * from people where title like 'taxi%';
 +--------+-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+------------+
 | id     | title                                                                                                                                               | city                           | occupation |
 +--------+-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+------------+
@@ -307,14 +294,14 @@ mysql> select * from people where title like 'taxi%';
 +--------+-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+------------+
 29 rows in set (0.11 sec)
 
-mysql> explain select * from people where title like 'taxi%';
+mysql&gt; explain select * from people where title like 'taxi%';
 +----+-------------+--------+------+---------------+------+---------+------+--------+-------------+
 | id | select_type | table  | type | possible_keys | key  | key_len | ref  | rows   | Extra       |
 +----+-------------+--------+------+---------------+------+---------+------+--------+-------------+
 |  1 | SIMPLE      | people | ALL  | NULL          | NULL | NULL    | NULL | 150000 | Using where | 
 +----+-------------+--------+------+---------------+------+---------+------+--------+-------------+
 
-mysql> select * from people where title = 'hoppers iciest sharer dietitian dictionaries frac';
+mysql&gt; select * from people where title = 'hoppers iciest sharer dietitian dictionaries frac';
 +----+---------------------------------------------------+--------------------+------------+
 | id | title                                             | city               | occupation |
 +----+---------------------------------------------------+--------------------+------------+
@@ -322,7 +309,7 @@ mysql> select * from people where title = 'hoppers iciest sharer dietitian dicti
 +----+---------------------------------------------------+--------------------+------------+
 1 row in set (0.12 sec)
 
-mysql> explain select * from people where title = 'hoppers iciest sharer dietitian dictionaries frac';
+mysql&gt; explain select * from people where title = 'hoppers iciest sharer dietitian dictionaries frac';
 +----+-------------+--------+------+---------------+------+---------+------+--------+-------------+
 | id | select_type | table  | type | possible_keys | key  | key_len | ref  | rows   | Extra       |
 +----+-------------+--------+------+---------------+------+---------+------+--------+-------------+
@@ -330,19 +317,17 @@ mysql> explain select * from people where title = 'hoppers iciest sharer dietiti
 +----+-------------+--------+------+---------------+------+---------+------+--------+-------------+
 1 row in set (0.00 sec)
 </pre>
-
 <p>
 Ok, now let's create the index. I'm loading it into a cache here, which is not necessary (even less given my size of 150000 tuples), but it helps. In order to do this, all the indexes in your table must have the same block size.</p>
-
 <pre>
-mysql> create index idx_people_title on people(title(15));
+mysql&gt; create index idx_people_title on people(title(15));
 Query OK, 150000 rows affected (1.60 sec)
 Records: 150000  Duplicates: 0  Warnings: 0
 
-mysql> reset query cache;
+mysql&gt; reset query cache;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> load index into cache people;
+mysql&gt; load index into cache people;
 +-------------+--------------+----------+----------+
 | Table       | Op           | Msg_type | Msg_text |
 +-------------+--------------+----------+----------+
@@ -351,13 +336,11 @@ mysql> load index into cache people;
 1 row in set (0.00 sec)
 
 </pre>
-
 <p>
 Let's re test the queries:</p>
-
 <pre>
 
-mysql> select * from people where title like 'taxi%';
+mysql&gt; select * from people where title like 'taxi%';
 +--------+-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+------------+
 | id     | title                                                                                                                                               | city                           | occupation |
 +--------+-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+------------+
@@ -393,7 +376,7 @@ mysql> select * from people where title like 'taxi%';
 +--------+-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+------------+
 29 rows in set (0.00 sec)
 
-mysql> explain select * from people where title like 'taxi%';
+mysql&gt; explain select * from people where title like 'taxi%';
 +----+-------------+--------+-------+------------------+------------------+---------+------+------+-------------+
 | id | select_type | table  | type  | possible_keys    | key              | key_len | ref  | rows | Extra       |
 +----+-------------+--------+-------+------------------+------------------+---------+------+------+-------------+
@@ -401,13 +384,11 @@ mysql> explain select * from people where title like 'taxi%';
 +----+-------------+--------+-------+------------------+------------------+---------+------+------+-------------+
 1 row in set (0.00 sec)
 </pre>
-
 <p>
 Notice how we only go through 56 rows now.</p>
-
 <pre>
 
-mysql> select * from people where title = 'hoppers iciest sharer dietitian dictionaries frac';
+mysql&gt; select * from people where title = 'hoppers iciest sharer dietitian dictionaries frac';
 +----+---------------------------------------------------+--------------------+------------+
 | id | title                                             | city               | occupation |
 +----+---------------------------------------------------+--------------------+------------+
@@ -415,7 +396,7 @@ mysql> select * from people where title = 'hoppers iciest sharer dietitian dicti
 +----+---------------------------------------------------+--------------------+------------+
 1 row in set (0.00 sec)
 
-mysql> explain select * from people where title = 'hoppers iciest sharer dietitian dictionaries frac';
+mysql&gt; explain select * from people where title = 'hoppers iciest sharer dietitian dictionaries frac';
 +----+-------------+--------+------+------------------+------------------+---------+-------+------+-------------+
 | id | select_type | table  | type | possible_keys    | key              | key_len | ref   | rows | Extra       |
 +----+-------------+--------+------+------------------+------------------+---------+-------+------+-------------+
@@ -423,14 +404,12 @@ mysql> explain select * from people where title = 'hoppers iciest sharer dietiti
 +----+-------------+--------+------+------------------+------------------+---------+-------+------+-------------+
 1 row in set (0.01 sec)
 </pre>
-
 <p>
 Just 1 row.<br />
 Ok, let's test the quality of the index to find unique rows.</p>
-
 <pre>
 
-mysql> explain select * from people where title = 'arbitrariness MacDraw
+mysql&gt; explain select * from people where title = 'arbitrariness MacDraw
 <p>
 Granted, 150.000 rows isn't much, but still, with an average row data length of 94, I had to find a 140 character title in order to go through 2 rows before the right one was found. That's reasonable, considering<br />
 I estimated a 97% index coverage.</p>
@@ -445,7 +424,7 @@ s carbonates suckers budget chronicler cur drabs untested Aryans imperial';
 +----+-------------+--------+------+------------------+------------------+---------+-------+------+-------------+
 1 row in set (0.00 sec)
 
-mysql> explain select * from people where title = 'dunes delightfulness manurers jousts axer aristocrat
+mysql&gt; explain select * from people where title = 'dunes delightfulness manurers jousts axer aristocrat
 <p>
 Granted, 150.000 rows isn't much, but still, with an average row data length of 94, I had to find a 140 character title in order to go through 2 rows before the right one was found. That's reasonable, considering<br />
 I estimated a 97% index coverage.</p>
@@ -460,7 +439,7 @@ s driver greediness bloke pays preconditions enclosure consideration plaster';
 +----+-------------+--------+------+------------------+------------------+---------+-------+------+-------------+
 1 row in set (0.00 sec)
 
-mysql> explain select * from people where title = 'satire
+mysql&gt; explain select * from people where title = 'satire
 <p>
 Granted, 150.000 rows isn't much, but still, with an average row data length of 94, I had to find a 140 character title in order to go through 2 rows before the right one was found. That's reasonable, considering<br />
 I estimated a 97% index coverage.</p>
@@ -482,7 +461,7 @@ s amica';
 +----+-------------+--------+------+------------------+------------------+---------+-------+------+-------------+
 1 row in set (0.00 sec)
 
-mysql> select *,length(title) from people where title = 'satire
+mysql&gt; select *,length(title) from people where title = 'satire
 <p>
 Granted, 150.000 rows isn't much, but still, with an average row data length of 94, I had to find a 140 character title in order to go through 2 rows before the right one was found. That's reasonable, considering<br />
 I estimated a 97% index coverage.</p>
@@ -505,14 +484,13 @@ s amica';
 1 row in set (0.00 sec)
 
 </pre>
-
 <p>
 Granted, 150.000 rows isn't much, but still, with an average row data length of 94, I had to find a 140 character title in order to go through 2 rows before the right one was found. That's reasonable, considering<br />
 I estimated a 97% index coverage.</p>
-
 <p>
 In conclusion, wihle my dataset size certainly isn't large enough to do many interesting things, it should prove the point that a good index size will go great lengths into helping you improve the performance of your MySQL based<br />
 system. The query I presented here can be useful to look for a decent index size in terms of unique rows coverage.</p>
+</pre></p></pre></p></pre></p>
 
         </section>
 <!-- fi-posts -->

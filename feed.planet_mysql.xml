@@ -3,29 +3,29 @@
 	<channel>
 		<title>Fernando Ipar - Planet MySQL</title>
 		<description>Posts categorized as 'Planet MySQL'</description>
-		<link>http://fernandoipar.com</link>
-		<atom:link href="http://fernandoipar.com/feed.planet_mysql.xml" rel="self" type="application/rss+xml" />
+		<link>http://0.0.0.0:4000</link>
+		<atom:link href="http://0.0.0.0:4000/feed.planet_mysql.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
 				<title>MySQL can be evil</title>
 				
-					<description>&lt;p&gt;Ok, maybe evil is too strong a word, but MySQL can certainly be deceiving. &lt;/p&gt;
+					<description>&lt;p&gt;Ok, maybe evil is too strong a word, but MySQL can certainly be deceiving.&lt;/p&gt;
 </description>
 				
 				<pubDate>Fri, 04 Nov 2016 00:00:00 -0500</pubDate>
-				<link>http://fernandoipar.com/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</link>
-				<guid isPermaLink="true">http://fernandoipar.com/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</guid>
+				<link>http://0.0.0.0:4000/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</link>
+				<guid isPermaLink="true">http://0.0.0.0:4000/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</guid>
 			</item>
 		
 			<item>
 				<title>A new name and a wider scope for South America's favourite MySQL-related conference</title>
 				
-					<description>&lt;p&gt;Next November I&amp;#39;ll once again take the ferry to my neighbour city of Buenos Aires to enjoy two days of learning, networking, and presenting, at &lt;a href=&quot;http://www.dataops.la/&quot;&gt;DataOps LA 2015&lt;/a&gt;, the first incarnation of what used to be the &lt;a href=&quot;http://mysqlnosqlcloud.com/&quot;&gt;MySQL, NoSQL, Cloud&lt;/a&gt; Conference organized by &lt;a href=&quot;http://binlogic.com/&quot;&gt;BinLogic&lt;/a&gt; in Buenos Aires. &lt;/p&gt;
+					<description>&lt;p&gt;Next November I’ll once again take the ferry to my neighbour city of Buenos Aires to enjoy two days of learning, networking, and presenting, at &lt;a href=&quot;http://www.dataops.la/&quot;&gt;DataOps LA 2015&lt;/a&gt;, the first incarnation of what used to be the &lt;a href=&quot;http://mysqlnosqlcloud.com/&quot;&gt;MySQL, NoSQL, Cloud&lt;/a&gt; Conference organized by &lt;a href=&quot;http://binlogic.com/&quot;&gt;BinLogic&lt;/a&gt; in Buenos Aires.&lt;/p&gt;
 </description>
 				
 				<pubDate>Sat, 03 Oct 2015 00:00:00 -0500</pubDate>
-				<link>http://fernandoipar.com/planetmysql/mysql/2015/10/03/dataops-la.html</link>
-				<guid isPermaLink="true">http://fernandoipar.com/planetmysql/mysql/2015/10/03/dataops-la.html</guid>
+				<link>http://0.0.0.0:4000/planetmysql/mysql/2015/10/03/dataops-la.html</link>
+				<guid isPermaLink="true">http://0.0.0.0:4000/planetmysql/mysql/2015/10/03/dataops-la.html</guid>
 			</item>
 		
 	</channel>

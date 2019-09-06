@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/programming/2015/06/09/org-mode-babel-thoughts.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/programming/2015/06/09/org-mode-babel-thoughts.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -57,15 +57,15 @@
             <span class="post-reading-time"></span> read
           </div>
           <a name="topofpage"></a>
-          <p>Lately I&#39;ve been playing around with mongodb, specifically with the idea of having a script to summarize data that could be useful to have when troubleshooting, in a way like <a href="https://www.percona.com/doc/percona-toolkit/2.1/pt-mysql-summary.html">Percona Toolkit&#39;s pt-mysql-summary</a> works for MySQL. </p>
+          <p>Lately I’ve been playing around with mongodb, specifically with the idea of having a script to summarize data that could be useful to have when troubleshooting, in a way like <a href="https://www.percona.com/doc/percona-toolkit/2.1/pt-mysql-summary.html">Percona Toolkit’s pt-mysql-summary</a> works for MySQL.</p>
 
-<p>Unrelated to this, I have been using <a href="http://orgmode.org/">org-mode</a> to, well, organize my work, for a few years now. As part of my day to day job I write a lot of code snippets, usually in bash or SQL, sometimes in other languages, and for this I make heavy use of <a href="http://orgmode.org/manual/Working-With-Source-Code.html#Working-With-Source-Code">code blocks</a>. Over time, this has become one of my favourite org-mode&#39;s features, as it lets me keep code relevant to a customer issue on the same place as other information (like output from that code, output from text files, stack traces, notes from my calls with the customer, etc). </p>
+<p>Unrelated to this, I have been using <a href="http://orgmode.org/">org-mode</a> to, well, organize my work, for a few years now. As part of my day to day job I write a lot of code snippets, usually in bash or SQL, sometimes in other languages, and for this I make heavy use of <a href="http://orgmode.org/manual/Working-With-Source-Code.html#Working-With-Source-Code">code blocks</a>. Over time, this has become one of my favourite org-mode’s features, as it lets me keep code relevant to a customer issue on the same place as other information (like output from that code, output from text files, stack traces, notes from my calls with the customer, etc).</p>
 
-<p>Back to mongodb and my desire to work on some basic tools as a learning opportunity, I saw this as a good chance for trying to do some programming in the <a href="http://www.literateprogramming.com/">literate</a> style. </p>
+<p>Back to mongodb and my desire to work on some basic tools as a learning opportunity, I saw this as a good chance for trying to do some programming in the <a href="http://www.literateprogramming.com/">literate</a> style.</p>
 
-<p>My first tests can be seen <a href="https://github.com/fipar/playground/blob/master/tools-for-mongodb/mongo-summary.org">here</a>. I understand completely this is a very small and simple project that is not the best to expose the potential benefits of this approach to programming, but it is what I can do now given my work/personal life obligations. It is my goal to start working on something bigger on the personal side, and I plan to use a similar approach to it, so I may know more after that. </p>
+<p>My first tests can be seen <a href="https://github.com/fipar/playground/blob/master/tools-for-mongodb/mongo-summary.org">here</a>. I understand completely this is a very small and simple project that is not the best to expose the potential benefits of this approach to programming, but it is what I can do now given my work/personal life obligations. It is my goal to start working on something bigger on the personal side, and I plan to use a similar approach to it, so I may know more after that.</p>
 
-<p>That said, one benefit I have already been able to appreciate is that literate programming with org-mode shines when your project combines different languages. If you look at the test functions, like the test for a sharded cluster of replica sets, you can see how org-mode lets me interweave bash and javascript as I explain what I am trying to achieve, in a way that&#39;s independent of how the code will be tangled (as each block will go to a file for the corresponding language). One benefit of this is improved readability (as the alternative would be to have cross-comments in the js and bash scripts, which I think would be less clear to follow), but another, potentially even bigger benefit, IMO, is that this makes it easier to combine different languages in a same project, which gives you more reasons to try and use the best tool for each job. If you don&#39;t need to generate a distributable &#39;executable&#39; project (as is my goal here, I want people to be able to just run the generated code using the wrappers), then org-mode gives you even more features to combine different languages, by using result blocks associated with code blocks. I don&#39;t have a personal example for this right now, but you can read more about it <a href="http://orgmode.org/manual/Evaluating-code-blocks.html#Evaluating-code-blocks">here</a>. </p>
+<p>That said, one benefit I have already been able to appreciate is that literate programming with org-mode shines when your project combines different languages. If you look at the test functions, like the test for a sharded cluster of replica sets, you can see how org-mode lets me interweave bash and javascript as I explain what I am trying to achieve, in a way that’s independent of how the code will be tangled (as each block will go to a file for the corresponding language). One benefit of this is improved readability (as the alternative would be to have cross-comments in the js and bash scripts, which I think would be less clear to follow), but another, potentially even bigger benefit, IMO, is that this makes it easier to combine different languages in a same project, which gives you more reasons to try and use the best tool for each job. If you don’t need to generate a distributable ‘executable’ project (as is my goal here, I want people to be able to just run the generated code using the wrappers), then org-mode gives you even more features to combine different languages, by using result blocks associated with code blocks. I don’t have a personal example for this right now, but you can read more about it <a href="http://orgmode.org/manual/Evaluating-code-blocks.html#Evaluating-code-blocks">here</a>.</p>
 
         </section>
 <!-- fi-posts -->

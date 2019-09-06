@@ -17,7 +17,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/page8/">
+  <link rel="canonical" href="http://0.0.0.0:4000/page8/">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -33,7 +33,7 @@
 
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -50,7 +50,7 @@
 
 <header class="blog-header">
     
-      <a class="blog-logo" href="http://fernandoipar.com" style="background-image: url('/assets/images/df_logo.jpg')">Fernando Ipar</a>
+      <a class="blog-logo" href="http://0.0.0.0:4000" style="background-image: url('/assets/images/df_logo.jpg')">Fernando Ipar</a>
     
     <h1 class="blog-title">Fernando Ipar</h1>
     <h2 class="blog-description">"Tell my wife I love her very much, she knows"
@@ -77,6 +77,20 @@
     
 
     <div class="cf frame">
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/mysql/2009/04/02/using-mysql-sandbox-for-testing.html" itemprop="url">Using MySQL sandbox for testing</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>MySQL Sandbox is a great tool for quickly deploying test MySQL instances, particularly if your daily work involves diagnosing problems across multiple MySQL versions. Once you've downloaded it, it needs no installation. Just have a few MySQL binary releases at hand, and begin creating sandboxes in just a few seconds:...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="02 April 2009">02 April 2009</time>
+            </div>
+          </div>
+        </article>
       
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
           <div class="article-item">
@@ -130,20 +144,6 @@
             </section>
             <div class="post-meta">
               <time datetime="27 February 2009">27 February 2009</time>
-            </div>
-          </div>
-        </article>
-      
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
-          <div class="article-item">
-            <header class="post-header">
-              <h2 class="post-title" itemprop="name"><a href="/programming/2009/02/04/generating-random-salts-from-bash.html" itemprop="url">Generating random salts from bash</a></h2>
-            </header>
-            <section class="post-excerpt" itemprop="description">
-              <p>From the 'just because it can be done' column, here comes a handy shell script to generate random salts. So, without further ado,  here it goes: #!/bin/bash [ $# -eq 0 ] &amp;&amp; { echo "usage: salt &lt;length&gt;"&gt;&amp;2 exit } strings &lt;/dev/urandom | while read line; do echo $line |...</p>
-            </section>
-            <div class="post-meta">
-              <time datetime="04 February 2009">04 February 2009</time>
             </div>
           </div>
         </article>

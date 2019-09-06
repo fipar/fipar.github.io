@@ -4,80 +4,212 @@
     <title>Fernando Ipar</title>
     <description>&quot;Tell my wife I love her very much, she knows&quot;
 </description>
-    <link>http://fernandoipar.com/</link>
-    <atom:link href="http://fernandoipar.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 24 Apr 2019 06:50:48 -0500</pubDate>
-    <lastBuildDate>Wed, 24 Apr 2019 06:50:48 -0500</lastBuildDate>
-    <generator>Jekyll v3.8.5</generator>
+    <link>http://0.0.0.0:4000/</link>
+    <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Thu, 05 Sep 2019 20:17:32 -0500</pubDate>
+    <lastBuildDate>Thu, 05 Sep 2019 20:17:32 -0500</lastBuildDate>
+    <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Top 8 things every database practitioner should know</title>
+        <description>&lt;p&gt;&lt;em&gt;This article is a cross post from &lt;a href=&quot;https://blog.pythian.com/the-top-8-things-every-database-practitioner-should-know/&quot;&gt;Pythian’s blog&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I’ve been interviewing and mentoring candidates for technical database positions for almost ten years, and a common question from those who either don’t make it or feel they’re not ready yet to apply to the position they’re looking for is: What else should I learn to prepare for this?&lt;/p&gt;
+
+&lt;p&gt;This post is an attempt at summarizing my advice in this regard, covering what I think are the most important minimum topics one should be familiar with when applying for any position that involves doing technical work with databases.&lt;/p&gt;
+
+&lt;p&gt;They are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Database Models&lt;/li&gt;
+  &lt;li&gt;Transactional concepts&lt;/li&gt;
+  &lt;li&gt;Data structures&lt;/li&gt;
+  &lt;li&gt;Consensus algorithms&lt;/li&gt;
+  &lt;li&gt;Development and automation fundamentals&lt;/li&gt;
+  &lt;li&gt;Hardware basics&lt;/li&gt;
+  &lt;li&gt;Operating Systems Basics&lt;/li&gt;
+  &lt;li&gt;Performance Optimization&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;database-models&quot;&gt;Database Models&lt;/h2&gt;
+
+&lt;p&gt;You need to start at the beginning, and when it comes to databases, I think that’s database models. A database model can be considered a specification for how data will look like to the users of the database, including which data types and operations are supported. Unless you’re developing a database system from scratch, you never choose a model directly; instead, you pick it by proxy when you decide which database system to use.&lt;/p&gt;
+
+&lt;p&gt;For this reason, if your responsibilities include selecting a database based on a set of requirements, the only way to make an informed choice is by knowing which models are available, and which implementations they have.&lt;/p&gt;
+
+&lt;p&gt;While studying the models, always keep in mind that, as practitioners, we’ll be making choices based not just on ideal models but also on real-world constraints (e.g., budget constraints), so more often than not we’ll find ourselves bending the rules. As in the case of making informed decisions, the only way to properly bend (or break) the rules is by first knowing them very well.&lt;/p&gt;
+
+&lt;p&gt;I think the absolute minimum here is getting familiar with the relational model, as it inspired a lot of the database systems currently in use. You may have heard comments such as “when you get to a certain size, the relational model does not scale”. (A mistaken statement, since the relational model is a logical data model and has nothing to say about physical representation, so if anything, what does not scale is a specific implementation of the relational model. This statement makes as much sense as saying that arithmetic does not scale because your pocket calculator overflows at relatively small numbers, but I digress), but the fact is, there is still a vast market of job opportunities for people supporting database operations for medium-sized businesses, where a relational database implementation is a great fit.&lt;/p&gt;
+
+&lt;p&gt;Next in line would be the most popular contemporary non-relational models. This is the world of object, document, graph, and time-series databases, among others.&lt;/p&gt;
+
+&lt;p&gt;Finally, while not worth spending a lot of time (except to satisfy your historical curiosity), I think it pays to skim through pre-relational models, mostly so you become aware of 1) why the relational model became so popular, and 2) what pre-relational mistakes other contemporary products may be making. These would be the network and hierarchical models.&lt;/p&gt;
+
+&lt;p&gt;Several textbooks can help with this, but my bare minimum recommendation is to read &lt;a href=&quot;http://shop.oreilly.com/product/9780596100124.do&quot;&gt;“Database in Depth”&lt;/a&gt; by C.J.Date.&lt;/p&gt;
+
+&lt;h2 id=&quot;transactional-concepts&quot;&gt;Transactional Concepts&lt;/h2&gt;
+
+&lt;p&gt;Another critical concept in database systems is transaction support. You should be familiar with the ACID acronym and be able to evaluate the transactional guarantees of a database system, as well as the transactional requirements of a system you may design or build.&lt;/p&gt;
+
+&lt;p&gt;When using an SQL-based system, it’s essential to understand the transaction isolation levels provided by it. Make sure you go to the relevant documentation instead of relying just on the level names, as not all databases implement a given level in the same way.&lt;/p&gt;
+
+&lt;p&gt;As mentioned, the first resource to learn this should be the official documentation for the product you’re using or evaluating. If you want to go deeper, &lt;a href=&quot;https://dl.acm.org/citation.cfm?id=2821572&quot;&gt;“Transactional Information Systems: Theory, Algorithms, and the Practice of Concurrency Control and Recovery”&lt;/a&gt; is an excellent resource.&lt;/p&gt;
+
+&lt;p&gt;For distributed systems, &lt;a href=&quot;https://jepsen.io/consistency&quot;&gt;“Consistency Models”&lt;/a&gt; is a must-read.&lt;/p&gt;
+
+&lt;h2 id=&quot;data-structures&quot;&gt;Data Structures&lt;/h2&gt;
+
+&lt;p&gt;Data structures define the organization of data both in memory and in persistent storage. The fundamental ones you need to be familiar with to work with databases are B Trees, LSM Trees, and Hashes.&lt;/p&gt;
+
+&lt;p&gt;Others that you may need to become familiar with depending on the products you use are Bitmap Indexes, Bloom Filters, and Sparse Indexes.&lt;/p&gt;
+
+&lt;p&gt;Finally, if you want to get involved in developing or customizing database systems (e.g., patching MySQL, PostgreSQL, etc.) you should also be familiar with more fundamental data structures such as lists, stacks, and queues, among others.&lt;/p&gt;
+
+&lt;p&gt;There are many sources of information about this, but I recommend 3:&lt;/p&gt;
+
+&lt;p&gt;Some “Fundamentals” textbook. I learned with &lt;a href=&quot;https://www-cs-faculty.stanford.edu/~knuth/taocp.html&quot;&gt;Knuth&lt;/a&gt; (which, for data structures, involves Volumes &lt;a href=&quot;https://dl.acm.org/citation.cfm?id=260999&quot;&gt;1&lt;/a&gt; and &lt;a href=&quot;https://dl.acm.org/citation.cfm?id=280635&quot;&gt;3&lt;/a&gt;), but there are several excellent texts out there. Just check out a few samples on the web to find one where the style suits you and go for it. Online university course notes and bibliography are a great resource for finding out “where do I learn more?” too. 
+The paper presenting a specific data structure, or a good write up of it. For example, here’s one for &lt;a href=&quot;https://blog.acolyer.org/2014/11/26/the-log-structured-merge-tree-lsm-tree/&quot;&gt;LSM Trees&lt;/a&gt; (I recommend The Morning Paper as a friendly way to keep up with our field). 
+The relevant source code, if available. 
+Finally, if you want to design your own data structure, I recommend &lt;a href=&quot;https://stratos.seas.harvard.edu/files/stratos/files/periodictabledatastructures.pdf&quot;&gt;“The Periodic Table of Data Structures”&lt;/a&gt; to get ideas of what you could try.&lt;/p&gt;
+
+&lt;h2 id=&quot;consensus-algorithms&quot;&gt;Consensus Algorithms&lt;/h2&gt;
+
+&lt;p&gt;As soon as our databases involve more than one system communicating, they need some protocol for how to agree on what the global system’s state should be.&lt;/p&gt;
+
+&lt;p&gt;Consensus algorithms are the theoretical foundation for this, and if you plan to work with distributed databases, you should become familiar (this means “can understand how it works and what guarantees are provided,” not “can implement it”) with some. The choice will be dictated by the system you use, but if you want to learn this before using a system, or, as in the case of learning database models, so you’re better informed when you have to choose which distributed system to use, I think it pays to become familiar with &lt;a href=&quot;https://raft.github.io/&quot;&gt;Raft&lt;/a&gt; as a starting point. &lt;a href=&quot;https://lamport.azurewebsites.net/pubs/paxos-simple.pdf&quot;&gt;Paxos&lt;/a&gt; can be an excellent second step, but bear in mind one of the key reasons why Raft was designed was to provide a consensus algorithm that was more understandable than Paxos, so be ready to spend some time if you want to go down this road (Notice I linked to “Paxos Made Simple” instead of to the &lt;a href=&quot;https://lamport.azurewebsites.net/pubs/lamport-paxos.pdf&quot;&gt;original paper&lt;/a&gt;, even though they’re both by the same author).&lt;/p&gt;
+
+&lt;p&gt;Another good piece of advice I can give here is, as practitioners, we should treat consensus algorithms like we (hopefully) treat cryptographic algorithms: you don’t make up your own. Don’t get me wrong: it’s perfectly fine to try to create something new (in fact, I encouraged you to design your own data structure just a few paragraphs above), but this is not something you “learn by doing,” much less by writing production software.&lt;/p&gt;
+
+&lt;h2 id=&quot;development-and-automation-fundamentals&quot;&gt;Development And Automation Fundamentals&lt;/h2&gt;
+
+&lt;p&gt;The first thing you need to become proficient at is the language of the database you work with. The only caveat is that, even if you currently don’t use an SQL-based database, I think you should still become familiar with it since it is supported (in some form of another, with several inconsistencies between systems) by most database systems currently in use. As in the case of transaction isolation levels, I think the official documentation from the product should be read. However, that can be supplemented here by a more general SQL reference. My recommendation would be &lt;a href=&quot;http://shop.oreilly.com/product/0636920046158.do&quot;&gt;“SQL and Relational Theory”&lt;/a&gt; by C.J.Date.&lt;/p&gt;
+
+&lt;p&gt;You should also be confident with scripting. Any scripting language available on the platform(s) you work should be good here. I’m a heavy bash user, but these days a lot of people go straight to Python for this. Unless the position you’re applying for lists a specific requirement, any language will do, since you’ll be able to apply the concepts from it into other scripting languages in the future if needed.&lt;/p&gt;
+
+&lt;p&gt;Since database work involves a lot of automation these days, it’s essential to become familiar with some DevOps concepts and tools. At the very least, you’ll want to know the basics of automatic provisioning with &lt;a href=&quot;https://www.ansible.com/&quot;&gt;Ansible&lt;/a&gt;, &lt;a href=&quot;https://www.chef.io/&quot;&gt;Chef&lt;/a&gt;, or some other such tool.&lt;/p&gt;
+
+&lt;p&gt;If you want to work on an Open Source database and you enjoy programming, it’s a great idea to become familiar with its source code, and, in turn, with the programming language it is written in. This may seem like overkill at first, but it is priceless when you need to troubleshoot hard-to-track problems or understand stack traces and other error messages.&lt;/p&gt;
+
+&lt;h2 id=&quot;hardware-basics&quot;&gt;Hardware Basics&lt;/h2&gt;
+&lt;p&gt;You should be familiar with the overall architecture of the actual computers where the database software runs.&lt;/p&gt;
+
+&lt;p&gt;Databases are meant (among other things) to provide a reliable and convenient abstraction for data storage so that users can just worry about their logic, and not care about how things are done under the hood. However, as the people supporting (I’m using the term broadly here) databases, we spend a significant part of our time under this hood.&lt;/p&gt;
+
+&lt;p&gt;Among other things, this means you should be able to find out and properly interpret hardware specs such as storage device IOPS, understand what hyperthreading is, etc. All of this is tied together and, for example, what drives you have available may end up dictating which data structure you’ll use (e.g., some are better at reducing wear for SSDs or dealing with slower storage).&lt;/p&gt;
+
+&lt;p&gt;There are several great books on computer architecture, but I think the best recommendation I can make for this and the next section is &lt;a href=&quot;http://www.brendangregg.com/sysperfbook.html&quot;&gt;“Systems Performance: Enterprise and The Cloud”&lt;/a&gt; by Brendan Gregg.&lt;/p&gt;
+
+&lt;h2 id=&quot;operating-systems-basics&quot;&gt;Operating Systems Basics&lt;/h2&gt;
+
+&lt;p&gt;This is very much tied with Hardware and involves you knowing about swapping/paging, what Virtual Memory is, how the I/O subsystem works (including how to make sure a write made it to persistent storage, or what schedulers you have available).&lt;/p&gt;
+
+&lt;p&gt;It’s also vital to know what tracing and monitoring tools your OS has available, so you can dig deeper when a performance problem requires it, and understand what resource is the bottleneck, for example.&lt;/p&gt;
+
+&lt;h2 id=&quot;performance-optimization&quot;&gt;Performance Optimization&lt;/h2&gt;
+
+&lt;p&gt;Finally, you need to be proficient at suitable methods for performance analysis and optimization. Here, the Gregg book is recommended again, as it introduces the &lt;a href=&quot;http://www.brendangregg.com/usemethod.html&quot;&gt;USE method&lt;/a&gt;, which I often use when diagnosing performance problems.&lt;/p&gt;
+
+&lt;p&gt;The book &lt;a href=&quot;http://shop.oreilly.com/product/9780596005276.do&quot;&gt;“Optimizing Oracle Performance”&lt;/a&gt; by Cary Millsap is also recommended. If you don’t plan to work on Oracle: don’t be put off by the title. I’ve never worked on Oracle, and I still found it very helpful. I’d say about 2/3rds of the book is generic and applies to whatever database system you work with, as it consists of the presentation of “Method R” for performance optimization.&lt;/p&gt;
+
+&lt;p&gt;As a final recommendation, for capacity planning, I recommend reading &lt;a href=&quot;https://www.springer.com/gp/book/9783540261384&quot;&gt;“Guerrilla Capacity Planning”&lt;/a&gt; by Neil Gunther. This book introduces the Universal Scalability Law and includes some heavy theoretical material (which I had to re-read several times) plus good practical examples for how to use it to estimate hardware and software scalability.&lt;/p&gt;
+
+&lt;h2 id=&quot;parting-words&quot;&gt;Parting words&lt;/h2&gt;
+
+&lt;p&gt;I hope you found this useful. Besides studying all the things I’ve mentioned on this post, I have one last recommendation to make: get involved in an online community related (e.g., the &lt;a href=&quot;https://lefred.be/mysql-community-on-slack/&quot;&gt;MySQL Community Slack&lt;/a&gt;) to the technologies you want to get better at since frequently senior people are available and will provide insightful help to people asking questions.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 05 Sep 2019 00:00:00 -0500</pubDate>
+        <link>http://0.0.0.0:4000/notes/2019/09/05/top-8-things-every-database-practitioner-should-know.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/notes/2019/09/05/top-8-things-every-database-practitioner-should-know.html</guid>
+        
+        <category>notes</category>
+        
+        <category>pythian</category>
+        
+        
+        <category>notes</category>
+        
+      </item>
     
       <item>
         <title>My org-mode workflow</title>
-        <description>&lt;p&gt;A &lt;a href=&quot;https://news.ycombinator.com/item?id=18891069&quot;&gt;recent Hacker News discussion&lt;/a&gt; inspired me to write a short post on my org-mode workflow, with the hope that it may help others. &lt;/p&gt;
+        <description>&lt;p&gt;A &lt;a href=&quot;https://news.ycombinator.com/item?id=18891069&quot;&gt;recent Hacker News discussion&lt;/a&gt; inspired me to write a short post on my org-mode workflow, with the hope that it may help others.&lt;/p&gt;
 
-&lt;p&gt;The thing I like the most about org-mode is that it supports heavy customization. This is not surprising, since Emacs itself is all about customization. You don&amp;#39;t just use an editor, you build the editor you want using this Text Editing Framework, so to speak. &lt;/p&gt;
+&lt;p&gt;The thing I like the most about org-mode is that it supports heavy customization. This is not surprising, since Emacs itself is all about customization. You don’t just use an editor, you build the editor you want using this Text Editing Framework, so to speak.&lt;/p&gt;
 
-&lt;p&gt;I came to emacs precisely because of org-mode, after enough people recommended it. I came from vim and the first turn-down for me where the keyboard shortcuts. I partially improved that by using evil-mode, which in my view gives you the best of two worlds: the power of Emacs and the ergonomics of VIM. That is, of course, if you think VIM is an ergonomic text editor (I do). &lt;/p&gt;
+&lt;p&gt;I came to emacs precisely because of org-mode, after enough people recommended it. I came from vim and the first turn-down for me where the keyboard shortcuts. I partially improved that by using evil-mode, which in my view gives you the best of two worlds: the power of Emacs and the ergonomics of VIM. That is, of course, if you think VIM is an ergonomic text editor (I do).&lt;/p&gt;
 
-&lt;p&gt;The second huge improvement to the usability of Emacs (and org-mode) for me came via the Hyper key. I have written about this &lt;a href=&quot;http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html&quot;&gt;before&lt;/a&gt; and while my setup has changed a bit since that was written, the idea still holds. &lt;/p&gt;
+&lt;p&gt;The second huge improvement to the usability of Emacs (and org-mode) for me came via the Hyper key. I have written about this &lt;a href=&quot;http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html&quot;&gt;before&lt;/a&gt; and while my setup has changed a bit since that was written, the idea still holds.&lt;/p&gt;
 
-&lt;p&gt;I use a Kinesis Freestyle2 Blue keyboard and combined with heavy use of the Hyper key (all but 7 keys on my keyboard are currently mapped as hyper key shortcuts!) and slight typing changes (Never use the pinky for Shift, remap Caps-Lock as Control, that kind of thing), I can spend my typing time without incurring in physical pain. &lt;/p&gt;
+&lt;p&gt;I use a Kinesis Freestyle2 Blue keyboard and combined with heavy use of the Hyper key (all but 7 keys on my keyboard are currently mapped as hyper key shortcuts!) and slight typing changes (Never use the pinky for Shift, remap Caps-Lock as Control, that kind of thing), I can spend my typing time without incurring in physical pain.&lt;/p&gt;
 
-&lt;p&gt;So enough for the intro, here&amp;#39;s how I use org-mode to manage my work and personal life: &lt;/p&gt;
+&lt;p&gt;So enough for the intro, here’s how I use org-mode to manage my work and personal life:&lt;/p&gt;
 
-&lt;h2&gt;Capture templates and a global Inbox&lt;/h2&gt;
+&lt;h2 id=&quot;capture-templates-and-a-global-inbox&quot;&gt;Capture templates and a global Inbox&lt;/h2&gt;
 
-&lt;p&gt;I use org-mode&amp;#39;s &lt;a href=&quot;https://orgmode.org/manual/Capture-templates.html&quot;&gt;capture templates&lt;/a&gt; to create new entries whenever I need to get something off my head but without losing track of it. Typically that means creating follow-up To Do items after checking my email, getting a new ticket assigned to me, etc. This lets me go through my backlog at the start of the day (I have a daily &amp;quot;check-in&amp;quot; routine for this) and triage every item in the queue to make sure I don&amp;#39;t drop the ball on anything that&amp;#39;s urgent, while still allowing me not to waste mental space trying to track all tasks. &lt;/p&gt;
+&lt;p&gt;I use org-mode’s &lt;a href=&quot;https://orgmode.org/manual/Capture-templates.html&quot;&gt;capture templates&lt;/a&gt; to create new entries whenever I need to get something off my head but without losing track of it. Typically that means creating follow-up To Do items after checking my email, getting a new ticket assigned to me, etc. This lets me go through my backlog at the start of the day (I have a daily “check-in” routine for this) and triage every item in the queue to make sure I don’t drop the ball on anything that’s urgent, while still allowing me not to waste mental space trying to track all tasks.&lt;/p&gt;
 
-&lt;p&gt;When going through the backlog, I classify things in three categories: &lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;What I can do right now because I expect it to be fast. &amp;quot;Fast&amp;quot; is a subjective concept here. I never read the book, but from talking with others that have, my approach is inspired by &lt;a href=&quot;https://en.wikipedia.org/wiki/Getting_Things_Done&quot;&gt;Getting Things Done&lt;/a&gt;, and I believe the author sets the threshold at something that takes 5 minutes or less. &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;What I don&amp;#39;t need to do right now but I must do at some specific time. Things with a deadline. These go to a ToDo entry that is scheduled and has a deadline (Going back to my comment about shortcuts, I have Hyper keys setup to do both these things). It&amp;#39;s important to set this properly so that I can feel confident that once I&amp;#39;m done with the capture process, I can move on to the next item in the backlog and forget about this one, while still knowing I won&amp;#39;t drop the ball on it. &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;What I would like to do eventually, would be nice if I do, etc. Things that fall in this category tend to be ideas to improve a project, write a blog post, learn something new. Stuff I&amp;#39;d like to remember as &amp;quot;I would love to do this Some Day&amp;quot; but that is not time sensitive. I typically go to these items whenever I&amp;#39;m stuck, or I find myself procrastinating. &lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;By default, my capture templates go to the global Inbox. This is a heading in my Todo.org file. I&amp;#39;ll talk more about files in the next section but for now what matters is that I will usually refile items to their file, or to their header in the global one. &lt;/p&gt;
-
-&lt;p&gt;By the end of this process, I have a better picture of how my day (and upcoming days) will look like, and I can plan how to tackle it accordingly. &lt;/p&gt;
-
-&lt;h2&gt;My org files&lt;/h2&gt;
-
-&lt;p&gt;As mentioned, I have a Todo.org file, which I call my &amp;quot;global&amp;quot; file. It holds my Inbox, my Personal heading (where I file anything personal that doesn&amp;#39;t merit a file of its own) and a Trashcan. I borrowed the idea of a Trashcan for ideas as opposed to just deleting the &amp;quot;bad ones&amp;quot; right away from Robert Pirsig&amp;#39;s description of his workflow in &lt;a href=&quot;https://en.wikipedia.org/wiki/Lila:_An_Inquiry_into_Morals&quot;&gt;Lila&lt;/a&gt;. He used cards and my analogy is an org-mode heading (or subheading, etc) is the equivalent to one of his cards. &lt;/p&gt;
-
-&lt;p&gt;Besides this, I have some things in their own org file. Examples include: &lt;/p&gt;
+&lt;p&gt;When going through the backlog, I classify things in three categories:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Community.org to track work on community contributions, including ideas of the &amp;quot;would be nice to do&amp;quot; type, but also work with (usually soft) deadlines on bug reports and blog posts. &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;One file per each large-enough project I&amp;#39;m involved in at the moment, and/or for each active client. When going through my email, if I have a request from a client, after capturing it I will refile it to the appropriate file. &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;On-demand ephemeral files for things that I need on the spot. Say I need to hop on a call on short notice. I used to add a headline to an existing file and work there. Now I just create a file only for this, work there, and if needed, refile whatever is important to another place when the call is done. Otherwise, it&amp;#39;s easy to move the file to the Attic and be done with it. One of the goals of my setup is that I can both minimize &amp;quot;waste&amp;quot;, which I define as things that I don&amp;#39;t need and clutter my attention, while still letting me keep track of where I&amp;#39;ve been (something important so you have a decent chance of getting to where you&amp;#39;re going). I refer to this exit-target as Attic instead of Trashcan because I typically don&amp;#39;t delete things, unless I&amp;#39;m done with a client and the contract requires that I remove all information about this. Otherwise, having a history of my work as back as I have been doing it is quite useful to plan new things. Org-mode is all about text files so with today&amp;#39;s drives, there&amp;#39;s no way you can ever have disk-space problems because you have too many org files. &lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What I can do right now because I expect it to be fast. “Fast” is a subjective concept here. I never read the book, but from talking with others that have, my approach is inspired by &lt;a href=&quot;https://en.wikipedia.org/wiki/Getting_Things_Done&quot;&gt;Getting Things Done&lt;/a&gt;, and I believe the author sets the threshold at something that takes 5 minutes or less.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What I don’t need to do right now but I must do at some specific time. Things with a deadline. These go to a ToDo entry that is scheduled and has a deadline (Going back to my comment about shortcuts, I have Hyper keys setup to do both these things). It’s important to set this properly so that I can feel confident that once I’m done with the capture process, I can move on to the next item in the backlog and forget about this one, while still knowing I won’t drop the ball on it.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What I would like to do eventually, would be nice if I do, etc. Things that fall in this category tend to be ideas to improve a project, write a blog post, learn something new. Stuff I’d like to remember as “I would love to do this Some Day” but that is not time sensitive. I typically go to these items whenever I’m stuck, or I find myself procrastinating.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;My snippets&lt;/h2&gt;
+&lt;p&gt;By default, my capture templates go to the global Inbox. This is a heading in my Todo.org file. I’ll talk more about files in the next section but for now what matters is that I will usually refile items to their file, or to their header in the global one.&lt;/p&gt;
+
+&lt;p&gt;By the end of this process, I have a better picture of how my day (and upcoming days) will look like, and I can plan how to tackle it accordingly.&lt;/p&gt;
+
+&lt;h2 id=&quot;my-org-files&quot;&gt;My org files&lt;/h2&gt;
+
+&lt;p&gt;As mentioned, I have a Todo.org file, which I call my “global” file. It holds my Inbox, my Personal heading (where I file anything personal that doesn’t merit a file of its own) and a Trashcan. I borrowed the idea of a Trashcan for ideas as opposed to just deleting the “bad ones” right away from Robert Pirsig’s description of his workflow in &lt;a href=&quot;https://en.wikipedia.org/wiki/Lila:_An_Inquiry_into_Morals&quot;&gt;Lila&lt;/a&gt;. He used cards and my analogy is an org-mode heading (or subheading, etc) is the equivalent to one of his cards.&lt;/p&gt;
+
+&lt;p&gt;Besides this, I have some things in their own org file. Examples include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Community.org to track work on community contributions, including ideas of the “would be nice to do” type, but also work with (usually soft) deadlines on bug reports and blog posts.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;One file per each large-enough project I’m involved in at the moment, and/or for each active client. When going through my email, if I have a request from a client, after capturing it I will refile it to the appropriate file.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;On-demand ephemeral files for things that I need on the spot. Say I need to hop on a call on short notice. I used to add a headline to an existing file and work there. Now I just create a file only for this, work there, and if needed, refile whatever is important to another place when the call is done. Otherwise, it’s easy to move the file to the Attic and be done with it. One of the goals of my setup is that I can both minimize “waste”, which I define as things that I don’t need and clutter my attention, while still letting me keep track of where I’ve been (something important so you have a decent chance of getting to where you’re going). I refer to this exit-target as Attic instead of Trashcan because I typically don’t delete things, unless I’m done with a client and the contract requires that I remove all information about this. Otherwise, having a history of my work as back as I have been doing it is quite useful to plan new things. Org-mode is all about text files so with today’s drives, there’s no way you can ever have disk-space problems because you have too many org files.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;my-snippets&quot;&gt;My snippets&lt;/h2&gt;
 
 &lt;p&gt;I make use of snippets (via &lt;a href=&quot;https://github.com/joaotavora/yasnippet&quot;&gt;yasnippet&lt;/a&gt;) to help me work faster and avoid errors in repetitive work, but also to keep track of my steps. 
-Specifically, on this last item, I have a &amp;#39;tsnow&amp;#39; snippet that expands to the current timestamp (date + time) and when working on a case (say, a bug report), I will create an org header with a brief description of what I&amp;#39;m doing and then invoke the snippet. This creates a worklog that I can go back to when needed and is immensely helpful to me, especially if I need to interrupt my work for some time and then go back to it. When this happens, I also create a special log header called &amp;quot;Status at &amp;lt;tsnow&amp;gt;&amp;quot; where I do a short brain dump of what I&amp;#39;ve found so far and what I think my next steps should be. A nice side effect is that I can export the worklog in plain text (or HTML or PDF too) and upload it to a ticketing system. &lt;/p&gt;
+Specifically, on this last item, I have a ‘tsnow’ snippet that expands to the current timestamp (date + time) and when working on a case (say, a bug report), I will create an org header with a brief description of what I’m doing and then invoke the snippet. This creates a worklog that I can go back to when needed and is immensely helpful to me, especially if I need to interrupt my work for some time and then go back to it. When this happens, I also create a special log header called “Status at &amp;lt;tsnow&amp;gt;” where I do a short brain dump of what I’ve found so far and what I think my next steps should be. A nice side effect is that I can export the worklog in plain text (or HTML or PDF too) and upload it to a ticketing system.&lt;/p&gt;
 
-&lt;p&gt;Within each timestamped header I also make use of snippets to create EXAMPLE and SRC blocks as needed, to include code snippets and console output of what I have been doing. For more info on these type of blocks, I refer you to &lt;a href=&quot;https://orgmode.org/manual/Working-with-source-code.html&quot;&gt;the fine manual&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;Within each timestamped header I also make use of snippets to create EXAMPLE and SRC blocks as needed, to include code snippets and console output of what I have been doing. For more info on these type of blocks, I refer you to &lt;a href=&quot;https://orgmode.org/manual/Working-with-source-code.html&quot;&gt;the fine manual&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Quite often, these worklogs become narratives with code interweaved. I like to think of this as &amp;quot;Literate Troubleshooting&amp;quot;, but that may be just because I am a heavy Knuth fan :) &lt;/p&gt;
+&lt;p&gt;Quite often, these worklogs become narratives with code interweaved. I like to think of this as “Literate Troubleshooting”, but that may be just because I am a heavy Knuth fan :)&lt;/p&gt;
 
-&lt;h2&gt;Agenda&lt;/h2&gt;
+&lt;h2 id=&quot;agenda&quot;&gt;Agenda&lt;/h2&gt;
 
-&lt;p&gt;Org provides an agenda view and while by default it works fine, I have a custom view that shows me anything that is scheduled for today (or for another day in the week, in the weekly view) in the IN PROGRESS, TODO, and SCHEDULED states. In org mode, headers can have a state, and those are useful to &lt;a href=&quot;https://orgmode.org/guide/Multi_002dstate-workflows.html&quot;&gt;organize your workflow&lt;/a&gt;. Mine are: TODO, IN PROGRESS, SCHEDULED,DONE, WAITING FOR FEEDBACK, WAITING ON CUSTOMER, SUSPENDED, REASSIGNED, and CANCELLED. &lt;/p&gt;
+&lt;p&gt;Org provides an agenda view and while by default it works fine, I have a custom view that shows me anything that is scheduled for today (or for another day in the week, in the weekly view) in the IN PROGRESS, TODO, and SCHEDULED states. In org mode, headers can have a state, and those are useful to &lt;a href=&quot;https://orgmode.org/guide/Multi_002dstate-workflows.html&quot;&gt;organize your workflow&lt;/a&gt;. Mine are: TODO, IN PROGRESS, SCHEDULED,DONE, WAITING FOR FEEDBACK, WAITING ON CUSTOMER, SUSPENDED, REASSIGNED, and CANCELLED.&lt;/p&gt;
 
-&lt;h2&gt;Focusing&lt;/h2&gt;
+&lt;h2 id=&quot;focusing&quot;&gt;Focusing&lt;/h2&gt;
 
-&lt;p&gt;While org-mode is very nice to organize your thoughts, tasks, and many other things, multi-header org files can get cluttered quickly. If this becomes too much cognitive noise to you (it does to me at times) I recommend using the focus and widen options. I have each of this assigned to a Hyper key so that I can easily make anything except that heading I&amp;#39;m currently interested in, disappear, and then reappear as needed. &lt;/p&gt;
+&lt;p&gt;While org-mode is very nice to organize your thoughts, tasks, and many other things, multi-header org files can get cluttered quickly. If this becomes too much cognitive noise to you (it does to me at times) I recommend using the focus and widen options. I have each of this assigned to a Hyper key so that I can easily make anything except that heading I’m currently interested in, disappear, and then reappear as needed.&lt;/p&gt;
 
-&lt;h2&gt;Tracking time&lt;/h2&gt;
+&lt;h2 id=&quot;tracking-time&quot;&gt;Tracking time&lt;/h2&gt;
 
-&lt;p&gt;If tracking time is important for you, org&amp;#39;s &lt;a href=&quot;https://orgmode.org/manual/Clocking-work-time.html&quot;&gt;clock&lt;/a&gt; will come in handy. I basically run with the clock on all the time, and just have it switch automatically as I go from heading to heading, which is kind of saying from task to ask. Off for lunch? No problem, I just use my &amp;quot;Interruption&amp;quot; capture template before going afk. As a result, at the end of the week, I can get a nice report of where I&amp;#39;ve spent my time. &lt;/p&gt;
+&lt;p&gt;If tracking time is important for you, org’s &lt;a href=&quot;https://orgmode.org/manual/Clocking-work-time.html&quot;&gt;clock&lt;/a&gt; will come in handy. I basically run with the clock on all the time, and just have it switch automatically as I go from heading to heading, which is kind of saying from task to ask. Off for lunch? No problem, I just use my “Interruption” capture template before going afk. As a result, at the end of the week, I can get a nice report of where I’ve spent my time.&lt;/p&gt;
 
-&lt;p&gt;I hope you found this useful, and I hope you give Emacs and org-mode a chance. They&amp;#39;re both beautiful software that can help you get a lot done. &lt;/p&gt;
+&lt;p&gt;I hope you found this useful, and I hope you give Emacs and org-mode a chance. They’re both beautiful software that can help you get a lot done.&lt;/p&gt;
 </description>
         <pubDate>Wed, 23 Jan 2019 00:00:00 -0600</pubDate>
-        <link>http://fernandoipar.com/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</link>
-        <guid isPermaLink="true">http://fernandoipar.com/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</guid>
+        <link>http://0.0.0.0:4000/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</guid>
         
         <category>practice</category>
         
@@ -98,27 +230,33 @@ Specifically, on this last item, I have a &amp;#39;tsnow&amp;#39; snippet that e
 
 &lt;p&gt;Taking MySQL as an example: what is a good query cache hit ratio?&lt;/p&gt;
 
-&lt;p&gt;At the time of writing this, I get over 600 results if I enter that question into Google and limit the results to stackexchange.com. If I change &amp;#39;ratio&amp;#39; to &amp;#39;rate,&amp;#39; that increases to over 3000 results, which makes sense, as most people argue that it&amp;#39;s the rate what you usually want to know about.&lt;/p&gt;
+&lt;p&gt;At the time of writing this, I get over 600 results if I enter that question into Google and limit the results to stackexchange.com. If I change ‘ratio’ to ‘rate,’ that increases to over 3000 results, which makes sense, as most people argue that it’s the rate what you usually want to know about.&lt;/p&gt;
 
-&lt;p&gt;There are several answers to any of these questions, but I prefer to borrow from &lt;a href=&quot;https://en.wikipedia.org/wiki/G%C3%B6del,_Escher,_Bach&quot;&gt;Hofstadter&amp;#39;s&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/Zen_and_the_Art_of_Motorcycle_Maintenance&quot;&gt;Pirsig&amp;#39;s&lt;/a&gt; interpretation of a Zen Koan and answer &lt;a href=&quot;https://en.wikipedia.org/wiki/Mu_(negative)#%22Unasking%22_the_question&quot;&gt;&amp;#39;Mu&amp;#39;&lt;/a&gt;: unask the question.&lt;/p&gt;
+&lt;p&gt;There are several answers to any of these questions, but I prefer to borrow from &lt;a href=&quot;https://en.wikipedia.org/wiki/Gödel,_Escher,_Bach&quot;&gt;Hofstadter’s&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/Zen_and_the_Art_of_Motorcycle_Maintenance&quot;&gt;Pirsig’s&lt;/a&gt; interpretation of a Zen Koan and answer &lt;a href=&quot;https://en.wikipedia.org/wiki/Mu_(negative)#%22Unasking%22_the_question&quot;&gt;‘Mu’&lt;/a&gt;: unask the question.&lt;/p&gt;
 
-&lt;p&gt;What that means to me (and I am aware this is my interpretation of other people&amp;#39;s interpretation of a concept in a culture foreign to them) is that it does not make sense to answer the question given the context. To be more specific, I don&amp;#39;t think a (MySQL query) cache hit ratio can be good or bad. It can tell us something about a workload but nothing more. Additionally, what it tells us is aggregate information about this workload.&lt;/p&gt;
+&lt;p&gt;What that means to me (and I am aware this is my interpretation of other people’s interpretation of a concept in a culture foreign to them) is that it does not make sense to answer the question given the context. To be more specific, I don’t think a (MySQL query) cache hit ratio can be good or bad. It can tell us something about a workload but nothing more. Additionally, what it tells us is aggregate information about this workload.&lt;/p&gt;
 
-&lt;p&gt;Let&amp;#39;s say the hit rate is 60% hits over an hour. It does not tell us which queries were hits and which misses, nor what is the range of response time for a given query fingerprint (to borrow &lt;a href=&quot;https://www.percona.com/doc/percona-toolkit/LATEST/pt-query-digest.html&quot;&gt;pt-query-digest&amp;#39;s&lt;/a&gt; term). Without this info, it does not tell us if the query cache is beneficial for the workload or not. The same applies for a hit rate of 90% hits over an hour, by the way, as explained by Peter Zaitsev for memcached in &lt;a href=&quot;https://www.percona.com/blog/2010/05/19/beyond-great-cache-hit-ratio/&quot;&gt;this post&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;Let’s say the hit rate is 60% hits over an hour. It does not tell us which queries were hits and which misses, nor what is the range of response time for a given query fingerprint (to borrow &lt;a href=&quot;https://www.percona.com/doc/percona-toolkit/LATEST/pt-query-digest.html&quot;&gt;pt-query-digest’s&lt;/a&gt; term). Without this info, it does not tell us if the query cache is beneficial for the workload or not. The same applies for a hit rate of 90% hits over an hour, by the way, as explained by Peter Zaitsev for memcached in &lt;a href=&quot;https://www.percona.com/blog/2010/05/19/beyond-great-cache-hit-ratio/&quot;&gt;this post&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The reason I think this is not a valid question, at least not in a broad performance optimization/application health check context is that it tells us nothing about the things that actually matter about a database: is work being done at the rate and response time the client (or users) expect? Quoting &lt;a href=&quot;http://shop.oreilly.com/product/9780596005276.do&quot;&gt;Cary Millsap&lt;/a&gt;, there are only three acceptable units for (database) statistics that make sense to end users:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;your local currency&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The duration by which you’ll improve someone’s response time&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The number of business actions per unit of time by which you’ll improve someone’s throughput&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;your local currency&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The duration by which you’ll improve someone’s response time&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The number of business actions per unit of time by which you’ll improve someone’s throughput&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;A cache hit rate is measured in hits by time, which is none of the above because such a ratio tells you nothing useful about costs (or savings), response time or throughput.&lt;/p&gt;
 </description>
         <pubDate>Sat, 19 May 2018 00:00:00 -0500</pubDate>
-        <link>http://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</link>
-        <guid isPermaLink="true">http://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</guid>
+        <link>http://0.0.0.0:4000/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</guid>
         
         <category>practice</category>
         
@@ -133,7 +271,7 @@ Specifically, on this last item, I have a &amp;#39;tsnow&amp;#39; snippet that e
     
       <item>
         <title>Running sysbench-based benchmarks against Cassandra</title>
-        <description>&lt;p&gt;&lt;em&gt;This article is a cross post from &lt;a href=&quot;https://blog.pythian.com/running-sysbench-based-benchmarks-against-cassandra/&quot;&gt;Pythian&amp;#39;s blog&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;em&gt;This article is a cross post from &lt;a href=&quot;https://blog.pythian.com/running-sysbench-based-benchmarks-against-cassandra/&quot;&gt;Pythian’s blog&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;I was recently discussing benchmarking options for Cassandra with some colleagues and given my background with MySQL, sysbench was the first tool I thought of.&lt;/p&gt;
 
@@ -153,30 +291,33 @@ I felt this was a change that could benefit others too as I’m probably not the
 &lt;p&gt;Putting it all together, I can now launch sysbench against a Cassandra cluster to test the performance of different schemas and workloads.&lt;/p&gt;
 
 &lt;p&gt;To give a simple example let’s consider the following Lua script:&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    #!/usr/bin/env sysbench
+
+&lt;pre&gt;&lt;code&gt;    #!/usr/bin/env sysbench
 
     function event()
-    local cassandra = require &amp;quot;cassandra&amp;quot;
+    local cassandra = require &quot;cassandra&quot;
 
     local peer= assert(cassandra.new {
-    host = &amp;quot;172.17.0.2&amp;quot;,
-    port = 9042,
-    keyspace = &amp;quot;test&amp;quot;
+	host = &quot;172.17.0.2&quot;,
+	port = 9042,
+	keyspace = &quot;test&quot;
     })
 
     assert(peer:connect())
 
-    assert(peer:execute(&amp;quot;select * from user&amp;quot;))
+    assert(peer:execute(&quot;select * from user&quot;))
     peer:close()
     end
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;A couple of comments about the script:&lt;/p&gt;
 
 &lt;p&gt;172.17.0.2 is the IP address of the Cassandra node I want to connect to. In my case, this is another container, but be sure to change this as needed if you want to reproduce this test (or refer to this gist to see how I ran mine).
 For the script to work, the Cluster must have a ‘test’ keyspace with a ‘user’ table on it (as you can see from the query, the table structure does not matter here).
 We can use sysbench to execute it via docker like so:&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    telecaster:sysbench-docker fipar$ docker run -v ~/src/:/src/ --name=sb -it severalnines/sysbench bash -c &amp;#39;luarocks install lua-cassandra --local; luarocks install luasocket --local; /src/tmp/benchmark1.lua run&amp;#39;
-    Warning: The directory &amp;#39;/root/.cache/luarocks&amp;#39; or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing /usr/local/lib/luarocks/rocks/luarocks/2.4.3-1/bin/luarocks with sudo, you may want sudo&amp;#39;s -H flag.
+
+&lt;pre&gt;&lt;code&gt;    telecaster:sysbench-docker fipar$ docker run -v ~/src/:/src/ --name=sb -it severalnines/sysbench bash -c 'luarocks install lua-cassandra --local; luarocks install luasocket --local; /src/tmp/benchmark1.lua run'
+    Warning: The directory '/root/.cache/luarocks' or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing /usr/local/lib/luarocks/rocks/luarocks/2.4.3-1/bin/luarocks with sudo, you may want sudo's -H flag.
     Installing https://luarocks.org/lua-cassandra-1.2.3-0.rockspec
     ...snip...
     Installing https://luarocks.org/luasocket-3.0rc1-2.src.rock
@@ -194,27 +335,26 @@ We can use sysbench to execute it via docker like so:&lt;/p&gt;
 
 
     General statistics:
-    total time:                          10.0017s
-    total number of events:              2792
+	total time:                          10.0017s
+	total number of events:              2792
 
     Latency (ms):
-        min:                                    2.17
-        avg:                                    3.57
-        max:                                   48.12
-        95th percentile:                        4.65
-        sum:                                 9958.60
+	    min:                                    2.17
+	    avg:                                    3.57
+	    max:                                   48.12
+	    95th percentile:                        4.65
+	    sum:                                 9958.60
 
     Threads fairness:
-    events (avg/stddev):           2792.0000/0.00
-    execution time (avg/stddev):   9.9586/0.00
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;You can see I am installing the required Lua modules when starting the container. If a benchmark will be executed several times (which is usually the case) a better approach would be to further customize the Dockerfile to include the necessary modules. I have not done that in the PR though because I think that would bloat the existing image. You can also see that I’m making my machine’s src directory available on the container via the -v ~/src/:/src/. That’s why I can then execute the script from /src/ on the container. Be sure to adjust this as needed to point to a directory tree where the lua script can be found on your machine.&lt;/p&gt;
+	events (avg/stddev):           2792.0000/0.00
+	execution time (avg/stddev):   9.9586/0.00 You can see I am installing the required Lua modules when starting the container. If a benchmark will be executed several times (which is usually the case) a better approach would be to further customize the Dockerfile to include the necessary modules. I have not done that in the PR though because I think that would bloat the existing image. You can also see that I’m making my machine’s src directory available on the container via the -v ~/src/:/src/. That’s why I can then execute the script from /src/ on the container. Be sure to adjust this as needed to point to a directory tree where the lua script can be found on your machine.
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;In conclusion, if you have benchmarking needs and have not considered sysbench, don’t be put off if your database of choice is not listed as supported: as long as there’s a Lua driver for it there’s a good chance that you will be able to use sysbench for the task!&lt;/p&gt;
 </description>
         <pubDate>Mon, 26 Mar 2018 00:00:00 -0500</pubDate>
-        <link>http://fernandoipar.com/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</link>
-        <guid isPermaLink="true">http://fernandoipar.com/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</guid>
+        <link>http://0.0.0.0:4000/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</guid>
         
         <category>cassandra</category>
         
@@ -231,7 +371,7 @@ We can use sysbench to execute it via docker like so:&lt;/p&gt;
     
       <item>
         <title>Measuring the potential overhead of pmm-client on MySQL workloads</title>
-        <description>&lt;p&gt;&lt;em&gt;This article is a cross post from &lt;a href=&quot;https://blog.pythian.com/measuring-potential-overhead-pmm-client-mysql-workloads/&quot;&gt;Pythian&amp;#39;s blog&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;em&gt;This article is a cross post from &lt;a href=&quot;https://blog.pythian.com/measuring-potential-overhead-pmm-client-mysql-workloads/&quot;&gt;Pythian’s blog&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Having good historial metrics monitoring in place is critical for properly operating, maintaining and troubleshooting database systems, and &lt;a href=&quot;https://www.percona.com/doc/percona-monitoring-and-management/index.html&quot;&gt;Percona Monitoring and Management&lt;/a&gt; is one of the options we recommend to our clients for this.&lt;/p&gt;
 
@@ -240,12 +380,12 @@ We can use sysbench to execute it via docker like so:&lt;/p&gt;
 &lt;p&gt;To begin, let me describe my setup. I used the following Google Cloud instances:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;One 4 vCPU instance for the MySQL server&lt;/li&gt;
-&lt;li&gt;One 2 vCPU instance for the sysbench client&lt;/li&gt;
-&lt;li&gt;One 1 vCPU instance for the PMM server&lt;/li&gt;
+  &lt;li&gt;One 4 vCPU instance for the MySQL server&lt;/li&gt;
+  &lt;li&gt;One 2 vCPU instance for the sysbench client&lt;/li&gt;
+  &lt;li&gt;One 1 vCPU instance for the PMM server&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I used Percona Server 5.7 and PMM 1.5.3 installed via Docker. Slow query log was enabled with long&lt;em&gt;query&lt;/em&gt;time set to 0 for all tests.&lt;/p&gt;
+&lt;p&gt;I used Percona Server 5.7 and PMM 1.5.3 installed via Docker. Slow query log was enabled with long_query_time set to 0 for all tests.&lt;/p&gt;
 
 &lt;p&gt;I ran sysbench with 200k, 1M and 10M rows using the legacy oltp script with the pareto and special distributions, and up to 64 client threads. After several runs and reviews of the results, I settled on 1M rows with pareto for extended tests, as other combinations showed minor variations on the results from this one.&lt;/p&gt;
 
@@ -255,21 +395,21 @@ We can use sysbench to execute it via docker like so:&lt;/p&gt;
 
 &lt;p&gt;The following graph shows box plots for throughput for pmm enabled or disabled, for a different number of threads, with and without ssl:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/Boxplot-pmm-client-overhead.png&quot; alt=&quot;throughput with pmm enabled or disabled, per threads, with and without ssl&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/Boxplot-pmm-client-overhead.png&quot; alt=&quot;throughput with pmm enabled or disabled, per threads, with and without ssl&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;We can see that with SSL enabled there is a noticeable drop in throughput when the exporters are running, while this is not the case when SSL is disabled.&lt;/p&gt;
 
-&lt;p&gt;I arrived at the conclusion that it was worth repeating the tests with SSL disabled after creating &lt;a href=&quot;https://github.com/brendangregg/FlameGraph&quot;&gt;Flame Graphs&lt;/a&gt; from perf captures during sample runs. On them, the only significant increases were due to the exporters (mysqld&lt;em&gt;exporter and node&lt;/em&gt;exporter, the qan exporter did not have any noticeable impact during my tests). The results from the tests show that this analysis pointed me in the right direction so while they are worth of separate blog posts, it is worth to at least recommend our readers to get familiar with this performance analysis tool.&lt;/p&gt;
+&lt;p&gt;I arrived at the conclusion that it was worth repeating the tests with SSL disabled after creating &lt;a href=&quot;https://github.com/brendangregg/FlameGraph&quot;&gt;Flame Graphs&lt;/a&gt; from perf captures during sample runs. On them, the only significant increases were due to the exporters (mysqld_exporter and node_exporter, the qan exporter did not have any noticeable impact during my tests). The results from the tests show that this analysis pointed me in the right direction so while they are worth of separate blog posts, it is worth to at least recommend our readers to get familiar with this performance analysis tool.&lt;/p&gt;
 
 &lt;p&gt;Next is a scatter plot of throughput over time with ssl enabled:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/with-ssl-pareto-1000000-plot.png&quot; alt=&quot;throughput per threads, pmm enabled or disabled, with ssl&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/with-ssl-pareto-1000000-plot.png&quot; alt=&quot;throughput per threads, pmm enabled or disabled, with ssl&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;On it we get a more clear picture of the impact of having the exporters running during the test.&lt;/p&gt;
 
 &lt;p&gt;Next is the same graphs but with SSL disabled:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/without-ssl-pareto-1000000-plot.png&quot; alt=&quot;throughput per threads, pmm enabled or disabled, without ssl&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/without-ssl-pareto-1000000-plot.png&quot; alt=&quot;throughput per threads, pmm enabled or disabled, without ssl&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now it is much more difficult to differentiate the runs.&lt;/p&gt;
 
@@ -306,8 +446,8 @@ PMM is a very good Open Source option for monitoring but as every instrumentatio
 &lt;p&gt;Finally, I think a similar cost is probably paid for the TLS layer on the pmm-server end. It would be very interesting to see an experiment like this repeated but on a different scenario: one pmm-server with several monitored clients.&lt;/p&gt;
 </description>
         <pubDate>Mon, 22 Jan 2018 00:00:00 -0600</pubDate>
-        <link>http://fernandoipar.com/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</link>
-        <guid isPermaLink="true">http://fernandoipar.com/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</guid>
+        <link>http://0.0.0.0:4000/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</guid>
         
         <category>mysql</category>
         
@@ -324,59 +464,61 @@ PMM is a very good Open Source option for monitoring but as every instrumentatio
     
       <item>
         <title>Expanding your keyboard on emacs with the Hyper key</title>
-        <description>&lt;p&gt;I recently stumbled upon the hyper and super keys on emacs &lt;a href=&quot;http://ergoemacs.org/emacs/emacs_hyper_super_keys.html&quot;&gt;here&lt;/a&gt;. &lt;/p&gt;
+        <description>&lt;p&gt;I recently stumbled upon the hyper and super keys on emacs &lt;a href=&quot;http://ergoemacs.org/emacs/emacs_hyper_super_keys.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;What I like about this setup is that I rarely use the Function key in my day to day usage, so this is making good use of a key that&amp;#39;s both mostly unused and conveniently located in my keyboard, to the effect of running potentially complex tasks (like exporting the currently selected org mode subtree to a pdf and opening it) with just two keys. &lt;/p&gt;
+&lt;p&gt;What I like about this setup is that I rarely use the Function key in my day to day usage, so this is making good use of a key that’s both mostly unused and conveniently located in my keyboard, to the effect of running potentially complex tasks (like exporting the currently selected org mode subtree to a pdf and opening it) with just two keys.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/emacs-hyper-key.png&quot; alt=&quot;Because every blog post needs a Featured Image&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/emacs-hyper-key.png&quot; alt=&quot;Because every blog post needs a Featured Image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Here&amp;#39;s my current configuration:&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;;; hyper key shortcuts: http://ergoemacs.org/emacs/emacs_hyper_super_keys.html
-(setq ns-function-modifier &amp;#39;hyper)  ; make Fn key do Hyper
+&lt;p&gt;Here’s my current configuration:&lt;/p&gt;
 
-(global-set-key (kbd &amp;quot;H-a&amp;quot;) &amp;#39;org-agenda)
-(global-set-key (kbd &amp;quot;H-d&amp;quot;) &amp;#39;delete-other-windows)
-(global-set-key (kbd &amp;quot;H-i&amp;quot;) &amp;#39;org-clock-in)
-(global-set-key (kbd &amp;quot;H-o&amp;quot;) &amp;#39;org-clock-out)
-(global-set-key (kbd &amp;quot;H-s&amp;quot;) &amp;#39;org-schedule)
-(global-set-key (kbd &amp;quot;H-b&amp;quot;) &amp;#39;ido-switch-buffer)
-(global-set-key (kbd &amp;quot;H-r&amp;quot;) &amp;#39;org-archive-subtree-default)
-(global-set-key (kbd &amp;quot;H-m&amp;quot;) &amp;#39;evil-mc-make-all-cursors)
-(global-set-key (kbd &amp;quot;H-n&amp;quot;) &amp;#39;evil-mc-undo-all-cursors)
-(global-set-key (kbd &amp;quot;H-k&amp;quot;) &amp;#39;epa-encrypt-region)
-(global-set-key (kbd &amp;quot;H-l&amp;quot;) &amp;#39;epa-decrypt-region)
-(global-set-key (kbd &amp;quot;H-j&amp;quot;) &amp;#39;eww)
-(global-set-key (kbd &amp;quot;H-v&amp;quot;) &amp;#39;darkroom-mode)
-(global-set-key (kbd &amp;quot;H-x&amp;quot;) &amp;#39;toggle-frame-fullscreen)
+&lt;pre&gt;&lt;code&gt;;; hyper key shortcuts: http://ergoemacs.org/emacs/emacs_hyper_super_keys.html
+(setq ns-function-modifier 'hyper)  ; make Fn key do Hyper
+
+(global-set-key (kbd &quot;H-a&quot;) 'org-agenda)
+(global-set-key (kbd &quot;H-d&quot;) 'delete-other-windows)
+(global-set-key (kbd &quot;H-i&quot;) 'org-clock-in)
+(global-set-key (kbd &quot;H-o&quot;) 'org-clock-out)
+(global-set-key (kbd &quot;H-s&quot;) 'org-schedule)
+(global-set-key (kbd &quot;H-b&quot;) 'ido-switch-buffer)
+(global-set-key (kbd &quot;H-r&quot;) 'org-archive-subtree-default)
+(global-set-key (kbd &quot;H-m&quot;) 'evil-mc-make-all-cursors)
+(global-set-key (kbd &quot;H-n&quot;) 'evil-mc-undo-all-cursors)
+(global-set-key (kbd &quot;H-k&quot;) 'epa-encrypt-region)
+(global-set-key (kbd &quot;H-l&quot;) 'epa-decrypt-region)
+(global-set-key (kbd &quot;H-j&quot;) 'eww)
+(global-set-key (kbd &quot;H-v&quot;) 'darkroom-mode)
+(global-set-key (kbd &quot;H-x&quot;) 'toggle-frame-fullscreen)
 
 
 (defun open-ansi-term-localhost ()
 (interactive)
-(ansi-term &amp;quot;/bin/bash&amp;quot; &amp;quot;localhost&amp;quot;))
+(ansi-term &quot;/bin/bash&quot; &quot;localhost&quot;))
 
-(global-set-key (kbd &amp;quot;H-t&amp;quot;) &amp;#39;open-ansi-term-localhost)
+(global-set-key (kbd &quot;H-t&quot;) 'open-ansi-term-localhost)
 ;; C-c C-e C-s l o  export current subtree to latex pdf and open
-(global-set-key (kbd &amp;quot;H-e&amp;quot;) (kbd &amp;quot;C-c C-e C-s l o&amp;quot;))
+(global-set-key (kbd &quot;H-e&quot;) (kbd &quot;C-c C-e C-s l o&quot;))
 ;; same, but html buffer and open
-(global-set-key (kbd &amp;quot;H-w&amp;quot;) (kbd &amp;quot;C-c C-e C-s h H&amp;quot;))
+(global-set-key (kbd &quot;H-w&quot;) (kbd &quot;C-c C-e C-s h H&quot;))
 ;; same, but ascii and open
-(global-set-key (kbd &amp;quot;H-q&amp;quot;) (kbd &amp;quot;C-c C-e C-s t A&amp;quot;))
+(global-set-key (kbd &quot;H-q&quot;) (kbd &quot;C-c C-e C-s t A&quot;))
 ;; plain org export
-(global-set-key (kbd &amp;quot;H-y&amp;quot;) &amp;#39;org-export-dispatch) 
+(global-set-key (kbd &quot;H-y&quot;) 'org-export-dispatch) 
 ;; org capture
-(global-set-key (kbd &amp;quot;H-c&amp;quot;) &amp;#39;org-capture) 
+(global-set-key (kbd &quot;H-c&quot;) 'org-capture) 
 ;; eval lisp
-(global-set-key (kbd &amp;quot;H-z&amp;quot;) &amp;#39;org-ctrl-c-ctrl-c)
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;Something interesting here is that the target can be a function or another keyboard combination. The latter is useful if you can&amp;#39;t easily find the function you want, or if you want to pass arguments along with it, like I am doing in my org export shortcuts.&lt;/p&gt;
+(global-set-key (kbd &quot;H-z&quot;) 'org-ctrl-c-ctrl-c)
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;As for how to keep up with the growing amount of hyper key based shortcuts, I am using the old school technology of little sticker labels with a descriptive text on each key. It&amp;#39;s cheap and works wonders until I build the corresponding muscle memory. &lt;/p&gt;
+&lt;p&gt;Something interesting here is that the target can be a function or another keyboard combination. The latter is useful if you can’t easily find the function you want, or if you want to pass arguments along with it, like I am doing in my org export shortcuts.&lt;/p&gt;
 
-&lt;p&gt;Nothing groundbreaking for seasoned emacs users but I thought it could be useful to newbies such as myself (I have been using the editor in one form or another for several years already, but with evil-mode, and using only a small subset of its features). &lt;/p&gt;
+&lt;p&gt;As for how to keep up with the growing amount of hyper key based shortcuts, I am using the old school technology of little sticker labels with a descriptive text on each key. It’s cheap and works wonders until I build the corresponding muscle memory.&lt;/p&gt;
+
+&lt;p&gt;Nothing groundbreaking for seasoned emacs users but I thought it could be useful to newbies such as myself (I have been using the editor in one form or another for several years already, but with evil-mode, and using only a small subset of its features).&lt;/p&gt;
 </description>
         <pubDate>Tue, 02 Jan 2018 00:00:00 -0600</pubDate>
-        <link>http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html</link>
-        <guid isPermaLink="true">http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html</guid>
+        <link>http://0.0.0.0:4000/emacs/notes/2018/01/02/emacs-hyper-key.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/emacs/notes/2018/01/02/emacs-hyper-key.html</guid>
         
         <category>emacs</category>
         
@@ -395,37 +537,44 @@ PMM is a very good Open Source option for monitoring but as every instrumentatio
 
 &lt;p&gt;As part of that process, I transitioned from aquamacs (a great project to which I made a small donation at some point) to just plain emacs. The big goal here is that since I spent most of my time in a text editor, I would like to be able to easily migrate myself to another platform supported by emacs with little need to adjust my habits (this has become an important requirement should I ever decide that Macs move too far away from the needs of users like me that I decide to switch back to FreeBSD or GNU/Linux).&lt;/p&gt;
 
-&lt;p&gt;I won&amp;#39;t document the whole thing here, but I thought one little nugget of duck-tape-fixing was worth of making my blog-post-of-the-year on my personal blog, so here it is.&lt;/p&gt;
+&lt;p&gt;I won’t document the whole thing here, but I thought one little nugget of duck-tape-fixing was worth of making my blog-post-of-the-year on my personal blog, so here it is.&lt;/p&gt;
 
 &lt;p&gt;The scenario:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;I use Google Chrome for work as we have some customizer scripts that don&amp;#39;t work in Safari.&lt;/li&gt;
-&lt;li&gt;I do not want to make Chrome my default browser as I still use Safari for any browsing that does not involve my work email or my work&amp;#39;s ticketing system.&lt;/li&gt;
+  &lt;li&gt;I use Google Chrome for work as we have some customizer scripts that don’t work in Safari.&lt;/li&gt;
+  &lt;li&gt;I do not want to make Chrome my default browser as I still use Safari for any browsing that does not involve my work email or my work’s ticketing system.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;My way to achieve this is by this emacs config line:&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;(setq browse-url-browser-function &amp;#39;browse-url-chromium)
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;That requires the &amp;#39;chromium&amp;#39; command to be available on your path.
+
+&lt;pre&gt;&lt;code&gt;(setq browse-url-browser-function 'browse-url-chromium)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That requires the ‘chromium’ command to be available on your path.
 Now, at some point in the recent past, after a minor OS upgrade, emacs stopped being able to open URLs. After some digging, I tracked this down to the chromium command failing with this error:&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;stratocaster:bin fipar$ chromium http://localhost
+
+&lt;pre&gt;&lt;code&gt;stratocaster:bin fipar$ chromium http://localhost
 dlopen /usr/local/bin/../Versions/65.0.3295.0/Chromium Framework.framework/Chromium Framework: dlopen(/usr/local/bin/../Versions/65.0.3295.0/Chromium Framework.framework/Chromium Framework, 261): image not found
 Abort trap: 6
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;I attempted reinstalling chromium (available on mac via homebrew or as a nightly build) but neither approach worked. After some thought, I realized I only need this so that emacs can open urls in Google, I don&amp;#39;t use the chromium command for anything else. With that in mind, my duck tape solution was to create a chromium script somewhere on my PATH with the following contents:&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#!/bin/bash
-open -a &amp;#39;Google Chrome&amp;#39; $*
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;That just open the standard MacOS way to open files with a specific application from the command line. Now I don&amp;#39;t have the &amp;#39;chromium&amp;#39; command installed, and I can open urls from emacs using Google Chrome just the same.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;If you think this is a lazy approach to troubleshooting and that any self respected hacker would have instead spent time figuring out how to resolve the actual error, you&amp;#39;re right. However, life is all about balancing needs and I just can&amp;#39;t spend time tracking down how to fix a problem in a program I don&amp;#39;t really need, so the lazy fix is enough for me at this point.&lt;/p&gt;
+&lt;p&gt;I attempted reinstalling chromium (available on mac via homebrew or as a nightly build) but neither approach worked. After some thought, I realized I only need this so that emacs can open urls in Google, I don’t use the chromium command for anything else. With that in mind, my duck tape solution was to create a chromium script somewhere on my PATH with the following contents:&lt;/p&gt;
 
-&lt;p&gt;There&amp;#39;s a lesson here for people like my younger past self: once you move into &amp;#39;The Workforce&amp;#39;, tech work is not about solving problems per se, but about adding to your client&amp;#39;s revenue or cutting down from their costs. Doing this effectively requires, among other things, knowing when to stop because a solution is &amp;#39;good enough&amp;#39; for the business need at hand, to the point where the benefits of continuing work on it no longer offset the costs involved.  &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+open -a 'Google Chrome' $*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That just open the standard MacOS way to open files with a specific application from the command line. Now I don’t have the ‘chromium’ command installed, and I can open urls from emacs using Google Chrome just the same.&lt;/p&gt;
+
+&lt;p&gt;If you think this is a lazy approach to troubleshooting and that any self respected hacker would have instead spent time figuring out how to resolve the actual error, you’re right. However, life is all about balancing needs and I just can’t spend time tracking down how to fix a problem in a program I don’t really need, so the lazy fix is enough for me at this point.&lt;/p&gt;
+
+&lt;p&gt;There’s a lesson here for people like my younger past self: once you move into ‘The Workforce’, tech work is not about solving problems per se, but about adding to your client’s revenue or cutting down from their costs. Doing this effectively requires, among other things, knowing when to stop because a solution is ‘good enough’ for the business need at hand, to the point where the benefits of continuing work on it no longer offset the costs involved.&lt;/p&gt;
+
 </description>
         <pubDate>Tue, 26 Dec 2017 00:00:00 -0600</pubDate>
-        <link>http://fernandoipar.com/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html</link>
-        <guid isPermaLink="true">http://fernandoipar.com/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html</guid>
+        <link>http://0.0.0.0:4000/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html</guid>
         
         <category>emacs</category>
         
@@ -440,27 +589,38 @@ open -a &amp;#39;Google Chrome&amp;#39; $*
     
       <item>
         <title>MySQL can be evil</title>
-        <description>&lt;p&gt;Ok, maybe evil is too strong a word, but MySQL can certainly be deceiving. &lt;/p&gt;
+        <description>&lt;p&gt;Ok, maybe evil is too strong a word, but MySQL can certainly be deceiving.&lt;/p&gt;
 
-&lt;p&gt;To some extent, and in some circles, MySQL still suffers from a bad reputation as a database. In fact, I have personally tried to &lt;a href=&quot;http://fernandoipar.com/mysql/2015/03/11/ongoing-mysql-myths.html&quot;&gt;fight that reputation&lt;/a&gt; in the past. However, I&amp;#39;ll be honest and say that, sometimes, it deserves it.&lt;/p&gt;
+&lt;p&gt;To some extent, and in some circles, MySQL still suffers from a bad reputation as a database. In fact, I have personally tried to &lt;a href=&quot;http://fernandoipar.com/mysql/2015/03/11/ongoing-mysql-myths.html&quot;&gt;fight that reputation&lt;/a&gt; in the past. However, I’ll be honest and say that, sometimes, it deserves it.&lt;/p&gt;
 
-&lt;p&gt;As an example, take the ASC|DESC keyword in index creation. &lt;a href=&quot;http://mysqlserverteam.com/mysql-8-0-labs-descending-indexes-in-mysql/&quot;&gt;MySQL 8.0 support those&lt;/a&gt;, thanks for that! But what happens in older versions? Let me quote the &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.7/en/create-index.html&quot;&gt;Fine Manual&lt;/a&gt;:&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;   An index_col_name specification can end with ASC or DESC. These keywords are permitted
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;As an example, take the ASC&lt;/td&gt;
+      &lt;td&gt;DESC keyword in index creation. &lt;a href=&quot;http://mysqlserverteam.com/mysql-8-0-labs-descending-indexes-in-mysql/&quot;&gt;MySQL 8.0 support those&lt;/a&gt;, thanks for that! But what happens in older versions? Let me quote the &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.7/en/create-index.html&quot;&gt;Fine Manual&lt;/a&gt;:&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;pre&gt;&lt;code&gt;   An index_col_name specification can end with ASC or DESC. These keywords are permitted
    for future extensions for specifying ascending or descending index value storage. Currently,
    they are parsed but ignored; index values are always stored in ascending order.
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;Pretty clear, and obvious to anyone who has been working with MySQL enough time. We just have this kind of knowledge almost built-in. So built-in, in fact, that it never occurred to me to check what happens when you create an index that way. So I put myself in the shoes of a DBA coming into MySQL from another engine today, and here&amp;#39;s what our DBA would see:&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;   mysql&amp;gt; create index index_t_on_y on t(y desc);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pretty clear, and obvious to anyone who has been working with MySQL enough time. We just have this kind of knowledge almost built-in. So built-in, in fact, that it never occurred to me to check what happens when you create an index that way. So I put myself in the shoes of a DBA coming into MySQL from another engine today, and here’s what our DBA would see:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   mysql&amp;gt; create index index_t_on_y on t(y desc);
    Query OK, 0 rows affected (0.02 sec)
    Records: 0  Duplicates: 0  Warnings: 0
-&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;And that&amp;#39;s it. Not even a warning, and our DBA is left with the impression that, since the create index statement succeeded, producing no errors and no warnings, then a descending ordered index on y was created on table t. And we know how that impression will end.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Granted, this won&amp;#39;t cause anyone to lose data, but still, things like this make me think that, sometimes, MySQL deserves its reputation.  &lt;/p&gt;
+&lt;p&gt;And that’s it. Not even a warning, and our DBA is left with the impression that, since the create index statement succeeded, producing no errors and no warnings, then a descending ordered index on y was created on table t. And we know how that impression will end.&lt;/p&gt;
+
+&lt;p&gt;Granted, this won’t cause anyone to lose data, but still, things like this make me think that, sometimes, MySQL deserves its reputation.&lt;/p&gt;
 </description>
         <pubDate>Fri, 04 Nov 2016 00:00:00 -0500</pubDate>
-        <link>http://fernandoipar.com/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</link>
-        <guid isPermaLink="true">http://fernandoipar.com/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</guid>
+        <link>http://0.0.0.0:4000/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</guid>
         
         <category>mysql</category>
         
@@ -473,17 +633,17 @@ open -a &amp;#39;Google Chrome&amp;#39; $*
     
       <item>
         <title>A new name and a wider scope for South America's favourite MySQL-related conference</title>
-        <description>&lt;p&gt;Next November I&amp;#39;ll once again take the ferry to my neighbour city of Buenos Aires to enjoy two days of learning, networking, and presenting, at &lt;a href=&quot;http://www.dataops.la/&quot;&gt;DataOps LA 2015&lt;/a&gt;, the first incarnation of what used to be the &lt;a href=&quot;http://mysqlnosqlcloud.com/&quot;&gt;MySQL, NoSQL, Cloud&lt;/a&gt; Conference organized by &lt;a href=&quot;http://binlogic.com/&quot;&gt;BinLogic&lt;/a&gt; in Buenos Aires. &lt;/p&gt;
+        <description>&lt;p&gt;Next November I’ll once again take the ferry to my neighbour city of Buenos Aires to enjoy two days of learning, networking, and presenting, at &lt;a href=&quot;http://www.dataops.la/&quot;&gt;DataOps LA 2015&lt;/a&gt;, the first incarnation of what used to be the &lt;a href=&quot;http://mysqlnosqlcloud.com/&quot;&gt;MySQL, NoSQL, Cloud&lt;/a&gt; Conference organized by &lt;a href=&quot;http://binlogic.com/&quot;&gt;BinLogic&lt;/a&gt; in Buenos Aires.&lt;/p&gt;
 
-&lt;p&gt;The change in name reflects a change in scope, now including Operations, Infrastructure and Development tracks, besides the familiar Database one (with lots of MySQL content, but other systems covered too!). &lt;/p&gt;
+&lt;p&gt;The change in name reflects a change in scope, now including Operations, Infrastructure and Development tracks, besides the familiar Database one (with lots of MySQL content, but other systems covered too!).&lt;/p&gt;
 
-&lt;p&gt;The agenda is not yet confirmed and, in fact, the &lt;a href=&quot;http://www.dataops.la/callforpapers.php&quot;&gt;Call for Papers&lt;/a&gt; is open, so if you want and can afford to go, I encourage you to submit proposals. Of course, if you also want and can afford to sponsor, there are &lt;a href=&quot;http://www.dataops.la/sponsors.php&quot;&gt;a few plans&lt;/a&gt; available, and I would encourage you to do so too. I am personally very happy that, once again, Percona is supporting this project this year. &lt;/p&gt;
+&lt;p&gt;The agenda is not yet confirmed and, in fact, the &lt;a href=&quot;http://www.dataops.la/callforpapers.php&quot;&gt;Call for Papers&lt;/a&gt; is open, so if you want and can afford to go, I encourage you to submit proposals. Of course, if you also want and can afford to sponsor, there are &lt;a href=&quot;http://www.dataops.la/sponsors.php&quot;&gt;a few plans&lt;/a&gt; available, and I would encourage you to do so too. I am personally very happy that, once again, Percona is supporting this project this year.&lt;/p&gt;
 
-&lt;p&gt;I&amp;#39;m looking forward to seeing old friends and making new ones in this wide (and growing) community we have!&lt;/p&gt;
+&lt;p&gt;I’m looking forward to seeing old friends and making new ones in this wide (and growing) community we have!&lt;/p&gt;
 </description>
         <pubDate>Sat, 03 Oct 2015 00:00:00 -0500</pubDate>
-        <link>http://fernandoipar.com/planetmysql/mysql/2015/10/03/dataops-la.html</link>
-        <guid isPermaLink="true">http://fernandoipar.com/planetmysql/mysql/2015/10/03/dataops-la.html</guid>
+        <link>http://0.0.0.0:4000/planetmysql/mysql/2015/10/03/dataops-la.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/planetmysql/mysql/2015/10/03/dataops-la.html</guid>
         
         <category>mysql</category>
         
@@ -498,19 +658,19 @@ open -a &amp;#39;Google Chrome&amp;#39; $*
     
       <item>
         <title>Some thoughts on org-mode/babel</title>
-        <description>&lt;p&gt;Lately I&amp;#39;ve been playing around with mongodb, specifically with the idea of having a script to summarize data that could be useful to have when troubleshooting, in a way like &lt;a href=&quot;https://www.percona.com/doc/percona-toolkit/2.1/pt-mysql-summary.html&quot;&gt;Percona Toolkit&amp;#39;s pt-mysql-summary&lt;/a&gt; works for MySQL. &lt;/p&gt;
+        <description>&lt;p&gt;Lately I’ve been playing around with mongodb, specifically with the idea of having a script to summarize data that could be useful to have when troubleshooting, in a way like &lt;a href=&quot;https://www.percona.com/doc/percona-toolkit/2.1/pt-mysql-summary.html&quot;&gt;Percona Toolkit’s pt-mysql-summary&lt;/a&gt; works for MySQL.&lt;/p&gt;
 
-&lt;p&gt;Unrelated to this, I have been using &lt;a href=&quot;http://orgmode.org/&quot;&gt;org-mode&lt;/a&gt; to, well, organize my work, for a few years now. As part of my day to day job I write a lot of code snippets, usually in bash or SQL, sometimes in other languages, and for this I make heavy use of &lt;a href=&quot;http://orgmode.org/manual/Working-With-Source-Code.html#Working-With-Source-Code&quot;&gt;code blocks&lt;/a&gt;. Over time, this has become one of my favourite org-mode&amp;#39;s features, as it lets me keep code relevant to a customer issue on the same place as other information (like output from that code, output from text files, stack traces, notes from my calls with the customer, etc). &lt;/p&gt;
+&lt;p&gt;Unrelated to this, I have been using &lt;a href=&quot;http://orgmode.org/&quot;&gt;org-mode&lt;/a&gt; to, well, organize my work, for a few years now. As part of my day to day job I write a lot of code snippets, usually in bash or SQL, sometimes in other languages, and for this I make heavy use of &lt;a href=&quot;http://orgmode.org/manual/Working-With-Source-Code.html#Working-With-Source-Code&quot;&gt;code blocks&lt;/a&gt;. Over time, this has become one of my favourite org-mode’s features, as it lets me keep code relevant to a customer issue on the same place as other information (like output from that code, output from text files, stack traces, notes from my calls with the customer, etc).&lt;/p&gt;
 
-&lt;p&gt;Back to mongodb and my desire to work on some basic tools as a learning opportunity, I saw this as a good chance for trying to do some programming in the &lt;a href=&quot;http://www.literateprogramming.com/&quot;&gt;literate&lt;/a&gt; style. &lt;/p&gt;
+&lt;p&gt;Back to mongodb and my desire to work on some basic tools as a learning opportunity, I saw this as a good chance for trying to do some programming in the &lt;a href=&quot;http://www.literateprogramming.com/&quot;&gt;literate&lt;/a&gt; style.&lt;/p&gt;
 
-&lt;p&gt;My first tests can be seen &lt;a href=&quot;https://github.com/fipar/playground/blob/master/tools-for-mongodb/mongo-summary.org&quot;&gt;here&lt;/a&gt;. I understand completely this is a very small and simple project that is not the best to expose the potential benefits of this approach to programming, but it is what I can do now given my work/personal life obligations. It is my goal to start working on something bigger on the personal side, and I plan to use a similar approach to it, so I may know more after that. &lt;/p&gt;
+&lt;p&gt;My first tests can be seen &lt;a href=&quot;https://github.com/fipar/playground/blob/master/tools-for-mongodb/mongo-summary.org&quot;&gt;here&lt;/a&gt;. I understand completely this is a very small and simple project that is not the best to expose the potential benefits of this approach to programming, but it is what I can do now given my work/personal life obligations. It is my goal to start working on something bigger on the personal side, and I plan to use a similar approach to it, so I may know more after that.&lt;/p&gt;
 
-&lt;p&gt;That said, one benefit I have already been able to appreciate is that literate programming with org-mode shines when your project combines different languages. If you look at the test functions, like the test for a sharded cluster of replica sets, you can see how org-mode lets me interweave bash and javascript as I explain what I am trying to achieve, in a way that&amp;#39;s independent of how the code will be tangled (as each block will go to a file for the corresponding language). One benefit of this is improved readability (as the alternative would be to have cross-comments in the js and bash scripts, which I think would be less clear to follow), but another, potentially even bigger benefit, IMO, is that this makes it easier to combine different languages in a same project, which gives you more reasons to try and use the best tool for each job. If you don&amp;#39;t need to generate a distributable &amp;#39;executable&amp;#39; project (as is my goal here, I want people to be able to just run the generated code using the wrappers), then org-mode gives you even more features to combine different languages, by using result blocks associated with code blocks. I don&amp;#39;t have a personal example for this right now, but you can read more about it &lt;a href=&quot;http://orgmode.org/manual/Evaluating-code-blocks.html#Evaluating-code-blocks&quot;&gt;here&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;That said, one benefit I have already been able to appreciate is that literate programming with org-mode shines when your project combines different languages. If you look at the test functions, like the test for a sharded cluster of replica sets, you can see how org-mode lets me interweave bash and javascript as I explain what I am trying to achieve, in a way that’s independent of how the code will be tangled (as each block will go to a file for the corresponding language). One benefit of this is improved readability (as the alternative would be to have cross-comments in the js and bash scripts, which I think would be less clear to follow), but another, potentially even bigger benefit, IMO, is that this makes it easier to combine different languages in a same project, which gives you more reasons to try and use the best tool for each job. If you don’t need to generate a distributable ‘executable’ project (as is my goal here, I want people to be able to just run the generated code using the wrappers), then org-mode gives you even more features to combine different languages, by using result blocks associated with code blocks. I don’t have a personal example for this right now, but you can read more about it &lt;a href=&quot;http://orgmode.org/manual/Evaluating-code-blocks.html#Evaluating-code-blocks&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Tue, 09 Jun 2015 00:00:00 -0500</pubDate>
-        <link>http://fernandoipar.com/programming/2015/06/09/org-mode-babel-thoughts.html</link>
-        <guid isPermaLink="true">http://fernandoipar.com/programming/2015/06/09/org-mode-babel-thoughts.html</guid>
+        <link>http://0.0.0.0:4000/programming/2015/06/09/org-mode-babel-thoughts.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/programming/2015/06/09/org-mode-babel-thoughts.html</guid>
         
         <category>programming</category>
         
@@ -522,32 +682,6 @@ open -a &amp;#39;Google Chrome&amp;#39; $*
         
         
         <category>programming</category>
-        
-      </item>
-    
-      <item>
-        <title>Migrating to jekyll</title>
-        <description>&lt;p&gt;After years of service, my wordpress installation was compromised sometime last week, with all php files replaced by a link to some external site. 
-I estimate losses on my part to about $.01, but the impact on my reputation may be more difficult to quantify! &lt;/p&gt;
-
-&lt;p&gt;I was meaning to migrate to some static site generator based workload, since I don&amp;#39;t have time to be up to date on wordpress updates, security patches, etc, and I guess this provided the ideal opportunity. &lt;/p&gt;
-
-&lt;p&gt;Most posts are back online, with redirects to maintain the original urls, and I&amp;#39;m in the process of importing comments into disqus (so none are showing at the time of writing this). &lt;/p&gt;
-
-&lt;p&gt;Not that much people care, but I expect to be back to normal in a few days, including recovering all comments.&lt;/p&gt;
-
-&lt;p&gt;Thanks. &lt;/p&gt;
-</description>
-        <pubDate>Thu, 16 Apr 2015 00:00:00 -0500</pubDate>
-        <link>http://fernandoipar.com/mysql/planetmysql/2015/04/16/migrating-to-jekyll.html</link>
-        <guid isPermaLink="true">http://fernandoipar.com/mysql/planetmysql/2015/04/16/migrating-to-jekyll.html</guid>
-        
-        <category>MySQL</category>
-        
-        
-        <category>MySQL</category>
-        
-        <category>PlanetMySQL</category>
         
       </item>
     

@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/programming/2011/03/09/piping-data-to-multiple-processes.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/programming/2011/03/09/piping-data-to-multiple-processes.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -58,11 +58,9 @@
           </div>
           <a name="topofpage"></a>
           <p>Here's a simple shell script to stream data to multiple processes. It has many applications, but the reason I wrote it is to stream the same data to multiple netcat processes on remote machines.</p>
-
 <p>Here's the code:</p>
-
 <pre>
-#!/bin/bash</code>
+#!/bin/bash&lt;/code&gt;
 
 usage()
 {
@@ -98,13 +96,10 @@ rm -f /tmp/multi-fifo-$$.$j
 j=$((j+1))
 done
 </pre>
-
 <p>Usage is pretty straightforward:</p>
-
 <p><code><br />
 tar cjvf - . | ./multi-fifo "nc host1 9999" "nc host2 9999" &gt;/dev/null<br />
 </code></p>
-
 <p>This way, the script will create a fifo for each netcat client, then send it's stdin to a pipeline that writes to both fifos using tee. Useful for example if you want to stream a backup to multiple destination servers for cloning.</p>
 
         </section>

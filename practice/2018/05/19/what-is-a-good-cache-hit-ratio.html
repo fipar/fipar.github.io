@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -61,20 +61,26 @@
 
 <p>Taking MySQL as an example: what is a good query cache hit ratio?</p>
 
-<p>At the time of writing this, I get over 600 results if I enter that question into Google and limit the results to stackexchange.com. If I change &#39;ratio&#39; to &#39;rate,&#39; that increases to over 3000 results, which makes sense, as most people argue that it&#39;s the rate what you usually want to know about.</p>
+<p>At the time of writing this, I get over 600 results if I enter that question into Google and limit the results to stackexchange.com. If I change ‘ratio’ to ‘rate,’ that increases to over 3000 results, which makes sense, as most people argue that it’s the rate what you usually want to know about.</p>
 
-<p>There are several answers to any of these questions, but I prefer to borrow from <a href="https://en.wikipedia.org/wiki/G%C3%B6del,_Escher,_Bach">Hofstadter&#39;s</a> and <a href="https://en.wikipedia.org/wiki/Zen_and_the_Art_of_Motorcycle_Maintenance">Pirsig&#39;s</a> interpretation of a Zen Koan and answer <a href="https://en.wikipedia.org/wiki/Mu_(negative)#%22Unasking%22_the_question">&#39;Mu&#39;</a>: unask the question.</p>
+<p>There are several answers to any of these questions, but I prefer to borrow from <a href="https://en.wikipedia.org/wiki/Gödel,_Escher,_Bach">Hofstadter’s</a> and <a href="https://en.wikipedia.org/wiki/Zen_and_the_Art_of_Motorcycle_Maintenance">Pirsig’s</a> interpretation of a Zen Koan and answer <a href="https://en.wikipedia.org/wiki/Mu_(negative)#%22Unasking%22_the_question">‘Mu’</a>: unask the question.</p>
 
-<p>What that means to me (and I am aware this is my interpretation of other people&#39;s interpretation of a concept in a culture foreign to them) is that it does not make sense to answer the question given the context. To be more specific, I don&#39;t think a (MySQL query) cache hit ratio can be good or bad. It can tell us something about a workload but nothing more. Additionally, what it tells us is aggregate information about this workload.</p>
+<p>What that means to me (and I am aware this is my interpretation of other people’s interpretation of a concept in a culture foreign to them) is that it does not make sense to answer the question given the context. To be more specific, I don’t think a (MySQL query) cache hit ratio can be good or bad. It can tell us something about a workload but nothing more. Additionally, what it tells us is aggregate information about this workload.</p>
 
-<p>Let&#39;s say the hit rate is 60% hits over an hour. It does not tell us which queries were hits and which misses, nor what is the range of response time for a given query fingerprint (to borrow <a href="https://www.percona.com/doc/percona-toolkit/LATEST/pt-query-digest.html">pt-query-digest&#39;s</a> term). Without this info, it does not tell us if the query cache is beneficial for the workload or not. The same applies for a hit rate of 90% hits over an hour, by the way, as explained by Peter Zaitsev for memcached in <a href="https://www.percona.com/blog/2010/05/19/beyond-great-cache-hit-ratio/">this post</a>. </p>
+<p>Let’s say the hit rate is 60% hits over an hour. It does not tell us which queries were hits and which misses, nor what is the range of response time for a given query fingerprint (to borrow <a href="https://www.percona.com/doc/percona-toolkit/LATEST/pt-query-digest.html">pt-query-digest’s</a> term). Without this info, it does not tell us if the query cache is beneficial for the workload or not. The same applies for a hit rate of 90% hits over an hour, by the way, as explained by Peter Zaitsev for memcached in <a href="https://www.percona.com/blog/2010/05/19/beyond-great-cache-hit-ratio/">this post</a>.</p>
 
 <p>The reason I think this is not a valid question, at least not in a broad performance optimization/application health check context is that it tells us nothing about the things that actually matter about a database: is work being done at the rate and response time the client (or users) expect? Quoting <a href="http://shop.oreilly.com/product/9780596005276.do">Cary Millsap</a>, there are only three acceptable units for (database) statistics that make sense to end users:</p>
 
 <ul>
-<li><p>your local currency</p></li>
-<li><p>The duration by which you’ll improve someone’s response time</p></li>
-<li><p>The number of business actions per unit of time by which you’ll improve someone’s throughput</p></li>
+  <li>
+    <p>your local currency</p>
+  </li>
+  <li>
+    <p>The duration by which you’ll improve someone’s response time</p>
+  </li>
+  <li>
+    <p>The number of business actions per unit of time by which you’ll improve someone’s throughput</p>
+  </li>
 </ul>
 
 <p>A cache hit rate is measured in hits by time, which is none of the above because such a ratio tells you nothing useful about costs (or savings), response time or throughput.</p>

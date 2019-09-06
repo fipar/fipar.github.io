@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/mysql/2009/04/06/using-mysql-proxy-to-benchmark-query-performance.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/mysql/2009/04/06/using-mysql-proxy-to-benchmark-query-performance.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -58,57 +58,39 @@
           </div>
           <a name="topofpage"></a>
           <p>By transparently sitting between client and server on each request, MySQL Proxy offers many possibilities for query manipulation.</p>
-
 <p>Many are explored in the <a title="MySQL Proxy Cookbook" href="forge.mysql.com/wiki/MySQL_Proxy_Cookbook">cookbook</a>, and they even include a histogram recipe. Still, I wanted to learn more about the proxy while working on a script that would let me get some stats on the queries executed against a server (or group of servers).</p>
-
 <p>First things first, get a brief glimpse of the <a title="The lua programming language" href="www.lua.org">lua programming language</a> since that's what the proxy's scripts are written in. Alternatively, you can jump straight into the sample scripts, extrapolate what you don't understand of the syntax by making paralelizations against other known scripting languages and make the best of it. That's what I've been doing so far :)</p>
-
 <p>We'll, now on to it.</p>
-
 <p>Here's my super simple proxy script. It consists of a global variable and a line that spits out all the vars I want, separated by '||||'. I choose that separator since it's unlikely to happen in a real query and hence it won't cause me to loose much data while doing load data infile later. That's my scientific approach, and considering this aren't medical records, it's good enough for me.</p>
-
 <p>I can get away with using a global var because the proxy fires up a new instance of the lua script for every new client connection. At least that's what I've been able to find out so far, and my empirical data has confirmed this. If source code inspection later rejects this finding, I'll have to find a better (probably more complex) way to achieve the same goal.</p>
-
 <pre>query = ""
 
 function read_query( packet )
-    if packet:byte() == proxy.COM_QUERY then
-        query = packet:sub(2)
-        proxy.queries:append(1, packet )
-        return proxy.PROXY_SEND_QUERY
-    end
+	if packet:byte() == proxy.COM_QUERY then
+		query = packet:sub(2)
+		proxy.queries:append(1, packet )
+		return proxy.PROXY_SEND_QUERY
+	end
 end
 
 function read_query_result(inj)
         print(os.date('%Y-%m-%d %H:%M:%S') .. "||||" ..  query .. "||||" .. (in.query_time / 1000) .. "||||" .. (in.response_time / 1000))
 end</pre>
-
 <p>That simple script saves the query into the global variable, from the read_query hook function, and prints the results in the read_query_results function. Notice how this hooks provide for much more possibilities if you're a skillful hacker and an evil one too :) (i.e., man in the middle type of things, there are a few query modification examples in the cookbook)</p>
-
 <p>Ok, so with this part covered, we need to run the proxy, and then run some queries against it.</p>
-
 <p>Both things are easy:</p>
-
 <pre>$ mysql-proxy --proxy-lua-script trace.lua &amp;&gt; trace.log</pre>
-
 <p>and something like</p>
-
 <pre>$ mysql -someuser -psomepassword -proxyhost -P4040</pre>
-
 <p>Notice that 4040 is the default port for the proxy, but you could change it into 3306, and move mysql into another port.</p>
-
 <p>This generates a trace.log file that looks like this:</p>
-
 <pre>2009-04-06 07:13:03||||select count(*) from City||||0.381||||0.404
 2009-04-06 07:13:06||||desc City||||2.08||||2.18
 2009-04-06 07:13:20||||select * from City where Population between 200 and 2000||||169.122||||194.083
 2009-04-06 07:13:22||||select * from City where Population between 200 and 2000||||0.408||||9.16
 2009-04-06 07:13:23||||select * from City where Population between 200 and 2000||||0.664||||8.455</pre>
-
 <p>We need to load that into mysql.</p>
-
 <p>I created a script just for that purpose:</p>
-
 <pre>#!/bin/bash
 
 tcp trace.log /tmp
@@ -145,30 +127,19 @@ resultMySQL=$?
 rm -f /tmp/trace.log
 
 [ $resultMySQL -eq 0 ] &amp;&amp; echo "Data imported OK"&gt;&amp;2 || echo "Error while importing data, please refer to the output of MySQL"&gt;&amp;2</pre>
-
 <p>So, once you've run quite a few queries against the proxy, you could do something like this:</p>
-
 <pre>$ ./loadTrace.sh
 You'll be asked for MySQL root user's password
 Enter password:
 Data imported OK</pre>
-
 <p>And then run some queries against the analysis tables.</p>
-
 <p>Here are some ideas:</p>
-
 <p>Top 10 queries that took more time to process:</p>
-
 <pre>mysql&gt; select * from analysis_results_20090406073836 order by query_time desc limit 10;</pre>
-
 <p>Top 10 queries that took more time to return to the client:</p>
-
 <pre>mysql&gt; select * from analysis_results_20090406073836 order by response_time desc limit 10;</pre>
-
 <p>Top 10 queries, ordered by their text, and then the time it took them to get back. You can infer, by the query issue time, if the query cache was in use, and then, if it was useful. You'll be surprised that for large datasets, while the load is taken off the server by using the cache, the client doesn't perceive such a big improvement because it still takes a lot of time for the resultset to go back. Therefore he/she will still complain. Sometimes a lot of effort is put into optimizing server performance, and the way this server is accessed is totally neglected!</p>
-
 <pre>mysql&gt; select * from analysis_results_20090406073836 order by query, response_time desc limit 10;</pre>
-
 <p>Well, there you go. Have fun and find out what kind of usage your application is giving to your server.</p>
 
         </section>

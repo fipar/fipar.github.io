@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -57,7 +57,7 @@
             <span class="post-reading-time"></span> read
           </div>
           <a name="topofpage"></a>
-          <p><em>This article is a cross post from <a href="https://blog.pythian.com/measuring-potential-overhead-pmm-client-mysql-workloads/">Pythian&#39;s blog</a></em></p>
+          <p><em>This article is a cross post from <a href="https://blog.pythian.com/measuring-potential-overhead-pmm-client-mysql-workloads/">Pythian’s blog</a></em></p>
 
 <p>Having good historial metrics monitoring in place is critical for properly operating, maintaining and troubleshooting database systems, and <a href="https://www.percona.com/doc/percona-monitoring-and-management/index.html">Percona Monitoring and Management</a> is one of the options we recommend to our clients for this.</p>
 
@@ -66,12 +66,12 @@
 <p>To begin, let me describe my setup. I used the following Google Cloud instances:</p>
 
 <ul>
-<li>One 4 vCPU instance for the MySQL server</li>
-<li>One 2 vCPU instance for the sysbench client</li>
-<li>One 1 vCPU instance for the PMM server</li>
+  <li>One 4 vCPU instance for the MySQL server</li>
+  <li>One 2 vCPU instance for the sysbench client</li>
+  <li>One 1 vCPU instance for the PMM server</li>
 </ul>
 
-<p>I used Percona Server 5.7 and PMM 1.5.3 installed via Docker. Slow query log was enabled with long<em>query</em>time set to 0 for all tests.</p>
+<p>I used Percona Server 5.7 and PMM 1.5.3 installed via Docker. Slow query log was enabled with long_query_time set to 0 for all tests.</p>
 
 <p>I ran sysbench with 200k, 1M and 10M rows using the legacy oltp script with the pareto and special distributions, and up to 64 client threads. After several runs and reviews of the results, I settled on 1M rows with pareto for extended tests, as other combinations showed minor variations on the results from this one.</p>
 
@@ -81,21 +81,21 @@
 
 <p>The following graph shows box plots for throughput for pmm enabled or disabled, for a different number of threads, with and without ssl:</p>
 
-<p><img src="/assets/images/Boxplot-pmm-client-overhead.png" alt="throughput with pmm enabled or disabled, per threads, with and without ssl"></p>
+<p><img src="/assets/images/Boxplot-pmm-client-overhead.png" alt="throughput with pmm enabled or disabled, per threads, with and without ssl" /></p>
 
 <p>We can see that with SSL enabled there is a noticeable drop in throughput when the exporters are running, while this is not the case when SSL is disabled.</p>
 
-<p>I arrived at the conclusion that it was worth repeating the tests with SSL disabled after creating <a href="https://github.com/brendangregg/FlameGraph">Flame Graphs</a> from perf captures during sample runs. On them, the only significant increases were due to the exporters (mysqld<em>exporter and node</em>exporter, the qan exporter did not have any noticeable impact during my tests). The results from the tests show that this analysis pointed me in the right direction so while they are worth of separate blog posts, it is worth to at least recommend our readers to get familiar with this performance analysis tool.</p>
+<p>I arrived at the conclusion that it was worth repeating the tests with SSL disabled after creating <a href="https://github.com/brendangregg/FlameGraph">Flame Graphs</a> from perf captures during sample runs. On them, the only significant increases were due to the exporters (mysqld_exporter and node_exporter, the qan exporter did not have any noticeable impact during my tests). The results from the tests show that this analysis pointed me in the right direction so while they are worth of separate blog posts, it is worth to at least recommend our readers to get familiar with this performance analysis tool.</p>
 
 <p>Next is a scatter plot of throughput over time with ssl enabled:</p>
 
-<p><img src="/assets/images/with-ssl-pareto-1000000-plot.png" alt="throughput per threads, pmm enabled or disabled, with ssl"></p>
+<p><img src="/assets/images/with-ssl-pareto-1000000-plot.png" alt="throughput per threads, pmm enabled or disabled, with ssl" /></p>
 
 <p>On it we get a more clear picture of the impact of having the exporters running during the test.</p>
 
 <p>Next is the same graphs but with SSL disabled:</p>
 
-<p><img src="/assets/images/without-ssl-pareto-1000000-plot.png" alt="throughput per threads, pmm enabled or disabled, without ssl"></p>
+<p><img src="/assets/images/without-ssl-pareto-1000000-plot.png" alt="throughput per threads, pmm enabled or disabled, without ssl" /></p>
 
 <p>Now it is much more difficult to differentiate the runs.</p>
 

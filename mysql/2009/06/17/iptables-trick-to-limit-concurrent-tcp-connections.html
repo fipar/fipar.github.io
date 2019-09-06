@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/mysql/2009/06/17/iptables-trick-to-limit-concurrent-tcp-connections.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/mysql/2009/06/17/iptables-trick-to-limit-concurrent-tcp-connections.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -58,24 +58,15 @@
           </div>
           <a name="topofpage"></a>
           <p>This is sort of a self-documenting post, and a self-support group about ill-behaved tomcat apps.</p>
-
 <p>Sometimes, you have multiple nodes accesing your MySQL server (or any kind of server, for that matter) concurrently. Eventually, software in one or more of these nodes might do nasty things (you know who you are buddy:))</p>
-
 <p>MySQL provides a built in mechanism to limit concurrent connections, but this can only be set for the whole server, or on a per user basis. Unfortunatly, most of these setups use the same database user for all their nodes, so this feature can't be used to confine any possible damage.</p>
-
 <p>Enter your good friend iptables.</p>
-
 <p>This isn't perfect, but this little trick might help you while programmers take care of their business:</p>
-
 <pre>iptables -A INPUT -p tcp -m recent --rcheck --seconds 60 -j REJECT
 iptables -A INPUT -p tcp --dport 3306 -m connlimit --connlimit-above 2 -m recent --set -j REJECT</pre>
-
 <p>(The number of seconds and the concurrency limit here are examples for testing only, set them to proper values if you use them in your servers!)</p>
-
 <p>This two rules create a recent 'bad guy' list, and send any source that exceeds two concurent connections on tcp pot 3306 to this list for 60 seconds.</p>
-
 <p>If used smartly with a proper timeout value for MySQL connections, this could be useful for situations such as the one I described.</p>
-
 <p>Hope it helps you!</p>
 
         </section>

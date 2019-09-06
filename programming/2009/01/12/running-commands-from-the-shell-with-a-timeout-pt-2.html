@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/programming/2009/01/12/running-commands-from-the-shell-with-a-timeout-pt-2.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/programming/2009/01/12/running-commands-from-the-shell-with-a-timeout-pt-2.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -58,11 +58,8 @@
           </div>
           <a name="topofpage"></a>
           <p><b>EDIT: </b>This can be safely replaced by <a href="http://man7.org/linux/man-pages/man1/timeout.1.html">timeout</a></p>
-
 <p>Here's an improved version of the safecmd script. This one doesn't always wait for $timeout seconds even if the command you're running exits successfully. In that case, it kills the monitor script and ends at the proper time. </p>
-
 <p>Here's the code: </p>
-
 <pre>
 #!/bin/bash 
 
@@ -75,10 +72,10 @@ check_pid_name()
         command=$1
         childpid=$2
         [ -d /proc/$childpid ] || return 1
-        [ $(grep -c $command /proc/$childpid/cmdline 2>/dev/null) -gt 0 ] && return 0 || return 1
+        [ $(grep -c $command /proc/$childpid/cmdline 2&gt;/dev/null) -gt 0 ] &amp;&amp; return 0 || return 1
 }
 
-[ -z "$command" ] && echo "Usage: safecmd <timeout> <command> [args]">&2 && exit 1
+[ -z "$command" ] &amp;&amp; echo "Usage: safecmd <timeout> <command /> [args]"&gt;&amp;2 &amp;&amp; exit 1
 
 safe_run()
 {
@@ -88,46 +85,37 @@ safe_run()
         kill $$
 }
 
-safe_run $command $* &
+safe_run $command $* &amp;
 childpid=$!
 sleep $timeout 
 
-check_pid_name $command $childpid && {
+check_pid_name $command $childpid &amp;&amp; {
         kill $childpid
         sleep 0.1
-        check_pid_name $command $childpid && kill -9 $childpid
+        check_pid_name $command $childpid &amp;&amp; kill -9 $childpid
         echo "$command $* timed out"
 }
-</pre>
-
+&lt;/pre&gt;
 <p>You can try it how like this, for example: </p>
-
 <pre>
 ./safecmd 2 sleep 4
 </pre>
-
 <p>which will output</p>
-
 <pre>
 ./safecmd.1: line 34: 11739 Terminated               safe_run $command $*
 sleep 4 timed out
 </pre>
-
 <pre>
 or ./safecmd 2 sleep 1
 </pre>
-
 <p>which will output</p>
-
 <pre>
 Terminated
 </pre>
-
 <p>Indicating that sleep 1 finished successfully</p>
-
 <p>This is still missing something. You can't test for the success of the command you pass safecmd, if it exits successfully you'll see the same return code than if it would have exited with an error. </p>
-
 <p>In order to improve this, as far as I can tell, you have to use two scripts, one just as the wrapper (to use one separate script instead of the function safe_run()). That's the way this is handled in <a href="http://highbase.seriema-systems.com">Highbase</a>, and I'll post a full example in my next post on this subject. </p>
+</timeout></pre>
 
         </section>
 <!-- fi-posts -->

@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -57,23 +57,34 @@
             <span class="post-reading-time"></span> read
           </div>
           <a name="topofpage"></a>
-          <p>Ok, maybe evil is too strong a word, but MySQL can certainly be deceiving. </p>
+          <p>Ok, maybe evil is too strong a word, but MySQL can certainly be deceiving.</p>
 
-<p>To some extent, and in some circles, MySQL still suffers from a bad reputation as a database. In fact, I have personally tried to <a href="http://fernandoipar.com/mysql/2015/03/11/ongoing-mysql-myths.html">fight that reputation</a> in the past. However, I&#39;ll be honest and say that, sometimes, it deserves it.</p>
+<p>To some extent, and in some circles, MySQL still suffers from a bad reputation as a database. In fact, I have personally tried to <a href="http://fernandoipar.com/mysql/2015/03/11/ongoing-mysql-myths.html">fight that reputation</a> in the past. However, I’ll be honest and say that, sometimes, it deserves it.</p>
 
-<p>As an example, take the ASC|DESC keyword in index creation. <a href="http://mysqlserverteam.com/mysql-8-0-labs-descending-indexes-in-mysql/">MySQL 8.0 support those</a>, thanks for that! But what happens in older versions? Let me quote the <a href="http://dev.mysql.com/doc/refman/5.7/en/create-index.html">Fine Manual</a>:</p>
-<figure class="highlight"><pre><code class="language-text" data-lang="text">   An index_col_name specification can end with ASC or DESC. These keywords are permitted
+<table>
+  <tbody>
+    <tr>
+      <td>As an example, take the ASC</td>
+      <td>DESC keyword in index creation. <a href="http://mysqlserverteam.com/mysql-8-0-labs-descending-indexes-in-mysql/">MySQL 8.0 support those</a>, thanks for that! But what happens in older versions? Let me quote the <a href="http://dev.mysql.com/doc/refman/5.7/en/create-index.html">Fine Manual</a>:</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre><code>   An index_col_name specification can end with ASC or DESC. These keywords are permitted
    for future extensions for specifying ascending or descending index value storage. Currently,
    they are parsed but ignored; index values are always stored in ascending order.
-</code></pre></figure>
-<p>Pretty clear, and obvious to anyone who has been working with MySQL enough time. We just have this kind of knowledge almost built-in. So built-in, in fact, that it never occurred to me to check what happens when you create an index that way. So I put myself in the shoes of a DBA coming into MySQL from another engine today, and here&#39;s what our DBA would see:</p>
-<figure class="highlight"><pre><code class="language-text" data-lang="text">   mysql&gt; create index index_t_on_y on t(y desc);
+</code></pre>
+
+<p>Pretty clear, and obvious to anyone who has been working with MySQL enough time. We just have this kind of knowledge almost built-in. So built-in, in fact, that it never occurred to me to check what happens when you create an index that way. So I put myself in the shoes of a DBA coming into MySQL from another engine today, and here’s what our DBA would see:</p>
+
+<pre><code>   mysql&gt; create index index_t_on_y on t(y desc);
    Query OK, 0 rows affected (0.02 sec)
    Records: 0  Duplicates: 0  Warnings: 0
-</code></pre></figure>
-<p>And that&#39;s it. Not even a warning, and our DBA is left with the impression that, since the create index statement succeeded, producing no errors and no warnings, then a descending ordered index on y was created on table t. And we know how that impression will end.</p>
+</code></pre>
 
-<p>Granted, this won&#39;t cause anyone to lose data, but still, things like this make me think that, sometimes, MySQL deserves its reputation.  </p>
+<p>And that’s it. Not even a warning, and our DBA is left with the impression that, since the create index statement succeeded, producing no errors and no warnings, then a descending ordered index on y was created on table t. And we know how that impression will end.</p>
+
+<p>Granted, this won’t cause anyone to lose data, but still, things like this make me think that, sometimes, MySQL deserves its reputation.</p>
 
         </section>
 <!-- fi-posts -->

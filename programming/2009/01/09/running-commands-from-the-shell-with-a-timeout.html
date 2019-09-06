@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/programming/2009/01/09/running-commands-from-the-shell-with-a-timeout.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/programming/2009/01/09/running-commands-from-the-shell-with-a-timeout.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -58,11 +58,8 @@
           </div>
           <a name="topofpage"></a>
           <p><b>EDIT: </b>This can be safely replaced by <a href="http://man7.org/linux/man-pages/man1/timeout.1.html">timeout</a></p>
-
 <p>Sometimes, in a shell script, you need to run a command that might go on forever (or an amount of time long enough to be called forever) due to poor coding of the software and wrong external conditions (network down or overloaded, overloaded system, a changed private key, etc).</p>
-
 <p>In order to avoid this situations, here's a small shell script that will execute any command with a guaranteed timeout:</p>
-
 <pre>#!/bin/bash
 
 timeout=$1
@@ -91,9 +88,7 @@ check_pid_name $command $childpid &amp;&amp; {
         check_pid_name $command $childpid &amp;&amp; kill -9 $childpid
         echo "$command $* timed out"
 }</pre>
-
 <p>As you can see, it's quite simple. You just have to start the desired command in the background, sleep for the timeout, and then kill the process if it's still running.</p>
-
 <p>Yes, this script has a defect, all the commands will wait $timeout to run, but that's easy to solve. I'll post an improved (but slightly more complex) version in my next post.</p>
 
         </section>

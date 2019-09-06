@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/mysql/2014/02/09/recovering-mysql-access.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/mysql/2014/02/09/recovering-mysql-access.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -58,17 +58,11 @@
           </div>
           <a name="topofpage"></a>
           <p>Ever found yourself working on a MySQL server where root's password is unavailable? It has happened to me a few times, always because the person who set up the DB left the place long ago, and this information was not documented anywhere.</p>
-
 <p>If you have root access to the OS, MySQL lets you restart the server bypassing access checks, using the <a href="http://dev.mysql.com/doc/refman/5.6/en/server-options.html#option_mysqld_skip-grant-tables">skip-grant-tables</a> option, which requires a service restart.</p>
-
 <p>However, if you need to regain root access and want to minimize service impact, you can take advantage of the way the server responds to <a href="http://dev.mysql.com/doc/refman/5.6/en/server-signal-response.html">SIGHUP</a> signals and the fact that access credentials are stored on a MyISAM table.</p>
-
 <p>MySQL uses a few tables to store credentials and privileges for users (you can find more about this <a href="https://dev.mysql.com/doc/refman/5.5/en/grant-table-structure.html">here</a>), but for this procedure, we only need to work with the mysql.user table.</p>
-
 <p>Specifically, we will work with the columns 'user', 'host' and 'password' from this table.</p>
-
 <p>Here's an example of how this can look on a server:</p>
-
 <pre>mysql&gt; select user,host,password from mysql.user;
 +-----------+-----------+-------------------------------------------+
 | user      | host      | password                                  |
@@ -84,17 +78,11 @@
 | readonly  | localhost | *FC69E042CE30D92E2952335F690CF2345C812E36 |
 +-----------+-----------+-------------------------------------------+
 9 rows in set (0.00 sec)</pre>
-
 <p>To start, we'll need to make a copy of this table to a database where we can change it. On this example server, this means the 'test' schema, as the 'readwrite' user has write privileges on it. Even if root's password was lost, you can typically get a less privileged MySQL account by checking the applications that connects to this database. If for some reason this is not the case, you can achieve the same results by copying this table to another server, and copying it back after the necessary changes have been made.</p>
-
 <p>The following command happen on the datadir:</p>
-
 <pre>[root@mysql mysql]# cp mysql/user.* test/; chown mysql.mysql test/user.*</pre>
-
 <p><strong>Please don't overwrite an existing table</strong> when doing this! Rename the copied files as needed instead ...</p>
-
 <p>Now you should be able to access (and write) to this table:</p>
-
 <pre>[root@mysql mysql]# mysql -ureadwrite -p test
 Enter password: 
 Reading table information for completion of table and column names
@@ -127,18 +115,13 @@ mysql&gt; select user,host,password from user;
 | readwrite | %         | *202273E75BD11D06FBE2F057BFA1B1BB2B26549C |
 +-----------+-----------+-------------------------------------------+
 9 rows in set (0.00 sec)</pre>
-
 <p>By now you've probably figured out what I'll do: update test.user, changing the password column for user 'root' and host 'localhost' to the result of running the PASSWORD() function with some string of my choice, then copying this table back, and then sending SIGHUP to the server.</p>
-
 <p>A couple of caveats:</p>
-
 <ul>
 <li>Either make a copy of the original table file, (and?) or write down the original hash for root (the one you will replace)</li>
 <li>Even if nobody on the customer's current team knows how to get you MySQL's root password, that does not mean they don't have some old app someone has forgotten about that uses the root account to connect. If this is the case, access will break for this app. You can follow the same steps outlined here, but instead of permanently changing root's password, use your regained access to create a new super user account, and then replace root's hash with the one you saved (and flush privileges!)</li>
 </ul>
-
 <p>For completion, here's the rest of the process:</p>
-
 <pre>mysql&gt; update test.user set password=password('newpass but this is insecure so dont use') where user = 'root' and host = 'localhost';
 Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
@@ -155,14 +138,10 @@ mysql&gt; select user,host,password from test.user where user='root';
 4 rows in set (0.00 sec)
 
 mysql&gt;</pre>
-
 <p>Time to copy the table back and reload the grant tables:</p>
-
 <pre>[root@mysql mysql]# 'cp' test/user.MY* mysql/
 [root@mysql mysql]# kill -SIGHUP $(pidof mysqld)</pre>
-
 <p>And now you should be able to get back in:</p>
-
 <pre>[root@mysql mysql]# mysql -p'newpass but this is insecure so dont use'
 Warning: Using a password on the command line interface can be insecure.
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -185,9 +164,7 @@ mysql&gt; show grants;
 | GRANT PROXY ON ''@'' TO 'root'@'localhost' WITH GRANT OPTION                                                                           |
 +----------------------------------------------------------------------------------------------------------------------------------------+
 2 rows in set (0.00 sec)</pre>
-
 <p>There you go. We've regained root access to MySQL without restarting the service!</p>
-
 <p>I hope you find this useful, and I'll leave opinions on MySQL's security as an exercise to the reader ...</p>
 
         </section>

@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/programming/2009/02/04/generating-random-salts-from-bash.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/programming/2009/02/04/generating-random-salts-from-bash.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -58,9 +58,7 @@
           </div>
           <a name="topofpage"></a>
           <p>From the 'just because it can be done' column, here comes a handy shell script to generate random <a title="Cryptographic Salt (Wikipedia)" href="http://en.wikipedia.org/wiki/Salt_(cryptography)">salts</a>.</p>
-
 <p>So, without further ado,  here it goes:</p>
-
 <pre>#!/bin/bash 
 
 [ $# -eq 0 ] &amp;&amp; {
@@ -81,7 +79,6 @@ use Crypt::Salt;
 my $length = shift;
 print salt($length);
 </pre>
-
 <p>But if you ever find yourself in a server with no cpan, the first option might prove useful :)</p>
 
         </section>

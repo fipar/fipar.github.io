@@ -17,7 +17,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/page3/">
+  <link rel="canonical" href="http://0.0.0.0:4000/page3/">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -33,7 +33,7 @@
 
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -50,7 +50,7 @@
 
 <header class="blog-header">
     
-      <a class="blog-logo" href="http://fernandoipar.com" style="background-image: url('/assets/images/df_logo.jpg')">Fernando Ipar</a>
+      <a class="blog-logo" href="http://0.0.0.0:4000" style="background-image: url('/assets/images/df_logo.jpg')">Fernando Ipar</a>
     
     <h1 class="blog-title">Fernando Ipar</h1>
     <h2 class="blog-description">"Tell my wife I love her very much, she knows"
@@ -77,6 +77,20 @@
     
 
     <div class="cf frame">
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/mysql/planetmysql/2015/04/16/migrating-to-jekyll.html" itemprop="url">Migrating to jekyll</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>After years of service, my wordpress installation was compromised sometime last week, with all php files replaced by a link to some external site. I estimate losses on my part to about $.01, but the impact on my reputation may be more difficult to quantify! I was meaning to migrate...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="16 April 2015">16 April 2015</time>
+            </div>
+          </div>
+        </article>
       
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
           <div class="article-item">
@@ -113,12 +127,10 @@
             </header>
             <section class="post-excerpt" itemprop="description">
               <p>I mentioned this before, and now I have packaged this as a (j)ruby gem for ease of use.
-
 You just need to do 
 jgem install 'atom_attr_accessor'
 
-
-You can find more info here and here. 
+You can find more info here and &lt;a href=https://github.com/fipar/atom_attr_accessor&gt;here&lt;/a&gt;. 
 </p>
             </section>
             <div class="post-meta">
@@ -134,26 +146,11 @@ You can find more info here and here.
             </header>
             <section class="post-excerpt" itemprop="description">
               <p>This code snippet shows how to use Clojure Atoms to implement thread safe instance variables in JRuby classes.
-
 The atom_attr_accessor method is used analog to the usual attr_accessor so this should seem natural for the language, though I don't have enough experience with it to judge that.
 </p>
             </section>
             <div class="post-meta">
               <time datetime="13 March 2014">13 March 2014</time>
-            </div>
-          </div>
-        </article>
-      
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
-          <div class="article-item">
-            <header class="post-header">
-              <h2 class="post-title" itemprop="name"><a href="/mysql/2014/02/09/recovering-mysql-access.html" itemprop="url">Recovering MySQL access</a></h2>
-            </header>
-            <section class="post-excerpt" itemprop="description">
-              <p>Ever found yourself working on a MySQL server where root's password is unavailable? It has happened to me a few times, always because the person who set up the DB left the place long ago, and this information was not documented anywhere. If you have root access to the OS,...</p>
-            </section>
-            <div class="post-meta">
-              <time datetime="09 February 2014">09 February 2014</time>
             </div>
           </div>
         </article>

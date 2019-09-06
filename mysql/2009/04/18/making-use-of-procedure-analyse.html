@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/mysql/2009/04/18/making-use-of-procedure-analyse.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/mysql/2009/04/18/making-use-of-procedure-analyse.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -58,13 +58,9 @@
           </div>
           <a name="topofpage"></a>
           <p>SELECT Field0[,Field1,Field2,...] FROM TABLE PROCEDURE ANALYSE() is a nice tool to find out more about your table's columns.</p>
-
 <p>Still, it could be improved in a lot of ways, and the stored procedure below is a starting point. It makes use of <em>procedure analyse</em> (though with 'SELECT * FROM'), and modifies it's output to include the actual column datatype and the total number of rows of the table.</p>
-
 <p>The actual datatype is a piece of information I've seen a lot of people request, and the number of rows is, I think, a critical piece of information to determine if the output of <em>procedure analyse</em> is credible or not. It's not the same thing to take suggestions from mysql on a table with 7 or 20 rows than from a table with 1000000 rows. Of course, remember than numbers alone mean nothing, you might just have 7 rows in a table that represent the entire universe of possible values for your problem domain. In any case, a smart human being with a good toolset is the best way to solve problems!</p>
-
 <p>So here's the procedure, which can also be downloaded from this <a title="extended_procedure_analyse.sql" href="http://fernandoipar.com/extended_procedure_analyse.sql">link</a>:</p>
-
 <pre>/*
 
 extended procedure analyse
@@ -79,49 +75,47 @@ delimiter //
 create procedure extended_procedure_analyse(databaseName varchar(64), tableName varchar(64))
 begin
 
-    create temporary table procedure_analyse_output
-    (
-    Field_name varchar(64),
-    Min_value int,
-    Max_value int,
-    Min_length int,
-    Max_length int,
-    Empties_or_zeros int,
-    Nulls int,
-    Avg_value_or_avg_length float,
-    Std float,
-    Optimal_fieldtype text,
-    Actual_fieldtype text
-    );  
+	create temporary table procedure_analyse_output
+	(
+	Field_name varchar(64),
+	Min_value int,
+	Max_value int,
+	Min_length int,
+	Max_length int,
+	Empties_or_zeros int,
+	Nulls int,
+	Avg_value_or_avg_length float,
+	Std float,
+	Optimal_fieldtype text,
+	Actual_fieldtype text
+	);	
 
-    set @table = concat(databaseName,'.',tableName);
-    set @dbName = databaseName;
-    set @tbName = tableName;
+	set @table = concat(databaseName,'.',tableName);
+	set @dbName = databaseName;
+	set @tbName = tableName;
 
-    set @qry = concat('insert into procedure_analyse_output (Field_name,Min_value,Max_value,Min_length,Max_length,Empties_or_zeros,Nulls,Avg_Value_or_avg_length,Std,Optimal_fieldtype) select * from ', @table,' procedure analyse()');
-    prepare myStmt from @qry;
-    execute myStmt;
+	set @qry = concat('insert into procedure_analyse_output (Field_name,Min_value,Max_value,Min_length,Max_length,Empties_or_zeros,Nulls,Avg_Value_or_avg_length,Std,Optimal_fieldtype) select * from ', @table,' procedure analyse()');
+	prepare myStmt from @qry;
+	execute myStmt;
 
-    update procedure_analyse_output set Field_name = replace(Field_name,  CONCAT(databaseName,'.',tableName,'.'),'');
+	update procedure_analyse_output set Field_name = replace(Field_name,  CONCAT(databaseName,'.',tableName,'.'),'');
 
-    prepare myStmt from 'update procedure_analyse_output pao, information_schema.columns c set pao.Actual_Fieldtype = c.column_type where table_schema = ? and table_name = ? and column_name = pao.Field_name';
-    execute myStmt using @dbName,@tbName;
+	prepare myStmt from 'update procedure_analyse_output pao, information_schema.columns c set pao.Actual_Fieldtype = c.column_type where table_schema = ? and table_name = ? and column_name = pao.Field_name';
+	execute myStmt using @dbName,@tbName;
 
-    set @qry = concat('select count(*) as `Total_number_of_rows` from ',@table);
-    prepare myStmt from @qry;
+	set @qry = concat('select count(*) as `Total_number_of_rows` from ',@table);
+	prepare myStmt from @qry;
 
-    execute myStmt;
+	execute myStmt;
 
-    select * from procedure_analyse_output;
+	select * from procedure_analyse_output;
 
-    drop temporary table procedure_analyse_output;
+	drop temporary table procedure_analyse_output;
 
 end;
 //
 delimiter ;</pre>
-
 <p>Here are a couple of sample outputs:</p>
-
 <pre>mysql&gt; call extended_procedure_analyse('test','City')\G
 *************************** 1. row ***************************
 Total_number_of_rows: 30000
@@ -256,11 +250,8 @@ Avg_value_or_avg_length: 4.6605
 2 rows in set (0.56 sec)
 
 Query OK, 0 rows affected (0.56 sec)</pre>
-
 <p>Notice the difference in response time between the Innodb and MyISAM (yes, I wrongly used the 'isam' name ...) tables, that's because Innodb has to calculate the number of rows for a count(*) query, while MyISAM stores a row count in the table.</p>
-
 <p>I plan to extend this procedure to include index information, with useful data such as overindexed columns (columns that are included as a leftmost prefix in more than one index) and unindexed columns that are queried. The first question is easily answered from information_schema.statistics, using the seq_in_index column, I'm working on the second one.</p>
-
 <p>Still, if you have the time and interest, play with this early version and let me know what's wrong and/or could be improved with it.</p>
 
         </section>

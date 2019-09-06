@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/programming/2009/01/19/intrusion-detection-at-the-application-level-for-php.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/programming/2009/01/19/intrusion-detection-at-the-application-level-for-php.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -58,30 +58,21 @@
           </div>
           <a name="topofpage"></a>
           <p>Here's <a title="Intrusion Detection System for PHP" href="http://php-ids.org/" target="_self">phpids</a>, an Intrusion Detection System for PHP.</p>
-
 <p>According to the site, it aims to counter XSS, SQL Injection, header injection, directory traversal, RFE/LFI, DoS and LDAP attacks, and unknown attack patterns,  through it's Centrifuge component.</p>
-
 <p>Installation is simple. Just download it, copy the lib directory to a directory in your project structure, or add it to your <code>include_path</code>.</p>
-
 <p>I actually chose a mix of both ways, so it's automatically included when I distribute my applications.</p>
-
 <p>Here's how to use it:</p>
-
 <p><code><br />
 ini_set('include_path',ini_get('include_path').PATH_SEPARATOR.PRIVATE_ROOT.DIRECTORY_SEPARATOR.'phpids'.DIRECTORY_SEPARATOR.'lib');<br />
 </code><br />
 Here we're just modifying the include path in order to add phpids.<br />
 PRIVATE_ROOT is a constant that I've defined in my app, which defines the root of the application. This is not accessible from the web server (following the recommendation of the <a href="http://phpsec.org/projects/guide/1.html#1.4.1">Dispatch</a> method, from the <a href="http://phpsec.org">PHP Security Consortium</a>. However, this is a particular case, in most situations, I'd recommend using a framework that already takes a similar pattern into account, like <a href="http://cakephp.org/">CakePHP</a>).<br />
 phpids is where I've copied this IDS. The downloaded package has a similar root directory name, like phpids-x.y.n, depending on the version number.</p>
-
 <p><code><br />
 require_once 'IDS/Init.php';<br />
 </code></p>
-
 <p>Require the Init.php file</p>
-
 <p>Then, whenever you need to access the request variables (in my case, this was just in one point in my application so I just had to modify one function), add something like this:</p>
-
 <p><code><br />
 $request = array(<br />
 'REQUEST' =&gt; $_REQUEST,<br />
@@ -90,21 +81,15 @@ $request = array(<br />
 'COOKIE' =&gt; $_COOKIE<br />
 );<br />
 $init = IDS_Init::init(PRIVATE_ROOT. DIRECTORY_SEPARATOR .'phpids'.DIRECTORY_SEPARATOR.'lib/IDS/Config/Config.ini');</code></p>
-
 <p>$ids = new IDS_Monitor($request, $init);<br />
 $result = $ids-&gt;run();</p>
-
 <p>if (!$result-&gt;isEmpty()) {<br />
 trigger_error($result);<br />
 }</p>
-
 <p>If the $result object is not empty, the IDS detected an attack attempt and therefore you should stop processing the request.</p>
-
 <p>And now the fun part.</p>
-
 <p>In order to test this, I set up a very simple, very insecure test page.<br />
 Here's the php code:</p>
-
 <pre>error_reporting(E_ALL);
 ini_set('include_path',ini_get('include_path').':'.'../src/phpids/lib');
 require 'IDS/Init.php';
@@ -131,11 +116,8 @@ if (isset($_REQUEST['sql'])) {
      print 'Form says '.$sql.'
 ';
 }</pre>
-
 <p>The html page has just an input type text with the name 'sql', and a submit button.</p>
-
 <p>I tried the following inputs:</p>
-
 <ul>
 <li>Hello, which goes by ok</li>
 <li>' and 1, which generates errors for the REQUEST and POST variables, stating<br />
@@ -148,10 +130,9 @@ if (isset($_REQUEST['sql'])) {
 <li>Detects JavaScript object properties and methods | Tags: xss, csrf, id, rfe | ID: 17</li>
 <li>Detects basic SQL authentication bypass attempts 2/3 | Tags: sqli, id, lfi | ID: 45</li>
 </ul>
-
-<p></blockquote>
+</blockquote>
 </li>
-</ul></p>
+</ul>
 
         </section>
 <!-- fi-posts -->

@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/notes/2013/11/19/rmysql-basics.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/notes/2013/11/19/rmysql-basics.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -59,21 +59,20 @@
           <a name="topofpage"></a>
           <p>Installation:<br />
 <code><br />
-> install.packages("RMySQL", dependencies = TRUE)<br />
-> library(RMySQL)<br />
+&gt; install.packages("RMySQL", dependencies = TRUE)<br />
+&gt; library(RMySQL)<br />
 </code></p>
-
 <p>Simple usage:<br />
 <code><br />
-> con <- dbConnect(MySQL(), user="msandbox", password="msandbox", dbname="sakila", host="127.0.0.1", port=5527)<br />
-> dbGetQuery(con, "select * from sakila.sales_by_store")<br />
+&gt; con &lt;- dbConnect(MySQL(), user="msandbox", password="msandbox", dbname="sakila", host="127.0.0.1", port=5527)<br />
+&gt; dbGetQuery(con, "select * from sakila.sales_by_store")<br />
                 store      manager total_sales<br />
 1 Woodridge,Australia Jon Stephens    33726.77<br />
 2   Lethbridge,Canada Mike Hillyer    33679.79<br />
-> sales_by_film_category <- dbReadTable(con, "sales_by_film_category")<br />
-> qplot(category, total_sales, data=sales_by_film_category, geom="bar", fill=category)</p>
-
-<p></code></p>
+&gt; sales_by_film_category &lt;- dbReadTable(con, "sales_by_film_category")<br />
+&gt; qplot(category, total_sales, data=sales_by_film_category, geom="bar", fill=category)&lt;/p&gt;
+<p>&lt;/code&gt;</p>
+</code></p>
 
         </section>
 <!-- fi-posts -->

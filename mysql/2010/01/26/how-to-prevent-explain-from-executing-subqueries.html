@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/mysql/2010/01/26/how-to-prevent-explain-from-executing-subqueries.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/mysql/2010/01/26/how-to-prevent-explain-from-executing-subqueries.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -58,9 +58,7 @@
           </div>
           <a name="topofpage"></a>
           <p>Here's a quick tip for using explain:</p>
-
 <p>You may know this already, but mysql will actually execute some subqueries when you invoke explain.  Here's an example:</p>
-
 <pre>mysql&gt; explain select id from projects where id = (select max(id) from projects where name like 'en%');
 +----+-------------+----------+-------+---------------+---------+---------+-------+-------+-------------+
 | id | select_type | table    | type  | possible_keys | key     | key_len | ref   | rows  | Extra       |
@@ -70,10 +68,8 @@
 +----+-------------+----------+-------+---------------+---------+---------+-------+-------+-------------+
 2 rows in set (0.11 sec)
 </pre>
-
 <p>Take a look at the execution time (I choose an intentionally poorly executing query for my little dataset).<br />
 Here's explain when it's not executing:</p>
-
 <pre>mysql&gt; explain select max(id) from projects where name like 'en%';
 +----+-------------+----------+------+---------------+------+---------+------+-------+-------------+
 | id | select_type | table    | type | possible_keys | key  | key_len | ref  | rows  | Extra       |
@@ -82,9 +78,7 @@ Here's explain when it's not executing:</p>
 +----+-------------+----------+------+---------------+------+---------+------+-------+-------------+
 1 row in set (0.00 sec)
 </pre>
-
 <p>If you want to work around this to prevent trouble on a production server (albeit, not getting the output from explain), you can do this:</p>
-
 <pre>mysql&gt; set session max_join_size=1;
 Query OK, 0 rows affected (0.00 sec)
 

@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -61,33 +61,40 @@
 
 <p>As part of that process, I transitioned from aquamacs (a great project to which I made a small donation at some point) to just plain emacs. The big goal here is that since I spent most of my time in a text editor, I would like to be able to easily migrate myself to another platform supported by emacs with little need to adjust my habits (this has become an important requirement should I ever decide that Macs move too far away from the needs of users like me that I decide to switch back to FreeBSD or GNU/Linux).</p>
 
-<p>I won&#39;t document the whole thing here, but I thought one little nugget of duck-tape-fixing was worth of making my blog-post-of-the-year on my personal blog, so here it is.</p>
+<p>I won’t document the whole thing here, but I thought one little nugget of duck-tape-fixing was worth of making my blog-post-of-the-year on my personal blog, so here it is.</p>
 
 <p>The scenario:</p>
 
 <ul>
-<li>I use Google Chrome for work as we have some customizer scripts that don&#39;t work in Safari.</li>
-<li>I do not want to make Chrome my default browser as I still use Safari for any browsing that does not involve my work email or my work&#39;s ticketing system.</li>
+  <li>I use Google Chrome for work as we have some customizer scripts that don’t work in Safari.</li>
+  <li>I do not want to make Chrome my default browser as I still use Safari for any browsing that does not involve my work email or my work’s ticketing system.</li>
 </ul>
 
 <p>My way to achieve this is by this emacs config line:</p>
-<figure class="highlight"><pre><code class="language-text" data-lang="text">(setq browse-url-browser-function &#39;browse-url-chromium)
-</code></pre></figure>
-<p>That requires the &#39;chromium&#39; command to be available on your path.
+
+<pre><code>(setq browse-url-browser-function 'browse-url-chromium)
+</code></pre>
+
+<p>That requires the ‘chromium’ command to be available on your path.
 Now, at some point in the recent past, after a minor OS upgrade, emacs stopped being able to open URLs. After some digging, I tracked this down to the chromium command failing with this error:</p>
-<figure class="highlight"><pre><code class="language-text" data-lang="text">stratocaster:bin fipar$ chromium http://localhost
+
+<pre><code>stratocaster:bin fipar$ chromium http://localhost
 dlopen /usr/local/bin/../Versions/65.0.3295.0/Chromium Framework.framework/Chromium Framework: dlopen(/usr/local/bin/../Versions/65.0.3295.0/Chromium Framework.framework/Chromium Framework, 261): image not found
 Abort trap: 6
-</code></pre></figure>
-<p>I attempted reinstalling chromium (available on mac via homebrew or as a nightly build) but neither approach worked. After some thought, I realized I only need this so that emacs can open urls in Google, I don&#39;t use the chromium command for anything else. With that in mind, my duck tape solution was to create a chromium script somewhere on my PATH with the following contents:</p>
-<figure class="highlight"><pre><code class="language-text" data-lang="text">#!/bin/bash
-open -a &#39;Google Chrome&#39; $*
-</code></pre></figure>
-<p>That just open the standard MacOS way to open files with a specific application from the command line. Now I don&#39;t have the &#39;chromium&#39; command installed, and I can open urls from emacs using Google Chrome just the same.</p>
+</code></pre>
 
-<p>If you think this is a lazy approach to troubleshooting and that any self respected hacker would have instead spent time figuring out how to resolve the actual error, you&#39;re right. However, life is all about balancing needs and I just can&#39;t spend time tracking down how to fix a problem in a program I don&#39;t really need, so the lazy fix is enough for me at this point.</p>
+<p>I attempted reinstalling chromium (available on mac via homebrew or as a nightly build) but neither approach worked. After some thought, I realized I only need this so that emacs can open urls in Google, I don’t use the chromium command for anything else. With that in mind, my duck tape solution was to create a chromium script somewhere on my PATH with the following contents:</p>
 
-<p>There&#39;s a lesson here for people like my younger past self: once you move into &#39;The Workforce&#39;, tech work is not about solving problems per se, but about adding to your client&#39;s revenue or cutting down from their costs. Doing this effectively requires, among other things, knowing when to stop because a solution is &#39;good enough&#39; for the business need at hand, to the point where the benefits of continuing work on it no longer offset the costs involved.  </p>
+<pre><code>#!/bin/bash
+open -a 'Google Chrome' $*
+</code></pre>
+
+<p>That just open the standard MacOS way to open files with a specific application from the command line. Now I don’t have the ‘chromium’ command installed, and I can open urls from emacs using Google Chrome just the same.</p>
+
+<p>If you think this is a lazy approach to troubleshooting and that any self respected hacker would have instead spent time figuring out how to resolve the actual error, you’re right. However, life is all about balancing needs and I just can’t spend time tracking down how to fix a problem in a program I don’t really need, so the lazy fix is enough for me at this point.</p>
+
+<p>There’s a lesson here for people like my younger past self: once you move into ‘The Workforce’, tech work is not about solving problems per se, but about adding to your client’s revenue or cutting down from their costs. Doing this effectively requires, among other things, knowing when to stop because a solution is ‘good enough’ for the business need at hand, to the point where the benefits of continuing work on it no longer offset the costs involved.</p>
+
 
         </section>
 <!-- fi-posts -->

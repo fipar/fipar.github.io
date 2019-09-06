@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/programming/mysql/2009/04/21/extending-procedure_analyse.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/programming/mysql/2009/04/21/extending-procedure_analyse.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -58,13 +58,9 @@
           </div>
           <a name="topofpage"></a>
           <p>My previous post explored a stored procedure that extended procedure_analyse with the intent of helping DBAs optimize table structure.</p>
-
 <p>Here's an improved version. I've followed <a title="Open Query" href="http://openquery.com/">Arjen Lentz</a>'s suggestion and added support for the max_elements and max_memory parameters.</p>
-
 <p>I also added a new Indexed column to the output, which is an ENUM('No','Yes','Overindexed'). Yes and No are self-explanatory, while Overindexed means the column is present as the left-most part of more than one index. This is useless, it just presents a performance penalty for MySQL (it needs to update more indexes) and if, for instance, you have columns A and B, and you have KEY(A) and KEY (A,B), mysql can use the second index to search for A alone too.</p>
-
 <p>Here's the updated version:</p>
-
 <pre>
 /*
 
@@ -80,69 +76,67 @@ delimiter //
 create procedure extended_procedure_analyse(databaseName varchar(64), tableName varchar(64), max_elements int, max_memory int)
 begin
 
-    drop temporary table if exists procedure_analyse_output;
-    drop temporary table if exists tmp_pao;
+	drop temporary table if exists procedure_analyse_output;
+	drop temporary table if exists tmp_pao;
 
-    create temporary table procedure_analyse_output 
-    (
-    Field_name varchar(64),
-    Min_value int,
-    Max_value int,
-    Min_length int,
-    Max_length int,
-    Empties_or_zeros int,
-    Nulls int,
-    Avg_value_or_avg_length float,
-    Std float,
-    Optimal_fieldtype text,
-    Actual_fieldtype text,
-    Indexed enum ('No','Yes','Overindexed') default 'No'
-    );  
-    
-    set @table = concat(databaseName,'.',tableName);
-    set @dbName = databaseName;
-    set @tbName = tableName;
-    set @maxEle = max_elements;
-    set @maxMem = max_memory;
+	create temporary table procedure_analyse_output 
+	(
+	Field_name varchar(64),
+	Min_value int,
+	Max_value int,
+	Min_length int,
+	Max_length int,
+	Empties_or_zeros int,
+	Nulls int,
+	Avg_value_or_avg_length float,
+	Std float,
+	Optimal_fieldtype text,
+	Actual_fieldtype text,
+	Indexed enum ('No','Yes','Overindexed') default 'No'
+	);	
+	
+	set @table = concat(databaseName,'.',tableName);
+	set @dbName = databaseName;
+	set @tbName = tableName;
+	set @maxEle = max_elements;
+	set @maxMem = max_memory;
 
-    set @qry = concat('insert into procedure_analyse_output (Field_name,Min_value,Max_value,Min_length,Max_length,Empties_or_zeros,Nulls,Avg_Value_or_avg_length,Std,Optimal_fieldtype) select * from ', @table,' procedure analyse(',@maxEle,',',@maxMem,')');
-    prepare myStmt from @qry;
-    execute myStmt;
-    
-    update procedure_analyse_output set Field_name = replace(Field_name,  CONCAT(databaseName,'.',tableName,'.'),'');
-    
-    prepare myStmt from 'update procedure_analyse_output pao, information_schema.columns c set pao.Actual_Fieldtype = c.column_type where table_schema = ? and table_name = ? and column_name = pao.Field_name';
-    execute myStmt using @dbName,@tbName;
-    
-    set @qry = concat('select count(*) as `Total_number_of_rows` from ',@table);
-    prepare myStmt from @qry;
-    
-    execute myStmt;
-    
-    set @qry = concat('update procedure_analyse_output pao set Indexed = "Yes\" where exists (select 1 from information_schema.statistics where table_schema = ? and table_name = ? and column_name = pao.Field_name)');
-    prepare myStmt from @qry;
-    execute myStmt using @dbName,@tbName;
-    
+	set @qry = concat('insert into procedure_analyse_output (Field_name,Min_value,Max_value,Min_length,Max_length,Empties_or_zeros,Nulls,Avg_Value_or_avg_length,Std,Optimal_fieldtype) select * from ', @table,' procedure analyse(',@maxEle,',',@maxMem,')');
+	prepare myStmt from @qry;
+	execute myStmt;
+	
+	update procedure_analyse_output set Field_name = replace(Field_name,  CONCAT(databaseName,'.',tableName,'.'),'');
+	
+	prepare myStmt from 'update procedure_analyse_output pao, information_schema.columns c set pao.Actual_Fieldtype = c.column_type where table_schema = ? and table_name = ? and column_name = pao.Field_name';
+	execute myStmt using @dbName,@tbName;
+	
+	set @qry = concat('select count(*) as `Total_number_of_rows` from ',@table);
+	prepare myStmt from @qry;
+	
+	execute myStmt;
+	
+	set @qry = concat('update procedure_analyse_output pao set Indexed = "Yes\" where exists (select 1 from information_schema.statistics where table_schema = ? and table_name = ? and column_name = pao.Field_name)');
+	prepare myStmt from @qry;
+	execute myStmt using @dbName,@tbName;
+	
 
-    create temporary table tmp_pao as select * from procedure_analyse_output;
-    prepare myStmt from 'update tmp_pao set Indexed = "Overindexed" where exists (select Field_name,count(*) from procedure_analyse_output pao inner join information_schema.statistics s on pao.Field_name = s.column_name where table_schema = ? and table_name = ? and seq_in_index = 1 and pao.Field_name = tmp_pao.Field_name group by Field_name having count(*) > 1)';
-    execute myStmt  using @dbName,@tbName;
-        
-    select * from tmp_pao;
-    
-    drop temporary table procedure_analyse_output;
-    drop temporary table tmp_pao; 
-    
+	create temporary table tmp_pao as select * from procedure_analyse_output;
+	prepare myStmt from 'update tmp_pao set Indexed = "Overindexed" where exists (select Field_name,count(*) from procedure_analyse_output pao inner join information_schema.statistics s on pao.Field_name = s.column_name where table_schema = ? and table_name = ? and seq_in_index = 1 and pao.Field_name = tmp_pao.Field_name group by Field_name having count(*) &gt; 1)';
+	execute myStmt  using @dbName,@tbName;
+		
+	select * from tmp_pao;
+	
+	drop temporary table procedure_analyse_output;
+	drop temporary table tmp_pao; 
+	
 end;
 //
 delimiter ;
 
 </pre>
-
 <p>And here's a sample output: </p>
-
 <pre>
-mysql> call extended_procedure_analyse('test','Account',4,100)\G
+mysql&gt; call extended_procedure_analyse('test','Account',4,100)\G
 *************************** 1. row ***************************
 Total_number_of_rows: 1
 1 row in set (0.04 sec)
@@ -204,7 +198,6 @@ Avg_value_or_avg_length: 6.57541e+18
 Query OK, 0 rows affected, 8 warnings (0.24 sec)
 
 </pre>
-
 <p>There's a <a title="mydbsuggest at bitbucket" href="http://www.bitbucket.org/nandix/mydbsuggest/">hg repository</a> to handle the project. We're working with <a title="fedesilva@bitbucket.org" href="http://www.bitbucket.org/fedesilva">@fedesilva</a> to create a standalone java app that will present this and more info in a friendly manner to sysadmins, and to handle the creation and destruction of the stored procedure automatically.</p>
 
         </section>

@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/mysql/2015/03/11/ongoing-mysql-myths.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/mysql/2015/03/11/ongoing-mysql-myths.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -58,23 +58,14 @@
           </div>
           <a name="topofpage"></a>
           <p>There's an interesting post over at <a href="http://developer.olery.com/blog/goodbye-mongodb-hello-postgresql/">Olery</a>'s blog about a successful migration story from using MySQL/MongoDB to PostgreSQL as the persistence layer for applications that, however, lists a couple of cons of using MySQL that I personally think are no longer valid complaints (or at least not as big as they used to be). I did not find a way to reply to the post so, hopefully for the benefit of people who are new to MySQL and may hear the same recycled myths, I am doing so here.</p>
-
 <p>Now I am aware that PostgreSQL has feature MySQL lacks (bitmap indexes are a personal favourite), but still, it is frustrating that instead of using actual arguments consisting of actual use cases in which one database is better than another, these old stories get recycled. I think it's a disservice to both MySQL and PostgreSQL.</p>
-
 <p>The first paragraph that caught my attention is:</p>
-
 <blockquote><p>MySQL was the first candidate as we were already using it for some small chunks of critical data. MySQL however is not without its problems. For example, when defining a field as <code>int(11)</code> you can just happily insert textual data and MySQL will <em>try</em> to convert it.</p></blockquote>
-
 <p>The <a href="http://dev.mysql.com/doc/refman/5.6/en/sql-mode.html">sql_mode</a> variable is available since at least <a href="http://dev.mysql.com/doc/refman/4.1/en/sql-mode.html">4.0</a> (GA in 2004 if I'm not mistaken, which is over a decade ago) and while yes, the default value is permissive, and any evil programmer will be able to change the value for the variable (Roland made <a href="http://rpbouman.blogspot.com/2009/01/mysqls-sqlmode-my-suggestions.html">very good suggestions</a> about this some time ago), in my experience it has provided people with enough protection against this kind of data integrity problems.</p>
-
 <p>And here's the second one:</p>
-
 <blockquote><p>Another problem with MySQL is that any table modification (e.g. adding a column) will result in the table being locked for <em>both</em> reading and writing. This means that <em>any</em> operation using such a table will have to wait until the modification has completed.</p></blockquote>
-
 <p>Innodb supports <a href="http://dev.mysql.com/doc/refman/5.6/en/innodb-online-ddl.html">some online DDL</a> operations starting with MySQL 5.6 (GA in February 2013, over two years ago) and of course, there's always <a href="http://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html">pt-online-schema-change</a>, which can usually help in the cases were online DDL is still not supported, or when the impact on replica lag makes that approach unfeasible.</p>
-
 <p>To wrap up, my message is that it's a big world out there, with different technologies that all have cons and pros. You need to make your due diligence and investigate the biggest of each when evaluating one technology, or comparing a few of them, to make sure you pick the best tool for the job (and for your context, because tools are not context-free. A kitchen knife is not a very good screwdriver, but a few times in my life I found myself in the situation of using it, and with success!), but most importantly, please base your decision on actually experience-verified facts, and not on things you've heard others say, or that perhaps you experienced a long time ago.</p>
-
 <p>&nbsp;</p>
 
         </section>

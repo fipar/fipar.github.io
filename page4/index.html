@@ -17,7 +17,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/page4/">
+  <link rel="canonical" href="http://0.0.0.0:4000/page4/">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -33,7 +33,7 @@
 
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -50,7 +50,7 @@
 
 <header class="blog-header">
     
-      <a class="blog-logo" href="http://fernandoipar.com" style="background-image: url('/assets/images/df_logo.jpg')">Fernando Ipar</a>
+      <a class="blog-logo" href="http://0.0.0.0:4000" style="background-image: url('/assets/images/df_logo.jpg')">Fernando Ipar</a>
     
     <h1 class="blog-title">Fernando Ipar</h1>
     <h2 class="blog-description">"Tell my wife I love her very much, she knows"
@@ -81,13 +81,25 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
           <div class="article-item">
             <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/mysql/2014/02/09/recovering-mysql-access.html" itemprop="url">Recovering MySQL access</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>Ever found yourself working on a MySQL server where root's password is unavailable? It has happened to me a few times, always because the person who set up the DB left the place long ago, and this information was not documented anywhere. If you have root access to the OS,...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="09 February 2014">09 February 2014</time>
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
               <h2 class="post-title" itemprop="name"><a href="/programming/notes/2013/12/04/processing-data-to-obtain-meaningful-graphic-representations.html" itemprop="url">processing data to obtain meaningful graphic representations</a></h2>
             </header>
             <section class="post-excerpt" itemprop="description">
               <p>Pretty happy with the way this is going:
-
 playground/tools-for-mysql at master · fipar/playground.
-
 &nbsp;
 </p>
             </section>
@@ -103,24 +115,7 @@ playground/tools-for-mysql at master · fipar/playground.
               <h2 class="post-title" itemprop="name"><a href="/notes/2013/11/19/rmysql-basics.html" itemprop="url">RMySQL basics</a></h2>
             </header>
             <section class="post-excerpt" itemprop="description">
-              <p>Installation:
-
-> install.packages("RMySQL", dependencies = TRUE)
-> library(RMySQL)
-
-
-Simple usage:
-
-> con 
-> dbGetQuery(con, "select * from sakila.sales_by_store")
-                store      manager total_sales
-1 Woodridge,Australia Jon Stephens    33726.77
-2   Lethbridge,Canada Mike Hillyer    33679.79
-> sales_by_film_category 
-> qplot(category, total_sales, data=sales_by_film_category, geom="bar", fill=category)
-
-
-</p>
+              <p>Installation: &gt; install.packages("RMySQL", dependencies = TRUE) &gt; library(RMySQL) Simple usage: &gt; con &lt;- dbConnect(MySQL(), user="msandbox", password="msandbox", dbname="sakila", host="127.0.0.1", port=5527) &gt; dbGetQuery(con, "select * from sakila.sales_by_store") store manager total_sales 1 Woodridge,Australia Jon Stephens 33726.77 2 Lethbridge,Canada Mike Hillyer 33679.79 &gt; sales_by_film_category &lt;- dbReadTable(con, "sales_by_film_category") &gt; qplot(category, total_sales, data=sales_by_film_category, geom="bar", fill=category)&lt;/p&gt; &lt;/code&gt;...</p>
             </section>
             <div class="post-meta">
               <time datetime="19 November 2013">19 November 2013</time>
@@ -135,13 +130,10 @@ Simple usage:
             </header>
             <section class="post-excerpt" itemprop="description">
               <p>Basic idea: https://github.com/fipar/playground/blob/master/console_graphs/hello.c
-
 Goals:
-
 
 support streams
 use \220 and \223 to support finer granularity on the same # of rows
-
 
 &nbsp;
 </p>
@@ -159,11 +151,8 @@ use \220 and \223 to support finer granularity on the same # of rows
             </header>
             <section class="post-excerpt" itemprop="description">
               <p>Repo: https://github.com/fipar/vagrant_mysql_workshop_2013
-
 Base: https://github.com/fipar/vm_host_config/tree/master/vms/percona-server-5.6
-
 Additional provisioning:
-
  wget https://launchpad.net/test-db/employees-db-1/1.0.6/+download/employees_db-full-1.0.6.tar.bz2
 tar xjvf employees_db-full-1.0.6.tar.bz2 &amp;&amp; rm -f employees_db-full-1.0.6.tar.bz2
 cd employees_db
@@ -173,23 +162,6 @@ tar xzvf sakila-db.tar.gz &amp;&amp; rm -f sakila-db.tar.gz
 mysql &lt; sakila-db/sakila-schema.sql
 mysql sakila &lt; sakila-db/sakila-data.sql
 
-</p>
-            </section>
-            <div class="post-meta">
-              <time datetime="11 November 2013">11 November 2013</time>
-            </div>
-          </div>
-        </article>
-      
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
-          <div class="article-item">
-            <header class="post-header">
-              <h2 class="post-title" itemprop="name"><a href="/notes/2013/11/11/online-notes.html" itemprop="url">Online notes</a></h2>
-            </header>
-            <section class="post-excerpt" itemprop="description">
-              <p>I am adding a Notes category to this blog, for 'lab' style notes that are mostly meant for self-consumption.
-
-I am making this public because it makes it easier for me to collaborate, and maybe some of the content ends up being useful to a wider audience.
 </p>
             </section>
             <div class="post-meta">

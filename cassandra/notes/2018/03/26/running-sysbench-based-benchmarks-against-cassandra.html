@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html">
+  <link rel="canonical" href="http://0.0.0.0:4000/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -30,7 +30,7 @@
   <body itemscope itemtype="http://schema.org/Article">
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -57,7 +57,7 @@
             <span class="post-reading-time"></span> read
           </div>
           <a name="topofpage"></a>
-          <p><em>This article is a cross post from <a href="https://blog.pythian.com/running-sysbench-based-benchmarks-against-cassandra/">Pythian&#39;s blog</a></em></p>
+          <p><em>This article is a cross post from <a href="https://blog.pythian.com/running-sysbench-based-benchmarks-against-cassandra/">Pythian’s blog</a></em></p>
 
 <p>I was recently discussing benchmarking options for Cassandra with some colleagues and given my background with MySQL, sysbench was the first tool I thought of.</p>
 
@@ -77,30 +77,33 @@ I felt this was a change that could benefit others too as I’m probably not the
 <p>Putting it all together, I can now launch sysbench against a Cassandra cluster to test the performance of different schemas and workloads.</p>
 
 <p>To give a simple example let’s consider the following Lua script:</p>
-<figure class="highlight"><pre><code class="language-text" data-lang="text">    #!/usr/bin/env sysbench
+
+<pre><code>    #!/usr/bin/env sysbench
 
     function event()
-    local cassandra = require &quot;cassandra&quot;
+    local cassandra = require "cassandra"
 
     local peer= assert(cassandra.new {
-    host = &quot;172.17.0.2&quot;,
-    port = 9042,
-    keyspace = &quot;test&quot;
+	host = "172.17.0.2",
+	port = 9042,
+	keyspace = "test"
     })
 
     assert(peer:connect())
 
-    assert(peer:execute(&quot;select * from user&quot;))
+    assert(peer:execute("select * from user"))
     peer:close()
     end
-</code></pre></figure>
+</code></pre>
+
 <p>A couple of comments about the script:</p>
 
 <p>172.17.0.2 is the IP address of the Cassandra node I want to connect to. In my case, this is another container, but be sure to change this as needed if you want to reproduce this test (or refer to this gist to see how I ran mine).
 For the script to work, the Cluster must have a ‘test’ keyspace with a ‘user’ table on it (as you can see from the query, the table structure does not matter here).
 We can use sysbench to execute it via docker like so:</p>
-<figure class="highlight"><pre><code class="language-text" data-lang="text">    telecaster:sysbench-docker fipar$ docker run -v ~/src/:/src/ --name=sb -it severalnines/sysbench bash -c &#39;luarocks install lua-cassandra --local; luarocks install luasocket --local; /src/tmp/benchmark1.lua run&#39;
-    Warning: The directory &#39;/root/.cache/luarocks&#39; or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing /usr/local/lib/luarocks/rocks/luarocks/2.4.3-1/bin/luarocks with sudo, you may want sudo&#39;s -H flag.
+
+<pre><code>    telecaster:sysbench-docker fipar$ docker run -v ~/src/:/src/ --name=sb -it severalnines/sysbench bash -c 'luarocks install lua-cassandra --local; luarocks install luasocket --local; /src/tmp/benchmark1.lua run'
+    Warning: The directory '/root/.cache/luarocks' or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing /usr/local/lib/luarocks/rocks/luarocks/2.4.3-1/bin/luarocks with sudo, you may want sudo's -H flag.
     Installing https://luarocks.org/lua-cassandra-1.2.3-0.rockspec
     ...snip...
     Installing https://luarocks.org/luasocket-3.0rc1-2.src.rock
@@ -118,21 +121,20 @@ We can use sysbench to execute it via docker like so:</p>
 
 
     General statistics:
-    total time:                          10.0017s
-    total number of events:              2792
+	total time:                          10.0017s
+	total number of events:              2792
 
     Latency (ms):
-        min:                                    2.17
-        avg:                                    3.57
-        max:                                   48.12
-        95th percentile:                        4.65
-        sum:                                 9958.60
+	    min:                                    2.17
+	    avg:                                    3.57
+	    max:                                   48.12
+	    95th percentile:                        4.65
+	    sum:                                 9958.60
 
     Threads fairness:
-    events (avg/stddev):           2792.0000/0.00
-    execution time (avg/stddev):   9.9586/0.00
-</code></pre></figure>
-<p>You can see I am installing the required Lua modules when starting the container. If a benchmark will be executed several times (which is usually the case) a better approach would be to further customize the Dockerfile to include the necessary modules. I have not done that in the PR though because I think that would bloat the existing image. You can also see that I’m making my machine’s src directory available on the container via the -v ~/src/:/src/. That’s why I can then execute the script from /src/ on the container. Be sure to adjust this as needed to point to a directory tree where the lua script can be found on your machine.</p>
+	events (avg/stddev):           2792.0000/0.00
+	execution time (avg/stddev):   9.9586/0.00 You can see I am installing the required Lua modules when starting the container. If a benchmark will be executed several times (which is usually the case) a better approach would be to further customize the Dockerfile to include the necessary modules. I have not done that in the PR though because I think that would bloat the existing image. You can also see that I’m making my machine’s src directory available on the container via the -v ~/src/:/src/. That’s why I can then execute the script from /src/ on the container. Be sure to adjust this as needed to point to a directory tree where the lua script can be found on your machine.
+</code></pre>
 
 <p>In conclusion, if you have benchmarking needs and have not considered sysbench, don’t be put off if your database of choice is not listed as supported: as long as there’s a Lua driver for it there’s a good chance that you will be able to use sysbench for the task!</p>
 
