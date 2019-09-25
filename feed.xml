@@ -6,9 +6,83 @@
 </description>
     <link>http://0.0.0.0:4000/</link>
     <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 05 Sep 2019 20:17:32 -0500</pubDate>
-    <lastBuildDate>Thu, 05 Sep 2019 20:17:32 -0500</lastBuildDate>
+    <pubDate>Wed, 25 Sep 2019 18:57:15 -0500</pubDate>
+    <lastBuildDate>Wed, 25 Sep 2019 18:57:15 -0500</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Minimal networking knowledge recommended for DBAs</title>
+        <description>&lt;p&gt;&lt;em&gt;This article is a cross post from &lt;a href=&quot;https://blog.pythian.com/minimal-networking-knowledge-recommended-for-dbas/&quot;&gt;Pythian’s blog&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;In a &lt;a href=&quot;https://fernandoipar.com/notes/2019/09/05/top-8-things-every-database-practitioner-should-know.html&quot;&gt;recent post&lt;/a&gt;, I summarized what I consider to be the minimal topics one should be familiar with in order to do technical work with databases.&lt;/p&gt;
+
+&lt;p&gt;One thing I left out, except for it being implicitly included in “Hardware Basics” and “Operating Systems Basics”, is networking.  In this post, I’ll go through what I consider the minimal networking knowledge one needs to know when working with databases.&lt;/p&gt;
+
+&lt;h1 id=&quot;protocol-concepts&quot;&gt;Protocol Concepts&lt;/h1&gt;
+&lt;p&gt;While there are some niche network protocols in use (in my experience, when working with mainframes, for example), database practitioners may well spend their whole lives dealing mostly or only with TCP/IP, so that’s where I suggest focusing your learning efforts.&lt;/p&gt;
+
+&lt;p&gt;A great guide to the basics is &lt;a href=&quot;http://www.kohala.com/start/tcpipiv1.html&quot;&gt;“TCP/IP Illustrated, Vol 1: The Protocols”&lt;/a&gt;. While a bit old, the fundamentals are still relevant, and the book is very clearly written, and packed with tcpdump captures supporting the explanations. I think a good way to learn with it, while then checking out what has changed since it was written, is going to the &lt;a href=&quot;https://www.rfc-editor.org/rfc-index.html&quot;&gt;RFC index&lt;/a&gt; and checking out RFCs mentioned in the book for a protocol you’re studying. If more recent RFCs are available, they’ll be mentioned in the index with an “obsoleted-by” note.&lt;/p&gt;
+
+&lt;p&gt;This is a vast field, and not all of it is of immediate relevance to a database practitioner, so I’m providing the following list of what I consider the core networking knowledge you’ll need to work with (and primarily to troubleshoot) databases:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;TCP’s three-way handshake&lt;/li&gt;
+  &lt;li&gt;TCP connection termination&lt;/li&gt;
+  &lt;li&gt;The MSL and its relationship with connection termination and establishment&lt;/li&gt;
+  &lt;li&gt;Slow start&lt;/li&gt;
+  &lt;li&gt;Flow Control&lt;/li&gt;
+  &lt;li&gt;How ARP works&lt;/li&gt;
+  &lt;li&gt;How DNS works&lt;/li&gt;
+  &lt;li&gt;The MTU and Path MTU&lt;/li&gt;
+  &lt;li&gt;Routing, with emphasis on routing errors and their meaning (for example, what’s the difference between no route to host and a timeout?)&lt;/li&gt;
+  &lt;li&gt;Basics of UDP and what it does not provide when compared with TCP (if you’re troubleshooting something that uses it, like Galera)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;networking-tools&quot;&gt;Networking Tools&lt;/h1&gt;
+&lt;p&gt;I’ll mention tools available on GNU/Linux here because that’s the most popular OS by far for the databases I currently work with, but once you know the protocol basics, you’re just one quick Internet-search away from discovering which tool you must use on another OS (for example, entering “How to find out my IP in Windows” in Google gets me instructions on how to use ipconfig on the very first result returned). If you’re not on GNU/Linux but you are working on another OS that’s part of the Unix family tree, there are two useful resources that can help you:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;a href=&quot;http://bhami.com/rosetta.html&quot;&gt;Unix Rosetta Stone&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;The &lt;a href=&quot;http://www.brendangregg.com/USEmethod/use-rosetta.html&quot;&gt;USE Method’s Rosetta Stone&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You’ll need to become familiar with the following commands to find out which IP address the host you’re working has, how to change it, or add/remove an alias, and how to modify the routing table or the firewall rules. For this, I recommend reading the man pages for the following commands:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://linux.die.net/man/8/ip&quot;&gt;ip&lt;/a&gt; (You may find a lot of older resources online mentioning ifconfig, which is what I learned to use, but ip is what should be used now),&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://linux.die.net/man/8/ethtool&quot;&gt;ethtool&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://linux.die.net/man/8/arp&quot;&gt;arp&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://linux.die.net/man/8/iptables&quot;&gt;iptables&lt;/a&gt;/&lt;a href=&quot;https://linux.die.net/man/8/ip6tables&quot;&gt;ip6tables&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://linux.die.net/man/8/netstat&quot;&gt;netstat&lt;/a&gt; or &lt;a href=&quot;https://linux.die.net/man/8/ss&quot;&gt;ss&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Sometimes, you’ll end up working on a puzzling database problem that involves the network, and you’ll want to know if the client is sending what you actually mean to send, the server is sending the response the client ends up seeing, etc. In those (and other) cases, you’ll want to capture network traffic and analyze it to see what is being sent over the pipe.&lt;/p&gt;
+
+&lt;p&gt;For this, I recommend getting familiar with &lt;a href=&quot;https://www.tcpdump.org/&quot;&gt;tcpdump&lt;/a&gt; and &lt;a href=&quot;https://www.wireshark.org/&quot;&gt;wireshark&lt;/a&gt;. I also recommend that you get familiar with these tools as you learn the protocols because it is an interrelated process:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You’ll read how the three-way handshake works.&lt;/li&gt;
+  &lt;li&gt;You’ll want to go and establish a TCP connection while capturing traffic, then analyze the traffic and see if it matches what the protocol says should happen.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is how the examples in the Stevens book I recommended earlier were made, but I think it’s priceless to come up with your own captures as you learn this.&lt;/p&gt;
+
+&lt;h1 id=&quot;wrapping-up&quot;&gt;Wrapping up&lt;/h1&gt;
+
+&lt;p&gt;As database professionals, while we are specifically responsible for the health of database systems, our world does not end up there. Imagine a colleague (or client) that can’t connect to the database. You can’t just say, “The database logs show no connection attempts with your user; there’s nothing I can do.” You can instead get into a joint troubleshooting session, verifying that the client machine can reach the database server, at the right port, that a connection can be established, etc. When the problem is in the network, sometimes the solution is out of your hands (imagine a firewall sitting between you and the user, filtering traffic). But if you go to the network team with substantial evidence that shows how the connection can’t be established because it times out, despite the right routes being available, it will make their job easier, which in turns lets them be more effective at helping you resolve the problem. Great engineers always go the extra mile. Plus, troubleshooting network problems will be a welcome distraction from troubleshooting database problems!&lt;/p&gt;
+</description>
+        <pubDate>Wed, 25 Sep 2019 00:00:00 -0500</pubDate>
+        <link>http://0.0.0.0:4000/notes/2019/09/25/minimal-networking-knowledge-recommended-for-dbas.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/notes/2019/09/25/minimal-networking-knowledge-recommended-for-dbas.html</guid>
+        
+        <category>notes</category>
+        
+        <category>pythian</category>
+        
+        
+        <category>notes</category>
+        
+      </item>
     
       <item>
         <title>Top 8 things every database practitioner should know</title>
@@ -653,35 +727,6 @@ open -a 'Google Chrome' $*
         <category>planetmysql</category>
         
         <category>mysql</category>
-        
-      </item>
-    
-      <item>
-        <title>Some thoughts on org-mode/babel</title>
-        <description>&lt;p&gt;Lately I’ve been playing around with mongodb, specifically with the idea of having a script to summarize data that could be useful to have when troubleshooting, in a way like &lt;a href=&quot;https://www.percona.com/doc/percona-toolkit/2.1/pt-mysql-summary.html&quot;&gt;Percona Toolkit’s pt-mysql-summary&lt;/a&gt; works for MySQL.&lt;/p&gt;
-
-&lt;p&gt;Unrelated to this, I have been using &lt;a href=&quot;http://orgmode.org/&quot;&gt;org-mode&lt;/a&gt; to, well, organize my work, for a few years now. As part of my day to day job I write a lot of code snippets, usually in bash or SQL, sometimes in other languages, and for this I make heavy use of &lt;a href=&quot;http://orgmode.org/manual/Working-With-Source-Code.html#Working-With-Source-Code&quot;&gt;code blocks&lt;/a&gt;. Over time, this has become one of my favourite org-mode’s features, as it lets me keep code relevant to a customer issue on the same place as other information (like output from that code, output from text files, stack traces, notes from my calls with the customer, etc).&lt;/p&gt;
-
-&lt;p&gt;Back to mongodb and my desire to work on some basic tools as a learning opportunity, I saw this as a good chance for trying to do some programming in the &lt;a href=&quot;http://www.literateprogramming.com/&quot;&gt;literate&lt;/a&gt; style.&lt;/p&gt;
-
-&lt;p&gt;My first tests can be seen &lt;a href=&quot;https://github.com/fipar/playground/blob/master/tools-for-mongodb/mongo-summary.org&quot;&gt;here&lt;/a&gt;. I understand completely this is a very small and simple project that is not the best to expose the potential benefits of this approach to programming, but it is what I can do now given my work/personal life obligations. It is my goal to start working on something bigger on the personal side, and I plan to use a similar approach to it, so I may know more after that.&lt;/p&gt;
-
-&lt;p&gt;That said, one benefit I have already been able to appreciate is that literate programming with org-mode shines when your project combines different languages. If you look at the test functions, like the test for a sharded cluster of replica sets, you can see how org-mode lets me interweave bash and javascript as I explain what I am trying to achieve, in a way that’s independent of how the code will be tangled (as each block will go to a file for the corresponding language). One benefit of this is improved readability (as the alternative would be to have cross-comments in the js and bash scripts, which I think would be less clear to follow), but another, potentially even bigger benefit, IMO, is that this makes it easier to combine different languages in a same project, which gives you more reasons to try and use the best tool for each job. If you don’t need to generate a distributable ‘executable’ project (as is my goal here, I want people to be able to just run the generated code using the wrappers), then org-mode gives you even more features to combine different languages, by using result blocks associated with code blocks. I don’t have a personal example for this right now, but you can read more about it &lt;a href=&quot;http://orgmode.org/manual/Evaluating-code-blocks.html#Evaluating-code-blocks&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 09 Jun 2015 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/programming/2015/06/09/org-mode-babel-thoughts.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/programming/2015/06/09/org-mode-babel-thoughts.html</guid>
-        
-        <category>programming</category>
-        
-        <category>emacs</category>
-        
-        <category>org-mode</category>
-        
-        <category>babel</category>
-        
-        
-        <category>programming</category>
         
       </item>
     

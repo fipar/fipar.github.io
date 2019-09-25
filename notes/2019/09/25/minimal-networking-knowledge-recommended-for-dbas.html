@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Minimal networking knowledge recommended for DBAs</title>
+  <meta name="description" content=""Tell my wife I love her very much, she knows"
+" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="canonical" href="http://0.0.0.0:4000/notes/2019/09/25/minimal-networking-knowledge-recommended-for-dbas.html">
+
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+<!--  <link rel="stylesheet" href=""> -->
+  <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+
+<!-- header end -->
+
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="article-image">
+          <div class="post-image-image" style="background-image: url(/assets/images/millsap_book.jpg)">
+            Article Image
+          </div>
+          <div class="post-meta">
+            <h1 class="post-title">Minimal networking knowledge recommended for DBAs</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4 class="author-name">Fernando Ipar</h4>
+              on
+              <time datetime="2019-09-25 00:00">25 Sep 2019</time>
+            </div>
+            <div style="text-align:center">
+              <a href="#topofpage" class="topofpage"><i class="fa-angle-down"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p><em>This article is a cross post from <a href="https://blog.pythian.com/minimal-networking-knowledge-recommended-for-dbas/">Pythian’s blog</a></em></p>
+
+<p>In a <a href="https://fernandoipar.com/notes/2019/09/05/top-8-things-every-database-practitioner-should-know.html">recent post</a>, I summarized what I consider to be the minimal topics one should be familiar with in order to do technical work with databases.</p>
+
+<p>One thing I left out, except for it being implicitly included in “Hardware Basics” and “Operating Systems Basics”, is networking.  In this post, I’ll go through what I consider the minimal networking knowledge one needs to know when working with databases.</p>
+
+<h1 id="protocol-concepts">Protocol Concepts</h1>
+<p>While there are some niche network protocols in use (in my experience, when working with mainframes, for example), database practitioners may well spend their whole lives dealing mostly or only with TCP/IP, so that’s where I suggest focusing your learning efforts.</p>
+
+<p>A great guide to the basics is <a href="http://www.kohala.com/start/tcpipiv1.html">“TCP/IP Illustrated, Vol 1: The Protocols”</a>. While a bit old, the fundamentals are still relevant, and the book is very clearly written, and packed with tcpdump captures supporting the explanations. I think a good way to learn with it, while then checking out what has changed since it was written, is going to the <a href="https://www.rfc-editor.org/rfc-index.html">RFC index</a> and checking out RFCs mentioned in the book for a protocol you’re studying. If more recent RFCs are available, they’ll be mentioned in the index with an “obsoleted-by” note.</p>
+
+<p>This is a vast field, and not all of it is of immediate relevance to a database practitioner, so I’m providing the following list of what I consider the core networking knowledge you’ll need to work with (and primarily to troubleshoot) databases:</p>
+
+<ul>
+  <li>TCP’s three-way handshake</li>
+  <li>TCP connection termination</li>
+  <li>The MSL and its relationship with connection termination and establishment</li>
+  <li>Slow start</li>
+  <li>Flow Control</li>
+  <li>How ARP works</li>
+  <li>How DNS works</li>
+  <li>The MTU and Path MTU</li>
+  <li>Routing, with emphasis on routing errors and their meaning (for example, what’s the difference between no route to host and a timeout?)</li>
+  <li>Basics of UDP and what it does not provide when compared with TCP (if you’re troubleshooting something that uses it, like Galera)</li>
+</ul>
+
+<h1 id="networking-tools">Networking Tools</h1>
+<p>I’ll mention tools available on GNU/Linux here because that’s the most popular OS by far for the databases I currently work with, but once you know the protocol basics, you’re just one quick Internet-search away from discovering which tool you must use on another OS (for example, entering “How to find out my IP in Windows” in Google gets me instructions on how to use ipconfig on the very first result returned). If you’re not on GNU/Linux but you are working on another OS that’s part of the Unix family tree, there are two useful resources that can help you:</p>
+
+<ul>
+  <li>The <a href="http://bhami.com/rosetta.html">Unix Rosetta Stone</a>,</li>
+  <li>The <a href="http://www.brendangregg.com/USEmethod/use-rosetta.html">USE Method’s Rosetta Stone</a>.</li>
+</ul>
+
+<p>You’ll need to become familiar with the following commands to find out which IP address the host you’re working has, how to change it, or add/remove an alias, and how to modify the routing table or the firewall rules. For this, I recommend reading the man pages for the following commands:</p>
+
+<ul>
+  <li><a href="https://linux.die.net/man/8/ip">ip</a> (You may find a lot of older resources online mentioning ifconfig, which is what I learned to use, but ip is what should be used now),</li>
+  <li><a href="https://linux.die.net/man/8/ethtool">ethtool</a>,</li>
+  <li><a href="https://linux.die.net/man/8/arp">arp</a>,</li>
+  <li><a href="https://linux.die.net/man/8/iptables">iptables</a>/<a href="https://linux.die.net/man/8/ip6tables">ip6tables</a>,</li>
+  <li><a href="https://linux.die.net/man/8/netstat">netstat</a> or <a href="https://linux.die.net/man/8/ss">ss</a>.</li>
+</ul>
+
+<p>Sometimes, you’ll end up working on a puzzling database problem that involves the network, and you’ll want to know if the client is sending what you actually mean to send, the server is sending the response the client ends up seeing, etc. In those (and other) cases, you’ll want to capture network traffic and analyze it to see what is being sent over the pipe.</p>
+
+<p>For this, I recommend getting familiar with <a href="https://www.tcpdump.org/">tcpdump</a> and <a href="https://www.wireshark.org/">wireshark</a>. I also recommend that you get familiar with these tools as you learn the protocols because it is an interrelated process:</p>
+
+<ul>
+  <li>You’ll read how the three-way handshake works.</li>
+  <li>You’ll want to go and establish a TCP connection while capturing traffic, then analyze the traffic and see if it matches what the protocol says should happen.</li>
+</ul>
+
+<p>This is how the examples in the Stevens book I recommended earlier were made, but I think it’s priceless to come up with your own captures as you learn this.</p>
+
+<h1 id="wrapping-up">Wrapping up</h1>
+
+<p>As database professionals, while we are specifically responsible for the health of database systems, our world does not end up there. Imagine a colleague (or client) that can’t connect to the database. You can’t just say, “The database logs show no connection attempts with your user; there’s nothing I can do.” You can instead get into a joint troubleshooting session, verifying that the client machine can reach the database server, at the right port, that a connection can be established, etc. When the problem is in the network, sometimes the solution is out of your hands (imagine a firewall sitting between you and the user, filtering traffic). But if you go to the network team with substantial evidence that shows how the connection can’t be established because it times out, despite the right routes being available, it will make their job easier, which in turns lets them be more effective at helping you resolve the problem. Great engineers always go the extra mile. Plus, troubleshooting network problems will be a welcome distraction from troubleshooting database problems!</p>
+
+        </section>
+<!-- fi-posts -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'fipar';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a
+    href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+    powered by Disqus.</a></noscript>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4>Fernando Ipar</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2019-09-25 00:00">25 Sep 2019</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Fernando Ipar</a> &copy; 2019<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url(/assets/images/vivi_papas.jpg)">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fernando Ipar</h1>
+        <h2 class="blog-description">"Tell my wife I love her very much, she knows"
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+
+  </body>
+</html>

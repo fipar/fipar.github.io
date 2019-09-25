@@ -81,6 +81,22 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
           <div class="article-item">
             <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/programming/2014/03/13/thread-safe-attribute-accessors-using-clojure-atoms.html" itemprop="url">thread safe attribute accessors for ruby classes, using clojure Atoms</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>This code snippet shows how to use Clojure Atoms to implement thread safe instance variables in JRuby classes.
+The atom_attr_accessor method is used analog to the usual attr_accessor so this should seem natural for the language, though I don't have enough experience with it to judge that.
+</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="13 March 2014">13 March 2014</time>
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
               <h2 class="post-title" itemprop="name"><a href="/mysql/2014/02/09/recovering-mysql-access.html" itemprop="url">Recovering MySQL access</a></h2>
             </header>
             <section class="post-excerpt" itemprop="description">
@@ -144,39 +160,13 @@ use \220 and \223 to support finer granularity on the same # of rows
           </div>
         </article>
       
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
-          <div class="article-item">
-            <header class="post-header">
-              <h2 class="post-title" itemprop="name"><a href="/notes/2013/11/11/vagrant-environment-for-mysql-workshop.html" itemprop="url">Vagrant environment for MySQL Workshop</a></h2>
-            </header>
-            <section class="post-excerpt" itemprop="description">
-              <p>Repo: https://github.com/fipar/vagrant_mysql_workshop_2013
-Base: https://github.com/fipar/vm_host_config/tree/master/vms/percona-server-5.6
-Additional provisioning:
- wget https://launchpad.net/test-db/employees-db-1/1.0.6/+download/employees_db-full-1.0.6.tar.bz2
-tar xjvf employees_db-full-1.0.6.tar.bz2 &amp;&amp; rm -f employees_db-full-1.0.6.tar.bz2
-cd employees_db
-mysql -t &lt; employees.sql
-wget http://downloads.mysql.com/docs/sakila-db.tar.gz
-tar xzvf sakila-db.tar.gz &amp;&amp; rm -f sakila-db.tar.gz
-mysql &lt; sakila-db/sakila-schema.sql
-mysql sakila &lt; sakila-db/sakila-data.sql
-
-</p>
-            </section>
-            <div class="post-meta">
-              <time datetime="11 November 2013">11 November 2013</time>
-            </div>
-          </div>
-        </article>
-      
     </div>
 
     <nav class="pagination" role="navigation">
       
         <a class="newer-posts" href="/page5">&larr; Older posts</a>
       
-      <span class="page-number">Page 4 of 10</span>
+      <span class="page-number">Page 4 of 11</span>
       
         
           <a class="older-posts" href="/page3">Newer posts &rarr;</a>

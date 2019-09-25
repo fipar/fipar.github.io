@@ -81,6 +81,32 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
           <div class="article-item">
             <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/notes/2013/11/11/vagrant-environment-for-mysql-workshop.html" itemprop="url">Vagrant environment for MySQL Workshop</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>Repo: https://github.com/fipar/vagrant_mysql_workshop_2013
+Base: https://github.com/fipar/vm_host_config/tree/master/vms/percona-server-5.6
+Additional provisioning:
+ wget https://launchpad.net/test-db/employees-db-1/1.0.6/+download/employees_db-full-1.0.6.tar.bz2
+tar xjvf employees_db-full-1.0.6.tar.bz2 &amp;&amp; rm -f employees_db-full-1.0.6.tar.bz2
+cd employees_db
+mysql -t &lt; employees.sql
+wget http://downloads.mysql.com/docs/sakila-db.tar.gz
+tar xzvf sakila-db.tar.gz &amp;&amp; rm -f sakila-db.tar.gz
+mysql &lt; sakila-db/sakila-schema.sql
+mysql sakila &lt; sakila-db/sakila-data.sql
+
+</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="11 November 2013">11 November 2013</time>
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
               <h2 class="post-title" itemprop="name"><a href="/notes/2013/11/11/online-notes.html" itemprop="url">Online notes</a></h2>
             </header>
             <section class="post-excerpt" itemprop="description">
@@ -136,27 +162,13 @@ I am making this public because it makes it easier for me to collaborate, and ma
           </div>
         </article>
       
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
-          <div class="article-item">
-            <header class="post-header">
-              <h2 class="post-title" itemprop="name"><a href="/programming/2011/03/09/piping-data-to-multiple-processes.html" itemprop="url">Piping data to multiple processes</a></h2>
-            </header>
-            <section class="post-excerpt" itemprop="description">
-              <p>Here's a simple shell script to stream data to multiple processes. It has many applications, but the reason I wrote it is to stream the same data to multiple netcat processes on remote machines. Here's the code: #!/bin/bash&lt;/code&gt; usage() { cat &lt;&amp;2 usage : multi-fifo target0 [target1 [target2 [...]]] Where...</p>
-            </section>
-            <div class="post-meta">
-              <time datetime="09 March 2011">09 March 2011</time>
-            </div>
-          </div>
-        </article>
-      
     </div>
 
     <nav class="pagination" role="navigation">
       
         <a class="newer-posts" href="/page6">&larr; Older posts</a>
       
-      <span class="page-number">Page 5 of 10</span>
+      <span class="page-number">Page 5 of 11</span>
       
         
           <a class="older-posts" href="/page4">Newer posts &rarr;</a>
