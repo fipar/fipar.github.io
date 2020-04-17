@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Questions to ask when evaluating a database</title>
+  <meta name="description" content=""Tell my wife I love her very much, she knows"
+" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="canonical" href="http://fernandoipar.com/notes/2020/04/17/questions-for-databases.html">
+
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+<!--  <link rel="stylesheet" href=""> -->
+  <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+
+<!-- header end -->
+
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="article-image">
+          <div class="post-image-image" style="background-image: url(/assets/images/deadfish.jpg)">
+            Article Image
+          </div>
+          <div class="post-meta">
+            <h1 class="post-title">Questions to ask when evaluating a database</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4 class="author-name">Fernando Ipar</h4>
+              on
+              <time datetime="2020-04-17 00:00">17 Apr 2020</time>
+            </div>
+            <div style="text-align:center">
+              <a href="#topofpage" class="topofpage"><i class="fa-angle-down"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p>I’ve been evaluating a few databases recently while working on a way to process application logs, and here’s a list of questions I ask myself during the process.</p>
+
+<p>This list is biased to operations, so I’m explicitly ignoring equally important questions that apply to the development and usage side, like “can it enforce user-defined integrity constraints on the data?”.</p>
+
+<p>Without further ado, I want to know what happens when</p>
+
+<ul>
+  <li>The process crashes,</li>
+  <li>The OS crashes,</li>
+  <li>It runs out of disk space,</li>
+  <li>It runs out of memory,</li>
+  <li>A system call (e.g., fork) fails,</li>
+  <li>The system clock goes back (or forward) in time,</li>
+  <li>The process is SIGSTOPped and SIGCONTed later,</li>
+  <li>Multiple copies of the process are started with the same (or a different) config,</li>
+  <li>The storage subsystem silently changes data on the write path,</li>
+  <li>DNS fails,</li>
+  <li>The network fails, or its performance degrades, or packets arrive out of order,</li>
+  <li>The hostname changes,</li>
+  <li>There’s a surge in new connections,</li>
+  <li>A hardware resource saturates.</li>
+</ul>
+
+<p>More questions can be considered, (usually some will come up as subquestions while answering one of the above), but I’ve found this is a good enough list to start working on tests to verify how the database will behave for the use case.</p>
+
+<p>And what about the pic, you ask? It’s a dead fish on the beach. Fish out of water. I want to know how the database dies, so to speak. Does it make an irrecoverable mess? Does it die as cleanly as possible and make an autopsy possible?</p>
+
+        </section>
+<!-- fi-posts -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'fipar';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a
+    href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+    powered by Disqus.</a></noscript>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4>Fernando Ipar</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2020-04-17 00:00">17 Apr 2020</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Fernando Ipar</a> &copy; 2020<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url(/assets/images/vivi_papas.jpg)">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fernando Ipar</h1>
+        <h2 class="blog-description">"Tell my wife I love her very much, she knows"
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+
+  </body>
+</html>
