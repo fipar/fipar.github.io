@@ -6,9 +6,51 @@
 </description>
     <link>http://fernandoipar.com/</link>
     <atom:link href="http://fernandoipar.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 05 Feb 2020 13:02:35 -0600</pubDate>
-    <lastBuildDate>Wed, 05 Feb 2020 13:02:35 -0600</lastBuildDate>
+    <pubDate>Fri, 17 Apr 2020 09:17:25 -0500</pubDate>
+    <lastBuildDate>Fri, 17 Apr 2020 09:17:25 -0500</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Questions to ask when evaluating a database</title>
+        <description>&lt;p&gt;I’ve been evaluating a few databases recently while working on a way to process application logs, and here’s a list of questions I ask myself during the process.&lt;/p&gt;
+
+&lt;p&gt;This list is biased to operations, so I’m explicitly ignoring equally important questions that apply to the development and usage side, like “can it enforce user-defined integrity constraints on the data?”.&lt;/p&gt;
+
+&lt;p&gt;Without further ado, I want to know what happens when&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The process crashes,&lt;/li&gt;
+  &lt;li&gt;The OS crashes,&lt;/li&gt;
+  &lt;li&gt;It runs out of disk space,&lt;/li&gt;
+  &lt;li&gt;It runs out of memory,&lt;/li&gt;
+  &lt;li&gt;A system call (e.g., fork) fails,&lt;/li&gt;
+  &lt;li&gt;The system clock goes back (or forward) in time,&lt;/li&gt;
+  &lt;li&gt;The process is SIGSTOPped and SIGCONTed later,&lt;/li&gt;
+  &lt;li&gt;Multiple copies of the process are started with the same (or a different) config,&lt;/li&gt;
+  &lt;li&gt;The storage subsystem silently changes data on the write path,&lt;/li&gt;
+  &lt;li&gt;DNS fails,&lt;/li&gt;
+  &lt;li&gt;The network fails, or its performance degrades, or packets arrive out of order,&lt;/li&gt;
+  &lt;li&gt;The hostname changes,&lt;/li&gt;
+  &lt;li&gt;There’s a surge in new connections,&lt;/li&gt;
+  &lt;li&gt;A hardware resource saturates.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;More questions can be considered, (usually some will come up as subquestions while answering one of the above), but I’ve found this is a good enough list to start working on tests to verify how the database will behave for the use case.&lt;/p&gt;
+
+&lt;p&gt;And what about the pic, you ask? It’s a dead fish on the beach. Fish out of water. I want to know how the database dies, so to speak. Does it make an irrecoverable mess? Does it die as cleanly as possible and make an autopsy possible?&lt;/p&gt;
+</description>
+        <pubDate>Fri, 17 Apr 2020 00:00:00 -0500</pubDate>
+        <link>http://fernandoipar.com/notes/2020/04/17/questions-for-databases.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/notes/2020/04/17/questions-for-databases.html</guid>
+        
+        <category>notes</category>
+        
+        <category>databases</category>
+        
+        
+        <category>notes</category>
+        
+      </item>
     
       <item>
         <title>Minimal networking knowledge recommended for DBAs</title>
@@ -697,31 +739,6 @@ open -a 'Google Chrome' $*
         <guid isPermaLink="true">http://fernandoipar.com/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</guid>
         
         <category>mysql</category>
-        
-        
-        <category>planetmysql</category>
-        
-        <category>mysql</category>
-        
-      </item>
-    
-      <item>
-        <title>A new name and a wider scope for South America's favourite MySQL-related conference</title>
-        <description>&lt;p&gt;Next November I’ll once again take the ferry to my neighbour city of Buenos Aires to enjoy two days of learning, networking, and presenting, at &lt;a href=&quot;http://www.dataops.la/&quot;&gt;DataOps LA 2015&lt;/a&gt;, the first incarnation of what used to be the &lt;a href=&quot;http://mysqlnosqlcloud.com/&quot;&gt;MySQL, NoSQL, Cloud&lt;/a&gt; Conference organized by &lt;a href=&quot;http://binlogic.com/&quot;&gt;BinLogic&lt;/a&gt; in Buenos Aires.&lt;/p&gt;
-
-&lt;p&gt;The change in name reflects a change in scope, now including Operations, Infrastructure and Development tracks, besides the familiar Database one (with lots of MySQL content, but other systems covered too!).&lt;/p&gt;
-
-&lt;p&gt;The agenda is not yet confirmed and, in fact, the &lt;a href=&quot;http://www.dataops.la/callforpapers.php&quot;&gt;Call for Papers&lt;/a&gt; is open, so if you want and can afford to go, I encourage you to submit proposals. Of course, if you also want and can afford to sponsor, there are &lt;a href=&quot;http://www.dataops.la/sponsors.php&quot;&gt;a few plans&lt;/a&gt; available, and I would encourage you to do so too. I am personally very happy that, once again, Percona is supporting this project this year.&lt;/p&gt;
-
-&lt;p&gt;I’m looking forward to seeing old friends and making new ones in this wide (and growing) community we have!&lt;/p&gt;
-</description>
-        <pubDate>Sat, 03 Oct 2015 00:00:00 -0500</pubDate>
-        <link>http://fernandoipar.com/planetmysql/mysql/2015/10/03/dataops-la.html</link>
-        <guid isPermaLink="true">http://fernandoipar.com/planetmysql/mysql/2015/10/03/dataops-la.html</guid>
-        
-        <category>mysql</category>
-        
-        <category>community</category>
         
         
         <category>planetmysql</category>
