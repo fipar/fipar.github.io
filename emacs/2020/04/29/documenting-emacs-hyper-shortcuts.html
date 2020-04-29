@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Documenting emacs hyper shortcuts</title>
+  <meta name="description" content=""Tell my wife I love her very much, she knows"
+" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="canonical" href="http://fernandoipar.com/emacs/2020/04/29/documenting-emacs-hyper-shortcuts.html">
+
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+<!--  <link rel="stylesheet" href=""> -->
+  <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+
+<!-- header end -->
+
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="article-image">
+          <div class="post-image-image" style="background-image: url(/assets/images/shortcuts_documentation_sample.png)">
+            Article Image
+          </div>
+          <div class="post-meta">
+            <h1 class="post-title">Documenting emacs hyper shortcuts</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4 class="author-name">Fernando Ipar</h4>
+              on
+              <time datetime="2020-04-29 00:00">29 Apr 2020</time>
+            </div>
+            <div style="text-align:center">
+              <a href="#topofpage" class="topofpage"><i class="fa-angle-down"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p>I have written <a href="http://localhost:4000/emacs/notes/2018/01/02/emacs-hyper-key.html">before </a>about my discovery, and adoption of emacs shortcuts based on the Hyper key, and this time I want to share a simple script to generate basic documentation of them. 
+The script works on the assumption that shortcuts that involve defining another shortcut (i.e., using kbd) will include some user-friendly documentation in the form of a comment, and will include this, instead of the kbd form, in the documentation. 
+This is not perfect. For example, sometimes an extra closing parenthesis will show up. But perfect is the enemy of good, and this output is good enough for me right now.</p>
+
+<p>The color scheme is because I have physical sticker labels attached to some of my keys, and I am using [ and ] as ‘map’ keys to have two more layers of hyper shortcuts for each existing one (say, if ‘H-f’ focuses on the current org subtree, ‘H-] f’ reverts that, and I call the second form ‘Hyper Map 1 f’), and for mnemonics I have colored [ green, and ] red, and I am using the colors on individual key labels to let me know what is there for each level.</p>
+
+<p>Why a pdf with the shortcuts if I have the labels, you may ask? Because while some keys are set in stone (I don’t anticipate to ever change the shorcuts for getting me the day’s agenda, or for invoking capture), others are more dynamic, and depend on how frequently I use (or stop using) a specific function. It’s a pain to be relabeling these so I’m now just relying on the pdf document instead.</p>
+
+<p>Given the assumption described before, here’s the script that gets me a pdf with my shortcuts (that looks like the one shown in the post’s image):</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/618f12c996dd87d876d14f858254d9f2.js"> </script>
+
+
+        </section>
+<!-- fi-posts -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'fipar';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a
+    href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+    powered by Disqus.</a></noscript>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
+              <h4>Fernando Ipar</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2020-04-29 00:00">29 Apr 2020</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Fernando Ipar</a> &copy; 2020<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url(/assets/images/vivi_papas.jpg)">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fernando Ipar</h1>
+        <h2 class="blog-description">"Tell my wife I love her very much, she knows"
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+
+  </body>
+</html>

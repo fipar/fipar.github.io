@@ -81,6 +81,20 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
           <div class="article-item">
             <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/notes/2013/11/19/rmysql-basics.html" itemprop="url">RMySQL basics</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>Installation: &gt; install.packages("RMySQL", dependencies = TRUE) &gt; library(RMySQL) Simple usage: &gt; con &lt;- dbConnect(MySQL(), user="msandbox", password="msandbox", dbname="sakila", host="127.0.0.1", port=5527) &gt; dbGetQuery(con, "select * from sakila.sales_by_store") store manager total_sales 1 Woodridge,Australia Jon Stephens 33726.77 2 Lethbridge,Canada Mike Hillyer 33679.79 &gt; sales_by_film_category &lt;- dbReadTable(con, "sales_by_film_category") &gt; qplot(category, total_sales, data=sales_by_film_category, geom="bar", fill=category)&lt;/p&gt; &lt;/code&gt;...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="19 November 2013">19 November 2013</time>
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
               <h2 class="post-title" itemprop="name"><a href="/notes/2013/11/18/console-histograms.html" itemprop="url">Console histograms</a></h2>
             </header>
             <section class="post-excerpt" itemprop="description">
@@ -151,20 +165,6 @@ I am making this public because it makes it easier for me to collaborate, and ma
             </section>
             <div class="post-meta">
               <time datetime="29 October 2013">29 October 2013</time>
-            </div>
-          </div>
-        </article>
-      
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
-          <div class="article-item">
-            <header class="post-header">
-              <h2 class="post-title" itemprop="name"><a href="/mysql/2013/10/05/my-agenda-for-mysql-nosql-cloud-2013.html" itemprop="url">My agenda for MySQL NoSQL Cloud 2013</a></h2>
-            </header>
-            <section class="post-excerpt" itemprop="description">
-              <p>On October 15 and 16 I'll take the ferry to be at the MySQL NoSQL Cloud conference in Buenos Aires, and the schedule looks really nice so far. I think it's a great opportunity for people in this region to get up to date with what's going on in the...</p>
-            </section>
-            <div class="post-meta">
-              <time datetime="05 October 2013">05 October 2013</time>
             </div>
           </div>
         </article>
