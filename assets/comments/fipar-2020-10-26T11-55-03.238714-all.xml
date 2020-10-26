@@ -1,0 +1,3283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<disqus xmlns="http://disqus.com" xmlns:dsq="http://disqus.com/disqus-internals" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://disqus.com/api/schemas/1.0/disqus.xsd http://disqus.com/api/schemas/1.0/disqus-internals.xsd">
+<category dsq:id="3668767">
+<forum>fipar</forum>
+<title>General</title>
+<isDefault>true</isDefault>
+</category>
+<thread dsq:id="3697545034">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/2009/01/12/running-commands-from-the-shell-with-a-timeout-pt-2.html</link>
+<title>Running commands from the shell with a timeout (pt 2)</title>
+<message />
+<createdAt>2009-01-13T03:45:33Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512194">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2009/01/12/running-commands-from-the-shell-with-a-timeout-pt-2.html</link>
+<title>Running commands from the shell with a timeout (pt 2)</title>
+<message />
+<createdAt>2009-01-13T03:45:33Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697545049">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/highbase/2009/01/28/rewriting-highbase-in-erlang.html</link>
+<title>Rewriting Highbase in Erlang</title>
+<message />
+<createdAt>2009-01-28T08:28:42Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512195">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2009/01/28/rewriting-highbase-in-erlang.html</link>
+<title>Rewriting Highbase in Erlang</title>
+<message />
+<createdAt>2009-01-28T08:28:42Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697545041">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2009/03/06/mysql-certification-self-study.html</link>
+<title>MySQL Certification self study</title>
+<message />
+<createdAt>2009-03-06T21:33:12Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512209">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2009/03/06/mysql-certification-self-study.html</link>
+<title>MySQL Certification self study</title>
+<message />
+<createdAt>2009-03-06T21:33:12Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512199">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2009/03/09/using-the-enum-data-type-to-increase-performance.html</link>
+<title>Using the ENUM data type to increase performance</title>
+<message />
+<createdAt>2009-03-09T17:48:44Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697545036">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2009/04/06/using-mysql-proxy-to-benchmark-query-performance.html</link>
+<title>Using MySQL Proxy to benchmark query performance</title>
+<message />
+<createdAt>2009-04-06T15:20:28Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512204">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2009/04/06/using-mysql-proxy-to-benchmark-query-performance.html</link>
+<title>Using MySQL Proxy to benchmark query performance</title>
+<message />
+<createdAt>2009-04-06T15:20:28Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697545040">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2009/04/18/making-use-of-procedure-analyse.html</link>
+<title>Making use of procedure analyse()</title>
+<message />
+<createdAt>2009-04-18T23:47:48Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512201">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2009/04/18/making-use-of-procedure-analyse.html</link>
+<title>Making use of procedure analyse()</title>
+<message />
+<createdAt>2009-04-18T23:47:48Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697545056">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2009/04/21/extending-procedure_analyse.html</link>
+<title>Extending procedure_analyse</title>
+<message />
+<createdAt>2009-04-21T20:06:26Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512224">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2009/04/21/extending-procedure_analyse.html</link>
+<title>Extending procedure_analyse</title>
+<message />
+<createdAt>2009-04-21T20:06:26Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512236">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2009/06/17/iptables-trick-to-limit-concurrent-tcp-connections.html</link>
+<title>iptables trick to limit concurrent tcp connections</title>
+<message />
+<createdAt>2009-06-17T15:58:10Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512238">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2009/08/12/indexing-text-columns-in-mysql.html</link>
+<title>Indexing text columns in MySQL</title>
+<message />
+<createdAt>2009-08-13T02:07:28Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697545077">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2009/08/14/generating-data-with-dbmonster.html</link>
+<title>Generating data with dbmonster</title>
+<message />
+<createdAt>2009-08-15T00:02:56Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512242">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2009/08/14/generating-data-with-dbmonster.html</link>
+<title>Generating data with dbmonster</title>
+<message />
+<createdAt>2009-08-15T00:02:56Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697545079">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2010/01/26/how-to-prevent-explain-from-executing-subqueries.html</link>
+<title>how to prevent explain from executing subqueries</title>
+<message />
+<createdAt>2010-01-26T18:43:03Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512244">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2010/01/26/how-to-prevent-explain-from-executing-subqueries.html</link>
+<title>how to prevent explain from executing subqueries</title>
+<message />
+<createdAt>2010-01-26T18:43:03Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697545081">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2013/10/05/my-agenda-for-mysql-nosql-cloud-2013.html</link>
+<title>My agenda for MySQL NoSQL Cloud 2013</title>
+<message />
+<createdAt>2013-10-05T19:25:08Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512246">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2013/10/05/my-agenda-for-mysql-nosql-cloud-2013.html</link>
+<title>My agenda for MySQL NoSQL Cloud 2013</title>
+<message />
+<createdAt>2013-10-05T19:25:08Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512250">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2013/11/19/rmysql-basics.html</link>
+<title>RMySQL basics</title>
+<message />
+<createdAt>2013-11-20T01:31:23Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695512253">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2015/03/11/ongoing-mysql-myths.html</link>
+<title>Ongoing MySQL myths</title>
+<message />
+<createdAt>2015-03-11T16:45:07Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695514171">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2015/03/11/ongoing-mysql-myths.html</link>
+<title>Ongoing MySQL myths</title>
+<message />
+<createdAt>2015-04-19T22:51:08Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695741344">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2014/10/31/benchmarking-joomla.html</link>
+<title>Benchmarking Joomla</title>
+<message />
+<createdAt>2015-04-20T01:18:34Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3695784705">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2014/02/09/recovering-mysql-access.html</link>
+<title>Recovering MySQL access</title>
+<message />
+<createdAt>2015-04-20T01:47:43Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3696580751">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2009/03/09/using-the-enum-data-type-to-increase-performance.html</link>
+<title>Using the ENUM data type to increase performance</title>
+<message />
+<createdAt>2015-04-20T09:18:45Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3696611863">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2009/06/17/iptables-trick-to-limit-concurrent-tcp-connections.html</link>
+<title>iptables trick to limit concurrent tcp connections</title>
+<message />
+<createdAt>2015-04-20T09:29:59Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3696901495">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2009/08/12/indexing-text-columns-in-mysql.html</link>
+<title>Indexing text columns in MySQL</title>
+<message />
+<createdAt>2015-04-20T11:37:58Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697162446">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2015/04/16/migrating-to-jekyll.html</link>
+<title>Migrating to jekyll</title>
+<message />
+<createdAt>2015-04-20T13:17:40Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697185336">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/mysql/2015/03/11/ongoing-mysql-myths.html</link>
+<title>Ongoing MySQL myths</title>
+<message />
+<createdAt>2015-04-20T13:26:21Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697566681">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/etc/2013/10/29/best-eta-ever.html</link>
+<title>Best ETA ever</title>
+<message />
+<createdAt>2015-04-20T15:47:35Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697567348">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/mysql/2010/01/26/how-to-prevent-explain-from-executing-subqueries.html</link>
+<title>how to prevent explain from executing subqueries</title>
+<message />
+<createdAt>2015-04-20T15:47:49Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697655635">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/mysql/2015/04/16/migrating-to-jekyll.html</link>
+<title>Migrating to jekyll</title>
+<message />
+<createdAt>2015-04-20T16:21:49Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3697757140">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/2009/02/04/generating-random-salts-from-bash.html</link>
+<title>Generating random salts from bash</title>
+<message />
+<createdAt>2015-04-20T17:01:52Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3698681284">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/notes/2013/11/11/vagrant-environment-for-mysql-workshop.html</link>
+<title>Vagrant environment for MySQL Workshop</title>
+<message />
+<createdAt>2015-04-21T00:01:43Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3703306925">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/mysql/2009/04/29/soundex-triggers-and-stored-procedures.html</link>
+<title>SOUNDEX(), triggers, and stored procedures</title>
+<message />
+<createdAt>2015-04-22T14:42:57Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3703889654">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/2014/03/13/thread-safe-attribute-accessors-using-clojure-atoms.html</link>
+<title>thread safe attribute accessors for ruby classes, using clojure Atoms</title>
+<message />
+<createdAt>2015-04-22T18:34:26Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3719297759">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2009/04/02/using-mysql-sandbox-for-testing.html</link>
+<title>Using MySQL sandbox for testing</title>
+<message />
+<createdAt>2015-04-28T11:25:02Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3722809799">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2009/04/15/updated-mysql-proxy-benchmarking-script-for-proxy-07.html</link>
+<title>Updated mysql-proxy benchmarking script (for proxy 0.7)</title>
+<message />
+<createdAt>2015-04-29T15:33:13Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3750177155">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/notes/2013/11/19/rmysql-basics.html</link>
+<title>RMySQL basics</title>
+<message />
+<createdAt>2015-05-09T17:11:03Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3773702963">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/2014/03/17/thread-safe-accessors-for-ruby-classes-using-clojure-atoms-now-packaged-as-gem.html</link>
+<title>thread safe accessors for ruby classes using clojure atoms, now packaged as gem</title>
+<message />
+<createdAt>2015-05-18T12:00:55Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3809317554">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/notes/2013/11/18/console-histograms.html</link>
+<title>Console histograms</title>
+<message />
+<createdAt>2015-05-31T14:04:45Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3833136208">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/2009/02/02/i-love-playing-monopoly.html</link>
+<title>I love playing Monopoly</title>
+<message />
+<createdAt>2015-06-09T03:39:12Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3834224726">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/programming/2015/06/09/org-mode-babel-thoughts.html</link>
+<title>Some thoughts on org-mode/babel</title>
+<message />
+<createdAt>2015-06-09T13:02:59Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3834239551">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/2015/06/09/org-mode-babel-thoughts.html</link>
+<title>Some thoughts on org-mode/babel</title>
+<message />
+<createdAt>2015-06-09T13:08:57Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3843645117">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2010/07/07/high-availability-mysql-cookbook-review.html</link>
+<title>High Availability MySQL Cookbook review</title>
+<message />
+<createdAt>2015-06-12T18:25:16Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3850900589">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/startups/music/2009/01/09/scriptlance-for-musicians.html</link>
+<title>Scriptlance for musicians?</title>
+<message />
+<createdAt>2015-06-15T18:34:06Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3853347567">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/2011/03/10/piping-data-to-multiple-processes.html</link>
+<title>Piping data to multiple processes</title>
+<message />
+<createdAt>2015-06-16T15:22:43Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3857156526">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/2009/01/16/new-release-of-mysql-proxy-gpl.html</link>
+<title>New release of MySQL Proxy GPL</title>
+<message />
+<createdAt>2015-06-17T22:04:19Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3913701311">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/mysql/planetmysql/2015/04/16/migrating-to-jekyll.html</link>
+<title>Migrating to jekyll</title>
+<message />
+<createdAt>2015-07-07T22:50:04Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3913736375">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/planetmysql/2015/04/16/migrating-to-jekyll.html</link>
+<title>Migrating to jekyll</title>
+<message />
+<createdAt>2015-07-07T23:10:16Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3973752615">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/2009/01/10/running-commands-from-the-shell-with-a-timeout.html</link>
+<title>Running commands from the shell with a timeout</title>
+<message />
+<createdAt>2015-07-26T21:37:09Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4162443898">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/mysql/planetmysql/2015/09/24/dataops-la.html</link>
+<title>A new name and a wider scope for South America's favourite MySQL-related conference</title>
+<message />
+<createdAt>2015-09-24T20:50:01Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4162455796">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/planetmysql/2015/09/24/dataops-la.html</link>
+<title>A new name and a wider scope for South America's favourite MySQL-related conference</title>
+<message />
+<createdAt>2015-09-24T20:54:16Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4191375774">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/planetmysql/mysql/2015/10/03/dataops-la.html</link>
+<title>A new name and a wider scope for South America's favourite MySQL-related conference</title>
+<message />
+<createdAt>2015-10-03T23:32:11Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4204904270">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/notes/2013/12/04/processing-data-to-obtain-meaningful-graphic-representations.html</link>
+<title>processing data to obtain meaningful graphic representations</title>
+<message />
+<createdAt>2015-10-08T06:41:55Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4280997765">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/planetmysql/mysql/2015/10/03/dataops-la.html</link>
+<title>A new name and a wider scope for South America's favourite MySQL-related conference</title>
+<message />
+<createdAt>2015-11-01T23:16:08Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4281990652">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/mysql/2009/04/21/extending-procedure_analyse.html</link>
+<title>Extending procedure_analyse</title>
+<message />
+<createdAt>2015-11-02T09:10:02Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4284893327">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fanyi.ydstatic.com/translate_url?rurl=http%3A%2F%2Ffanyi.youdao.com%2F&amp;url=http%3A%2F%2Ffernandoipar.com%2Fmysql%2F2014%2F02%2F09%2Frecovering-mysql-access.html&amp;type=AUTO&amp;usg=youdaowebfanyi4633262864509481977m849140630&amp;keyfrom=360se</link>
+<title>Recovering MySQL access恢复MySQL访问</title>
+<message />
+<createdAt>2015-11-03T06:06:18Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4296215274">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/2009/01/19/intrusion-detection-at-the-application-level-for-php.html</link>
+<title>Intrusion detection at the application level, for PHP</title>
+<message />
+<createdAt>2015-11-06T21:06:46Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4722639442">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/2012/09/10/speaking-at-percona-live-ny-2012.html</link>
+<title>Presenting at Percona Live NY 2012</title>
+<message />
+<createdAt>2016-04-05T17:46:16Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="5278700376">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</link>
+<title>MySQL can be evil</title>
+<message />
+<createdAt>2016-11-04T17:13:58Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="5279340724">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</link>
+<title>MySQL can be evil</title>
+<message />
+<createdAt>2016-11-04T22:08:17Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="5585859971">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/notes/2013/11/11/online-notes.html</link>
+<title>Online notes</title>
+<message />
+<createdAt>2017-02-26T14:10:00Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="5776236534">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2009/03/09/using-the-enum-data-type-to-increase-performance/</link>
+<title>Using the ENUM data type to increase performance</title>
+<message />
+<createdAt>2017-05-01T14:00:26Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="5779129688">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/2009/04/06/using-mysql-proxy-to-benchmark-query-performance/</link>
+<title>Using MySQL Proxy to benchmark query performance</title>
+<message />
+<createdAt>2017-05-02T12:24:15Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="5779997977">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/2009/03/04/coding-buddies.html</link>
+<title>Coding Buddies</title>
+<message />
+<createdAt>2017-05-02T17:41:07Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6092001578">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>https://web.archive.org/web/20161025132529/http://fernandoipar.com/mysql/2009/03/09/using-the-enum-data-type-to-increase-performance.html</link>
+<title>Using the ENUM data type to increase performance</title>
+<message />
+<createdAt>2017-08-24T13:24:48Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6373416776">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html</link>
+<title>Opening urls from emacs using Google Chrome on MacOS</title>
+<message />
+<createdAt>2017-12-26T14:01:13Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6373490824">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html</link>
+<title>Opening urls from emacs using Google Chrome on MacOS</title>
+<message />
+<createdAt>2017-12-26T14:50:37Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6373691606">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BC6Cjfl5JSVyVveiHGVQxYw%3D%3D</link>
+<title>Opening urls from emacs using Google Chrome on MacOS</title>
+<message />
+<createdAt>2017-12-26T16:56:04Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6387301314">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/emacs/notes/2018/01/02/emacs-hyper-key.html</link>
+<title>Expanding your keyboard on emacs with the Hyper key</title>
+<message />
+<createdAt>2018-01-02T20:33:41Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6387345477">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html</link>
+<title>Expanding your keyboard on emacs with the Hyper key</title>
+<message />
+<createdAt>2018-01-02T20:56:17Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6387781963">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BixTwvxfjSQe%2F4JGzN%2B30wQ%3D%3D</link>
+<title>Expanding your keyboard on emacs with the Hyper key</title>
+<message />
+<createdAt>2018-01-03T01:39:24Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6430815845">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</link>
+<title>Measuring the potential overhead of pmm-client on MySQL workloads</title>
+<message />
+<createdAt>2018-01-22T17:01:46Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6430848648">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</link>
+<title>Measuring the potential overhead of pmm-client on MySQL workloads</title>
+<message />
+<createdAt>2018-01-22T17:18:20Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6483275999">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/2009/01/13/top-25-most-dangerous-programming-errors.html</link>
+<title>Top 25 most dangerous programming errors</title>
+<message />
+<createdAt>2018-02-16T06:57:39Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6483276375">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/science/2009/01/14/coffee-may-or-may-not-cause-hallucinations.html</link>
+<title>Coffee May or May not cause hallucinations</title>
+<message />
+<createdAt>2018-02-16T06:57:56Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6577569820">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</link>
+<title>Running sysbench-based benchmarks against Cassandra</title>
+<message />
+<createdAt>2018-03-26T14:47:12Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6577577206">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</link>
+<title>Running sysbench-based benchmarks against Cassandra</title>
+<message />
+<createdAt>2018-03-26T14:51:21Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6680483184">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</link>
+<title>What is a good cache hit ratio?</title>
+<message />
+<createdAt>2018-05-19T23:20:26Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6680507712">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</link>
+<title>What is a good cache hit ratio?</title>
+<message />
+<createdAt>2018-05-19T23:46:33Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6804437365">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra</link>
+<title>Running sysbench-based benchmarks against Cassandra</title>
+<message />
+<createdAt>2018-07-20T01:34:02Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6823880794">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/programming/2011/03/09/piping-data-to-multiple-processes.html</link>
+<title>Piping data to multiple processes</title>
+<message />
+<createdAt>2018-07-29T14:47:59Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7184932056">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</link>
+<title>My org-mode workflow</title>
+<message />
+<createdAt>2019-01-23T19:16:31Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7184957630">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://fernandoipar.com/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</link>
+<title>My org-mode workflow</title>
+<message />
+<createdAt>2019-01-23T19:32:41Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7260317497">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</link>
+<title>My org-mode workflow</title>
+<message />
+<createdAt>2019-02-27T14:15:56Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308352189">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/startups/music/2009/01/08/scriptlance-for-musicians.html</link>
+<title>Scriptlance for musicians?</title>
+<message />
+<createdAt>2019-03-21T00:17:35Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308352487">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/programming/2009/01/09/running-commands-from-the-shell-with-a-timeout.html</link>
+<title>Running commands from the shell with a timeout</title>
+<message />
+<createdAt>2019-03-21T00:17:53Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308352766">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/programming/2009/01/12/running-commands-from-the-shell-with-a-timeout-pt-2.html</link>
+<title>Running commands from the shell with a timeout (pt 2)</title>
+<message />
+<createdAt>2019-03-21T00:18:11Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308355968">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/programming/2009/01/13/top-25-most-dangerous-programming-errors.html</link>
+<title>Top 25 most dangerous programming errors</title>
+<message />
+<createdAt>2019-03-21T00:21:23Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308356269">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/science/2009/01/14/coffee-may-or-may-not-cause-hallucinations.html</link>
+<title>Coffee May or May not cause hallucinations</title>
+<message />
+<createdAt>2019-03-21T00:21:41Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308356819">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/programming/2009/01/19/symbolics-lisp-machine.html</link>
+<title>Symbolics Lisp Machine</title>
+<message />
+<createdAt>2019-03-21T00:22:14Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308357003">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/highbase/2009/01/27/rewriting-highbase-in-erlang.html</link>
+<title>Rewriting Highbase in Erlang</title>
+<message />
+<createdAt>2019-03-21T00:22:24Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308360834">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/programming/2009/03/04/coding-buddies.html</link>
+<title>Coding Buddies</title>
+<message />
+<createdAt>2019-03-21T00:26:13Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308361040">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/mysql/2009/03/06/mysql-certification-self-study.html</link>
+<title>MySQL Certification self study</title>
+<message />
+<createdAt>2019-03-21T00:26:25Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308361590">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/mysql/2009/03/09/using-the-enum-data-type-to-increase-performance.html</link>
+<title>Using the ENUM data type to increase performance</title>
+<message />
+<createdAt>2019-03-21T00:26:57Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308361770">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/mysql/2010/07/06/high-availability-mysql-cookbook-review.html</link>
+<title>High Availability MySQL Cookbook review</title>
+<message />
+<createdAt>2019-03-21T00:27:08Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308363090">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/programming/2011/03/09/piping-data-to-multiple-processes.html</link>
+<title>Piping data to multiple processes</title>
+<message />
+<createdAt>2019-03-21T00:28:27Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308364002">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/mysql/2012/09/10/speaking-at-percona-live-ny-2012.html</link>
+<title>Presenting at Percona Live NY 2012</title>
+<message />
+<createdAt>2019-03-21T00:29:23Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308364192">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/etc/2013/10/29/best-eta-ever.html</link>
+<title>Best ETA ever</title>
+<message />
+<createdAt>2019-03-21T00:29:34Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308364377">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/notes/2013/11/18/console-histograms.html</link>
+<title>Console histograms</title>
+<message />
+<createdAt>2019-03-21T00:29:45Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308364598">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/notes/2013/11/11/online-notes.html</link>
+<title>Online notes</title>
+<message />
+<createdAt>2019-03-21T00:29:58Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308364741">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/notes/2013/11/11/vagrant-environment-for-mysql-workshop.html</link>
+<title>Vagrant environment for MySQL Workshop</title>
+<message />
+<createdAt>2019-03-21T00:30:05Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308364811">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/notes/2013/11/19/rmysql-basics.html</link>
+<title>RMySQL basics</title>
+<message />
+<createdAt>2019-03-21T00:30:09Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308364884">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/programming/notes/2013/12/04/processing-data-to-obtain-meaningful-graphic-representations.html</link>
+<title>processing data to obtain meaningful graphic representations</title>
+<message />
+<createdAt>2019-03-21T00:30:14Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308364972">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/mysql/2014/02/09/recovering-mysql-access.html</link>
+<title>Recovering MySQL access</title>
+<message />
+<createdAt>2019-03-21T00:30:19Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308366274">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/programming/2014/03/13/thread-safe-attribute-accessors-using-clojure-atoms.html</link>
+<title>thread safe attribute accessors for ruby classes, using clojure Atoms</title>
+<message />
+<createdAt>2019-03-21T00:31:26Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308366390">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/programming/2015/06/09/org-mode-babel-thoughts.html</link>
+<title>Some thoughts on org-mode/babel</title>
+<message />
+<createdAt>2019-03-21T00:31:31Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308368208">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/planetmysql/mysql/2015/10/03/dataops-la.html</link>
+<title>A new name and a wider scope for South America's favourite MySQL-related conference</title>
+<message />
+<createdAt>2019-03-21T00:33:10Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308368606">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/planetmysql/mysql/2016/11/04/mysql-can-be-evil.html</link>
+<title>MySQL can be evil</title>
+<message />
+<createdAt>2019-03-21T00:33:34Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7308368912">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://0.0.0.0:4000/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html</link>
+<title>Opening urls from emacs using Google Chrome on MacOS</title>
+<message />
+<createdAt>2019-03-21T00:33:54Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7621361452">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/notes/2019/09/05/top-8-things-every-database-practitioner-should-know.html</link>
+<title>Top 8 things every database practitioner should know</title>
+<message />
+<createdAt>2019-09-06T01:17:53Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7621366069">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>https://fernandoipar.com/notes/2019/09/05/top-8-things-every-database-practitioner-should-know.html</link>
+<title>Top 8 things every database practitioner should know</title>
+<message />
+<createdAt>2019-09-06T01:23:06Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7650626810">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/notes/2019/09/25/minimal-networking-knowledge-recommended-for-dbas.html</link>
+<title>Top 8 things every database practitioner should know</title>
+<message />
+<createdAt>2019-09-25T23:52:30Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7650632941">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>https://fernandoipar.com/notes/2019/09/25/minimal-networking-knowledge-recommended-for-dbas.html</link>
+<title>Minimal networking knowledge recommended for DBAs</title>
+<message />
+<createdAt>2019-09-26T00:01:07Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7688303707">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>https://fernandoipar.com/programming/2009/01/09/running-commands-from-the-shell-with-a-timeout.html</link>
+<title>Running commands from the shell with a timeout</title>
+<message />
+<createdAt>2019-10-23T11:11:28Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7766931518">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>https://translate.googleusercontent.com/translate_c?depth=1&amp;sl=auto&amp;sp=nmt4&amp;tl=ru&amp;u=https://fernandoipar.com/emacs/notes/2019/01/23/emacs-org-mode-workflow.html&amp;xid=25657,15700023,15700186,15700191,15700256,15700259,15700262,15700265,15700271,15700283</link>
+<title> My org-mode workflow Мой рабочий режим в режиме орг </title>
+<message />
+<createdAt>2019-12-16T14:57:02Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7975662835">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/notes/2020/04/17/questions-for-databases.html</link>
+<title>Questions to ask when evaluating a database</title>
+<message />
+<createdAt>2020-04-17T14:10:57Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7975745553">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>https://fernandoipar.com/notes/2020/04/17/questions-for-databases.html</link>
+<title>Questions to ask when evaluating a database</title>
+<message />
+<createdAt>2020-04-17T15:05:05Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7998216878">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/emacs/2020/04/29/documenting-emacs-hyper-shortcuts.html</link>
+<title>Documenting emacs hyper shortcuts</title>
+<message />
+<createdAt>2020-04-29T15:29:17Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7998233526">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>https://fernandoipar.com/emacs/2020/04/29/documenting-emacs-hyper-shortcuts.html</link>
+<title>Documenting emacs hyper shortcuts</title>
+<message />
+<createdAt>2020-04-29T15:40:54Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8020987676">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>http://localhost:4000/2020/05/12/this-is-a-test-post-generated-from-org-mode.html</link>
+<title>This is a test post generated from org-mode</title>
+<message />
+<createdAt>2020-05-12T14:54:48Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8037789156">
+<id />
+<forum>fipar</forum>
+<category dsq:id="3668767" />
+<link>https://fernandoipar.com/highbase/2009/01/27/rewriting-highbase-in-erlang.html</link>
+<title>Rewriting Highbase in Erlang</title>
+<message />
+<createdAt>2020-05-22T14:47:49Z</createdAt>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<post dsq:id="1976475137">
+<id>wp_id=2</id>
+<message><![CDATA[<p>Seems a bit complicated. Have a look at:<br><a href="http://www.pixelbeat.org/scripts/timeout" rel="nofollow noopener" title="http://www.pixelbeat.org/scripts/timeout">http://www.pixelbeat.org/sc...</a></p><p>Also note that there will be a timeout command included in newer versions of coreutils.</p>]]></message>
+<createdAt>2009-01-13T15:02:44Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Pádraig Brady</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512194" />
+</post>
+<post dsq:id="1977575012">
+<id>wp_id=2</id>
+<message><![CDATA[<p>Seems a bit complicated. Have a look at:<br><a href="http://www.pixelbeat.org/scripts/timeout" rel="nofollow noopener" title="http://www.pixelbeat.org/scripts/timeout">http://www.pixelbeat.org/sc...</a></p><p>Also note that there will be a timeout command included in newer versions of coreutils.</p>]]></message>
+<createdAt>2009-01-13T15:02:44Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Pádraig Brady</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545034" />
+</post>
+<post dsq:id="1977575023">
+<id>wp_id=3</id>
+<message><![CDATA[<p>Thanks for the reply. I had two similar replies in reddit, I guess I was really out of touch.</p><p>I've just installed timeout through apt-get and it does just what my script from Highbase does, though I'll wait until it's included in coreutils to remove my self made version.</p><p>I tried to figure out when timeout is coming with coreutils, and it seems you're the contributor :) Any ideas for a date?</p>]]></message>
+<createdAt>2009-01-13T19:08:37Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545034" />
+</post>
+<post dsq:id="1976475130">
+<id>wp_id=3</id>
+<message><![CDATA[<p>Thanks for the reply. I had two similar replies in reddit, I guess I was really out of touch.</p><p>I've just installed timeout through apt-get and it does just what my script from Highbase does, though I'll wait until it's included in coreutils to remove my self made version.</p><p>I tried to figure out when timeout is coming with coreutils, and it seems you're the contributor :) Any ideas for a date?</p>]]></message>
+<createdAt>2009-01-13T19:08:37Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512194" />
+</post>
+<post dsq:id="1977575019">
+<id>wp_id=5</id>
+<message><![CDATA[<p>Hi Fernando, before start using gen_server you should take a deeper look into gen_fsm. It's a behaviour for finite state machines as you've described above. And it's as easy and powerful as gen_server. Regards, mue</p>]]></message>
+<createdAt>2009-01-29T13:52:50Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Frank Mueller</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545049" />
+</post>
+<post dsq:id="1976475129">
+<id>wp_id=5</id>
+<message><![CDATA[<p>Hi Fernando, before start using gen_server you should take a deeper look into gen_fsm. It's a behaviour for finite state machines as you've described above. And it's as easy and powerful as gen_server. Regards, mue</p>]]></message>
+<createdAt>2009-01-29T13:52:50Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Frank Mueller</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512195" />
+</post>
+<post dsq:id="1977575011">
+<id>wp_id=6</id>
+<message><![CDATA[<p>Hi Frank,</p><p>Thanks for your recommendation. <br>I did read a couple of examples of gen_fsm and yes, it is better for this design, I guess I put it in the back of my mind, so it's good to have someone more experienced in Erlang/OTP remind me about it :)</p><p>I'm still trying to put all the pieces together, I'm definitely trying to make a good use of the event handling mechanism.</p><p>Going through Armstrong's book for, like, the fourth time now :)</p><p>Regards, Fernando.</p>]]></message>
+<createdAt>2009-01-29T17:40:31Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545049" />
+</post>
+<post dsq:id="1976475142">
+<id>wp_id=6</id>
+<message><![CDATA[<p>Hi Frank,</p><p>Thanks for your recommendation. <br>I did read a couple of examples of gen_fsm and yes, it is better for this design, I guess I put it in the back of my mind, so it's good to have someone more experienced in Erlang/OTP remind me about it :)</p><p>I'm still trying to put all the pieces together, I'm definitely trying to make a good use of the event handling mechanism.</p><p>Going through Armstrong's book for, like, the fourth time now :)</p><p>Regards, Fernando.</p>]]></message>
+<createdAt>2009-01-29T17:40:31Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512195" />
+</post>
+<post dsq:id="1976475133">
+<id>wp_id=37</id>
+<message><![CDATA[<p>Should have seen this a fortnight back. And would not have gone to put down code for Open PHP MyProfiler <a href="http://www.php-trivandrum.org/open-php-myprofiler" rel="nofollow noopener" title="http://www.php-trivandrum.org/open-php-myprofiler">http://www.php-trivandrum.o...</a>.</p><p>Open PHP MyProfiler is just a trial to run query profiling on a php-mysql application, without changing the architecture too much. The profiler is open and downloadable, though the analzer, is just a mockup or a bare one and not yet ripe to be opened up. Any one who needs to do the analysis could make use of the same by downloading the profiler, and implementing with their code. The profiler would create logs depending on hostname and date. upload the profile logs to our Profile Sampler and you should be able to see the full profile of your application.</p>]]></message>
+<createdAt>2009-04-11T04:42:42Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>php trivandrum</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512204" />
+</post>
+<post dsq:id="1977575025">
+<id>wp_id=37</id>
+<message><![CDATA[<p>Should have seen this a fortnight back. And would not have gone to put down code for Open PHP MyProfiler <a href="http://www.php-trivandrum.org/open-php-myprofiler" rel="nofollow noopener" title="http://www.php-trivandrum.org/open-php-myprofiler">http://www.php-trivandrum.o...</a>.</p><p>Open PHP MyProfiler is just a trial to run query profiling on a php-mysql application, without changing the architecture too much. The profiler is open and downloadable, though the analzer, is just a mockup or a bare one and not yet ripe to be opened up. Any one who needs to do the analysis could make use of the same by downloading the profiler, and implementing with their code. The profiler would create logs depending on hostname and date. upload the profile logs to our Profile Sampler and you should be able to see the full profile of your application.</p>]]></message>
+<createdAt>2009-04-11T04:42:42Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>php trivandrum</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545036" />
+</post>
+<post dsq:id="1976475139">
+<id>wp_id=38</id>
+<message><![CDATA[<p>I did try this out.. first thing, in your lua script, should it not be "in", instead of "inj" as parameter for read_query_result()?</p><p>Also to achieve this, you dont need the read_query and the global query, since in.query will give the original query as read here: <a href="http://dev.mysql.com/doc/mysql-ha-scalability/en/mysql-proxy-scripting-read-query-result.html" rel="nofollow noopener" title="http://dev.mysql.com/doc/mysql-ha-scalability/en/mysql-proxy-scripting-read-query-result.html">http://dev.mysql.com/doc/my...</a></p>]]></message>
+<createdAt>2009-04-11T05:17:17Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>php trivandrum</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512204" />
+</post>
+<post dsq:id="1977575032">
+<id>wp_id=38</id>
+<message><![CDATA[<p>I did try this out.. first thing, in your lua script, should it not be "in", instead of "inj" as parameter for read_query_result()?</p><p>Also to achieve this, you dont need the read_query and the global query, since in.query will give the original query as read here: <a href="http://dev.mysql.com/doc/mysql-ha-scalability/en/mysql-proxy-scripting-read-query-result.html" rel="nofollow noopener" title="http://dev.mysql.com/doc/mysql-ha-scalability/en/mysql-proxy-scripting-read-query-result.html">http://dev.mysql.com/doc/my...</a></p>]]></message>
+<createdAt>2009-04-11T05:17:17Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>php trivandrum</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545036" />
+</post>
+<post dsq:id="1977575021">
+<id>wp_id=39</id>
+<message><![CDATA[<p>Sorry, I was wrong in the second part. To trigger read_query_result, the first injection is needed</p>]]></message>
+<createdAt>2009-04-11T05:24:02Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>php trivandrum</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545036" />
+</post>
+<post dsq:id="1976475141">
+<id>wp_id=39</id>
+<message><![CDATA[<p>Sorry, I was wrong in the second part. To trigger read_query_result, the first injection is needed</p>]]></message>
+<createdAt>2009-04-11T05:24:02Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>php trivandrum</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512204" />
+</post>
+<post dsq:id="1977575017">
+<id>wp_id=40</id>
+<message><![CDATA[<p>Hi,</p><p>This was my first lua script, so some parts might have been wrong. Still, I think the first injection was needed, and your third message seems to confirm this so it gives me some confidence ;)</p><p>Regarding your second message, it's possible. There was a new release of mysql-proxy just after I published this, and apparently, some changes rendered my script obsolete. I've joined the mysql-proxy team on launchpad to try to keep a closer eye on the project and I promise to make an updated post on this blog with a new script that works.</p><p>In fact, if it's approved by the team, I'll publish in the cookbook where it'll be much more useful.</p><p>I think your project is quite interesting and might be in fact easier to implement for people working on the LAMP stack and on shared hosting environments (where installing the proxy is totally out of the question), so please keep up the good work!</p>]]></message>
+<createdAt>2009-04-11T06:49:06Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545036" />
+</post>
+<post dsq:id="1976475140">
+<id>wp_id=40</id>
+<message><![CDATA[<p>Hi,</p><p>This was my first lua script, so some parts might have been wrong. Still, I think the first injection was needed, and your third message seems to confirm this so it gives me some confidence ;)</p><p>Regarding your second message, it's possible. There was a new release of mysql-proxy just after I published this, and apparently, some changes rendered my script obsolete. I've joined the mysql-proxy team on launchpad to try to keep a closer eye on the project and I promise to make an updated post on this blog with a new script that works.</p><p>In fact, if it's approved by the team, I'll publish in the cookbook where it'll be much more useful.</p><p>I think your project is quite interesting and might be in fact easier to implement for people working on the LAMP stack and on shared hosting environments (where installing the proxy is totally out of the question), so please keep up the good work!</p>]]></message>
+<createdAt>2009-04-11T06:49:06Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512204" />
+</post>
+<post dsq:id="1976475147">
+<id>wp_id=41</id>
+<message><![CDATA[<p>hi fernando,</p><p>I never thought about the shared hosting part, thanks for boosting my morale, I would be quite happy if you would comment on my relevant page</p><p><a href="http://www.php-trivandrum.org/open-php-myprofiler" rel="nofollow noopener" title="http://www.php-trivandrum.org/open-php-myprofiler">http://www.php-trivandrum.o...</a></p>]]></message>
+<createdAt>2009-04-14T06:25:06Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>php trivandrum</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512204" />
+</post>
+<post dsq:id="1977575009">
+<id>wp_id=41</id>
+<message><![CDATA[<p>hi fernando,</p><p>I never thought about the shared hosting part, thanks for boosting my morale, I would be quite happy if you would comment on my relevant page</p><p><a href="http://www.php-trivandrum.org/open-php-myprofiler" rel="nofollow noopener" title="http://www.php-trivandrum.org/open-php-myprofiler">http://www.php-trivandrum.o...</a></p>]]></message>
+<createdAt>2009-04-14T06:25:06Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>php trivandrum</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545036" />
+</post>
+<post dsq:id="1977575016">
+<id>wp_id=42</id>
+<message><![CDATA[<p>Awesome! I never realized you could grab the output of a PROCEDURE ANALYSE() like that.</p><p>Thanks!</p>]]></message>
+<createdAt>2009-04-19T02:08:00Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Roland Bouman</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545040" />
+</post>
+<post dsq:id="1976475148">
+<id>wp_id=42</id>
+<message><![CDATA[<p>Awesome! I never realized you could grab the output of a PROCEDURE ANALYSE() like that.</p><p>Thanks!</p>]]></message>
+<createdAt>2009-04-19T02:08:00Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Roland Bouman</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512201" />
+</post>
+<post dsq:id="1976475149">
+<id>wp_id=43</id>
+<message><![CDATA[<p>Run ANALYSE(10,100) rather than without params. This sets the max# of ENUM items to 10 and a total of 100 bytes in the ENUM list.<br>In short, it gets rid of the nonsensical default of trying to stick everything in an enum.</p><p>See <a href="http://bugs.mysql.com/2049" rel="nofollow noopener" title="http://bugs.mysql.com/2049">http://bugs.mysql.com/2049</a></p>]]></message>
+<createdAt>2009-04-19T02:14:43Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Arjen Lentz</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512201" />
+</post>
+<post dsq:id="1977575022">
+<id>wp_id=43</id>
+<message><![CDATA[<p>Run ANALYSE(10,100) rather than without params. This sets the max# of ENUM items to 10 and a total of 100 bytes in the ENUM list.<br>In short, it gets rid of the nonsensical default of trying to stick everything in an enum.</p><p>See <a href="http://bugs.mysql.com/2049" rel="nofollow noopener" title="http://bugs.mysql.com/2049">http://bugs.mysql.com/2049</a></p>]]></message>
+<createdAt>2009-04-19T02:14:43Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Arjen Lentz</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545040" />
+</post>
+<post dsq:id="1977575018">
+<id>wp_id=44</id>
+<message><![CDATA[<p>Well done!</p>]]></message>
+<createdAt>2009-04-19T07:30:50Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Shlomi Noach</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545040" />
+</post>
+<post dsq:id="1976475153">
+<id>wp_id=44</id>
+<message><![CDATA[<p>Well done!</p>]]></message>
+<createdAt>2009-04-19T07:30:50Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Shlomi Noach</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512201" />
+</post>
+<post dsq:id="1977575029">
+<id>wp_id=45</id>
+<message><![CDATA[<p>Thanks for all the comments!</p><p>@Arjen: I'll add these limits to my todo. I followed your link and couldn't help to laugh at the first reply you got. It's no wonder there are so many MySQL forks out there.</p>]]></message>
+<createdAt>2009-04-19T08:24:24Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545040" />
+</post>
+<post dsq:id="1976475132">
+<id>wp_id=45</id>
+<message><![CDATA[<p>Thanks for all the comments!</p><p>@Arjen: I'll add these limits to my todo. I followed your link and couldn't help to laugh at the first reply you got. It's no wonder there are so many MySQL forks out there.</p>]]></message>
+<createdAt>2009-04-19T08:24:24Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512201" />
+</post>
+<post dsq:id="1977575015">
+<id>wp_id=46</id>
+<message><![CDATA[<p>Good work.</p><p>With regard to overused indexes, you should note that an index on (a,b) and on (a,c) have nothing useless between them. But your code will report "a" as being over indexed.</p>]]></message>
+<createdAt>2009-04-22T07:22:51Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Shlomi Noach</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545056" />
+</post>
+<post dsq:id="1976475160">
+<id>wp_id=46</id>
+<message><![CDATA[<p>Good work.</p><p>With regard to overused indexes, you should note that an index on (a,b) and on (a,c) have nothing useless between them. But your code will report "a" as being over indexed.</p>]]></message>
+<createdAt>2009-04-22T07:22:51Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Shlomi Noach</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512224" />
+</post>
+<post dsq:id="1977575034">
+<id>wp_id=47</id>
+<message><![CDATA[<p>Thanks a lot for the observation, that didn't occur to me :)</p><p>I'll have to look just for columns that have count(*) &gt; 1 and that are also indexed alone, this would be the useless index (of course, it might be that one index takes duplicates, the other not, I don't know if that still makes all cases useless, you've really opened a can of worms for me :)</p><p>Fortunately we've got the thing at bitbucket now so I'll report this as a bug and begin working on it ASAP!</p>]]></message>
+<createdAt>2009-04-22T07:49:13Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545056" />
+</post>
+<post dsq:id="1976475145">
+<id>wp_id=47</id>
+<message><![CDATA[<p>Thanks a lot for the observation, that didn't occur to me :)</p><p>I'll have to look just for columns that have count(*) &gt; 1 and that are also indexed alone, this would be the useless index (of course, it might be that one index takes duplicates, the other not, I don't know if that still makes all cases useless, you've really opened a can of worms for me :)</p><p>Fortunately we've got the thing at bitbucket now so I'll report this as a bug and begin working on it ASAP!</p>]]></message>
+<createdAt>2009-04-22T07:49:13Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512224" />
+</post>
+<post dsq:id="1976475159">
+<id>wp_id=48</id>
+<message><![CDATA[<p>Hi,<br>Still not complete. If the the index on (a) is UNIQUE, then an index (a,b) does make it redundant.<br>Since there's already a utility which checks for duplicate indexes, and it's quite complicated, I suggest you take a look how it does it. It is part of maatkit, and is called mk-duplicate-key-checker. See <a href="http://code.google.com/p/maatkit/wiki/DeterminingDuplicateKeys" rel="nofollow noopener" title="http://code.google.com/p/maatkit/wiki/DeterminingDuplicateKeys">http://code.google.com/p/maatkit/wiki/DeterminingDuplicateKeys</a></p>]]></message>
+<createdAt>2009-04-22T07:58:54Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Shlomi Noach</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512224" />
+</post>
+<post dsq:id="1977575031">
+<id>wp_id=48</id>
+<message><![CDATA[<p>Hi,<br>Still not complete. If the the index on (a) is UNIQUE, then an index (a,b) does make it redundant.<br>Since there's already a utility which checks for duplicate indexes, and it's quite complicated, I suggest you take a look how it does it. It is part of maatkit, and is called mk-duplicate-key-checker. See <a href="http://code.google.com/p/maatkit/wiki/DeterminingDuplicateKeys" rel="nofollow noopener" title="http://code.google.com/p/maatkit/wiki/DeterminingDuplicateKeys">http://code.google.com/p/maatkit/wiki/DeterminingDuplicateKeys</a></p>]]></message>
+<createdAt>2009-04-22T07:58:54Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Shlomi Noach</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545056" />
+</post>
+<post dsq:id="1977575028">
+<id>wp_id=49</id>
+<message><![CDATA[<p>Thanks for the additional suggestion, as I said, I expected that kind of problems. I'll look into that particular maatkit script for ideas, I don't intend to reinvent the wheel but rather to present DBAs with some useful screenshot of information, but it has to be useful and properly obtained :)</p>]]></message>
+<createdAt>2009-04-22T08:33:20Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545056" />
+</post>
+<post dsq:id="1976475158">
+<id>wp_id=49</id>
+<message><![CDATA[<p>Thanks for the additional suggestion, as I said, I expected that kind of problems. I'll look into that particular maatkit script for ideas, I don't intend to reinvent the wheel but rather to present DBAs with some useful screenshot of information, but it has to be useful and properly obtained :)</p>]]></message>
+<createdAt>2009-04-22T08:33:20Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512224" />
+</post>
+<post dsq:id="1976475179">
+<id>wp_id=73</id>
+<message><![CDATA[<p>Sorry but:</p><p>1. it can handle referential integrity<br>2. you don't have to create the XML file, just use schema grabber</p><p>See <a href="http://pabloj.blogspot.com/2005/10/feeding-your-database.html" rel="nofollow noopener" title="http://pabloj.blogspot.com/2005/10/feeding-your-database.html">http://pabloj.blogspot.com/...</a></p>]]></message>
+<createdAt>2009-08-16T18:31:29Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>pabloj</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512242" />
+</post>
+<post dsq:id="1977575054">
+<id>wp_id=73</id>
+<message><![CDATA[<p>Sorry but:</p><p>1. it can handle referential integrity<br>2. you don't have to create the XML file, just use schema grabber</p><p>See <a href="http://pabloj.blogspot.com/2005/10/feeding-your-database.html" rel="nofollow noopener" title="http://pabloj.blogspot.com/2005/10/feeding-your-database.html">http://pabloj.blogspot.com/...</a></p>]]></message>
+<createdAt>2009-08-16T18:31:29Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>pabloj</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545077" />
+</post>
+<post dsq:id="1976475166">
+<id>wp_id=74</id>
+<message><![CDATA[<p>Hey, no need to be sorry, that's good news :)<br>My mistake was going straight to the configuration section of the manual. Since foreign keys are handles automatically according to this: <a href="http://dbmonster.kernelpanic.pl/manual/intro.html" rel="nofollow noopener" title="http://dbmonster.kernelpanic.pl/manual/intro.html">http://dbmonster.kernelpani...</a>, there's no configuration key/option for them. <br>I'll run new tests taking this into consideration and either update this post or write a new one.</p><p>Thanks for the info and the link!</p>]]></message>
+<createdAt>2009-08-16T19:30:27Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512242" />
+</post>
+<post dsq:id="1977575056">
+<id>wp_id=74</id>
+<message><![CDATA[<p>Hey, no need to be sorry, that's good news :)<br>My mistake was going straight to the configuration section of the manual. Since foreign keys are handles automatically according to this: <a href="http://dbmonster.kernelpanic.pl/manual/intro.html" rel="nofollow noopener" title="http://dbmonster.kernelpanic.pl/manual/intro.html">http://dbmonster.kernelpani...</a>, there's no configuration key/option for them. <br>I'll run new tests taking this into consideration and either update this post or write a new one.</p><p>Thanks for the info and the link!</p>]]></message>
+<createdAt>2009-08-16T19:30:27Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545077" />
+</post>
+<post dsq:id="1977575033">
+<id>wp_id=76</id>
+<message><![CDATA[<p>Very Nice!</p><p>I have been trying to find a way to prevent Apache from spawning too many child processes whenever some bad robot or hacker throws a bunch of concurrent requests at our website.</p><p>This may just do the trick...</p>]]></message>
+<createdAt>2009-08-18T17:01:25Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Edward Hall</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3696611863" />
+</post>
+<post dsq:id="1976475169">
+<id>wp_id=76</id>
+<message><![CDATA[<p>Very Nice!</p><p>I have been trying to find a way to prevent Apache from spawning too many child processes whenever some bad robot or hacker throws a bunch of concurrent requests at our website.</p><p>This may just do the trick...</p>]]></message>
+<createdAt>2009-08-18T17:01:25Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Edward Hall</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512236" />
+</post>
+<post dsq:id="1976475163">
+<id>wp_id=77</id>
+<message><![CDATA[<p>Glad you found it useful!</p><p>This might be of interest to you too: <a href="http://www.cohprog.com/mod_bandwidth.html" rel="nofollow noopener" title="http://www.cohprog.com/mod_bandwidth.html">http://www.cohprog.com/mod_...</a>, though I don't know if it's still active, or if it works across apache v 1.x and 2.x.</p><p>The good side of the iptables approach is that it can be used to limit concurrent connections to any network based service</p><p>Good luck,</p>]]></message>
+<createdAt>2009-08-18T17:21:15Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512236" />
+</post>
+<post dsq:id="1977575035">
+<id>wp_id=77</id>
+<message><![CDATA[<p>Glad you found it useful!</p><p>This might be of interest to you too: <a href="http://www.cohprog.com/mod_bandwidth.html" rel="nofollow noopener" title="http://www.cohprog.com/mod_bandwidth.html">http://www.cohprog.com/mod_...</a>, though I don't know if it's still active, or if it works across apache v 1.x and 2.x.</p><p>The good side of the iptables approach is that it can be used to limit concurrent connections to any network based service</p><p>Good luck,</p>]]></message>
+<createdAt>2009-08-18T17:21:15Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3696611863" />
+</post>
+<post dsq:id="1976475183">
+<id>wp_id=78</id>
+<message><![CDATA[<p>Indeed, I ran another test and it works exactly as described:</p><p>mysql -e 'create database rtest' <br>[... create some inodb tables on rtest, with foreign key constraints ... ]</p><p>java pl.kernelpanic.dbmonster.Launcher -c <a href="http://rtest.properties" rel="nofollow noopener" title="rtest.properties">rtest.properties</a> --grab &gt; rtest.xml</p><p>After properly editing the begining of the rtest.xml file (since it will included some non-xml output from dbmonster):</p><p>java pl.kernelpanic.dbmonster.Launcher -c <a href="http://rtest.properties" rel="nofollow noopener" title="rtest.properties">rtest.properties</a> -s rtest.xml</p><p>This successfully generates rows for all tables, satisfying referential integrity :)</p>]]></message>
+<createdAt>2009-08-18T18:03:02Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512242" />
+</post>
+<post dsq:id="1977575049">
+<id>wp_id=78</id>
+<message><![CDATA[<p>Indeed, I ran another test and it works exactly as described:</p><p>mysql -e 'create database rtest' <br>[... create some inodb tables on rtest, with foreign key constraints ... ]</p><p>java pl.kernelpanic.dbmonster.Launcher -c <a href="http://rtest.properties" rel="nofollow noopener" title="rtest.properties">rtest.properties</a> --grab &gt; rtest.xml</p><p>After properly editing the begining of the rtest.xml file (since it will included some non-xml output from dbmonster):</p><p>java pl.kernelpanic.dbmonster.Launcher -c <a href="http://rtest.properties" rel="nofollow noopener" title="rtest.properties">rtest.properties</a> -s rtest.xml</p><p>This successfully generates rows for all tables, satisfying referential integrity :)</p>]]></message>
+<createdAt>2009-08-18T18:03:02Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545077" />
+</post>
+<post dsq:id="1977575039">
+<id>wp_id=109</id>
+<message><![CDATA[<p>Thanks for this article, it was really helpful! =)</p>]]></message>
+<createdAt>2009-11-08T15:54:50Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Julio</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3696901495" />
+</post>
+<post dsq:id="1976475165">
+<id>wp_id=109</id>
+<message><![CDATA[<p>Thanks for this article, it was really helpful! =)</p>]]></message>
+<createdAt>2009-11-08T15:54:50Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Julio</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512238" />
+</post>
+<post dsq:id="1977575003">
+<id>wp_id=110</id>
+<message><![CDATA[<p>i hope that u continue on posting more samples of programs... thnx!</p>]]></message>
+<createdAt>2009-11-13T17:19:55Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>chris</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3696580751" />
+</post>
+<post dsq:id="1976475143">
+<id>wp_id=110</id>
+<message><![CDATA[<p>i hope that u continue on posting more samples of programs... thnx!</p>]]></message>
+<createdAt>2009-11-13T17:19:55Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>chris</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512199" />
+</post>
+<post dsq:id="1977575005">
+<id>wp_id=111</id>
+<message><![CDATA[<p>Thanks for the message chris. <br>I've been neglecting the blog due to work lately, but I'm sure coming back to it. <br>I'm standing by for OpenSQL Camp in Portland with my Percona team mates right now, that should give me some nice blogging material for my return :)</p>]]></message>
+<createdAt>2009-11-13T18:53:41Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3696580751" />
+</post>
+<post dsq:id="1976475135">
+<id>wp_id=111</id>
+<message><![CDATA[<p>Thanks for the message chris. <br>I've been neglecting the blog due to work lately, but I'm sure coming back to it. <br>I'm standing by for OpenSQL Camp in Portland with my Percona team mates right now, that should give me some nice blogging material for my return :)</p>]]></message>
+<createdAt>2009-11-13T18:53:41Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512199" />
+</post>
+<post dsq:id="1977575041">
+<id>wp_id=112</id>
+<message><![CDATA[<p>Thanks for an insight into a very thorny problem I am tackling in my latest project. Now, I need to grok this and do some testing.</p>]]></message>
+<createdAt>2009-11-26T03:20:50Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>JonB</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3696901495" />
+</post>
+<post dsq:id="1976475176">
+<id>wp_id=112</id>
+<message><![CDATA[<p>Thanks for an insight into a very thorny problem I am tackling in my latest project. Now, I need to grok this and do some testing.</p>]]></message>
+<createdAt>2009-11-26T03:20:50Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>JonB</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512238" />
+</post>
+<post dsq:id="1977575051">
+<id>wp_id=114</id>
+<message><![CDATA[<p>Hm, what if there is a user-defined function (UDF) which may have side effects?</p><p>    explain select id from projects where id = (select my_udf(max(id)) from projects where name like 'en%');</p><p>Would this EXPLAIN then actually call my_udf()? Seems a bit scary (but maybe one should expect that?)</p>]]></message>
+<createdAt>2010-01-27T12:30:42Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Kristian Nielsen</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545079" />
+</post>
+<post dsq:id="1976475180">
+<id>wp_id=114</id>
+<message><![CDATA[<p>Hm, what if there is a user-defined function (UDF) which may have side effects?</p><p>    explain select id from projects where id = (select my_udf(max(id)) from projects where name like 'en%');</p><p>Would this EXPLAIN then actually call my_udf()? Seems a bit scary (but maybe one should expect that?)</p>]]></message>
+<createdAt>2010-01-27T12:30:42Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Kristian Nielsen</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512244" />
+</post>
+<post dsq:id="1976475168">
+<id>wp_id=116</id>
+<message><![CDATA[<p>Kristian:</p><p>I've poked around the source before to try and figure things out, but code for handling explain seems to be a bit distributed on the code base, so it takes more than just a few minutes reading to understand it.</p><p>So that leaves me with my second best guess: strace.</p><p>Take a look at this:</p><p>(I'm using lookup from <a href="http://udf_example.so" rel="nofollow noopener" title="udf_example.so">udf_example.so</a>)</p><p>mysql&gt; select lookup(url) from urls;<br>+---------------+<br>| lookup(url)   |<br>+---------------+<br>| 69.80.205.238 | <br>| 69.89.31.108  | <br>| 69.80.205.238 | <br>+---------------+<br>3 rows in set (0.09 sec)</p><p>And here's the strace relevant for the lookup:</p><p>[pid  8205]      0.000120 write(3, "100127 16:40:23\t      9 Query       select lookup(url) from urls\n"..., 65) = 65 <br>...<br>[pid  8205]      0.000878 open("/etc/resolv.conf", O_RDONLY) = 37 <br>[pid  8205]      0.000179 fstat(37, {st_mode=S_IFREG|0644, st_size=240, ...}) = 0</p><p>Now with explain:</p><p>mysql&gt; explain select lookup(url) from urls;<br>+----+-------------+-------+------+---------------+------+---------+------+------+-------+<br>| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra |<br>+----+-------------+-------+------+---------------+------+---------+------+------+-------+<br>|  1 | SIMPLE      | urls  | ALL  | NULL          | NULL | NULL    | NULL |    3 |       | <br>+----+-------------+-------+------+---------------+------+---------+------+------+-------+<br>1 row in set (0.00 sec)</p><p>[pid  8205]      0.000137 write(3, "100127 16:40:35\t      9 Query       explain select lookup(url) from urls\n"..., 73) = 73 <br>[pid  8205]      0.000185 sched_setscheduler(8205, SCHED_OTHER, { 6 }) = -1 EINVAL (Invalid argument) <br>[pid  8205]      0.000280 gettimeofday({1264617635, 884763}, NULL) = 0 <br>[pid  8205]      0.000091 gettimeofday({1264617635, 884852}, NULL) = 0 <br>[pid  8205]      0.000266 write(29, "\x01\x00\x00\x01\x0a\x18\x00\x00\x02\x03\x64\x65\x66\x00\x00\x00\x02\x69\x64\x00\x0c\x3f\x00\x03\x00\x00\x00\x08\xa1\x00<br>\x00\x00\x00\x21\x00\x00\x03\x03\x64\x65\x66\x00\x00\x00\x0b\x73\x65\x6c\x65\x63\x74\x5f\x74\x79\x70\x65\x00\x0c\x08\x00\x13\x00\x00\x00\xfd\x01\x00\x1f\x00\<br>x00\x1b\x00\x00\x04\x03\x64\x65\x66\x00\x00\x00\x05\x74\x61\x62\x6c\x65\x00\x0c\x08\x00\x40\x00\x00\x00\xfd\x00\x00\x1f\x00\x00\x1a\x00\x00\x05\x03\x64\x65\x<br>66\x00\x00\x00\x04\x74\x79\x70\x65\x00\x0c\x08\x00\x0a\x00\x00\x00\xfd\x00\x00\x1f\x00\x00\x23\x00\x00\x06\x03\x64\x65\x66\x00\x00\x00\x0d\x70\x6f\x73\x73\x6<br>9\x62\x6c\x65\x5f\x6b\x65\x79\x73\x00\x0c\x08\x00\x00\x10\x00\x00\xfd\x00\x00\x1f\x00\x00\x19\x00\x00\x07\x03\x64\x65\x66\x00\x00\x00\x03\x6b\x65\x79\x00\x0c<br>\x08\x00\x40\x00\x00\x00\xfd\x00\x00\x1f\x00\x00\x1d\x00\x00\x08\x03\x64\x65\x66\x00\x00\x00\x07\x6b\x65\x79\x5f\x6c\x65\x6e\x00\x0c\x08\x00\x00\x10\x00\x00\<br>xfd\x00\x00\x1f\x00\x00\x19\x00\x00\x09\x03\x64\x65\x66\x00\x00\x00\x03\x72\x65\x66\x00\x0c\x08\x00\x00\x04\x00\x00\xfd\x00\x00\x1f\x00\x00\x1a\x00\x00\x0a\x<br>03\x64\x65\x66\x00\x00\x00\x04\x72\x6f\x77\x73\x00\x0c\x3f\x00\x0a\x00\x00\x00\x08\xa0\x00\x00\x00\x00\x1b\x00\x00\x0b\x03\x64\x65\x66\x00\x00\x00\x05\x45\x7<br>8\x74\x72\x61\x00\x0c\x08\x00\xff\x00\x00\x00\xfd\x01\x00\x1f\x00\x00\x05\x00\x00\x0c\xfe\x00\x00\x02\x00\x19\x00\x00\x0d\x01\x31\x06\x53\x49\x4d\x50\x4c\x45<br>\x04\x75\x72\x6c\x73\x03\x41\x4c\x4c\xfb\xfb\xfb\xfb\x01\x33\x00\x05\x00\x00\x0e\xfe\x00\x00\x02\x00"..., 369) = 369 <br>[pid  8205]      0.000457 gettimeofday({1264617635, 885575}, NULL) = 0 <br>[pid  8205]      0.000092 sched_setscheduler(8205, SCHED_OTHER, { 8 }) = -1 EINVAL (Invalid argument) <br>[pid  8205]      0.000103 gettimeofday({1264617635, 885770}, NULL) = 0 <br>[pid  8205]      0.000084 gettimeofday({1264617635, 885853}, NULL) = 0 <br>[pid  8205]      0.000086 gettimeofday({1264617635, 885939}, NULL) = 0 <br>[pid  8205]      0.000116 gettimeofday({1264617635, 886058}, NULL) = 0 <br>[pid  8205]      0.000130 write(4, "# Time: 100127 16:40:35\n# User@Host: root[root] @ <a href="http://fernandoipar.com" rel="nofollow noopener" title="fernandoipar.com">fernandoipar.com</a> []\n# Thread_id: 9  Schema: test\n# Query_time: 0.001985  Lo<br>ck_time: 0.000690  Rows_sent: 1  Rows_examined: 0  Rows_affected: 0  Rows_read: 1\nexplain select lookup(url) from urls;\n"..., 238) = 238 <br>...</p><p>To discard a possible dns caching effect, I ran the original query twice on the same connection, and got the same strace output, so it's always going to /etc/resolv.conf</p><p>Still, without looking at the source code, this is just anecdotical evidence from one example, I'll try to look more into this and perhaps make a new post on the subject :)</p>]]></message>
+<createdAt>2010-01-28T00:05:16Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512244" />
+</post>
+<post dsq:id="1977575057">
+<id>wp_id=116</id>
+<message><![CDATA[<p>Kristian:</p><p>I've poked around the source before to try and figure things out, but code for handling explain seems to be a bit distributed on the code base, so it takes more than just a few minutes reading to understand it.</p><p>So that leaves me with my second best guess: strace.</p><p>Take a look at this:</p><p>(I'm using lookup from <a href="http://udf_example.so" rel="nofollow noopener" title="udf_example.so">udf_example.so</a>)</p><p>mysql&gt; select lookup(url) from urls;<br>+---------------+<br>| lookup(url)   |<br>+---------------+<br>| 69.80.205.238 | <br>| 69.89.31.108  | <br>| 69.80.205.238 | <br>+---------------+<br>3 rows in set (0.09 sec)</p><p>And here's the strace relevant for the lookup:</p><p>[pid  8205]      0.000120 write(3, "100127 16:40:23\t      9 Query       select lookup(url) from urls\n"..., 65) = 65 <br>...<br>[pid  8205]      0.000878 open("/etc/resolv.conf", O_RDONLY) = 37 <br>[pid  8205]      0.000179 fstat(37, {st_mode=S_IFREG|0644, st_size=240, ...}) = 0</p><p>Now with explain:</p><p>mysql&gt; explain select lookup(url) from urls;<br>+----+-------------+-------+------+---------------+------+---------+------+------+-------+<br>| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra |<br>+----+-------------+-------+------+---------------+------+---------+------+------+-------+<br>|  1 | SIMPLE      | urls  | ALL  | NULL          | NULL | NULL    | NULL |    3 |       | <br>+----+-------------+-------+------+---------------+------+---------+------+------+-------+<br>1 row in set (0.00 sec)</p><p>[pid  8205]      0.000137 write(3, "100127 16:40:35\t      9 Query       explain select lookup(url) from urls\n"..., 73) = 73 <br>[pid  8205]      0.000185 sched_setscheduler(8205, SCHED_OTHER, { 6 }) = -1 EINVAL (Invalid argument) <br>[pid  8205]      0.000280 gettimeofday({1264617635, 884763}, NULL) = 0 <br>[pid  8205]      0.000091 gettimeofday({1264617635, 884852}, NULL) = 0 <br>[pid  8205]      0.000266 write(29, "\x01\x00\x00\x01\x0a\x18\x00\x00\x02\x03\x64\x65\x66\x00\x00\x00\x02\x69\x64\x00\x0c\x3f\x00\x03\x00\x00\x00\x08\xa1\x00<br>\x00\x00\x00\x21\x00\x00\x03\x03\x64\x65\x66\x00\x00\x00\x0b\x73\x65\x6c\x65\x63\x74\x5f\x74\x79\x70\x65\x00\x0c\x08\x00\x13\x00\x00\x00\xfd\x01\x00\x1f\x00\<br>x00\x1b\x00\x00\x04\x03\x64\x65\x66\x00\x00\x00\x05\x74\x61\x62\x6c\x65\x00\x0c\x08\x00\x40\x00\x00\x00\xfd\x00\x00\x1f\x00\x00\x1a\x00\x00\x05\x03\x64\x65\x<br>66\x00\x00\x00\x04\x74\x79\x70\x65\x00\x0c\x08\x00\x0a\x00\x00\x00\xfd\x00\x00\x1f\x00\x00\x23\x00\x00\x06\x03\x64\x65\x66\x00\x00\x00\x0d\x70\x6f\x73\x73\x6<br>9\x62\x6c\x65\x5f\x6b\x65\x79\x73\x00\x0c\x08\x00\x00\x10\x00\x00\xfd\x00\x00\x1f\x00\x00\x19\x00\x00\x07\x03\x64\x65\x66\x00\x00\x00\x03\x6b\x65\x79\x00\x0c<br>\x08\x00\x40\x00\x00\x00\xfd\x00\x00\x1f\x00\x00\x1d\x00\x00\x08\x03\x64\x65\x66\x00\x00\x00\x07\x6b\x65\x79\x5f\x6c\x65\x6e\x00\x0c\x08\x00\x00\x10\x00\x00\<br>xfd\x00\x00\x1f\x00\x00\x19\x00\x00\x09\x03\x64\x65\x66\x00\x00\x00\x03\x72\x65\x66\x00\x0c\x08\x00\x00\x04\x00\x00\xfd\x00\x00\x1f\x00\x00\x1a\x00\x00\x0a\x<br>03\x64\x65\x66\x00\x00\x00\x04\x72\x6f\x77\x73\x00\x0c\x3f\x00\x0a\x00\x00\x00\x08\xa0\x00\x00\x00\x00\x1b\x00\x00\x0b\x03\x64\x65\x66\x00\x00\x00\x05\x45\x7<br>8\x74\x72\x61\x00\x0c\x08\x00\xff\x00\x00\x00\xfd\x01\x00\x1f\x00\x00\x05\x00\x00\x0c\xfe\x00\x00\x02\x00\x19\x00\x00\x0d\x01\x31\x06\x53\x49\x4d\x50\x4c\x45<br>\x04\x75\x72\x6c\x73\x03\x41\x4c\x4c\xfb\xfb\xfb\xfb\x01\x33\x00\x05\x00\x00\x0e\xfe\x00\x00\x02\x00"..., 369) = 369 <br>[pid  8205]      0.000457 gettimeofday({1264617635, 885575}, NULL) = 0 <br>[pid  8205]      0.000092 sched_setscheduler(8205, SCHED_OTHER, { 8 }) = -1 EINVAL (Invalid argument) <br>[pid  8205]      0.000103 gettimeofday({1264617635, 885770}, NULL) = 0 <br>[pid  8205]      0.000084 gettimeofday({1264617635, 885853}, NULL) = 0 <br>[pid  8205]      0.000086 gettimeofday({1264617635, 885939}, NULL) = 0 <br>[pid  8205]      0.000116 gettimeofday({1264617635, 886058}, NULL) = 0 <br>[pid  8205]      0.000130 write(4, "# Time: 100127 16:40:35\n# User@Host: root[root] @ <a href="http://fernandoipar.com" rel="nofollow noopener" title="fernandoipar.com">fernandoipar.com</a> []\n# Thread_id: 9  Schema: test\n# Query_time: 0.001985  Lo<br>ck_time: 0.000690  Rows_sent: 1  Rows_examined: 0  Rows_affected: 0  Rows_read: 1\nexplain select lookup(url) from urls;\n"..., 238) = 238 <br>...</p><p>To discard a possible dns caching effect, I ran the original query twice on the same connection, and got the same strace output, so it's always going to /etc/resolv.conf</p><p>Still, without looking at the source code, this is just anecdotical evidence from one example, I'll try to look more into this and perhaps make a new post on the subject :)</p>]]></message>
+<createdAt>2010-01-28T00:05:16Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545079" />
+</post>
+<post dsq:id="1977575036">
+<id>wp_id=139</id>
+<message><![CDATA[<p>it is possible to see the "bad list" ?</p>]]></message>
+<createdAt>2010-09-24T23:24:50Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>antonio</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3696611863" />
+</post>
+<post dsq:id="1976475167">
+<id>wp_id=139</id>
+<message><![CDATA[<p>it is possible to see the "bad list" ?</p>]]></message>
+<createdAt>2010-09-24T23:24:50Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>antonio</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512236" />
+</post>
+<post dsq:id="1977575013">
+<id>wp_id=140</id>
+<message><![CDATA[<p>Can you update us on how you did on the exam? Any particular areas we should focus on in our study?</p>]]></message>
+<createdAt>2010-11-18T00:36:55Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Onjefu</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545041" />
+</post>
+<post dsq:id="1976475136">
+<id>wp_id=140</id>
+<message><![CDATA[<p>Can you update us on how you did on the exam? Any particular areas we should focus on in our study?</p>]]></message>
+<createdAt>2010-11-18T00:36:55Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Onjefu</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512209" />
+</post>
+<post dsq:id="1977575043">
+<id>wp_id=141</id>
+<message><![CDATA[<p>It was very well written article - I liked that You showed the executed commands along with the tables, so readers can learn and try those commands on their own.</p><p>Thanks!</p>]]></message>
+<createdAt>2011-01-18T18:58:24Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>rauni</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3696901495" />
+</post>
+<post dsq:id="1976475178">
+<id>wp_id=141</id>
+<message><![CDATA[<p>It was very well written article - I liked that You showed the executed commands along with the tables, so readers can learn and try those commands on their own.</p><p>Thanks!</p>]]></message>
+<createdAt>2011-01-18T18:58:24Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>rauni</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512238" />
+</post>
+<post dsq:id="1977575002">
+<id>wp_id=143</id>
+<message><![CDATA[<p>Fernando,</p><p>I wonder if you would get the same performance results if you exhaust the enum data type with up to 2^16-1 elements. I mean, what happens, if you have many different types, would it be better to pre-define all possible combinations in the scheme or would it be better to use a normalized scheme? Just from a performance point of view of course, elegance is somewhat different :D</p><p>But I think the difference would be negigible because you only shift the lookup problem.</p><p>Robert</p>]]></message>
+<createdAt>2011-02-26T14:53:31Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Robert</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3696580751" />
+</post>
+<post dsq:id="1976475154">
+<id>wp_id=143</id>
+<message><![CDATA[<p>Fernando,</p><p>I wonder if you would get the same performance results if you exhaust the enum data type with up to 2^16-1 elements. I mean, what happens, if you have many different types, would it be better to pre-define all possible combinations in the scheme or would it be better to use a normalized scheme? Just from a performance point of view of course, elegance is somewhat different :D</p><p>But I think the difference would be negigible because you only shift the lookup problem.</p><p>Robert</p>]]></message>
+<createdAt>2011-02-26T14:53:31Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Robert</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512199" />
+</post>
+<post dsq:id="1977575059">
+<id>wp_id=189</id>
+<message><![CDATA[<p>Hi Tocayo,</p><p>Greetings from across the pond. Do you know if “Proactive measures to minimize MySQL downtime" will be recorded? Or, at the very least, will the presentation (odf or whatever) be made online?</p><p>Kudos and good luck<br>FC</p>]]></message>
+<createdAt>2013-10-07T06:40:59Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Fernando Cassia (@fcassia)</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545081" />
+</post>
+<post dsq:id="1976475184">
+<id>wp_id=189</id>
+<message><![CDATA[<p>Hi Tocayo,</p><p>Greetings from across the pond. Do you know if “Proactive measures to minimize MySQL downtime" will be recorded? Or, at the very least, will the presentation (odf or whatever) be made online?</p><p>Kudos and good luck<br>FC</p>]]></message>
+<createdAt>2013-10-07T06:40:59Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Fernando Cassia (@fcassia)</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512246" />
+</post>
+<post dsq:id="1977575058">
+<id>wp_id=190</id>
+<message><![CDATA[<p>Woot!  See you there!</p>]]></message>
+<createdAt>2013-10-07T19:51:25Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Ronald Bradford</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545081" />
+</post>
+<post dsq:id="1976475185">
+<id>wp_id=190</id>
+<message><![CDATA[<p>Woot!  See you there!</p>]]></message>
+<createdAt>2013-10-07T19:51:25Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Ronald Bradford</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512246" />
+</post>
+<post dsq:id="1976475182">
+<id>wp_id=191</id>
+<message><![CDATA[<p><a href="http://youtube.com" rel="nofollow noopener" title="youtube.com">youtube.com</a>  @Fernando: I honestly don't know :) There is a recording  of a similar (english) presentation I delivered as webinar, here: <a href="http://www.youtube.com/watch?v=XOrZq-Hj1ag" rel="nofollow noopener" title="http://www.youtube.com/watch?v=XOrZq-Hj1ag">http://www.youtube.com/watc...</a></p><p>Thanks for the good luck, and hope to see you there!</p>]]></message>
+<createdAt>2013-10-07T20:26:31Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512246" />
+</post>
+<post dsq:id="1977575060">
+<id>wp_id=191</id>
+<message><![CDATA[<p><a href="http://youtube.com" rel="nofollow noopener" title="youtube.com">youtube.com</a>  @Fernando: I honestly don't know :) There is a recording  of a similar (english) presentation I delivered as webinar, here: <a href="http://www.youtube.com/watch?v=XOrZq-Hj1ag" rel="nofollow noopener" title="http://www.youtube.com/watch?v=XOrZq-Hj1ag">http://www.youtube.com/watc...</a></p><p>Thanks for the good luck, and hope to see you there!</p>]]></message>
+<createdAt>2013-10-07T20:26:31Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545081" />
+</post>
+<post dsq:id="1977575052">
+<id>wp_id=192</id>
+<message><![CDATA[<p>@Ronald: I was on vacation other times you came nearby, so I'm glad I will get to you see you this time! If you go on a latin american tour again, ping me if you'd like to present at the Montevideo MySQL Meetup. The group would surely love that!</p>]]></message>
+<createdAt>2013-10-07T20:28:24Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545081" />
+</post>
+<post dsq:id="1976475170">
+<id>wp_id=192</id>
+<message><![CDATA[<p>@Ronald: I was on vacation other times you came nearby, so I'm glad I will get to you see you this time! If you go on a latin american tour again, ping me if you'd like to present at the Montevideo MySQL Meetup. The group would surely love that!</p>]]></message>
+<createdAt>2013-10-07T20:28:24Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512246" />
+</post>
+<post dsq:id="1977575030">
+<id>wp_id=207</id>
+<message><![CDATA[<p>Hi Fernando,<br>This seems like a great tool but I'm getting an error -<br>ERROR 1221 (HY000): Incorrect usage of PROCEDURE and non-SELECT<br>I'm on the latest 5.6.x, maybe that's got something to do with it.<br>Any ideas?<br>Thanks</p>]]></message>
+<createdAt>2013-11-03T07:28:16Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Alex</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545040" />
+</post>
+<post dsq:id="1976475150">
+<id>wp_id=207</id>
+<message><![CDATA[<p>Hi Fernando,<br>This seems like a great tool but I'm getting an error -<br>ERROR 1221 (HY000): Incorrect usage of PROCEDURE and non-SELECT<br>I'm on the latest 5.6.x, maybe that's got something to do with it.<br>Any ideas?<br>Thanks</p>]]></message>
+<createdAt>2013-11-03T07:28:16Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Alex</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512201" />
+</post>
+<post dsq:id="1977575026">
+<id>wp_id=208</id>
+<message><![CDATA[<p>Hello Alex,</p><p>You're right, this stopped working on 5.6 Not just the stored procedure, but apparently any use of procedure analyse() other than a select.</p><p>So far I have only found a changelog mention for 5.6.6 about this, but I tired 5.6.5 and this did not work either so the change must have happened before.</p><p>I'll dig around a bit to see what I can find.</p>]]></message>
+<createdAt>2013-11-04T17:13:19Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545040" />
+</post>
+<post dsq:id="1976475151">
+<id>wp_id=208</id>
+<message><![CDATA[<p>Hello Alex,</p><p>You're right, this stopped working on 5.6 Not just the stored procedure, but apparently any use of procedure analyse() other than a select.</p><p>So far I have only found a changelog mention for 5.6.6 about this, but I tired 5.6.5 and this did not work either so the change must have happened before.</p><p>I'll dig around a bit to see what I can find.</p>]]></message>
+<createdAt>2013-11-04T17:13:19Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512201" />
+</post>
+<post dsq:id="1977575042">
+<id>wp_id=210</id>
+<message><![CDATA[<p>This has been extremely useful, thank you!</p>]]></message>
+<createdAt>2013-11-05T02:09:28Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jason</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3696901495" />
+</post>
+<post dsq:id="1976475174">
+<id>wp_id=210</id>
+<message><![CDATA[<p>This has been extremely useful, thank you!</p>]]></message>
+<createdAt>2013-11-05T02:09:28Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jason</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512238" />
+</post>
+<post dsq:id="1977575010">
+<id>wp_id=237</id>
+<message><![CDATA[<p>mysql&gt; insert into procedure_analyse_output select * from pet procedure analyse()<br>    -&gt; ;<br>ERROR 1221 (HY000): Incorrect usage of PROCEDURE and non-SELECT</p>]]></message>
+<createdAt>2013-12-01T12:57:40Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>root</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545040" />
+</post>
+<post dsq:id="1976475144">
+<id>wp_id=237</id>
+<message><![CDATA[<p>mysql&gt; insert into procedure_analyse_output select * from pet procedure analyse()<br>    -&gt; ;<br>ERROR 1221 (HY000): Incorrect usage of PROCEDURE and non-SELECT</p>]]></message>
+<createdAt>2013-12-01T12:57:40Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>root</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512201" />
+</post>
+<post dsq:id="1977575024">
+<id>wp_id=238</id>
+<message><![CDATA[<p>hello fernando,<br>it can work this way:<br>mysql&gt; select * from pet procedure analyse() into OUTFILE "ana.txt";<br>mysql&gt; load data infile "ana.txt" into procedure_analyse_output;<br>than you la</p>]]></message>
+<createdAt>2013-12-01T13:06:41Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>root</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3697545040" />
+</post>
+<post dsq:id="1976475155">
+<id>wp_id=238</id>
+<message><![CDATA[<p>hello fernando,<br>it can work this way:<br>mysql&gt; select * from pet procedure analyse() into OUTFILE "ana.txt";<br>mysql&gt; load data infile "ana.txt" into procedure_analyse_output;<br>than you la</p>]]></message>
+<createdAt>2013-12-01T13:06:41Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>root</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512201" />
+</post>
+<post dsq:id="1976475173">
+<id>wp_id=239</id>
+<message><![CDATA[<p>More detailed example w/graph:</p><p><a href="https://gist.github.com/fipar/7758814" rel="nofollow noopener" title="https://gist.github.com/fipar/7758814">https://gist.github.com/fip...</a></p>]]></message>
+<createdAt>2013-12-03T03:25:28Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512250" />
+</post>
+<post dsq:id="1977575004">
+<id>wp_id=1576</id>
+<message><![CDATA[<p>I always experienced lots of problems using MySQL ENUMs , and never going to use it again.</p>]]></message>
+<createdAt>2014-09-23T11:40:56Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Tony</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3696580751" />
+</post>
+<post dsq:id="1976475146">
+<id>wp_id=1576</id>
+<message><![CDATA[<p>I always experienced lots of problems using MySQL ENUMs , and never going to use it again.</p>]]></message>
+<createdAt>2014-09-23T11:40:56Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Tony</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512199" />
+</post>
+<post dsq:id="1977575045">
+<id>wp_id=3123</id>
+<message><![CDATA[<p>Nice write up! Thanks for the shout-out :)</p><p>Roland.</p>]]></message>
+<createdAt>2015-03-11T17:52:16Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Roland Bouman</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695514171" />
+</post>
+<post dsq:id="1976475188">
+<id>wp_id=3123</id>
+<message><![CDATA[<p>Nice write up! Thanks for the shout-out :)</p><p>Roland.</p>]]></message>
+<createdAt>2015-03-11T17:52:16Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Roland Bouman</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512253" />
+</post>
+<post dsq:id="1977575048">
+<id>wp_id=3126</id>
+<message><![CDATA[<p>Thank you for this.</p><p>As an addition: since 5.6, GA more than 2 years ago, Oracle ships its MySQL packages with strict SQL defaults on the config file (people may not have noticed because of Linux distribution defaults or them using ancients versions) and compiled in defaults in 5.7.</p><p>The only reason the change is taking so long is due to backwards compatibility with old applications.</p><p>Other myth that people continue repeating over and over without really understanding the internals is that data is not really safe in MySQL: By default, MySQL is fully ACID, synchronous to disk, data is written twice to secondary storage to avoid partial page writes in case the system crashes, and mantains a checksum for every 16K bytes of information, shutting down automatically if it detects physical corruption. Despite that, it still beats some of the other systems in throughput and latency.</p><p>I would love if some people stopped attacking MySQL and instead praised their favourite DB system. Or better, stopped having a favourite system and praised the strong points and hated the weak ones of every option. Like programming languages, every option has its cons and pros.</p>]]></message>
+<createdAt>2015-03-11T18:47:33Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jaime Crespo</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695514171" />
+</post>
+<post dsq:id="1976475186">
+<id>wp_id=3126</id>
+<message><![CDATA[<p>Thank you for this.</p><p>As an addition: since 5.6, GA more than 2 years ago, Oracle ships its MySQL packages with strict SQL defaults on the config file (people may not have noticed because of Linux distribution defaults or them using ancients versions) and compiled in defaults in 5.7.</p><p>The only reason the change is taking so long is due to backwards compatibility with old applications.</p><p>Other myth that people continue repeating over and over without really understanding the internals is that data is not really safe in MySQL: By default, MySQL is fully ACID, synchronous to disk, data is written twice to secondary storage to avoid partial page writes in case the system crashes, and mantains a checksum for every 16K bytes of information, shutting down automatically if it detects physical corruption. Despite that, it still beats some of the other systems in throughput and latency.</p><p>I would love if some people stopped attacking MySQL and instead praised their favourite DB system. Or better, stopped having a favourite system and praised the strong points and hated the weak ones of every option. Like programming languages, every option has its cons and pros.</p>]]></message>
+<createdAt>2015-03-11T18:47:33Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jaime Crespo</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512253" />
+</post>
+<post dsq:id="1977575050">
+<id>wp_id=3127</id>
+<message><![CDATA[<p>As a "Fan Boy" I have to say, Thanks for a good post.    I'll go out on a limb and say... As a push by every App Dev to become a rock star and write their own data store,  MySQL has fallen into the "Old School" bucket with Oracle.   DBA's are being ask to for the "New Stuff" without being ask for their expertise.  Things like the memcache interface to MySQL are simply ignored by developers.</p>]]></message>
+<createdAt>2015-03-11T19:32:17Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Mark Grennan</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695514171" />
+</post>
+<post dsq:id="1976475187">
+<id>wp_id=3127</id>
+<message><![CDATA[<p>As a "Fan Boy" I have to say, Thanks for a good post.    I'll go out on a limb and say... As a push by every App Dev to become a rock star and write their own data store,  MySQL has fallen into the "Old School" bucket with Oracle.   DBA's are being ask to for the "New Stuff" without being ask for their expertise.  Things like the memcache interface to MySQL are simply ignored by developers.</p>]]></message>
+<createdAt>2015-03-11T19:32:17Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Mark Grennan</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512253" />
+</post>
+<post dsq:id="1977575046">
+<id>wp_id=3130</id>
+<message><![CDATA[<p>pgsql has bitmap join optimization, in that it can scan more than one b-tree, create a bitmap and logically combine them.  This is faster than "merge intersection" that MySQL has.  pgsql doesn't have real bitmap indexes to the best of my knowledge, unless perhaps they were added in the latest release and I missed them.</p><p>And if you want real bitmap indexes for MySQL, you can always use my FastBit_UDF.  It is a little clunky, but very very fast.</p>]]></message>
+<createdAt>2015-03-11T21:03:04Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Justin Swanhart</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695514171" />
+</post>
+<post dsq:id="1976475177">
+<id>wp_id=3130</id>
+<message><![CDATA[<p>pgsql has bitmap join optimization, in that it can scan more than one b-tree, create a bitmap and logically combine them.  This is faster than "merge intersection" that MySQL has.  pgsql doesn't have real bitmap indexes to the best of my knowledge, unless perhaps they were added in the latest release and I missed them.</p><p>And if you want real bitmap indexes for MySQL, you can always use my FastBit_UDF.  It is a little clunky, but very very fast.</p>]]></message>
+<createdAt>2015-03-11T21:03:04Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Justin Swanhart</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512253" />
+</post>
+<post dsq:id="1977575047">
+<id>wp_id=3131</id>
+<message><![CDATA[<p>Justin, I was thinking of the Bizgres patches that did/do provide on-disk bitmap indexes, but it seems it never made it into a stable version (I'll admit I haven't seriously played with PostgreSQL in a while...)</p>]]></message>
+<createdAt>2015-03-11T21:27:23Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695514171" />
+</post>
+<post dsq:id="1976475189">
+<id>wp_id=3131</id>
+<message><![CDATA[<p>Justin, I was thinking of the Bizgres patches that did/do provide on-disk bitmap indexes, but it seems it never made it into a stable version (I'll admit I haven't seriously played with PostgreSQL in a while...)</p>]]></message>
+<createdAt>2015-03-11T21:27:23Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fernando</name>
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3695512253" />
+</post>
+<post dsq:id="2985663697">
+<id />
+<message><![CDATA[<p>Sadly, when MySQL violates the policy of least surprise it is not surprising.</p>]]></message>
+<createdAt>2016-11-05T02:49:23Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Justin Swanhart</name>
+<isAnonymous>false</isAnonymous>
+<username>justinswanhart</username>
+</author>
+<thread dsq:id="5279340724" />
+</post>
+<post dsq:id="2986954960">
+<id />
+<message><![CDATA[<p>Perhaps this is obvious, but what are the implications?</p><p>Certainly, if the majority of a tuple's access was "ORDER BY indexed_field DESC", there would be a performance hit, but are there other cases where it is really important to have descending indexes?</p>]]></message>
+<createdAt>2016-11-06T00:52:58Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>$58077795</name>
+<isAnonymous>false</isAnonymous>
+<username>$58077795</username>
+</author>
+<thread dsq:id="5279340724" />
+</post>
+<post dsq:id="2987149783">
+<id />
+<message><![CDATA[<p>The whole point of the DESC keyword is to support accessing the index in descending order more efficiently.  If the database silently ignores this request, it sucks.</p><p>Much worse is that you can define CHECK constraints, and they parse correctly, but they do nothing.  Or on MyISAM you can define foreign keys and you get no error, but they are not created.  Or a myriad of other toy database behaviors that make me wonder why I ever picked up MySQL until I realize it was forced upon me and somehow I just ended up with Stockholm Syndrome for it.</p>]]></message>
+<createdAt>2016-11-06T03:59:12Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Justin Swanhart</name>
+<isAnonymous>false</isAnonymous>
+<username>justinswanhart</username>
+</author>
+<thread dsq:id="5279340724" />
+<parent dsq:id="2986954960" />
+</post>
+<post dsq:id="2987588715">
+<id />
+<message><![CDATA[<p>That last comment of yours ought to make it to a t-shirt some day!</p>]]></message>
+<createdAt>2016-11-06T13:47:27Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<thread dsq:id="5279340724" />
+<parent dsq:id="2987149783" />
+</post>
+<post dsq:id="2988845026">
+<id />
+<message><![CDATA[<p>I have not dived in this subject in details, but my guess is that InnoDB does not support DESC indexes, but another storage engine could.  So it is a good thing that MySQL support the syntax.  However, it should at least give a warning, and maybe even an error in 5.5 and 5.6.  Did you open a bugs about this ?</p>]]></message>
+<createdAt>2016-11-07T07:30:38Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jean-François Gagné</name>
+<isAnonymous>false</isAnonymous>
+<username>jean_fran_ois_gagn</username>
+</author>
+<thread dsq:id="5279340724" />
+</post>
+<post dsq:id="2988855153">
+<id />
+<message><![CDATA[<p>"The whole point of the DESC keyword is to support accessing the index in descending order more efficiently."</p><p>That is not the whole point.  I think it is more important that it makes it possible to use a multi-column index for ordering even when ordering is a mix of ASC and DESC.</p>]]></message>
+<createdAt>2016-11-07T07:47:48Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Øystein Grøvlen</name>
+<isAnonymous>false</isAnonymous>
+<username>ystein_gr_vlen</username>
+</author>
+<thread dsq:id="5279340724" />
+<parent dsq:id="2987149783" />
+</post>
+<post dsq:id="2988993310">
+<id />
+<message><![CDATA[<p>You're right that the rationale here would be differences in support by storage engine, as with foreign keys, but in this case, before MySQL 8.0, it does not really matter since MySQL itself ignores the modifiers so even if an engine would support those, it wouldn't get used. I thought about filing a bug report but since it works as expected on 8.0 and I would not expect this to be changed in earlier versions, I didn't do it.</p>]]></message>
+<createdAt>2016-11-07T11:08:43Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Fernando Ipar</name>
+<isAnonymous>false</isAnonymous>
+<username>fernandoipar</username>
+</author>
+<thread dsq:id="5279340724" />
+<parent dsq:id="2988845026" />
+</post>
+<post dsq:id="2989100596">
+<id />
+<message><![CDATA[<p>That was the point, but we can split hairs if you want.  If I use an ORDER BY that uses the ASC/DESC keywords as defined in the index, I expect that ORDER BY to be efficient and use the index as I defined it, which is more efficient than a filesort.  But since the index ignores the order, the database can not efficiently execute the query that I specifically asked the database to optimize.</p>]]></message>
+<createdAt>2016-11-07T13:04:30Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Justin Swanhart</name>
+<isAnonymous>false</isAnonymous>
+<username>justinswanhart</username>
+</author>
+<thread dsq:id="5279340724" />
+<parent dsq:id="2988855153" />
+</post>
+<post dsq:id="2989590437">
+<id />
+<message><![CDATA[<p>It should at least give a warning similar to the optimize table warning on InnoDB</p>]]></message>
+<createdAt>2016-11-07T18:13:42Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Daniël van Eeden</name>
+<isAnonymous>false</isAnonymous>
+<username>danielvaneeden</username>
+</author>
+<thread dsq:id="5279340724" />
+</post>
+<post dsq:id="3653035938">
+<id />
+<message><![CDATA[<p>Ever notice how SHOW PROFILES always has 99+% of the time in "Sending data"?  That makes me wonder if there is any use for SHOW PROFILES.  What did you hope to show with it?  (Meanwhile, please wrap queries; they are hard to read when scrolling is needed.)</p>]]></message>
+<createdAt>2017-12-08T18:43:03Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>true</isSpam>
+<author>
+<name>Rick James</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_pVLAy3TNCg</username>
+</author>
+<thread dsq:id="3696580751" />
+</post>
+</disqus>
