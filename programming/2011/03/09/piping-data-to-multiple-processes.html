@@ -60,11 +60,11 @@
           <p>Here's a simple shell script to stream data to multiple processes. It has many applications, but the reason I wrote it is to stream the same data to multiple netcat processes on remote machines.</p>
 <p>Here's the code:</p>
 <pre>
-#!/bin/bash&lt;/code&gt;
+#!/bin/bash
 
 usage()
 {
-cat &lt;&amp;2
+cat &lt;&lt;EOF&gt;&amp;2
 
 usage : multi-fifo target0 [target1 [target2 [...]]]
 

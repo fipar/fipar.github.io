@@ -112,7 +112,7 @@
               <h2 class="post-title" itemprop="name"><a href="/programming/2011/03/09/piping-data-to-multiple-processes.html" itemprop="url">Piping data to multiple processes</a></h2>
             </header>
             <section class="post-excerpt" itemprop="description">
-              <p>Here's a simple shell script to stream data to multiple processes. It has many applications, but the reason I wrote it is to stream the same data to multiple netcat processes on remote machines. Here's the code: #!/bin/bash&lt;/code&gt; usage() { cat &lt;&amp;2 usage : multi-fifo target0 [target1 [target2 [...]]] Where...</p>
+              <p>Here's a simple shell script to stream data to multiple processes. It has many applications, but the reason I wrote it is to stream the same data to multiple netcat processes on remote machines. Here's the code: #!/bin/bash usage() { cat &lt;&lt;EOF&gt;&amp;2 usage : multi-fifo target0 [target1 [target2 [...]]] Where...</p>
             </section>
             <div class="post-meta">
               <time datetime="09 March 2011">09 March 2011</time>
