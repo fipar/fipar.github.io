@@ -151,7 +151,7 @@ body { font-family: Open Sans, MundoSans, "Helvetica Neue", Arial, Helvetica, sa
 
 .blog-header .custom-links a:hover { color: #333; }
 
-.content { width: 100%; max-width: 840px; margin: 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.content { width: 95%; max-width: 1840px; margin: 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
 @media only screen and (max-width: 800px) { .content { padding: 0 32px; } }
 
