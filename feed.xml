@@ -6,9 +6,9 @@
 </description>
     <link>http://fernandoipar.com/</link>
     <atom:link href="http://fernandoipar.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 05 Jun 2021 19:22:11 -0500</pubDate>
-    <lastBuildDate>Sat, 05 Jun 2021 19:22:11 -0500</lastBuildDate>
-    <generator>Jekyll v4.0.0</generator>
+    <pubDate>Wed, 01 Sep 2021 11:16:53 -0500</pubDate>
+    <lastBuildDate>Wed, 01 Sep 2021 11:16:53 -0500</lastBuildDate>
+    <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>Documenting emacs hyper shortcuts</title>
