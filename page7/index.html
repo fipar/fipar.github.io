@@ -17,7 +17,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/page7/">
+  <link rel="canonical" href="http://0.0.0.0:4000/page7/">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -33,7 +33,7 @@
 
     <!-- header start -->
 
-<a href="http://fernandoipar.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
+<a href="http://0.0.0.0:4000" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/df_logo.jpg)"></span></a>
 
 <!-- header end -->
 
@@ -50,7 +50,7 @@
 
 <header class="blog-header">
     
-      <a class="blog-logo" href="http://fernandoipar.com" style="background-image: url('/assets/images/df_logo.jpg')">Fernando Ipar</a>
+      <a class="blog-logo" href="http://0.0.0.0:4000" style="background-image: url('/assets/images/df_logo.jpg')">Fernando Ipar</a>
     
     <h1 class="blog-title">Fernando Ipar</h1>
     <h2 class="blog-description">"Tell my wife I love her very much, she knows"
@@ -77,6 +77,20 @@
     
 
     <div class="cf frame">
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/mysql/2010/01/26/how-to-prevent-explain-from-executing-subqueries.html" itemprop="url">how to prevent explain from executing subqueries</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>Here's a quick tip for using explain: You may know this already, but mysql will actually execute some subqueries when you invoke explain.  Here's an example: mysql&gt; explain select id from projects where id = (select max(id) from projects where name like 'en%'); +----+-------------+----------+-------+---------------+---------+---------+-------+-------+-------------+ | id | select_type | table...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="26 January 2010">26 January 2010</time>
+            </div>
+          </div>
+        </article>
       
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
           <div class="article-item">
@@ -134,20 +148,6 @@
           </div>
         </article>
       
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
-          <div class="article-item">
-            <header class="post-header">
-              <h2 class="post-title" itemprop="name"><a href="/programming/mysql/2009/04/21/extending-procedure_analyse.html" itemprop="url">Extending procedure_analyse</a></h2>
-            </header>
-            <section class="post-excerpt" itemprop="description">
-              <p>My previous post explored a stored procedure that extended procedure_analyse with the intent of helping DBAs optimize table structure. Here's an improved version. I've followed Arjen Lentz's suggestion and added support for the max_elements and max_memory parameters. I also added a new Indexed column to the output, which is an...</p>
-            </section>
-            <div class="post-meta">
-              <time datetime="21 April 2009">21 April 2009</time>
-            </div>
-          </div>
-        </article>
-      
     </div>
 
     <nav class="pagination" role="navigation">
@@ -176,7 +176,7 @@
   <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> Subscribe!</span></a>
     <div class="inner">
          <section class="copyright">All content copyright <a
-  href="mailto:fipar (at) acm (dot) org">Fernando Ipar</a> &copy; 2009 - 2021 &bull; All rights reserved.</section>
+  href="mailto:fipar (at) acm (dot) org">Fernando Ipar</a> &copy; 2009 - 2023 &bull; All rights reserved.</section>
          <section class="poweredby">Made with <a
   href="http://jekyllrb.com"> Jekyll</a></section>
       <section class="poweredby">Theme customized from <a href="https://github.com/dirkfabisch/mediator">mediator</a></section<
