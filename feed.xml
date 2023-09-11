@@ -4,10 +4,10 @@
     <title>Fernando Ipar</title>
     <description>&quot;Tell my wife I love her very much, she knows&quot;
 </description>
-    <link>http://0.0.0.0:4000/</link>
-    <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 11 Sep 2023 13:19:03 -0500</pubDate>
-    <lastBuildDate>Mon, 11 Sep 2023 13:19:03 -0500</lastBuildDate>
+    <link>http://fernandoipar.com/</link>
+    <atom:link href="http://fernandoipar.com/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Mon, 11 Sep 2023 13:31:37 -0500</pubDate>
+    <lastBuildDate>Mon, 11 Sep 2023 13:31:37 -0500</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -34,8 +34,8 @@
 &lt;p&gt;Finally, I’m now using&lt;a href=&quot;https://github.com/protesilaos/modus-themes&quot;&gt; modus vivendi&lt;/a&gt;, which is now included on 29 (so I’m linking that repo just as a reference).&lt;/p&gt;
 </description>
         <pubDate>Mon, 11 Sep 2023 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/emacs/2023/09/11/emacs-config-update.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/emacs/2023/09/11/emacs-config-update.html</guid>
+        <link>http://fernandoipar.com/emacs/2023/09/11/emacs-config-update.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/emacs/2023/09/11/emacs-config-update.html</guid>
         
         <category>notes</category>
         
@@ -63,8 +63,8 @@ This is not perfect. For example, sometimes an extra closing parenthesis will sh
 
 </description>
         <pubDate>Wed, 29 Apr 2020 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/emacs/2020/04/29/documenting-emacs-hyper-shortcuts.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/emacs/2020/04/29/documenting-emacs-hyper-shortcuts.html</guid>
+        <link>http://fernandoipar.com/emacs/2020/04/29/documenting-emacs-hyper-shortcuts.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/emacs/2020/04/29/documenting-emacs-hyper-shortcuts.html</guid>
         
         <category>notes</category>
         
@@ -105,8 +105,8 @@ This is not perfect. For example, sometimes an extra closing parenthesis will sh
 &lt;p&gt;And what about the pic, you ask? It’s a dead fish on the beach. Fish out of water. I want to know how the database dies, so to speak. Does it make an irrecoverable mess? Does it die as cleanly as possible and make an autopsy possible?&lt;/p&gt;
 </description>
         <pubDate>Fri, 17 Apr 2020 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/notes/2020/04/17/questions-for-databases.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/notes/2020/04/17/questions-for-databases.html</guid>
+        <link>http://fernandoipar.com/notes/2020/04/17/questions-for-databases.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/notes/2020/04/17/questions-for-databases.html</guid>
         
         <category>notes</category>
         
@@ -179,8 +179,8 @@ This is not perfect. For example, sometimes an extra closing parenthesis will sh
 &lt;p&gt;As database professionals, while we are specifically responsible for the health of database systems, our world does not end up there. Imagine a colleague (or client) that can’t connect to the database. You can’t just say, “The database logs show no connection attempts with your user; there’s nothing I can do.” You can instead get into a joint troubleshooting session, verifying that the client machine can reach the database server, at the right port, that a connection can be established, etc. When the problem is in the network, sometimes the solution is out of your hands (imagine a firewall sitting between you and the user, filtering traffic). But if you go to the network team with substantial evidence that shows how the connection can’t be established because it times out, despite the right routes being available, it will make their job easier, which in turns lets them be more effective at helping you resolve the problem. Great engineers always go the extra mile. Plus, troubleshooting network problems will be a welcome distraction from troubleshooting database problems!&lt;/p&gt;
 </description>
         <pubDate>Wed, 25 Sep 2019 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/notes/2019/09/25/minimal-networking-knowledge-recommended-for-dbas.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/notes/2019/09/25/minimal-networking-knowledge-recommended-for-dbas.html</guid>
+        <link>http://fernandoipar.com/notes/2019/09/25/minimal-networking-knowledge-recommended-for-dbas.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/notes/2019/09/25/minimal-networking-knowledge-recommended-for-dbas.html</guid>
         
         <category>notes</category>
         
@@ -299,8 +299,8 @@ Finally, if you want to design your own data structure, I recommend &lt;a href=&
 &lt;p&gt;I hope you found this useful. Besides studying all the things I’ve mentioned on this post, I have one last recommendation to make: get involved in an online community related (e.g., the &lt;a href=&quot;https://lefred.be/mysql-community-on-slack/&quot;&gt;MySQL Community Slack&lt;/a&gt;) to the technologies you want to get better at since frequently senior people are available and will provide insightful help to people asking questions.&lt;/p&gt;
 </description>
         <pubDate>Thu, 05 Sep 2019 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/notes/2019/09/05/top-8-things-every-database-practitioner-should-know.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/notes/2019/09/05/top-8-things-every-database-practitioner-should-know.html</guid>
+        <link>http://fernandoipar.com/notes/2019/09/05/top-8-things-every-database-practitioner-should-know.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/notes/2019/09/05/top-8-things-every-database-practitioner-should-know.html</guid>
         
         <category>notes</category>
         
@@ -389,8 +389,8 @@ Specifically, on this last item, I have a ‘tsnow’ snippet that expands to th
 &lt;p&gt;I hope you found this useful, and I hope you give Emacs and org-mode a chance. They’re both beautiful software that can help you get a lot done.&lt;/p&gt;
 </description>
         <pubDate>Wed, 23 Jan 2019 00:00:00 -0600</pubDate>
-        <link>http://0.0.0.0:4000/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</guid>
+        <link>http://fernandoipar.com/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/emacs/notes/2019/01/23/emacs-org-mode-workflow.html</guid>
         
         <category>practice</category>
         
@@ -436,8 +436,8 @@ Specifically, on this last item, I have a ‘tsnow’ snippet that expands to th
 &lt;p&gt;A cache hit rate is measured in hits by time, which is none of the above because such a ratio tells you nothing useful about costs (or savings), response time or throughput.&lt;/p&gt;
 </description>
         <pubDate>Sat, 19 May 2018 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</guid>
+        <link>http://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html</guid>
         
         <category>practice</category>
         
@@ -534,8 +534,8 @@ We can use sysbench to execute it via docker like so:&lt;/p&gt;
 &lt;p&gt;In conclusion, if you have benchmarking needs and have not considered sysbench, don’t be put off if your database of choice is not listed as supported: as long as there’s a Lua driver for it there’s a good chance that you will be able to use sysbench for the task!&lt;/p&gt;
 </description>
         <pubDate>Mon, 26 Mar 2018 00:00:00 -0500</pubDate>
-        <link>http://0.0.0.0:4000/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</guid>
+        <link>http://fernandoipar.com/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/cassandra/notes/2018/03/26/running-sysbench-based-benchmarks-against-cassandra.html</guid>
         
         <category>cassandra</category>
         
@@ -627,8 +627,8 @@ PMM is a very good Open Source option for monitoring but as every instrumentatio
 &lt;p&gt;Finally, I think a similar cost is probably paid for the TLS layer on the pmm-server end. It would be very interesting to see an experiment like this repeated but on a different scenario: one pmm-server with several monitored clients.&lt;/p&gt;
 </description>
         <pubDate>Mon, 22 Jan 2018 00:00:00 -0600</pubDate>
-        <link>http://0.0.0.0:4000/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</guid>
+        <link>http://fernandoipar.com/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/mysql/notes/2018/01/22/measuring-the-potential-overhead-of-pmm-client-on-mysql-workloads.html</guid>
         
         <category>mysql</category>
         
@@ -698,8 +698,8 @@ PMM is a very good Open Source option for monitoring but as every instrumentatio
 &lt;p&gt;Nothing groundbreaking for seasoned emacs users but I thought it could be useful to newbies such as myself (I have been using the editor in one form or another for several years already, but with evil-mode, and using only a small subset of its features).&lt;/p&gt;
 </description>
         <pubDate>Tue, 02 Jan 2018 00:00:00 -0600</pubDate>
-        <link>http://0.0.0.0:4000/emacs/notes/2018/01/02/emacs-hyper-key.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/emacs/notes/2018/01/02/emacs-hyper-key.html</guid>
+        <link>http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html</link>
+        <guid isPermaLink="true">http://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html</guid>
         
         <category>emacs</category>
         

@@ -7,7 +7,7 @@
   <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>thread safe attribute accessors for ruby classes, using clojure Atoms</title>
+  <title>emacs config update</title>
   <meta name="description" content=""Tell my wife I love her very much, she knows"
 " />
 
@@ -16,7 +16,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <link rel="canonical" href="http://fernandoipar.com/programming/2014/03/13/thread-safe-attribute-accessors-using-clojure-atoms.html">
+  <link rel="canonical" href="http://fernandoipar.com/emacs/2023/09/11/emacs-config-update.html">
 
   <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <!--  <link rel="stylesheet" href=""> -->
@@ -37,28 +37,49 @@
     <main class="content" role="main">
       <article class="post">
         
-        <div class="noarticleimage">
+        <div class="article-image">
+          <div class="post-image-image" style="background-image: url(/assets/images/model-100.jpg)">
+            Article Image
+          </div>
           <div class="post-meta">
-            <h1 class="post-title">thread safe attribute accessors for ruby classes, using clojure Atoms</h1>
+            <h1 class="post-title">emacs config update</h1>
             <div class="cf post-meta-text">
               <div class="author-image" style="background-image: url(/assets/images/author.png)">Blog Logo</div>
-              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">Fernando Ipar</h4>
+              <h4 class="author-name">Fernando Ipar</h4>
               on
-              <time datetime="2014-03-13T20:02:30-05:00">13 Mar 2014</time>
+              <time datetime="2023-09-11 00:00">11 Sep 2023</time>
+            </div>
+            <div style="text-align:center">
+              <a href="#topofpage" class="topofpage"><i class="fa-angle-down"></i></a>
             </div>
           </div>
         </div>
-        <br>
-        <br>
-        <br>
         
         <section class="post-content">
           <div class="post-reading">
             <span class="post-reading-time"></span> read
           </div>
           <a name="topofpage"></a>
-          <p>This <a href="https://gist.github.com/fipar/9539935">code snippet</a> shows how to use Clojure Atoms to implement thread safe instance variables in JRuby classes.</p>
-<p>The atom_attr_accessor method is used analog to the usual attr_accessor so this should seem natural for the language, though I don't have enough experience with it to judge that.</p>
+          <p>Time for the sporadic update about my emacs configuration journey.</p>
+
+<p>I’m now on 29.1, and as part of the upgrade process, I refactored my config into more, smaller files, to make it easy to selectively disable features while troubelshooting startup problems.</p>
+
+<p>Since I use both a personal and a work machine, maintaining emacs’ configuration in sync has been a challenge. I’ve now gone back to keeping this on a private git repo, and I created a simple macro to support adding config snippets depending on the machine name:</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/ee28c09afd1a1e7bc3db0dfc94979b5c.js"> </script>
+
+<p>For example, at work I’m using Github Copilot (through the neovim plugin and https://github.com/zerolfx/copilot.el) and I set this up on a file named copilot.el on my ~/.emacs.d/ with this content:</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/816b8bf9f57d177da0ed28392b7baf39.js"> </script>
+
+<p>I’m now simplifying my shortcuts a little bit by using <a href="https://github.com/abo-abo/hydra">hydras</a>, resulting in things like this:</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/1a877880c3879b734e6715b7d4fb3b7a.js"> </script>
+
+<p>Finally, I’m now using<a href="https://github.com/protesilaos/modus-themes"> modus vivendi</a>, which is now included on 29 (so I’m linking that repo just as a reference).</p>
 
         </section>
 <!-- fi-posts -->
@@ -77,7 +98,7 @@
               <h4>Fernando Ipar</h4>
               <p class="bio"></p>
               <hr>
-              <p class="published">Published <time datetime="2014-03-13 20:02">13 Mar 2014</time></p>
+              <p class="published">Published <time datetime="2023-09-11 00:00">11 Sep 2023</time></p>
             </section>
           </div>
           
