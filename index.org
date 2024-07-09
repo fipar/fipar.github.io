@@ -29,6 +29,16 @@ Random list of things I've done professionally:
 
 #+begin_export html
 <details>
+<summary><b>etc</b></summary>
+#+end_export
+Some [[https://fernandoipar.com/content/etc/links.html][links]].
+#+begin_export html
+</details>
+#+end_export
+
+
+#+begin_export html
+<details>
 <summary><b>Music</b></summary>
 #+end_export
 My [[https://fernandoipar.com/content/music/poly-d/index.html][Poly-D]] patches.
