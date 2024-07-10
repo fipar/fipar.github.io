@@ -93,7 +93,7 @@ Some are duplicates.
 - [[https://news.ycombinator.com/item?id=24398273][Alien Signals | Hacker News]]
 - [[https://docs.google.com/forms/d/e/1FAIpQLSfyIDS6vF_H14RMAWdej6-XZclQkmjE7nX_cHFPJjBXMsitMQ/viewform?embedded=true&usp=embed_facebook][Join the Penrose inner circle]] - We're looking to talk with authors, educators, and expert illustrators who might be interested in collaborating on building a Penrose library for their area of expertise. Fill in this form to express your interest!
 
-Write to us at team@penrose.ink with any questions. 
+Write to us at team@penrose.ink with any questions.
 More information: https://penrose.ink/siggraph20.html
 - [[https://karthinks.com/software/batteries-included-with-emacs/][Batteries included with Emacs]] - Emacs has a reputation for being borderline unusable out of the box, of being bloated but somehow surprisingly bare.
 This is largely a discoverability problem1. The solution the Internet has settled on seems to be ‚ÄúEmacs distributions‚Äù like Doom, Spacemacs or Prelude that glue together dozens (sometimes hundreds) of addons to deliver a batteries included, finely tuned and user-friendly experience from first launch. While it‚Äôs not for me, this does work great¬†2, and many of these packages will probably make their way into the default Emacs experience in due time.
@@ -127,7 +127,7 @@ root@kali:~# binwalk -B ddwrt-linksys-wrt1200ac-webflash.bin DECIMAL HEXADECIMAL
 - [[https://mullikine.github.io/posts/setting-up-lsp-with-emacs-attempt-2/][Setting up LSP with emacs (Go, Java, Python, Rust, C++, Haskell, JS, TS, Ruby‚Ä¶)]] - Guides used https://www.mortens.dev/blog/emacs-and-the-language-server-protocol/ https://github.com/emacs-lsp/lsp-java   1 2 3 4 5  Debug Adaptor Protocol DAP The LSP of debugging. https://code.visualstudio.com/blogs/2018/08/07/debug-adapter-protocol-website    State of languages with LSP in my own environment  Also, I‚Äôm using GPT-3 for:  code generation comment generation       Language LSP Working Fallback working Current user experience TabNine enabled REPL / Playground DAP (debug) Working Static analysis Complaints Custom LSP improvements     Go ‚úì ‚úì Amazing ‚úì ‚úì  ‚úì Go toolchain changes too quickly    Python ‚úì ‚úì Amazing ‚úì ‚úì ‚úì ‚úì     Racket ‚úì ‚úì racket-mode Amazing  ‚úì  ‚úì     Java ‚úì ‚úì eclim Good ‚úì ‚úì (default) ‚úì ‚úì A little slow.
 - [[https://nullprogram.com/blog/2013/02/06/][How to Make an Emacs Minor Mode]]
 - [[http://homebank.free.fr/en/index.php][HomeBank | Free personal finance software, money management for everyone]]
-- [[https://en.wikipedia.org/w/index.php?title=Tall_poppy_syndrome&oldid=1068114146][Tall poppy syndrome]] - The tall poppy syndrome is a cultural phenomenon in which people hold back, criticise, or sabotage those who have or are believed to have achieved notable success in one or more aspects of life, particularly intellectual or cultural wealth‚Äî"cutting down the tall poppy". It describes a draw towards mediocrity and conformity.  
+- [[https://en.wikipedia.org/w/index.php?title=Tall_poppy_syndrome&oldid=1068114146][Tall poppy syndrome]] - The tall poppy syndrome is a cultural phenomenon in which people hold back, criticise, or sabotage those who have or are believed to have achieved notable success in one or more aspects of life, particularly intellectual or cultural wealth‚Äî"cutting down the tall poppy". It describes a draw towards mediocrity and conformity.
 Commonly in Australia and New Zealand, "cutting down the tall poppy" is used to describe those who deliberately put down another for their success and achievements.In Japan, a similar common expression is "the nail that sticks up gets hammered down".
 - [[https://www.geepawhill.org/2019/08/25/upstream-uptime-4-content-level-versioning-and-diagnostics/][Upstream Uptime #4: Content-Level Versioning and Diagnostics | GeePawHill.org]] - Half of the point of upstream-centric architectures is simultaneous change, and that means the content needs versioning & diagnostics, not just our transport. The biggest single difference between a modern upstream-centric architecture and our database apps: the database app doesn't cha ...
 - [[https://fullstackeconomics.com/why-agatha-christie-could-afford-a-maid-and-a-nanny-but-not-a-car/][Why Agatha Christie could afford a maid and a nanny but not a car]] - The counterintuitive principle that explains the modern world.
@@ -199,17 +199,17 @@ $ sqlite3 :memory: -cmd '.mode csv' -cmd '.import taxi.csv taxi' -cmd '.mode col
     'SELECT passenger_count, COUNT(*), AVG(total_amount) FROM taxi GROUP BY passenger_count'
 passenger_count  COUNT(*)  AVG(total_amount)
 ---------------  --------  -----------------
-                 128020    32.2371511482553 
-0                42228     17.0214016766151 
-1                1533197   17.6418833067999 
-2                286461    18.0975870711456 
-3                72852     17.9153958710923 
-4                25510     18.452774990196  
-5                50291     17.2709248175672 
-6                32623     17.6002964166367 
-7                2         87.17            
-8                2         95.705           
-9                1         113.6            
+                 128020    32.2371511482553
+0                42228     17.0214016766151
+1                1533197   17.6418833067999
+2                286461    18.0975870711456
+3                72852     17.9153958710923
+4                25510     18.452774990196
+5                50291     17.2709248175672
+6                32623     17.6002964166367
+7                2         87.17
+8                2         95.705
+9                1         113.6
 #+end_src
 
 Or use `-cmd '.mode markdown'` to get a Markdown table:
@@ -290,7 +290,6 @@ While cliche nowadays, you‚Äôre no doubt familiar with the ‚Äú80/20 rule
 - [[https://www.pbr-book.org/3ed-2018/contents][Physically Based Rendering: From Theory to Implementation]]
 - [[https://github.com/nkallen/plasticity][Plasticity]]
 - [[https://bellard.org/pi/][Pi Formulas, Algorithms and Computations]]
-- [[][Theory of the Nudnik: The Future of Consumer Activism and What We Can Do to Stop It]]
 - [[https://www.msgviz.com/][msgviz - Message Visualization Tool]]
 - [[https://www.manim.community/][Manim ‚Äì Mathematical Animation Framework]] - A community-maintained Python framework for creating mathematical animations.
 - [[https://github.com/dai-shi/excalidraw-claymate][excalidraw-claymate]] - A tool based on Excalidraw to create stop motion animations and slides.
@@ -311,11 +310,54 @@ While cliche nowadays, you‚Äôre no doubt familiar with the ‚Äú80/20 rule
 - [[https://architecturenotes.co/redis/][Redis Explained]] - A deep technical dive into all things Redis. Covering various Redis topologies, data persistence and process forking.
 - [[https://zserge.com/posts/post-apocalyptic-programming/][Post-apocalyptic programming]] - In a post-apocalyptic future with no internet or stackoverflow, let's try to build a programming environment from scratch.
 - [[https://pianochord.io/chord/C/][Piano Chords Reference]]
-- [[][Viewstamped Replication Revisited]] - This paper presents an updated version of Viewstamped Replication, a replication technique that handles failures in which nodes crash. It describes how client requests are handled, how the group reorganizes when a replica fails, and how a failed replica is able to rejoin the group. The paper also describes a number of important optimizations and presents a protocol for handling reconÔ¨Ågurations that can change both the group membership and the number of failures the group is able to handle.
 - [[https://github.com/tigerbeetledb/tigerbeetle/blob/0d948da123507e6699dc6323f1191431db909b36/docs/DESIGN.md][tigerbeetle]] - A distributed financial accounting database designed for mission critical safety and performance.
-- [[][Keeping data safe in the presence of crashes is a fundamental problem.]]
-- [[][The Arrival of Zero Trust: What Does it Mean?]]
 - [[https://www.withdiode.com/projects/62716731-5e1e-4622-86af-90d8e6b5123b][Diode: Circuit designer]]
 - [[https://text-to-diagram.com][Community list of comparisons between Text to Diagram tools]]
 - [[https://knowen-production.s3.amazonaws.com/uploads/attachment/file/2005/DESIGNING%2BORGANIZATIONS%2Bfor%2BInformation-Rich%2Bworld%2B--%2BSImon.pdf][DESIGNING+ORGANIZATIONS+for+Information-Rich+world+--+SImon.pdf]]
-Prepare for landing
+- Malabarba/elisp-bug-hunter: Hunt down errors in elisp files. [[https://github.com/Malabarba/elisp-bug-hunter/][https://github.com/Malabarba/elisp-bug-hunter/]]
+
+- Fuzzy Finding with Emacs Instead of Fzf | Hacker News [[https://news.ycombinator.com/item?id=38590164][https://news.ycombinator.com/item?id=38590164]]
+
+- add TODO entry from source (e.g. via hyperkey shortcut), https://news.ycombinator.com/item?id=21911183
+
+- The hunt for a cluster-killer Erlang bug | Hacker News, , [[https://engineering.klarna.com/the-hunt-for-the-cluster-killer-erlang-bug-81dd0640aa81?gi=e3144c1fcf1b][https://engineering.klarna.com/the-hunt-for-the-cluster-killer-erlang-bug-81dd0640aa81?gi=e3144c1fcf1b]]
+
+- The hunt for a cluster-killer Erlang bug | Hacker News, , [[https://ferd.ca/handling-overload.html][https://ferd.ca/handling-overload.html]]
+
+- Ask HN: Whats the modern day equivalent of 80s computer for kids to explore? | Hacker News, , [[https://cardinal.kx.studio/][https://cardinal.kx.studio/]]
+
+- Akin's Laws of Spacecraft Design, , [[https://spacecraft.ssl.umd.edu/akins_laws.html][https://spacecraft.ssl.umd.edu/akins_laws.html]]
+
+- The Misfit Who Built the IBM PC, , [[https://every.to/the-crazy-ones/the-misfit-who-built-the-ibm-pc][https://every.to/the-crazy-ones/the-misfit-who-built-the-ibm-pc]]
+
+- GitHub - nikitabobko/AeroSpace: AeroSpace is an i3-like tiling window manager for macOS, , [[https://github.com/nikitabobko/AeroSpace][https://github.com/nikitabobko/AeroSpace]]
+
+- The True Story of D-Day, as Told by Paratroopers - POLITICO, , [[https://www.politico.com/news/magazine/2024/06/06/d-day-normandy-world-war-ii-paratroopers-00161916][https://www.politico.com/news/magazine/2024/06/06/d-day-normandy-world-war-ii-paratroopers-00161916]]
+
+- The Man Who Reinvented the Cat | The New Yorker, , [[https://www.newyorker.com/magazine/2024/06/10/catland-louis-wain-and-the-great-cat-mania-kathryn-hughes-book-review][https://www.newyorker.com/magazine/2024/06/10/catland-louis-wain-and-the-great-cat-mania-kathryn-hughes-book-review]]
+
+- GitHub - piku/piku: The tiniest PaaS you've ever seen. Piku allows you to do git push deployments to your own servers., , [[https://github.com/piku/piku][https://github.com/piku/piku]]
+
+- Map of Forest Sounds from Around the World | Hacker News, , [[https://timberfestival.org.uk/soundsoftheforest-soundmap/][https://timberfestival.org.uk/soundsoftheforest-soundmap/]]
+
+- Map of Forest Sounds from Around the World | Hacker News, , [[https://aporee.org/][https://aporee.org/]]
+
+- Logo Programming With Turtle Graphics IBM PC : Logo Computer Systems, Inc. : Free Download, Borrow, and Streaming : Internet Arc, Logo Programming With Turtle Graphics IBM PC : Logo Computer Systems, Inc. : Free Download, Borrow, and Streaming : Internet Archive, [[https://archive.org/details/logo-programming-with-turtle-graphics-ibm-pc][https://archive.org/details/logo-programming-with-turtle-graphics-ibm-pc]]
+
+- New Reminder, , [[https://archive.org/details/coleco-adam-smart-logo-manual][https://archive.org/details/coleco-adam-smart-logo-manual]]
+
+- EasyOS Home — All categories, , [[https://easyos.org/][https://easyos.org/]]
+
+- Fast Crimes at Lambda School, , [[https://www.sandofsky.com/lambda-school/][https://www.sandofsky.com/lambda-school/]]
+
+- CSS Tip: An em isn’t an “m”, but an ex is an “x” – Frank M Taylor, , [[https://blog.frankmtaylor.com/2012/01/25/css-font-size-an-em-isnt-an-m-but-an-ex-is-an-x/][https://blog.frankmtaylor.com/2012/01/25/css-font-size-an-em-isnt-an-m-but-an-ex-is-an-x/]]
+
+- WerWolv/ImHex: 🔍 A Hex Editor for Reverse Engineers, Programmers and people who value their retinas when working at 3 AM., , [[https://github.com/WerWolv/ImHex][https://github.com/WerWolv/ImHex]]
+
+- OpenBB-finance/OpenBBTerminal: Investment Research for Everyone, Everywhere., , [[https://github.com/OpenBB-finance/OpenBBTerminal][https://github.com/OpenBB-finance/OpenBBTerminal]]
+
+- Below MI - IBM i for Hackers, , [[https://silentsignal.github.io/BelowMI/][https://silentsignal.github.io/BelowMI/]]
+
+- Documentation | Pipes, , [[https://www.pipes.digital/docs][https://www.pipes.digital/docs]]
+
+- My finetuned models beat OpenAI's GPT-4 | Hacker News, , [[https://jacobsgill.es/phdobtained][https://jacobsgill.es/phdobtained]]

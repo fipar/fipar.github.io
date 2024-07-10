@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-07-09 Tue 14:33 -->
+<!-- 2024-07-09 Tue 21:46 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Some random links</title>
@@ -113,7 +113,7 @@ Some are duplicates.
 </ul>
 
 <p>
-Write to us at team@penrose.ink with any questions. 
+Write to us at team@penrose.ink with any questions.
 More information: <a href="https://penrose.ink/siggraph20.html">https://penrose.ink/siggraph20.html</a>
 </p>
 <ul class="org-ul">
@@ -234,7 +234,7 @@ I figured this out while commenting on [this issue](<a href="https://github.com/
 The output looks like this:
 </p>
 
-<pre class="example" id="org78980e0">
+<pre class="example" id="orga9b4b27">
 "",128020,32.2371511482553
 0,42228,17.0214016766151
 1,1533197,17.6418833067999
@@ -258,24 +258,24 @@ $ sqlite3 :memory: -cmd <span style="color: #79a8ff;">'.mode csv'</span> -cmd <s
     <span style="color: #79a8ff;">'SELECT passenger_count, COUNT(*), AVG(total_amount) FROM taxi GROUP BY passenger_count'</span>
 passenger_count  COUNT(*)  AVG(total_amount)
 ---------------  --------  -----------------
-                 128020    32.2371511482553 
-0                42228     17.0214016766151 
-1                1533197   17.6418833067999 
-2                286461    18.0975870711456 
-3                72852     17.9153958710923 
-4                25510     18.452774990196  
-5                50291     17.2709248175672 
-6                32623     17.6002964166367 
-7                2         87.17            
-8                2         95.705           
-9                1         113.6            
+                 128020    32.2371511482553
+0                42228     17.0214016766151
+1                1533197   17.6418833067999
+2                286461    18.0975870711456
+3                72852     17.9153958710923
+4                25510     18.452774990196
+5                50291     17.2709248175672
+6                32623     17.6002964166367
+7                2         87.17
+8                2         95.705
+9                1         113.6
 </pre>
 </div>
 
 <p>
 Or use `-cmd '.mode markdown'` to get a Markdown table:
 </p>
-<pre class="example" id="org235a68b">
+<pre class="example" id="org9c60e58">
 | passenger_count | COUNT(*) | AVG(total_amount) |
 |-----------------|----------|-------------------|
 |                 | 128020   | 32.2371511482553  |
@@ -368,7 +368,6 @@ Introduction - terminology Troubleshooting high system load on Linux Drilling do
 <li><a href="https://www.pbr-book.org/3ed-2018/contents">Physically Based Rendering: From Theory to Implementation</a></li>
 <li><a href="https://github.com/nkallen/plasticity">Plasticity</a></li>
 <li><a href="https://bellard.org/pi/">Pi Formulas, Algorithms and Computations</a></li>
-<li>[[][Theory of the Nudnik: The Future of Consumer Activism and What We Can Do to Stop It]]</li>
 <li><a href="https://www.msgviz.com/">msgviz - Message Visualization Tool</a></li>
 <li><a href="https://www.manim.community/">Manim ‚Äì Mathematical Animation Framework</a> - A community-maintained Python framework for creating mathematical animations.</li>
 <li><a href="https://github.com/dai-shi/excalidraw-claymate">excalidraw-claymate</a> - A tool based on Excalidraw to create stop motion animations and slides.</li>
@@ -389,17 +388,58 @@ Introduction - terminology Troubleshooting high system load on Linux Drilling do
 <li><a href="https://architecturenotes.co/redis/">Redis Explained</a> - A deep technical dive into all things Redis. Covering various Redis topologies, data persistence and process forking.</li>
 <li><a href="https://zserge.com/posts/post-apocalyptic-programming/">Post-apocalyptic programming</a> - In a post-apocalyptic future with no internet or stackoverflow, let's try to build a programming environment from scratch.</li>
 <li><a href="https://pianochord.io/chord/C/">Piano Chords Reference</a></li>
-<li>[[][Viewstamped Replication Revisited]] - This paper presents an updated version of Viewstamped Replication, a replication technique that handles failures in which nodes crash. It describes how client requests are handled, how the group reorganizes when a replica fails, and how a failed replica is able to rejoin the group. The paper also describes a number of important optimizations and presents a protocol for handling reconÔ¨Ågurations that can change both the group membership and the number of failures the group is able to handle.</li>
 <li><a href="https://github.com/tigerbeetledb/tigerbeetle/blob/0d948da123507e6699dc6323f1191431db909b36/docs/DESIGN.md">tigerbeetle</a> - A distributed financial accounting database designed for mission critical safety and performance.</li>
-<li>[[][Keeping data safe in the presence of crashes is a fundamental problem.]]</li>
-<li>[[][The Arrival of Zero Trust: What Does it Mean?]]</li>
 <li><a href="https://www.withdiode.com/projects/62716731-5e1e-4622-86af-90d8e6b5123b">Diode: Circuit designer</a></li>
 <li><a href="https://text-to-diagram.com">Community list of comparisons between Text to Diagram tools</a></li>
 <li><a href="https://knowen-production.s3.amazonaws.com/uploads/attachment/file/2005/DESIGNING%2BORGANIZATIONS%2Bfor%2BInformation-Rich%2Bworld%2B--%2BSImon.pdf">DESIGNING+ORGANIZATIONS+for+Information-Rich+world+&#x2013;+SImon.pdf</a></li>
+<li>Malabarba/elisp-bug-hunter: Hunt down errors in elisp files. <a href="https://github.com/Malabarba/elisp-bug-hunter/">https://github.com/Malabarba/elisp-bug-hunter/</a></li>
+
+<li>Fuzzy Finding with Emacs Instead of Fzf | Hacker News <a href="https://news.ycombinator.com/item?id=38590164">https://news.ycombinator.com/item?id=38590164</a></li>
+
+<li>add TODO entry from source (e.g. via hyperkey shortcut), <a href="https://news.ycombinator.com/item?id=21911183">https://news.ycombinator.com/item?id=21911183</a></li>
+
+<li>The hunt for a cluster-killer Erlang bug | Hacker News, , <a href="https://engineering.klarna.com/the-hunt-for-the-cluster-killer-erlang-bug-81dd0640aa81?gi=e3144c1fcf1b">https://engineering.klarna.com/the-hunt-for-the-cluster-killer-erlang-bug-81dd0640aa81?gi=e3144c1fcf1b</a></li>
+
+<li>The hunt for a cluster-killer Erlang bug | Hacker News, , <a href="https://ferd.ca/handling-overload.html">https://ferd.ca/handling-overload.html</a></li>
+
+<li>Ask HN: Whats the modern day equivalent of 80s computer for kids to explore? | Hacker News, , <a href="https://cardinal.kx.studio/">https://cardinal.kx.studio/</a></li>
+
+<li>Akin's Laws of Spacecraft Design, , <a href="https://spacecraft.ssl.umd.edu/akins_laws.html">https://spacecraft.ssl.umd.edu/akins<sub>laws.html</sub></a></li>
+
+<li>The Misfit Who Built the IBM PC, , <a href="https://every.to/the-crazy-ones/the-misfit-who-built-the-ibm-pc">https://every.to/the-crazy-ones/the-misfit-who-built-the-ibm-pc</a></li>
+
+<li>GitHub - nikitabobko/AeroSpace: AeroSpace is an i3-like tiling window manager for macOS, , <a href="https://github.com/nikitabobko/AeroSpace">https://github.com/nikitabobko/AeroSpace</a></li>
+
+<li>The True Story of D-Day, as Told by Paratroopers - POLITICO, , <a href="https://www.politico.com/news/magazine/2024/06/06/d-day-normandy-world-war-ii-paratroopers-00161916">https://www.politico.com/news/magazine/2024/06/06/d-day-normandy-world-war-ii-paratroopers-00161916</a></li>
+
+<li>The Man Who Reinvented the Cat | The New Yorker, , <a href="https://www.newyorker.com/magazine/2024/06/10/catland-louis-wain-and-the-great-cat-mania-kathryn-hughes-book-review">https://www.newyorker.com/magazine/2024/06/10/catland-louis-wain-and-the-great-cat-mania-kathryn-hughes-book-review</a></li>
+
+<li>GitHub - piku/piku: The tiniest PaaS you've ever seen. Piku allows you to do git push deployments to your own servers., , <a href="https://github.com/piku/piku">https://github.com/piku/piku</a></li>
+
+<li>Map of Forest Sounds from Around the World | Hacker News, , <a href="https://timberfestival.org.uk/soundsoftheforest-soundmap/">https://timberfestival.org.uk/soundsoftheforest-soundmap/</a></li>
+
+<li>Map of Forest Sounds from Around the World | Hacker News, , <a href="https://aporee.org/">https://aporee.org/</a></li>
+
+<li>Logo Programming With Turtle Graphics IBM PC : Logo Computer Systems, Inc. : Free Download, Borrow, and Streaming : Internet Arc, Logo Programming With Turtle Graphics IBM PC : Logo Computer Systems, Inc. : Free Download, Borrow, and Streaming : Internet Archive, <a href="https://archive.org/details/logo-programming-with-turtle-graphics-ibm-pc">https://archive.org/details/logo-programming-with-turtle-graphics-ibm-pc</a></li>
+
+<li>New Reminder, , <a href="https://archive.org/details/coleco-adam-smart-logo-manual">https://archive.org/details/coleco-adam-smart-logo-manual</a></li>
+
+<li>EasyOS Home — All categories, , <a href="https://easyos.org/">https://easyos.org/</a></li>
+
+<li>Fast Crimes at Lambda School, , <a href="https://www.sandofsky.com/lambda-school/">https://www.sandofsky.com/lambda-school/</a></li>
+
+<li>CSS Tip: An em isn’t an “m”, but an ex is an “x” – Frank M Taylor, , <a href="https://blog.frankmtaylor.com/2012/01/25/css-font-size-an-em-isnt-an-m-but-an-ex-is-an-x/">https://blog.frankmtaylor.com/2012/01/25/css-font-size-an-em-isnt-an-m-but-an-ex-is-an-x/</a></li>
+
+<li>WerWolv/ImHex: 🔍 A Hex Editor for Reverse Engineers, Programmers and people who value their retinas when working at 3 AM., , <a href="https://github.com/WerWolv/ImHex">https://github.com/WerWolv/ImHex</a></li>
+
+<li>OpenBB-finance/OpenBBTerminal: Investment Research for Everyone, Everywhere., , <a href="https://github.com/OpenBB-finance/OpenBBTerminal">https://github.com/OpenBB-finance/OpenBBTerminal</a></li>
+
+<li>Below MI - IBM i for Hackers, , <a href="https://silentsignal.github.io/BelowMI/">https://silentsignal.github.io/BelowMI/</a></li>
+
+<li>Documentation | Pipes, , <a href="https://www.pipes.digital/docs">https://www.pipes.digital/docs</a></li>
+
+<li>My finetuned models beat OpenAI's GPT-4 | Hacker News, , <a href="https://jacobsgill.es/phdobtained">https://jacobsgill.es/phdobtained</a></li>
 </ul>
-<p>
-Prepare for landing
-</p>
 </div>
 <div id="postamble" class="status">
 <hr/><div align="left" id="postamble" class="footer">Prepare for <a href="https://fernandoipar.com">landing</div>
