@@ -2,7 +2,7 @@
 #+begin_export html
     <style>
       body {
-          font-family: 'Courier New', monospace; /* Ensures 0 and O are differentiable */
+	  font-family: Raleway, monospace;
       }
     </style>
         <img src="https://fernandoipar.com/img/Jetpac.gif" alt="Screenshot of Jetpac by Ultimate Play The Game. Source: https://en.m.wikipedia.org/wiki/Jetpac#/media/File%3AJetpac.gif">
@@ -23,13 +23,15 @@ Random list of things I've done professionally:
 - Rebase work maintaining private MySQL branches for the DBaaS product of a Cloud vendor.
 - Programming work in Java, C, C++, Ruby, Go, and Python.
 - Private benchmarks
+- A 0 and a capital O.
+
 #+begin_export html
 </details>
 #+end_export
 
 #+begin_export html
 <details>
-<summary><b>etc</b></summary>
+<summary><b>Etc</b></summary>
 #+end_export
 Some [[https://fernandoipar.com/content/etc/links.html][links]].
 #+begin_export html

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synthesizer Panel</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+    body {
+        font-family: Futura, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+    }
+    .sectionTitle {
+	font-size: 16px;
+	text-anchor: middle;
+    }
+    .smallTitle {
+	font-size: 14px;
+	text-anchor: middle;
+    }
+    .label {
+        font-size: 10px;
+        text-anchor: middle;
+    }
+    .smallLabel {
+        font-size: 7px;
+        text-anchor: middle;
+    }
+    .knob, .switch, .button {
+        stroke: #000;
+        fill: #ccc;
+    }
+    .switch-rect {
+        stroke: #000;
+    }
+</style>
+</head>
+<body>
+<script>
+    const width = 1500;
+    const height = 600;
+
+    const svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .style("background-color", "white")
+        .style("border", "1px solid #ccc")
+        .style("padding", "20px");
+
+    const sections = [
+        { name: "CONTROLLERS", x: 0, y: 0, w: 300, h: 360 },
+        { name: "OSCILLATOR BANK", x: 300, y: 0, w: 300, h: 360 },
+        { name: "MIXER", x: 600, y: 0, w: 300, h: 360 },
+        { name: "FILTER", x: 900, y: 0, w: 300, h: 360 },
+        { name: "OUTPUT", x: 1200, y: 0, w: 300, h: 360 },
+    ];
+
+    sections.forEach(section => {
+        svg.append("rect")
+            .attr("x", section.x)
+            .attr("y", section.y)
+            .attr("width", section.w)
+            .attr("height", section.h)
+            .attr("fill", "none")
+            .attr("stroke", "#ccc");
+
+        svg.append("text")
+            .attr("x", section.x + section.w / 2)
+            .attr("y", section.y + section.h - 10)
+            .attr("class", "sectionTitle")
+            .text(section.name);
+    });
+
+function createLabel(x, y, text, className = "label") {
+    const lines = text.split('\n');
+    lines.forEach((line, i) => {
+        svg.append("text")
+            .attr("x", x)
+            .attr("y", y + i * 12) // Adjust line spacing as needed
+            .attr("class", className)
+            .text(line);
+    });
+}
+
+    function createKnob(x, y, angle, size = 1.0, label = "") {
+        const radius = 20 * size;
+        const radians = (angle - 90) * (Math.PI / 180);
+        const lineX = x + radius * Math.cos(radians);
+        const lineY = y + radius * Math.sin(radians);
+
+        if (label) {
+            svg.append("text")
+                .attr("x", x)
+                .attr("y", y - radius - 10)
+                .attr("class", "label")
+                .text(label);
+        }
+
+        svg.append("circle")
+            .attr("cx", x)
+            .attr("cy", y)
+            .attr("r", radius)
+            .attr("class", "knob");
+
+        svg.append("line")
+            .attr("x1", x)
+            .attr("y1", y)
+            .attr("x2", lineX)
+            .attr("y2", lineY)
+            .attr("stroke", "#000")
+            .attr("stroke-width", 2);
+    }
+
+  function createSwitch(x, y, orientation, positions, selected, labels = {}) {
+    const width = orientation === "horizontal" ? 50 : 20;
+    const height = orientation === "horizontal" ? 20 : 50;
+    const posWidth = orientation === "horizontal" ? width / positions : width;
+    const posHeight = orientation === "horizontal" ? height : height / positions;
+
+    svg.append("rect")
+      .attr("x", x - width / 2)
+      .attr("y", y - height / 2)
+      .attr("width", width)
+      .attr("height", height)
+      .attr("class", "switch");
+
+    for (let i = 0; i < positions; i++) {
+      const posX = orientation === "horizontal" ? x - width / 2 + i * posWidth : x - width / 2;
+      const posY = orientation === "horizontal" ? y - height / 2 : y - height / 2 + i * posHeight;
+
+      svg.append("rect")
+        .attr("x", posX)
+        .attr("y", posY)
+        .attr("width", posWidth)
+        .attr("height", posHeight)
+        .attr("class", "switch-rect")
+        .attr("fill", i === selected ? "#000" : "#ccc");
+    }
+
+    if (labels.top) {
+      const topLabels = labels.top.split('\n');
+      topLabels.forEach((label, i) => {
+        svg.append("text")
+          .attr("x", x)
+          .attr("y", y - height / 2 - 5 - (10 * (topLabels.length - i - 1)))
+          .attr("class", "label")
+          .text(label);
+      });
+    }
+
+    if (labels.bottom) {
+      const bottomLabels = labels.bottom.split(" ");
+      bottomLabels.forEach((label, i) => {
+        const posX = orientation === "horizontal" ? x - width / 2 + i * posWidth + posWidth / 2 : x;
+        const posY = orientation === "horizontal" ? y + height / 2 + 10 : y - height / 2 + i * posHeight + posHeight / 2;
+        svg.append("text")
+          .attr("x", posX - 10)
+          .attr("y", posY)
+          .attr("class", "smallLabel")
+          .text(label);
+      });
+    }
+  }
+
+    function createButton(x, y) {
+        svg.append("rect")
+            .attr("x", x - 10)
+            .attr("y", y - 10)
+            .attr("width", 20)
+            .attr("height", 20)
+            .attr("class", "button");
+    }
+
+    // Controllers
+  createKnob(150, 50, 0, 1.25, "TUNE");
+
+createSwitch(297, 60, "horizontal", 2, 1, { top: "OSCILLATOR\nMODULATION", bottom: "  ON" });
+
+  createSwitch(100, 110, "horizontal", 3, 0, { top: "MODE", bottom: "MONO  UNI  POLY" });
+    createSwitch(200, 110, "horizontal", 2, 1, { top: "AUTODAMP", bottom: "  ON" });
+
+    createKnob(100, 180, 0, 1.0, "GLIDE");
+    createKnob(200, 180, 0, 1.0, "MODULATION MIX");
+
+    createSwitch(100, 300, "horizontal", 2, 0, { bottom: "OSC4  FILTER EG" });
+    createSwitch(220, 300, "horizontal", 2, 1, { bottom: "NOISE (MOD SRC) LFO" });
+
+    // Oscillator Bank
+createKnob(370, 50, 0, 1.25, "RANGE");
+createLabel(470, 17, "OSCILLATOR-1\nFREQUENCY","smallTitle");
+createKnob(570, 50, 45, 1.25, "WAVEFORM");
+
+createKnob(370, 120, 90, 1.25);
+createLabel(470,90, "OSCILLATOR-2","smallTitle");
+createKnob(470, 120, 50, 1.25);
+createKnob(560, 120, 50, 1.25);
+
+    createKnob(370, 150, 180);
+    createKnob(470, 150, 225);
+
+    // Mixer
+    createKnob(650, 50, 0);
+    createKnob(750, 50, 45);
+    createKnob(650, 100, 90);
+    createKnob(750, 100, 135);
+    createSwitch(850, 50, "horizontal", 2, 0);
+    createSwitch(850, 100, "horizontal", 3, 1);
+
+    // Filter
+    createKnob(950, 50, 0);
+    createKnob(1050, 50, 45);
+    createKnob(950, 100, 90);
+    createKnob(1050, 100, 135);
+    createKnob(950, 150, 180);
+    createKnob(1050, 150, 225);
+    createSwitch(1150, 50, "horizontal", 2, 1);
+    createSwitch(1150, 100, "vertical", 3, 2);
+
+    // Output
+    createKnob(1350, 50, 0);
+    createKnob(1350, 100, 45);
+    createButton(1350, 150);
+
+</script>
+</body>
+</html>
