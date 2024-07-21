@@ -27,6 +27,10 @@
         font-size: 10px;
         text-anchor: middle;
     }
+    .knobLabel {
+	font-size: 9px;
+	text-anchor: middle;
+    }
     .smallLabel {
         font-size: 7px;
         text-anchor: middle;
@@ -87,7 +91,7 @@ function createLabel(x, y, text, className = "label") {
     });
 }
 
-    function createKnob(x, y, angle, size = 1.0, label = "") {
+    function createKnob(x, y, angle, size = 1.0, label = "", labelsAround = []) {
         const radius = 20 * size;
         const radians = (angle - 90) * (Math.PI / 180);
         const lineX = x + radius * Math.cos(radians);
@@ -96,7 +100,7 @@ function createLabel(x, y, text, className = "label") {
         if (label) {
             svg.append("text")
                 .attr("x", x)
-                .attr("y", y - radius - 10)
+                .attr("y", y - radius - 20)
                 .attr("class", "label")
                 .text(label);
         }
@@ -114,6 +118,20 @@ function createLabel(x, y, text, className = "label") {
             .attr("y2", lineY)
             .attr("stroke", "#000")
             .attr("stroke-width", 2);
+
+        // Adding labels around the knob
+        labelsAround.forEach(({ text, angle }, i) => {
+            const radian = (angle - 90) * (Math.PI / 180);
+            const labelX = x + (radius + 6) * Math.cos(radian);
+            const labelY = y + (radius + 6) * Math.sin(radian);
+            svg.append("text")
+                .attr("x", labelX)
+                .attr("y", labelY)
+                .attr("class", "knobLabel")
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .text(text);
+        });
     }
 
   function createSwitch(x, y, orientation, positions, selected, labels = {}) {
@@ -191,9 +209,25 @@ createSwitch(297, 60, "horizontal", 2, 1, { top: "OSCILLATOR\nMODULATION", botto
     createSwitch(220, 300, "horizontal", 2, 1, { bottom: "NOISE (MOD SRC) LFO" });
 
     // Oscillator Bank
-createKnob(370, 50, 0, 1.25, "RANGE");
+createKnob(370, 50, 0, 1.25, "RANGE", [
+        { text: "LO", angle: 225 },
+        { text: "32'", angle: 270 },
+        { text: "16'", angle: 315 },
+        { text: "8'", angle: 0 },
+        { text: "4'", angle: 45 },
+        { text: "2'", angle: 90 }
+    ]);
 createLabel(470, 17, "OSCILLATOR-1\nFREQUENCY","smallTitle");
-createKnob(570, 50, 45, 1.25, "WAVEFORM");
+createKnob(570, 50, 45, 1.25, "WAVEFORM", [
+    { text: "∧", angle: 225},
+    { text: "ʎ", angle: 270},
+    { text: "⩘", angle: 315},
+    { text: "⨅ˍ", angle: 0},
+    { text: "⨅_", angle:45},
+    { text: "⨅_ˍ", angle:90}
+]);
+
+// for osc 4 try this:  ◺
 
 createKnob(370, 120, 90, 1.25);
 createLabel(470,90, "OSCILLATOR-2","smallTitle");
