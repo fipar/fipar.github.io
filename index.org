@@ -23,7 +23,6 @@ Random list of things I've done professionally:
 - Rebase work maintaining private MySQL branches for the DBaaS product of a Cloud vendor.
 - Programming work in Java, C, C++, Ruby, Go, and Python.
 - Private benchmarks
-- A 0 and a capital O.
 
 #+begin_export html
 </details>
