@@ -195,14 +195,34 @@ function createLabel(x, y, text, className = "label") {
     }
 
     // Controllers
-  createKnob(150, 50, 0, 1.25, "TUNE");
+createKnob(150, 50, 0, 1.25, "TUNE", [
+    { text: "-2", angle: 240 },
+    { text: ".", angle: 225 },
+    { text: "-", angle: 270 },
+    { text: "--", angle: 270 },
+    { text: "--", angle: 90 },
+    { text: "1", angle: 60 },
+    { text: ".", angle: 30 },
+    { text: "2", angle: 120},
+    { text: ".", angle: 135},
+    { text: "I", angle: 0 },
+    { text: ".", angle: 330 },
+    { text: "-1", angle: 300 }
+]);
 
 createSwitch(297, 60, "horizontal", 2, 1, { top: "OSCILLATOR\nMODULATION", bottom: "  ON" });
 
   createSwitch(100, 110, "horizontal", 3, 0, { top: "MODE", bottom: "MONO  UNI  POLY" });
     createSwitch(200, 110, "horizontal", 2, 1, { top: "AUTODAMP", bottom: "  ON" });
 
-    createKnob(100, 180, 0, 1.0, "GLIDE");
+createKnob(100, 180, 0, 1.0, "GLIDE",[
+        { text: "240", angle: 240 },
+        { text: "270", angle: 270 },
+        { text: "300", angle: 300 },
+        { text: "60", angle: 60 },
+        { text: "90", angle: 90 },
+        { text: "120", angle: 120 }
+]);
     createKnob(200, 180, 0, 1.0, "MODULATION MIX");
 
     createSwitch(100, 300, "horizontal", 2, 0, { bottom: "OSC4  FILTER EG" });
