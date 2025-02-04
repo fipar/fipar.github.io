@@ -10,10 +10,8 @@
         <p><i>"Tell my wife I love her very much, she knows"</i></p>
 #+end_export
 
-#+begin_export html
-<details>
-<summary><b>Work</b></summary>
-#+end_export
+#+BEGIN_work
+
 I'm currently working as a [[https://www.linkedin.com/in/fipar][DBRE]] at [[https://www.life360.com][Life360]].
 I've created a short page for [[https://fernandoipar.com/recruiters/][recruiters]], and [[https://fernandoipar.com/presentations/][here]]'s where I keep links to some of my presentations.
 [[https://fernandoipar.com/everything/][This]] is the list of all posts from the old blog, and [[https://gnuserland.blogspot.com][this]] is an even older blog, if you have time to waste.
@@ -30,33 +28,17 @@ Recent (for large enough values of "Recent") work-related writings:
 - [[https://fernandoipar.com/notes/2019/09/25/minimal-networking-knowledge-recommended-for-dbas.html][Minimal networking knowledge recommended for DBAs]].
 - [[https://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html][What is a good cache hit ratio?]]
 
-#+begin_export html
-</details>
-#+end_export
+#+END_work
 
-#+begin_export html
-<details>
-<summary><b>Etc</b></summary>
-#+end_export
+#+BEGIN_etc
 Some [[https://fernandoipar.com/content/etc/links.html][links]].
-#+begin_export html
-</details>
-#+end_export
+#+END_etc
 
-
-#+begin_export html
-<details>
-<summary><b>Music</b></summary>
-#+end_export
+#+BEGIN_music
 My [[https://fernandoipar.com/content/music/poly-d/index.html][Poly-D]] patches.
-#+begin_export html
-</details>
-#+end_export
+#+END_music
 
-#+begin_export html
-<details>
-<summary><b>Emacs</b></summary>
-#+end_export
+#+BEGIN_emacs
 The journey to emacs proficiency is a lifetime one, and it includes developing the skill of knowing when you've customized it enough.
 
 My first recommendation is to read the [[https://www.masteringemacs.org/][book]] Mastering Emacs and to make it a habit to check [[http://sachachua.com/blog/][Sacha Chua's blog]], which is a treasure trove of all things Emacs.
@@ -70,10 +52,7 @@ Always remember emacs is programmable and you don't need to use the builtin key 
 - [[https://fernandoipar.com/emacs/notes/2017/12/26/opening-urls-with-chrome-from-emacs-on-macos.html][Opening URLs with Chrome from Emacs on MacOS]]
 - [[https://fernandoipar.com/emacs/notes/2019/01/23/emacs-org-mode-workflow.html][Emacs Org Mode Workflow]]
 - [[https://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html][Emacs Hyper Key]]
-#+begin_export html
-</details>
-#+end_export
-
+#+END_emacs
 
 #+begin_export html
       <p><i>"What's a boy to do? Just be a darling and I will be too, faithful to you"</i></p>
