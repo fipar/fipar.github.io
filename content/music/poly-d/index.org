@@ -12,7 +12,8 @@
 The Behringer [[https://www.behringer.com/product.html?modelCode=0722-AAJ][Poly-D]] is a great analog synth that seems to be a modern take on the [[https://www.moogmusic.com/products/minimoog-model-d][Minimoog]] and provides for endless fun for amateur musicians.
 I'm sure it's great for professionals too but I woudln't know, I make a living on databases. The [[./poly-d-patch.jpg][image]] used in the patches is taken from the synth's manual.
 
-* Chamaleon bass
+#+ATTR_HTML: :title Chamaleon bass
+#+BEGIN_chamaleon
 
 An approximation to the sound of the iconic bass line. That bass line that, if it doesn't get you moving, don't call 911, call the undertaker!
 The attack knob on the loudness countour section is almost (but not quite).
@@ -21,11 +22,15 @@ The attack knob on the loudness countour section is almost (but not quite).
 #+ATTR_HTML: :width 100%
 [[./chamaleon-bass.jpg]]
 
-* Blown blues organ
+#+END_chamaleon
 
+#+ATTR_HTML: :title Blown blues organ
+#+BEGIN_blownblues
 
 Patch aftertouch to filter. You should get a clean sound if playing a single note at a time, but the "blown amp" sound if pressing more.
 
 #+CAPTION: Blown blues organ
 #+ATTR_HTML: :width 100%
 [[./blown-blues-organ.jpg]]
+
+#+END_blownblues

@@ -30,10 +30,6 @@ Recent (for large enough values of "Recent") work-related writings:
 
 #+END_work
 
-#+BEGIN_etc
-Some [[https://fernandoipar.com/content/etc/links.html][links]].
-#+END_etc
-
 #+BEGIN_music
 My [[https://fernandoipar.com/content/music/poly-d/index.html][Poly-D]] patches.
 #+END_music
