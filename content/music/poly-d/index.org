@@ -16,7 +16,7 @@ I'm sure it's great for professionals too but I wouldn't know, I make a living o
 #+BEGIN_chamaleon
 
 An approximation to the sound of the iconic bass line. That bass line that, if it doesn't get you moving, don't call 911, call the undertaker!
-The attack knob on the loudness countour section is almost (but not quite).
+The attack knob on the loudness countour section is almost (but not quite) 0.
 
 #+CAPTION: Chamaleon bass
 #+ATTR_HTML: :width 100%
