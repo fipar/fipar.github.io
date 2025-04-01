@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2025-04-01 Tue 20:39 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My .zshrc file</title>
+<meta name="author" content="Fernando Ipar" />
+<meta name="generator" content="Org Mode" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Fernando Ipar's personal website">
+<style>
+  body {
+    font-family: Raleway, monospace;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1em;
+  }
+  article {
+    margin: 2em 0;
+  }
+  section {
+    margin: 2em 0;
+  }
+  h2 {
+    color: #333;
+    margin-bottom: 1em;
+  }
+</style>
+</head>
+<body>
+<main>
+<article>
+<style>
+  body {
+      font-family: Raleway, monospace;
+  }
+</style>
+
+<p>
+My .zshrc file.
+Well, parts of it, anyway.
+</p>
+
+<p>
+First things first, I use oh-my-zsh
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #f78fe7;">export</span> <span style="color: #00d3d0;">ZSH</span>=<span style="color: #79a8ff;">"$HOME/.oh-my-zsh"</span>
+</pre>
+</div>
+
+<p>
+My plugins and theme:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #00d3d0;">plugins</span>=(git themes emacs emoji macos iterm2 kubectl thefuck web-search man)
+<span style="color: #00d3d0;">ZSH_THEME</span>=ys
+</pre>
+</div>
+
+<p>
+Of course, actually source omz:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #f78fe7;">source</span> $<span style="color: #00d3d0;">ZSH</span>/oh-my-zsh.sh
+</pre>
+</div>
+
+<p>
+A line added by rbenv. I could just remove the test since I have it on all my machines &#x2026;
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #f78fe7;">which</span> rbenv &gt;/dev/null 2&gt;&amp;1 &amp;&amp; <span style="color: #f78fe7;">eval</span> <span style="color: #79a8ff;">"`rbenv init -`"</span>
+</pre>
+</div>
+
+
+<p>
+And have a more useful history
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #f78fe7;">alias</span> <span style="color: #00d3d0;">history</span>=<span style="color: #79a8ff;">'history -i'</span>
+<span style="color: #f78fe7;">eval</span> <span style="color: #79a8ff;">"$(atuin init zsh)"</span>
+</pre>
+</div>
+
+<p>
+This makes its output look like this:
+</p>
+<pre class="example" id="orgd26ee3b">
+$ history|tail -1
+ 5461  2025-04-01 20:23  ls
+</pre>
+
+<p>
+Also, atuin makes reverse search (Ctrl-R) much better IMHO.
+</p>
+
+<p>
+On my work machine I frequently add new functions to my zshrc file to help me do whatever I need to do more efficiently.
+For this reason, I find it useful to have my zshrc autload every time its modified (autoloaded here means after I run a command or press enter on that shell):
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to calculate checksum of .zshrc</span>
+<span style="color: #feacd0;">get_zshrc_checksum</span>() {
+  md5 -q ~/.zshrc 2&gt;/dev/null || md5sum ~/.zshrc 2&gt;/dev/null | cut -d<span style="color: #79a8ff;">' '</span> -f1
+}
+
+<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Store the initial checksum of .zshrc</span>
+<span style="color: #00d3d0;">ZSHRC_CHECKSUM</span>=$(get_zshrc_checksum)
+
+<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to reload .zshrc</span>
+<span style="color: #feacd0;">reload_zshrc</span>() {
+  <span style="color: #f78fe7;">source</span> ~/.zshrc
+  <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Reloaded .zshrc"</span>
+}
+
+<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to check if .zshrc was modified</span>
+<span style="color: #feacd0;">check_zshrc_updated</span>() {
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">current_checksum</span>=$(get_zshrc_checksum)
+
+  <span style="color: #b6a0ff;">if</span> [[ <span style="color: #79a8ff;">"$current_checksum"</span> != <span style="color: #79a8ff;">"$ZSHRC_CHECKSUM"</span> ]]; <span style="color: #b6a0ff;">then</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">".zshrc has been modified, reloading..."</span>
+    <span style="color: #00d3d0;">ZSHRC_CHECKSUM</span>=$<span style="color: #00d3d0;">current_checksum</span>
+    reload_zshrc
+  <span style="color: #b6a0ff;">fi</span>
+}
+
+<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Add the function to the precmd hook to run before each prompt</span>
+<span style="color: #f78fe7;">autoload</span> -Uz add-zsh-hook
+add-zsh-hook precmd check_zshrc_updated
+</pre>
+</div>
+
+
+<p>
+Sometimes I define variables, aliases, or short-lived functions (that aren't worth putting on the file for posterity) and I want those to be available across several shells (I use <b>lots</b> of tabs):
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #a8a8a8;">## </span><span style="color: #a8a8a8;">manage shared state / temp functions</span>
+
+<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Define the shared state directory</span>
+<span style="color: #00d3d0;">SHARED_STATE_DIR</span>=<span style="color: #79a8ff;">"${HOME}/.zsh_shared_state"</span>
+
+<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Create the directory if it doesn't exist</span>
+[[ -d <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span> ]] || mkdir -p <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span>
+
+<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to load all shared state files</span>
+<span style="color: #feacd0;">load_shared_state</span>() {
+  <span style="color: #f78fe7;">local</span> file
+
+  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Source all files in the shared state directory</span>
+  <span style="color: #b6a0ff;">for</span> file<span style="color: #b6a0ff;"> in</span> <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span>/*; <span style="color: #b6a0ff;">do</span>
+    [[ -f <span style="color: #79a8ff;">"$file"</span> ]] &amp;&amp; <span style="color: #f78fe7;">source</span> <span style="color: #79a8ff;">"$file"</span>
+  <span style="color: #b6a0ff;">done</span>
+}
+
+<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to add a function to the shared state</span>
+<span style="color: #feacd0;">shared_function</span>() {
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">func_name</span>=<span style="color: #79a8ff;">"$1"</span>
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">file_path</span>=<span style="color: #79a8ff;">"$SHARED_STATE_DIR/func_${func_name}"</span>
+
+  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Check if the function exists</span>
+  <span style="color: #b6a0ff;">if ! </span><span style="color: #f78fe7;">typeset</span> -f <span style="color: #79a8ff;">"$func_name"</span> &gt; /dev/null; <span style="color: #b6a0ff;">then</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Function '$func_name' does not exist"</span> &gt;&amp;2
+    <span style="color: #b6a0ff;">return</span> 1
+  <span style="color: #b6a0ff;">fi</span>
+
+  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Get function definition and save it to a file</span>
+  <span style="color: #f78fe7;">typeset</span> -f <span style="color: #79a8ff;">"$func_name"</span> &gt; <span style="color: #79a8ff;">"$file_path"</span>
+
+  <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Function '$func_name' added to shared state"</span>
+}
+
+<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to add an alias to the shared state</span>
+<span style="color: #feacd0;">shared_alias</span>() {
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">alias_name</span>=<span style="color: #79a8ff;">"$1"</span>
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">file_path</span>=<span style="color: #79a8ff;">"$SHARED_STATE_DIR/alias_${alias_name}"</span>
+
+  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Get the alias definition</span>
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">alias_def</span>=$(<span style="color: #f78fe7;">alias</span> <span style="color: #79a8ff;">"$alias_name"</span> 2&gt;/dev/null)
+
+  <span style="color: #b6a0ff;">if</span> [[ -z <span style="color: #79a8ff;">"$alias_def"</span> ]]; <span style="color: #b6a0ff;">then</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Alias '$alias_name' does not exist"</span> &gt;&amp;2
+    <span style="color: #b6a0ff;">return</span> 1
+  <span style="color: #b6a0ff;">fi</span>
+
+  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Save alias to a file</span>
+  <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"$alias_def"</span> &gt; <span style="color: #79a8ff;">"$file_path"</span>
+
+  <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Alias '$alias_name' added to shared state"</span>
+}
+
+<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to add a variable to the shared state</span>
+<span style="color: #feacd0;">shared_variable</span>() {
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">var_name</span>=<span style="color: #79a8ff;">"$1"</span>
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">file_path</span>=<span style="color: #79a8ff;">"$SHARED_STATE_DIR/var_${var_name}"</span>
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">value</span>=<span style="color: #79a8ff;">"${(P)var_name}"</span>  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Get the value of the variable</span>
+
+  <span style="color: #b6a0ff;">if</span> [[ -z <span style="color: #79a8ff;">"$var_name"</span> ]]; <span style="color: #b6a0ff;">then</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Variable name is required"</span> &gt;&amp;2
+    <span style="color: #b6a0ff;">return</span> 1
+  <span style="color: #b6a0ff;">fi</span>
+
+  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Save variable to a file, properly escaping special characters</span>
+  <span style="color: #00d3d0;">escaped_value</span>=$(printf <span style="color: #79a8ff;">'%q'</span> <span style="color: #79a8ff;">"$value"</span>)
+  <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"export $var_name=$escaped_value"</span> &gt; <span style="color: #79a8ff;">"$file_path"</span>
+
+  <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Variable '$var_name' added to shared state"</span>
+}
+
+<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to remove an item from the shared state</span>
+<span style="color: #feacd0;">shared_remove</span>() {
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">item_type</span>=<span style="color: #79a8ff;">"$1"</span>
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">item_name</span>=<span style="color: #79a8ff;">"$2"</span>
+
+  <span style="color: #b6a0ff;">if</span> [[ -z <span style="color: #79a8ff;">"$item_type"</span> || -z <span style="color: #79a8ff;">"$item_name"</span> ]]; <span style="color: #b6a0ff;">then</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Usage: shared_remove &lt;function|alias|variable&gt; &lt;name&gt;"</span> &gt;&amp;2
+    <span style="color: #b6a0ff;">return</span> 1
+  <span style="color: #b6a0ff;">fi</span>
+
+  <span style="color: #f78fe7;">local</span> prefix
+  <span style="color: #b6a0ff;">case</span> <span style="color: #79a8ff;">"$item_type"</span><span style="color: #b6a0ff;"> in</span>
+    <span style="color: #b6a0ff;">function</span>)
+      <span style="color: #00d3d0;">prefix</span>=<span style="color: #79a8ff;">"func_"</span>
+      ;;
+    <span style="color: #f78fe7;">alias</span>)
+      <span style="color: #00d3d0;">prefix</span>=<span style="color: #79a8ff;">"alias_"</span>
+      ;;
+    variable)
+      <span style="color: #00d3d0;">prefix</span>=<span style="color: #79a8ff;">"var_"</span>
+      ;;
+    *)
+      <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Unknown item type: $item_type. Use function, alias, or variable."</span> &gt;&amp;2
+      <span style="color: #b6a0ff;">return</span> 1
+      ;;
+  <span style="color: #b6a0ff;">esac</span>
+
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">file_path</span>=<span style="color: #79a8ff;">"$SHARED_STATE_DIR/${prefix}${item_name}"</span>
+
+  <span style="color: #b6a0ff;">if</span> [[ -f <span style="color: #79a8ff;">"$file_path"</span> ]]; <span style="color: #b6a0ff;">then</span>
+    rm -f <span style="color: #79a8ff;">"$file_path"</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Removed $item_type '$item_name' from shared state"</span>
+  <span style="color: #b6a0ff;">else</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"$item_type '$item_name' not found in shared state"</span> &gt;&amp;2
+    <span style="color: #b6a0ff;">return</span> 1
+  <span style="color: #b6a0ff;">fi</span>
+}
+
+<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to list all shared items</span>
+<span style="color: #feacd0;">shared_list</span>() {
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">item_type</span>=<span style="color: #79a8ff;">"$1"</span>
+
+  <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Shared State Contents:"</span>
+  <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"----------------------"</span>
+
+  <span style="color: #b6a0ff;">if</span> [[ -z <span style="color: #79a8ff;">"$item_type"</span> || <span style="color: #79a8ff;">"$item_type"</span> == <span style="color: #79a8ff;">"function"</span> ]]; <span style="color: #b6a0ff;">then</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Functions:"</span>
+    <span style="color: #b6a0ff;">for</span> file<span style="color: #b6a0ff;"> in</span> <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span>/func_*; <span style="color: #b6a0ff;">do</span>
+      [[ -f <span style="color: #79a8ff;">"$file"</span> ]] &amp;&amp; <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"  $(basename "$file" | sed 's/^func_//')"</span>
+    <span style="color: #b6a0ff;">done</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">""</span>
+  <span style="color: #b6a0ff;">fi</span>
+
+  <span style="color: #b6a0ff;">if</span> [[ -z <span style="color: #79a8ff;">"$item_type"</span> || <span style="color: #79a8ff;">"$item_type"</span> == <span style="color: #79a8ff;">"alias"</span> ]]; <span style="color: #b6a0ff;">then</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Aliases:"</span>
+    <span style="color: #b6a0ff;">for</span> file<span style="color: #b6a0ff;"> in</span> <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span>/alias_*; <span style="color: #b6a0ff;">do</span>
+      [[ -f <span style="color: #79a8ff;">"$file"</span> ]] &amp;&amp; <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"  $(basename "$file" | sed 's/^alias_//')"</span>
+    <span style="color: #b6a0ff;">done</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">""</span>
+  <span style="color: #b6a0ff;">fi</span>
+
+  <span style="color: #b6a0ff;">if</span> [[ -z <span style="color: #79a8ff;">"$item_type"</span> || <span style="color: #79a8ff;">"$item_type"</span> == <span style="color: #79a8ff;">"variable"</span> ]]; <span style="color: #b6a0ff;">then</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Variables:"</span>
+    <span style="color: #b6a0ff;">for</span> file<span style="color: #b6a0ff;"> in</span> <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span>/var_*; <span style="color: #b6a0ff;">do</span>
+      [[ -f <span style="color: #79a8ff;">"$file"</span> ]] &amp;&amp; <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"  $(basename "$file" | sed 's/^var_//')"</span>
+    <span style="color: #b6a0ff;">done</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">""</span>
+  <span style="color: #b6a0ff;">fi</span>
+}
+
+<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to view the content of a shared item</span>
+<span style="color: #feacd0;">shared_view</span>() {
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">item_type</span>=<span style="color: #79a8ff;">"$1"</span>
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">item_name</span>=<span style="color: #79a8ff;">"$2"</span>
+
+  <span style="color: #b6a0ff;">if</span> [[ -z <span style="color: #79a8ff;">"$item_type"</span> || -z <span style="color: #79a8ff;">"$item_name"</span> ]]; <span style="color: #b6a0ff;">then</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Usage: shared_view &lt;function|alias|variable&gt; &lt;name&gt;"</span> &gt;&amp;2
+    <span style="color: #b6a0ff;">return</span> 1
+  <span style="color: #b6a0ff;">fi</span>
+
+  <span style="color: #f78fe7;">local</span> prefix
+  <span style="color: #b6a0ff;">case</span> <span style="color: #79a8ff;">"$item_type"</span><span style="color: #b6a0ff;"> in</span>
+    <span style="color: #b6a0ff;">function</span>)
+      <span style="color: #00d3d0;">prefix</span>=<span style="color: #79a8ff;">"func_"</span>
+      ;;
+    <span style="color: #f78fe7;">alias</span>)
+      <span style="color: #00d3d0;">prefix</span>=<span style="color: #79a8ff;">"alias_"</span>
+      ;;
+    variable)
+      <span style="color: #00d3d0;">prefix</span>=<span style="color: #79a8ff;">"var_"</span>
+      ;;
+    *)
+      <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Unknown item type: $item_type. Use function, alias, or variable."</span> &gt;&amp;2
+      <span style="color: #b6a0ff;">return</span> 1
+      ;;
+  <span style="color: #b6a0ff;">esac</span>
+
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">file_path</span>=<span style="color: #79a8ff;">"$SHARED_STATE_DIR/${prefix}${item_name}"</span>
+
+  <span style="color: #b6a0ff;">if</span> [[ -f <span style="color: #79a8ff;">"$file_path"</span> ]]; <span style="color: #b6a0ff;">then</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Content of $item_type '$item_name':"</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"-----------------------------"</span>
+    cat <span style="color: #79a8ff;">"$file_path"</span>
+  <span style="color: #b6a0ff;">else</span>
+    <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"$item_type '$item_name' not found in shared state"</span> &gt;&amp;2
+    <span style="color: #b6a0ff;">return</span> 1
+  <span style="color: #b6a0ff;">fi</span>
+}
+
+<span style="color: #feacd0;">reload_shared_state</span>() {
+  load_shared_state
+}
+
+<span style="color: #f78fe7;">autoload</span> -Uz add-zsh-hook
+add-zsh-hook precmd reload_shared_state
+load_shared_state
+
+</pre>
+</div>
+
+<p>
+Good old pathmunge:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #feacd0;">pathmunge</span>()
+{
+        <span style="color: #b6a0ff;">if ! </span><span style="color: #f78fe7;">echo</span> $<span style="color: #00d3d0;">PATH</span> | /usr/bin/egrep -q <span style="color: #79a8ff;">"(^|:)$1($|:)"</span> ; <span style="color: #b6a0ff;">then</span>
+                <span style="color: #b6a0ff;">if</span> [ <span style="color: #79a8ff;">"$2"</span> = <span style="color: #79a8ff;">"after"</span> ] ; <span style="color: #b6a0ff;">then</span>
+                        <span style="color: #00d3d0;">PATH</span>=$<span style="color: #00d3d0;">PATH</span>:$<span style="color: #00d3d0;">1</span>
+                <span style="color: #b6a0ff;">else</span>
+                        <span style="color: #00d3d0;">PATH</span>=$<span style="color: #00d3d0;">1</span>:$<span style="color: #00d3d0;">PATH</span>
+                <span style="color: #b6a0ff;">fi</span>
+        <span style="color: #b6a0ff;">fi</span>
+}
+</pre>
+</div>
+
+
+<p>
+Load other scripts into the path:
+</p>
+<div class="org-src-container">
+<pre class="src src-:results">pathmunge ~/gdrive/scripts
+</pre>
+</div>
+
+<p>
+I took this idea from Percona Toolkit. Just set _DEBUG to something and have your code show lots of debug info.
+With this, freely sprinkle debugp in your shell code and only have its output show up if _DEBUG is set:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #feacd0;">debugp</span>()
+{
+   [ -n <span style="color: #79a8ff;">"$_DEBUG"</span> ] &amp;&amp; <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"$*"</span>&gt;&amp;2
+}
+</pre>
+</div>
+
+<p>
+I don't use this too often now as I usually just ask Siri (typing, not speaking), but I haven't removed it yet:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #feacd0;">remind_me</span>()
+{
+    (
+    <span style="color: #00d3d0;">wait_time</span>=$(( $<span style="color: #00d3d0;">1</span> * 60))
+    <span style="color: #f78fe7;">shift</span>
+    sleep $<span style="color: #00d3d0;">wait_time</span>
+    osascript -e <span style="color: #79a8ff;">"tell app \"System Events\" to display dialog \"$*\" buttons {\"OK\"} default button 1 with title \"remind_me notification\""</span>
+    ) &amp;
+}
+</pre>
+</div>
+
+<p>
+For when the need arises &#x2026;
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #feacd0;">kalishell</span>()
+{
+    <span style="color: #00d3d0;">kali</span>=$(docker ps |grep kali|grep -v CONTAINER|awk <span style="color: #79a8ff;">'{print $1}'</span>)
+    [ -z <span style="color: #79a8ff;">"$kali"</span> ] &amp;&amp; docker run --tty --interactive --name kali kalilinux/kali-rolling &amp;&amp; <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"apt update &amp;&amp; apt -y install kali-linux-headless"</span>
+    docker exec -it $<span style="color: #00d3d0;">kali</span> /bin/bash
+}
+</pre>
+</div>
+
+<p>
+Because I often build lists dynamically and it's easier to get the last comma out with sed than with an exception in the loop:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #feacd0;">remove_last_comma_from_input</span>()
+{
+    sed <span style="color: #79a8ff;">'$s/,$//'</span>
+}
+</pre>
+</div>
+
+<p>
+Basic parallelization. Very basic.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #feacd0;">run_in_background_if_cnt_of_background_processes_is_less_than</span>()
+{
+        [ -z <span style="color: #79a8ff;">"$1"</span> ] &amp;&amp; <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"expected arg: max number of background processes"</span> &amp;&amp; <span style="color: #b6a0ff;">return</span> 1
+        [ -z <span style="color: #79a8ff;">"$2"</span> ] &amp;&amp; <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"expected arg: command to run"</span> &amp;&amp; <span style="color: #b6a0ff;">return</span> 1
+        [ -z <span style="color: #79a8ff;">"$3"</span> ] &amp;&amp; <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"expected arg: command to run"</span> &amp;&amp; <span style="color: #b6a0ff;">return</span> 1
+        <span style="color: #00d3d0;">max_processes</span>=$<span style="color: #00d3d0;">1</span>
+        <span style="color: #f78fe7;">shift</span>
+        <span style="color: #b6a0ff;">while </span><span style="color: #f78fe7;">true</span>
+        <span style="color: #b6a0ff;">do</span>
+        <span style="color: #00d3d0;">running_processes</span>=$(<span style="color: #f78fe7;">jobs</span> -p|wc -l)
+        <span style="color: #b6a0ff;">if</span> [ $<span style="color: #00d3d0;">running_processes</span> -lt $<span style="color: #00d3d0;">max_processes</span> ]
+        <span style="color: #b6a0ff;">then</span>
+            $<span style="color: #00d3d0;">*</span> &amp;
+        <span style="color: #b6a0ff;">else</span>
+            sleep 1
+        <span style="color: #b6a0ff;">fi</span>
+        <span style="color: #b6a0ff;">done</span>
+}
+</pre>
+</div>
+
+
+<p>
+Besides having the file on git (not on github, not that I have anything against them), make manual copies. One can never be too much paranoid.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #feacd0;">backup</span>()
+{
+    <span style="color: #79a8ff;">'cp'</span> ~/.zshrc ~/gdrive/backup/dotfiles/$(hostname -s)/
+}
+</pre>
+</div>
+
+<p>
+Sometimes I forget if I already have a function defined for something I want to do &#x2026;
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #feacd0;">my_functions</span>()
+{
+    grep -E <span style="color: #79a8ff;">'^[a-zA-Z0-9_]+\(\)'</span> ~/.zshrc
+}
+</pre>
+</div>
+
+<p>
+Dear Python:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #f78fe7;">export</span> <span style="color: #00d3d0;">PYENV_ROOT</span>=<span style="color: #79a8ff;">"$HOME/.pyenv"</span>
+<span style="color: #f78fe7;">export</span> <span style="color: #00d3d0;">PYENV_ROOT</span>=<span style="color: #79a8ff;">"$HOME/.pyenv"</span>
+<span style="color: #f78fe7;">export</span> <span style="color: #00d3d0;">PATH</span>=<span style="color: #79a8ff;">"$PYENV_ROOT/bin:$PATH"</span>
+<span style="color: #f78fe7;">eval</span> <span style="color: #79a8ff;">"$(pyenv init --path)"</span>
+<span style="color: #f78fe7;">eval</span> <span style="color: #79a8ff;">"$(pyenv init -)"</span>
+</pre>
+</div>
+
+</article>
+</main>
+</body>
+</html>
