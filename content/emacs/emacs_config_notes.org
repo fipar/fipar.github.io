@@ -1,0 +1,230 @@
+#+TITLE: Some notes about Emacs' configuration
+
+#+begin_export html
+    <style>
+      body {
+          font-family: Raleway, monospace;
+      }
+    </style>
+#+end_export
+
+These are some random notes about my emacs configuration, as it may be useful to others.
+
+I keep my usual configuration under ~/.emacs.d/ with init.el being the entry point.
+
+I find it useful to bring up the debugger if I hit an error as the trace usually has enough information to figure out what's going on:
+#+begin_src emacs-lisp :results output raw
+;; makes it easier to handle startup errors
+(setq debug-on-error t)
+;; makes it easier to handle freeze errors (if you then SIGHUP or SIGTERM emacs)
+(setq debug-on-quit t)
+#+end_src
+
+Because I use a different computer for work and personal purposes ("don't cross the streams") I have a simple macro that lets me load config sections depending on which machine I'm on:
+
+#+begin_src emacs-lisp :results output raw
+;; allow customizations per machine
+(setq hostname (car (split-string system-name "\\.")))
+
+(defmacro execute-on-machine (machine-name &rest body)
+  "Execute BODY only if the machine name matches MACHINE-NAME."
+  `(let ((current-machine hostname))
+     (when (string-equal current-machine ,machine-name)
+       ,@body)))
+
+(setq work-machine "mellotron")
+(setq personal-machine "moog")
+#+end_src
+
+For example, I can work with a different set of agenda files for org mode depending on whether I'm having professional or personal fun:
+#+begin_src emacs-lisp :results output raw
+(execute-on-machine work-machine (setq my-custom-org-agenda-files ('"the" "list" "of" "files")))
+
+(execute-on-machine personal-machine (setq my-custom-org-agenda-files '("~/Documents/org-mode/journal.org" "~/Documents/org-mode/Professional_Development.org" "~/Documents/org-mode/Notes.org" "~/Documents/org-mode/Community.org" "~/Documents/org-mode/Reference.org" "~/Documents/org-mode/Todo.org" "~/Documents/org-mode/Bookmarks.org")))
+#+end_src
+
+This snippet lets me share the config between multiple machines and not have startup errors if I:
+- install a new package on one of them
+- decide that I want to add package-specific lines somewhere on the config, and load it for all machines
+
+#+begin_src emacs-lisp :results output raw
+;; this should happen after (package-initialize)
+(setq package-list '(ace-jump-mode aws-snippets awscli-capf calfw company-tabnine csound-mode darkroom dtrt-indent ein eproject evil evil-mc evil-visual-replace gnutls helm-tramp ipcalc imenu-list kubed minimap neotree ob-go ob-async ob-sagemath org-download org-mru-clock org-notify ox-jira popup rtags shell-pop sqlite3 emacsql-sqlite3 unicode-fonts with-simulated-input workgroups2 yaml-mode yasnippet polymode poly-org ob-sagemath))
+
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-refresh-contents)
+    (package-install package)))
+#+end_src
+
+With this, any missing but required package will be installed (provided I don't forget to add it to the list).
+
+This takes care of loading any other .el files on ~/.emacs.d/:
+#+begin_src emacs-lisp :results output raw
+(defun load-directory (dir)
+  "Load all Emacs Lisp files in a directory, excluding init.el and files that start with .#."
+  (let ((load-file-silent t))
+    (dolist (file (directory-files dir t "\\.el$"))
+      (unless (or (string= (file-name-nondirectory file) "init.el")
+		  (string-prefix-p ".#" (file-name-nondirectory file)))
+	(load file)))))
+#+end_src
+
+It avoids loading init.el, which would cause an infinite loop, and any file-is-being-edited markers.
+Also, because it only targets .el files, I can simply rename the extension of a file if I want to avoid loading it.
+This comes in handy when dealing with startup issues (usually after an upgrade).
+
+What comes next is taken from  https://github.com/LionyxML/emacs-solo/blob/main/init.el:
+#+begin_src emacs-lisp :results output raw
+(add-to-list 'save-some-buffers-action-alist
+             (list "d"
+                   (lambda (buffer) (diff-buffer-with-file (buffer-file-name buffer)))
+                   "show diff between the buffer and its file"))
+#+end_src
+
+When you're quitting emacs with unsaved work, you get asked what you want to do with each file. This adds the very useful option of showing us a diff (so we can answer intelligently).
+
+I then just call load-directory:
+#+begin_src emacs-lisp :results output raw
+(load-directory "~/.emacs.d/")
+#+end_src
+
+
+I use hydras a lot to avoid having to remember lots of shortcuts, and because I frequently change shortcuts depending on what I'm working on.
+A trick I use for discoverability is to have a meta hydra that calls all the other ones, and I wrote it so that it adds additional shortcuts depending on the context from which it's called:
+#+begin_src emacs-lisp :results output raw
+(defun hydra-meta-context-aware ()
+  "Context-aware version of the meta hydra showing relevant options based on current context."
+  (interactive)
+  
+  ;; Detect various contexts
+  (let* ((is-on-url (thing-at-point 'url))
+         (is-on-email (thing-at-point 'email))
+         (is-on-filename (thing-at-point 'filename))
+         (is-in-org-mode (derived-mode-p 'org-mode))
+         (is-in-prog-mode (derived-mode-p 'prog-mode))
+         (has-region (use-region-p))
+         (is-in-dired (derived-mode-p 'dired-mode))
+         (is-in-magit (derived-mode-p 'magit-mode))
+         
+         ;; Start with your existing hydra heads
+         (hydra-heads
+          `(("q" nil "quit")
+            ("se" hydra-searches/body "Searching")
+            ("sh" hydra-shells/body "Shells")
+            ("u" hydra-kill-ring/body "Kill Ring")
+            ("h" hydra-helm-org-rifle/body "Helm")
+            ("sp" hydra-spelling/body "Spelling")
+            ("p" hydra-profiler/body "Profiler")
+            ("l" hydra-org-links/body "Links")
+            ("e" hydra-eval/body "Eval")
+            ("x" hydra-org-export/body "Export")
+            ("z" hydra-org-misc/body "Org Misc")
+            ("k" hydra-epa/body "Encryption")
+            ("K" kubed-transient)
+            ("v" hydra-visibility/body "Visibility")
+            ("m" hydra-multiple-cursors/body "Multiple cursors and rectangles")
+            ("b" hydra-org-babel/body "Babel")
+            ("f" hydra-focus/body "Focus")
+            ("t" hydra-treemacs/body)
+            ("g" hydra-emacs/body "Emacs")
+            ("d" hydra-describe/body "Describe and help")
+            ("D" hydra-db/body "Databases")
+            ("w" hydra-workgroups/body "Workgroups")))
+         
+         ;; Prepare a list for context-specific suggestions
+         (context-heads '()))
+    
+    ;; Add context-specific heads
+    (when is-on-url
+      (push '("U" browse-url-at-point "Open URL at point") context-heads))
+    
+    (when is-on-email
+      (push '("E" (lambda () (interactive) (compose-mail (thing-at-point 'email))) "Email address at point") context-heads))
+    
+    (when is-on-filename
+      (push '("F" find-file-at-point "Open file at point") context-heads))
+    
+    (when is-in-org-mode
+      (push '("T" org-todo "Toggle TODO") context-heads)
+      (push '("S" org-schedule "Schedule") context-heads)
+      (push '("L" org-insert-link "Insert link") context-heads))
+    
+    (when is-in-prog-mode
+      (push '("C" comment-dwim "Comment") context-heads)
+      (push '("D" xref-find-definitions "Find Definition") context-heads))
+    
+    (when has-region
+      (push '("W" kill-ring-save "Copy region") context-heads)
+      (push '("K" kill-region "Cut region") context-heads))
+    
+    (when is-in-dired
+      (push '("R" dired-do-rename "Rename") context-heads)
+      (push '("M" dired-do-chmod "Change mode") context-heads))
+    
+    (when is-in-magit
+      (push '("G" magit-refresh "Refresh") context-heads)
+      (push '("P" magit-push "Push") context-heads))
+    
+    ;; Create and call the hydra with combined heads and context suggestions
+    (eval
+     `(defhydra hydra-meta-dynamic (:hint none :exit t)
+        ,(format "
+The Meta Hydra, which lets you jump into any other Hydra
+_q_ Quit
+_se_ SEarching          _e_ Eval
+_sh_ SHells             _x_ eXport
+_sp_ SPelling           _v_ Visibility
+_u_ Kill Ring           _l_ Org Links
+_w_ Workgroups          _b_ Org Babel
+_p_ Profiler            _f_ Org Focus
+_k_ encryption          _z_ Org Misc
+_d_ Describe and help   _h_ Helm
+_D_ DB                  _t_ Treemacs
+_K_ Kubed
+_m_ Multiple cursors and rectangles
+_g_ Gnu emacs
+
+%s
+"
+                (if context-heads
+                    (concat "Context-specific actions:\n"
+                            (mapconcat (lambda (head) 
+                                         (format "_%s_ %s" (car head) (nth 2 head))) 
+                                       (reverse context-heads) "  "))
+                    ""))
+                
+        ;; Combine your standard heads with the context-specific ones
+        ,@hydra-heads
+        ,@context-heads))
+    (hydra-meta-dynamic/body)))
+
+;; Replace your current binding or add a new one
+(global-set-key (kbd "H-h") 'hydra-meta-context-aware)
+#+end_src
+
+H stands for Hyper key in that global binding, and I have that bound to right control:
+#+begin_src emacs-lisp :results output raw
+(setq ns-right-control-modifier 'hyper)
+#+end_src
+
+To avoid finger strain (depending on which hyper key I want to use) I can also use the left control as a right control thanks to my [[https://shop.keyboard.io/products/model-100][Model 100]], which lets me change the mappings based on layers.
+
+Having a programmable keyboard is very useful for shortcuts, because you can create arbitrarily long prefixes and then just bind them to a special key.
+For example, here's my Github Copilot config, including its corresponding key binding:
+
+#+begin_src emacs-lisp :results output raw
+(progn
+  (require 'copilot)
+  (add-hook 'prog-mode-hook 'copilot-mode)
+  (add-hook 'git-commit-mode-hook 'copilot-mode)
+  (add-hook 'org-mode-hook 'copilot-mode)
+  (define-key copilot-completion-map (kbd "y") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "n") 'copilot-next-completion)
+  (define-key copilot-completion-map (kbd "c") 'copilot-clear-overlay)
+  (global-set-key (kbd "C-M-S-s-u") 'copilot-complete)
+  )
+#+end_src
+
+C-M-S-s- is quite the prefix, but for me, it's just the any key (that means a key labeled "any"), so to trigger copilot completion I just do any-u.
+The main benefit of a long prefix (that you can get with just one key press) is that you don't collide with other prefixes on the system. 

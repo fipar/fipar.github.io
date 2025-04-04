@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2025-04-04 Fri 18:41 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Some notes about Emacs' configuration</title>
+<meta name="author" content="Fernando Ipar" />
+<meta name="generator" content="Org Mode" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Fernando Ipar's personal website">
+<style>
+  body {
+    font-family: Raleway, monospace;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1em;
+  }
+  article {
+    margin: 2em 0;
+  }
+  section {
+    margin: 2em 0;
+  }
+  h2 {
+    color: #333;
+    margin-bottom: 1em;
+  }
+</style>
+</head>
+<body>
+<main>
+<article>
+<style>
+  body {
+      font-family: Raleway, monospace;
+  }
+</style>
+
+<p>
+These are some random notes about my emacs configuration, as it may be useful to others.
+</p>
+
+<p>
+I keep my usual configuration under ~/.emacs.d/ with init.el being the entry point.
+</p>
+
+<p>
+I find it useful to bring up the debugger if I hit an error as the trace usually has enough information to figure out what's going on:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #a8a8a8;">;; </span><span style="color: #a8a8a8;">makes it easier to handle startup errors</span>
+(<span style="color: #b6a0ff;">setq</span> debug-on-error t)
+<span style="color: #a8a8a8;">;; </span><span style="color: #a8a8a8;">makes it easier to handle freeze errors (if you then SIGHUP or SIGTERM emacs)</span>
+(<span style="color: #b6a0ff;">setq</span> debug-on-quit t)
+</pre>
+</div>
+
+<p>
+Because I use a different computer for work and personal purposes ("don't cross the streams") I have a simple macro that lets me load config sections depending on which machine I'm on:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #a8a8a8;">;; </span><span style="color: #a8a8a8;">allow customizations per machine</span>
+(<span style="color: #b6a0ff;">setq</span> hostname (car (split-string system-name <span style="color: #79a8ff;">"\\."</span>)))
+
+(<span style="color: #b6a0ff;">defmacro</span> <span style="color: #feacd0;">execute-on-machine</span> (machine-name <span style="color: #6ae4b9;">&amp;rest</span> body)
+  <span style="color: #b0d6f5;">"Execute BODY only if the machine name matches MACHINE-NAME."</span>
+  `(<span style="color: #b6a0ff;">let</span> ((current-machine hostname))
+     (<span style="color: #b6a0ff;">when</span> (string-equal current-machine ,machine-name)
+       ,@body)))
+
+(<span style="color: #b6a0ff;">setq</span> work-machine <span style="color: #79a8ff;">"mellotron"</span>)
+(<span style="color: #b6a0ff;">setq</span> personal-machine <span style="color: #79a8ff;">"moog"</span>)
+</pre>
+</div>
+
+<p>
+For example, I can work with a different set of agenda files for org mode depending on whether I'm having professional or personal fun:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">execute-on-machine</span> work-machine (<span style="color: #b6a0ff;">setq</span> my-custom-org-agenda-files ('<span style="color: #79a8ff;">"the"</span> <span style="color: #79a8ff;">"list"</span> <span style="color: #79a8ff;">"of"</span> <span style="color: #79a8ff;">"files"</span>)))
+
+(<span style="color: #b6a0ff;">execute-on-machine</span> personal-machine (<span style="color: #b6a0ff;">setq</span> my-custom-org-agenda-files '(<span style="color: #79a8ff;">"~/Documents/org-mode/journal.org"</span> <span style="color: #79a8ff;">"~/Documents/org-mode/Professional_Development.org"</span> <span style="color: #79a8ff;">"~/Documents/org-mode/Notes.org"</span> <span style="color: #79a8ff;">"~/Documents/org-mode/Community.org"</span> <span style="color: #79a8ff;">"~/Documents/org-mode/Reference.org"</span> <span style="color: #79a8ff;">"~/Documents/org-mode/Todo.org"</span> <span style="color: #79a8ff;">"~/Documents/org-mode/Bookmarks.org"</span>)))
+</pre>
+</div>
+
+<p>
+This snippet lets me share the config between multiple machines and not have startup errors if I:
+</p>
+<ul class="org-ul">
+<li>install a new package on one of them</li>
+<li>decide that I want to add package-specific lines somewhere on the config, and load it for all machines</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #a8a8a8;">;; </span><span style="color: #a8a8a8;">this should happen after (package-initialize)</span>
+(<span style="color: #b6a0ff;">setq</span> package-list '(ace-jump-mode aws-snippets awscli-capf calfw company-tabnine csound-mode darkroom dtrt-indent ein eproject evil evil-mc evil-visual-replace gnutls helm-tramp ipcalc imenu-list kubed minimap neotree ob-go ob-async ob-sagemath org-download org-mru-clock org-notify ox-jira popup rtags shell-pop sqlite3 emacsql-sqlite3 unicode-fonts with-simulated-input workgroups2 yaml-mode yasnippet polymode poly-org ob-sagemath))
+
+(<span style="color: #b6a0ff;">dolist</span> (package package-list)
+  (<span style="color: #b6a0ff;">unless</span> (package-installed-p package)
+    (package-refresh-contents)
+    (package-install package)))
+</pre>
+</div>
+
+<p>
+With this, any missing but required package will be installed (provided I don't forget to add it to the list).
+</p>
+
+<p>
+This takes care of loading any other .el files on ~/.emacs.d/:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">defun</span> <span style="color: #feacd0;">load-directory</span> (dir)
+  <span style="color: #b0d6f5;">"Load all Emacs Lisp files in a directory, excluding init.el and files that start with .#."</span>
+  (<span style="color: #b6a0ff;">let</span> ((load-file-silent t))
+    (<span style="color: #b6a0ff;">dolist</span> (file (directory-files dir t <span style="color: #79a8ff;">"\\.el$"</span>))
+      (<span style="color: #b6a0ff;">unless</span> (<span style="color: #b6a0ff;">or</span> (string= (file-name-nondirectory file) <span style="color: #79a8ff;">"init.el"</span>)
+                  (string-prefix-p <span style="color: #79a8ff;">".#"</span> (file-name-nondirectory file)))
+        (load file)))))
+</pre>
+</div>
+
+<p>
+It avoids loading init.el, which would cause an infinite loop, and any file-is-being-edited markers.
+Also, because it only targets .el files, I can simply rename the extension of a file if I want to avoid loading it.
+This comes in handy when dealing with startup issues (usually after an upgrade).
+</p>
+
+<p>
+What comes next is taken from  <a href="https://github.com/LionyxML/emacs-solo/blob/main/init.el">https://github.com/LionyxML/emacs-solo/blob/main/init.el</a>:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(add-to-list 'save-some-buffers-action-alist
+             (list <span style="color: #79a8ff;">"d"</span>
+                   (<span style="color: #b6a0ff;">lambda</span> (buffer) (diff-buffer-with-file (buffer-file-name buffer)))
+                   <span style="color: #79a8ff;">"show diff between the buffer and its file"</span>))
+</pre>
+</div>
+
+<p>
+When you're quitting emacs with unsaved work, you get asked what you want to do with each file. This adds the very useful option of showing us a diff (so we can answer intelligently).
+</p>
+
+<p>
+I then just call load-directory:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(load-directory <span style="color: #79a8ff;">"~/.emacs.d/"</span>)
+</pre>
+</div>
+
+
+<p>
+I use hydras a lot to avoid having to remember lots of shortcuts, and because I frequently change shortcuts depending on what I'm working on.
+A trick I use for discoverability is to have a meta hydra that calls all the other ones, and I wrote it so that it adds additional shortcuts depending on the context from which it's called:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">defun</span> <span style="color: #feacd0;">hydra-meta-context-aware</span> ()
+  <span style="color: #b0d6f5;">"Context-aware version of the meta hydra showing relevant options based on current context."</span>
+  (<span style="color: #b6a0ff;">interactive</span>)
+  
+  <span style="color: #a8a8a8;">;; </span><span style="color: #a8a8a8;">Detect various contexts</span>
+  (<span style="color: #b6a0ff;">let*</span> ((is-on-url (thing-at-point 'url))
+         (is-on-email (thing-at-point 'email))
+         (is-on-filename (thing-at-point 'filename))
+         (is-in-org-mode (derived-mode-p 'org-mode))
+         (is-in-prog-mode (derived-mode-p 'prog-mode))
+         (has-region (use-region-p))
+         (is-in-dired (derived-mode-p 'dired-mode))
+         (is-in-magit (derived-mode-p 'magit-mode))
+         
+         <span style="color: #a8a8a8;">;; </span><span style="color: #a8a8a8;">Start with your existing hydra heads</span>
+         (hydra-heads
+          `((<span style="color: #79a8ff;">"q"</span> nil <span style="color: #79a8ff;">"quit"</span>)
+            (<span style="color: #79a8ff;">"se"</span> hydra-searches/body <span style="color: #79a8ff;">"Searching"</span>)
+            (<span style="color: #79a8ff;">"sh"</span> hydra-shells/body <span style="color: #79a8ff;">"Shells"</span>)
+            (<span style="color: #79a8ff;">"u"</span> hydra-kill-ring/body <span style="color: #79a8ff;">"Kill Ring"</span>)
+            (<span style="color: #79a8ff;">"h"</span> hydra-helm-org-rifle/body <span style="color: #79a8ff;">"Helm"</span>)
+            (<span style="color: #79a8ff;">"sp"</span> hydra-spelling/body <span style="color: #79a8ff;">"Spelling"</span>)
+            (<span style="color: #79a8ff;">"p"</span> hydra-profiler/body <span style="color: #79a8ff;">"Profiler"</span>)
+            (<span style="color: #79a8ff;">"l"</span> hydra-org-links/body <span style="color: #79a8ff;">"Links"</span>)
+            (<span style="color: #79a8ff;">"e"</span> hydra-eval/body <span style="color: #79a8ff;">"Eval"</span>)
+            (<span style="color: #79a8ff;">"x"</span> hydra-org-export/body <span style="color: #79a8ff;">"Export"</span>)
+            (<span style="color: #79a8ff;">"z"</span> hydra-org-misc/body <span style="color: #79a8ff;">"Org Misc"</span>)
+            (<span style="color: #79a8ff;">"k"</span> hydra-epa/body <span style="color: #79a8ff;">"Encryption"</span>)
+            (<span style="color: #79a8ff;">"K"</span> kubed-transient)
+            (<span style="color: #79a8ff;">"v"</span> hydra-visibility/body <span style="color: #79a8ff;">"Visibility"</span>)
+            (<span style="color: #79a8ff;">"m"</span> hydra-multiple-cursors/body <span style="color: #79a8ff;">"Multiple cursors and rectangles"</span>)
+            (<span style="color: #79a8ff;">"b"</span> hydra-org-babel/body <span style="color: #79a8ff;">"Babel"</span>)
+            (<span style="color: #79a8ff;">"f"</span> hydra-focus/body <span style="color: #79a8ff;">"Focus"</span>)
+            (<span style="color: #79a8ff;">"t"</span> hydra-treemacs/body)
+            (<span style="color: #79a8ff;">"g"</span> hydra-emacs/body <span style="color: #79a8ff;">"Emacs"</span>)
+            (<span style="color: #79a8ff;">"d"</span> hydra-describe/body <span style="color: #79a8ff;">"Describe and help"</span>)
+            (<span style="color: #79a8ff;">"D"</span> hydra-db/body <span style="color: #79a8ff;">"Databases"</span>)
+            (<span style="color: #79a8ff;">"w"</span> hydra-workgroups/body <span style="color: #79a8ff;">"Workgroups"</span>)))
+         
+         <span style="color: #a8a8a8;">;; </span><span style="color: #a8a8a8;">Prepare a list for context-specific suggestions</span>
+         (context-heads '()))
+    
+    <span style="color: #a8a8a8;">;; </span><span style="color: #a8a8a8;">Add context-specific heads</span>
+    (<span style="color: #b6a0ff;">when</span> is-on-url
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"U"</span> browse-url-at-point <span style="color: #79a8ff;">"Open URL at point"</span>) context-heads))
+    
+    (<span style="color: #b6a0ff;">when</span> is-on-email
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"E"</span> (<span style="color: #b6a0ff;">lambda</span> () (<span style="color: #b6a0ff;">interactive</span>) (compose-mail (thing-at-point 'email))) <span style="color: #79a8ff;">"Email address at point"</span>) context-heads))
+    
+    (<span style="color: #b6a0ff;">when</span> is-on-filename
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"F"</span> find-file-at-point <span style="color: #79a8ff;">"Open file at point"</span>) context-heads))
+    
+    (<span style="color: #b6a0ff;">when</span> is-in-org-mode
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"T"</span> org-todo <span style="color: #79a8ff;">"Toggle TODO"</span>) context-heads)
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"S"</span> org-schedule <span style="color: #79a8ff;">"Schedule"</span>) context-heads)
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"L"</span> org-insert-link <span style="color: #79a8ff;">"Insert link"</span>) context-heads))
+    
+    (<span style="color: #b6a0ff;">when</span> is-in-prog-mode
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"C"</span> comment-dwim <span style="color: #79a8ff;">"Comment"</span>) context-heads)
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"D"</span> xref-find-definitions <span style="color: #79a8ff;">"Find Definition"</span>) context-heads))
+    
+    (<span style="color: #b6a0ff;">when</span> has-region
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"W"</span> kill-ring-save <span style="color: #79a8ff;">"Copy region"</span>) context-heads)
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"K"</span> kill-region <span style="color: #79a8ff;">"Cut region"</span>) context-heads))
+    
+    (<span style="color: #b6a0ff;">when</span> is-in-dired
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"R"</span> dired-do-rename <span style="color: #79a8ff;">"Rename"</span>) context-heads)
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"M"</span> dired-do-chmod <span style="color: #79a8ff;">"Change mode"</span>) context-heads))
+    
+    (<span style="color: #b6a0ff;">when</span> is-in-magit
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"G"</span> magit-refresh <span style="color: #79a8ff;">"Refresh"</span>) context-heads)
+      (<span style="color: #b6a0ff;">push</span> '(<span style="color: #79a8ff;">"P"</span> magit-push <span style="color: #79a8ff;">"Push"</span>) context-heads))
+    
+    <span style="color: #a8a8a8;">;; </span><span style="color: #a8a8a8;">Create and call the hydra with combined heads and context suggestions</span>
+    (eval
+     `(<span style="color: #b6a0ff;">defhydra</span> hydra-meta-dynamic (<span style="color: #f78fe7;">:hint</span> none <span style="color: #f78fe7;">:exit</span> t)
+        ,(format <span style="color: #79a8ff;">"</span>
+<span style="color: #79a8ff;">The Meta Hydra, which lets you jump into any other Hydra</span>
+<span style="color: #79a8ff;">_q_ Quit</span>
+<span style="color: #79a8ff;">_se_ SEarching          _e_ Eval</span>
+<span style="color: #79a8ff;">_sh_ SHells             _x_ eXport</span>
+<span style="color: #79a8ff;">_sp_ SPelling           _v_ Visibility</span>
+<span style="color: #79a8ff;">_u_ Kill Ring           _l_ Org Links</span>
+<span style="color: #79a8ff;">_w_ Workgroups          _b_ Org Babel</span>
+<span style="color: #79a8ff;">_p_ Profiler            _f_ Org Focus</span>
+<span style="color: #79a8ff;">_k_ encryption          _z_ Org Misc</span>
+<span style="color: #79a8ff;">_d_ Describe and help   _h_ Helm</span>
+<span style="color: #79a8ff;">_D_ DB                  _t_ Treemacs</span>
+<span style="color: #79a8ff;">_K_ Kubed</span>
+<span style="color: #79a8ff;">_m_ Multiple cursors and rectangles</span>
+<span style="color: #79a8ff;">_g_ Gnu emacs</span>
+
+<span style="color: #79a8ff;">%s</span>
+<span style="color: #79a8ff;">"</span>
+                (<span style="color: #b6a0ff;">if</span> context-heads
+                    (concat <span style="color: #79a8ff;">"Context-specific actions:\n"</span>
+                            (mapconcat (<span style="color: #b6a0ff;">lambda</span> (head) 
+                                         (format <span style="color: #79a8ff;">"_%s_ %s"</span> (car head) (nth 2 head))) 
+                                       (reverse context-heads) <span style="color: #79a8ff;">"  "</span>))
+                    <span style="color: #79a8ff;">""</span>))
+                
+        <span style="color: #a8a8a8;">;; </span><span style="color: #a8a8a8;">Combine your standard heads with the context-specific ones</span>
+        ,@hydra-heads
+        ,@context-heads))
+    (hydra-meta-dynamic/body)))
+
+<span style="color: #a8a8a8;">;; </span><span style="color: #a8a8a8;">Replace your current binding or add a new one</span>
+(global-set-key (kbd <span style="color: #79a8ff;">"H-h"</span>) 'hydra-meta-context-aware)
+</pre>
+</div>
+
+<p>
+H stands for Hyper key in that global binding, and I have that bound to right control:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">setq</span> ns-right-control-modifier 'hyper)
+</pre>
+</div>
+
+<p>
+To avoid finger strain (depending on which hyper key I want to use) I can also use the left control as a right control thanks to my <a href="https://shop.keyboard.io/products/model-100">Model 100</a>, which lets me change the mappings based on layers.
+</p>
+
+<p>
+Having a programmable keyboard is very useful for shortcuts, because you can create arbitrarily long prefixes and then just bind them to a special key.
+For example, here's my Github Copilot config, including its corresponding key binding:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #b6a0ff;">progn</span>
+  (<span style="color: #b6a0ff;">require</span> '<span style="color: #00bcff;">copilot</span>)
+  (add-hook 'prog-mode-hook 'copilot-mode)
+  (add-hook 'git-commit-mode-hook 'copilot-mode)
+  (add-hook 'org-mode-hook 'copilot-mode)
+  (define-key copilot-completion-map (kbd <span style="color: #79a8ff;">"y"</span>) 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd <span style="color: #79a8ff;">"n"</span>) 'copilot-next-completion)
+  (define-key copilot-completion-map (kbd <span style="color: #79a8ff;">"c"</span>) 'copilot-clear-overlay)
+  (global-set-key (kbd <span style="color: #79a8ff;">"C-M-S-s-u"</span>) 'copilot-complete)
+  )
+</pre>
+</div>
+
+<p>
+C-M-S-s- is quite the prefix, but for me, it's just the any key (that means a key labeled "any"), so to trigger copilot completion I just do any-u.
+The main benefit of a long prefix (that you can get with just one key press) is that you don't collide with other prefixes on the system. 
+</p>
+
+</article>
+</main>
+</body>
+</html>
