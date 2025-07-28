@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-04-01 Tue 20:39 -->
+<!-- 2025-07-01 Tue 17:40 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>My .zshrc file</title>
@@ -90,7 +90,7 @@ And have a more useful history
 <p>
 This makes its output look like this:
 </p>
-<pre class="example" id="orgd26ee3b">
+<pre class="example" id="org5a11d4c">
 $ history|tail -1
  5461  2025-04-01 20:23  ls
 </pre>
@@ -104,21 +104,21 @@ On my work machine I frequently add new functions to my zshrc file to help me do
 For this reason, I find it useful to have my zshrc autload every time its modified (autoloaded here means after I run a command or press enter on that shell):
 </p>
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to calculate checksum of .zshrc</span>
+<pre class="src src-sh"><span style="color: #989898;"># </span><span style="color: #989898;">Function to calculate checksum of .zshrc</span>
 <span style="color: #feacd0;">get_zshrc_checksum</span>() {
   md5 -q ~/.zshrc 2&gt;/dev/null || md5sum ~/.zshrc 2&gt;/dev/null | cut -d<span style="color: #79a8ff;">' '</span> -f1
 }
 
-<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Store the initial checksum of .zshrc</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Store the initial checksum of .zshrc</span>
 <span style="color: #00d3d0;">ZSHRC_CHECKSUM</span>=$(get_zshrc_checksum)
 
-<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to reload .zshrc</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Function to reload .zshrc</span>
 <span style="color: #feacd0;">reload_zshrc</span>() {
   <span style="color: #f78fe7;">source</span> ~/.zshrc
   <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Reloaded .zshrc"</span>
 }
 
-<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to check if .zshrc was modified</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Function to check if .zshrc was modified</span>
 <span style="color: #feacd0;">check_zshrc_updated</span>() {
   <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">current_checksum</span>=$(get_zshrc_checksum)
 
@@ -129,7 +129,7 @@ For this reason, I find it useful to have my zshrc autload every time its modifi
   <span style="color: #b6a0ff;">fi</span>
 }
 
-<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Add the function to the precmd hook to run before each prompt</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Add the function to the precmd hook to run before each prompt</span>
 <span style="color: #f78fe7;">autoload</span> -Uz add-zsh-hook
 add-zsh-hook precmd check_zshrc_updated
 </pre>
@@ -140,47 +140,47 @@ add-zsh-hook precmd check_zshrc_updated
 Sometimes I define variables, aliases, or short-lived functions (that aren't worth putting on the file for posterity) and I want those to be available across several shells (I use <b>lots</b> of tabs):
 </p>
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #a8a8a8;">## </span><span style="color: #a8a8a8;">manage shared state / temp functions</span>
+<pre class="src src-sh"><span style="color: #989898;">## </span><span style="color: #989898;">manage shared state / temp functions</span>
 
-<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Define the shared state directory</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Define the shared state directory</span>
 <span style="color: #00d3d0;">SHARED_STATE_DIR</span>=<span style="color: #79a8ff;">"${HOME}/.zsh_shared_state"</span>
 
-<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Create the directory if it doesn't exist</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Create the directory if it doesn't exist</span>
 [[ -d <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span> ]] || mkdir -p <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span>
 
-<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to load all shared state files</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Function to load all shared state files</span>
 <span style="color: #feacd0;">load_shared_state</span>() {
   <span style="color: #f78fe7;">local</span> file
 
-  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Source all files in the shared state directory</span>
+  <span style="color: #989898;"># </span><span style="color: #989898;">Source all files in the shared state directory</span>
   <span style="color: #b6a0ff;">for</span> file<span style="color: #b6a0ff;"> in</span> <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span>/*; <span style="color: #b6a0ff;">do</span>
     [[ -f <span style="color: #79a8ff;">"$file"</span> ]] &amp;&amp; <span style="color: #f78fe7;">source</span> <span style="color: #79a8ff;">"$file"</span>
   <span style="color: #b6a0ff;">done</span>
 }
 
-<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to add a function to the shared state</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Function to add a function to the shared state</span>
 <span style="color: #feacd0;">shared_function</span>() {
   <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">func_name</span>=<span style="color: #79a8ff;">"$1"</span>
   <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">file_path</span>=<span style="color: #79a8ff;">"$SHARED_STATE_DIR/func_${func_name}"</span>
 
-  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Check if the function exists</span>
+  <span style="color: #989898;"># </span><span style="color: #989898;">Check if the function exists</span>
   <span style="color: #b6a0ff;">if ! </span><span style="color: #f78fe7;">typeset</span> -f <span style="color: #79a8ff;">"$func_name"</span> &gt; /dev/null; <span style="color: #b6a0ff;">then</span>
     <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Function '$func_name' does not exist"</span> &gt;&amp;2
     <span style="color: #b6a0ff;">return</span> 1
   <span style="color: #b6a0ff;">fi</span>
 
-  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Get function definition and save it to a file</span>
+  <span style="color: #989898;"># </span><span style="color: #989898;">Get function definition and save it to a file</span>
   <span style="color: #f78fe7;">typeset</span> -f <span style="color: #79a8ff;">"$func_name"</span> &gt; <span style="color: #79a8ff;">"$file_path"</span>
 
   <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Function '$func_name' added to shared state"</span>
 }
 
-<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to add an alias to the shared state</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Function to add an alias to the shared state</span>
 <span style="color: #feacd0;">shared_alias</span>() {
   <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">alias_name</span>=<span style="color: #79a8ff;">"$1"</span>
   <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">file_path</span>=<span style="color: #79a8ff;">"$SHARED_STATE_DIR/alias_${alias_name}"</span>
 
-  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Get the alias definition</span>
+  <span style="color: #989898;"># </span><span style="color: #989898;">Get the alias definition</span>
   <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">alias_def</span>=$(<span style="color: #f78fe7;">alias</span> <span style="color: #79a8ff;">"$alias_name"</span> 2&gt;/dev/null)
 
   <span style="color: #b6a0ff;">if</span> [[ -z <span style="color: #79a8ff;">"$alias_def"</span> ]]; <span style="color: #b6a0ff;">then</span>
@@ -188,31 +188,31 @@ Sometimes I define variables, aliases, or short-lived functions (that aren't wor
     <span style="color: #b6a0ff;">return</span> 1
   <span style="color: #b6a0ff;">fi</span>
 
-  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Save alias to a file</span>
+  <span style="color: #989898;"># </span><span style="color: #989898;">Save alias to a file</span>
   <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"$alias_def"</span> &gt; <span style="color: #79a8ff;">"$file_path"</span>
 
   <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Alias '$alias_name' added to shared state"</span>
 }
 
-<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to add a variable to the shared state</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Function to add a variable to the shared state</span>
 <span style="color: #feacd0;">shared_variable</span>() {
   <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">var_name</span>=<span style="color: #79a8ff;">"$1"</span>
   <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">file_path</span>=<span style="color: #79a8ff;">"$SHARED_STATE_DIR/var_${var_name}"</span>
-  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">value</span>=<span style="color: #79a8ff;">"${(P)var_name}"</span>  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Get the value of the variable</span>
+  <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">value</span>=<span style="color: #79a8ff;">"${(P)var_name}"</span>  <span style="color: #989898;"># </span><span style="color: #989898;">Get the value of the variable</span>
 
   <span style="color: #b6a0ff;">if</span> [[ -z <span style="color: #79a8ff;">"$var_name"</span> ]]; <span style="color: #b6a0ff;">then</span>
     <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Variable name is required"</span> &gt;&amp;2
     <span style="color: #b6a0ff;">return</span> 1
   <span style="color: #b6a0ff;">fi</span>
 
-  <span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Save variable to a file, properly escaping special characters</span>
+  <span style="color: #989898;"># </span><span style="color: #989898;">Save variable to a file, properly escaping special characters</span>
   <span style="color: #00d3d0;">escaped_value</span>=$(printf <span style="color: #79a8ff;">'%q'</span> <span style="color: #79a8ff;">"$value"</span>)
   <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"export $var_name=$escaped_value"</span> &gt; <span style="color: #79a8ff;">"$file_path"</span>
 
   <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Variable '$var_name' added to shared state"</span>
 }
 
-<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to remove an item from the shared state</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Function to remove an item from the shared state</span>
 <span style="color: #feacd0;">shared_remove</span>() {
   <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">item_type</span>=<span style="color: #79a8ff;">"$1"</span>
   <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">item_name</span>=<span style="color: #79a8ff;">"$2"</span>
@@ -250,7 +250,7 @@ Sometimes I define variables, aliases, or short-lived functions (that aren't wor
   <span style="color: #b6a0ff;">fi</span>
 }
 
-<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to list all shared items</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Function to list all shared items</span>
 <span style="color: #feacd0;">shared_list</span>() {
   <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">item_type</span>=<span style="color: #79a8ff;">"$1"</span>
 
@@ -259,30 +259,32 @@ Sometimes I define variables, aliases, or short-lived functions (that aren't wor
 
   <span style="color: #b6a0ff;">if</span> [[ -z <span style="color: #79a8ff;">"$item_type"</span> || <span style="color: #79a8ff;">"$item_type"</span> == <span style="color: #79a8ff;">"function"</span> ]]; <span style="color: #b6a0ff;">then</span>
     <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Functions:"</span>
-    <span style="color: #b6a0ff;">for</span> file<span style="color: #b6a0ff;"> in</span> <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span>/func_*; <span style="color: #b6a0ff;">do</span>
-      [[ -f <span style="color: #79a8ff;">"$file"</span> ]] &amp;&amp; <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"  $(basename "$file" | sed 's/^func_//')"</span>
+    <span style="color: #989898;"># </span><span style="color: #989898;">The (N.) qualifier matches only regular files and is null if none exist.</span>
+    <span style="color: #989898;"># </span><span style="color: #989898;">${${file:t}#func_} removes the path and then the prefix.</span>
+    <span style="color: #b6a0ff;">for</span> file<span style="color: #b6a0ff;"> in</span> <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span>/func_*(N.); <span style="color: #b6a0ff;">do</span>
+      <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"  ${${file:t}#func_}"</span>
     <span style="color: #b6a0ff;">done</span>
     <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">""</span>
   <span style="color: #b6a0ff;">fi</span>
 
   <span style="color: #b6a0ff;">if</span> [[ -z <span style="color: #79a8ff;">"$item_type"</span> || <span style="color: #79a8ff;">"$item_type"</span> == <span style="color: #79a8ff;">"alias"</span> ]]; <span style="color: #b6a0ff;">then</span>
     <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Aliases:"</span>
-    <span style="color: #b6a0ff;">for</span> file<span style="color: #b6a0ff;"> in</span> <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span>/alias_*; <span style="color: #b6a0ff;">do</span>
-      [[ -f <span style="color: #79a8ff;">"$file"</span> ]] &amp;&amp; <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"  $(basename "$file" | sed 's/^alias_//')"</span>
+    <span style="color: #b6a0ff;">for</span> file<span style="color: #b6a0ff;"> in</span> <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span>/alias_*(N.); <span style="color: #b6a0ff;">do</span>
+      <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"  ${${file:t}#alias_}"</span>
     <span style="color: #b6a0ff;">done</span>
     <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">""</span>
   <span style="color: #b6a0ff;">fi</span>
 
   <span style="color: #b6a0ff;">if</span> [[ -z <span style="color: #79a8ff;">"$item_type"</span> || <span style="color: #79a8ff;">"$item_type"</span> == <span style="color: #79a8ff;">"variable"</span> ]]; <span style="color: #b6a0ff;">then</span>
     <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"Variables:"</span>
-    <span style="color: #b6a0ff;">for</span> file<span style="color: #b6a0ff;"> in</span> <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span>/var_*; <span style="color: #b6a0ff;">do</span>
-      [[ -f <span style="color: #79a8ff;">"$file"</span> ]] &amp;&amp; <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"  $(basename "$file" | sed 's/^var_//')"</span>
+    <span style="color: #b6a0ff;">for</span> file<span style="color: #b6a0ff;"> in</span> <span style="color: #79a8ff;">"$SHARED_STATE_DIR"</span>/var_*(N.); <span style="color: #b6a0ff;">do</span>
+      <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">"  ${${file:t}#var_}"</span>
     <span style="color: #b6a0ff;">done</span>
     <span style="color: #f78fe7;">echo</span> <span style="color: #79a8ff;">""</span>
   <span style="color: #b6a0ff;">fi</span>
 }
 
-<span style="color: #a8a8a8;"># </span><span style="color: #a8a8a8;">Function to view the content of a shared item</span>
+<span style="color: #989898;"># </span><span style="color: #989898;">Function to view the content of a shared item</span>
 <span style="color: #feacd0;">shared_view</span>() {
   <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">item_type</span>=<span style="color: #79a8ff;">"$1"</span>
   <span style="color: #f78fe7;">local</span> <span style="color: #00d3d0;">item_name</span>=<span style="color: #79a8ff;">"$2"</span>

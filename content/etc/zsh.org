@@ -202,24 +202,26 @@ shared_list() {
 
   if [[ -z "$item_type" || "$item_type" == "function" ]]; then
     echo "Functions:"
-    for file in "$SHARED_STATE_DIR"/func_*; do
-      [[ -f "$file" ]] && echo "  $(basename "$file" | sed 's/^func_//')"
+    # The (N.) qualifier matches only regular files and is null if none exist.
+    # ${${file:t}#func_} removes the path and then the prefix.
+    for file in "$SHARED_STATE_DIR"/func_*(N.); do
+      echo "  ${${file:t}#func_}"
     done
     echo ""
   fi
 
   if [[ -z "$item_type" || "$item_type" == "alias" ]]; then
     echo "Aliases:"
-    for file in "$SHARED_STATE_DIR"/alias_*; do
-      [[ -f "$file" ]] && echo "  $(basename "$file" | sed 's/^alias_//')"
+    for file in "$SHARED_STATE_DIR"/alias_*(N.); do
+      echo "  ${${file:t}#alias_}"
     done
     echo ""
   fi
 
   if [[ -z "$item_type" || "$item_type" == "variable" ]]; then
     echo "Variables:"
-    for file in "$SHARED_STATE_DIR"/var_*; do
-      [[ -f "$file" ]] && echo "  $(basename "$file" | sed 's/^var_//')"
+    for file in "$SHARED_STATE_DIR"/var_*(N.); do
+      echo "  ${${file:t}#var_}"
     done
     echo ""
   fi

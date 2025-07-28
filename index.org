@@ -35,7 +35,7 @@ My [[./content/etc/zsh.html][.zshrc]] file.
 #+END_etc
 
 #+BEGIN_music
-My [[https://fernandoipar.com/content/music/poly-d/index.html][Poly-D]] patches.
+[[https://semicolony.bandcamp.com][Semicolony]] is my ambient, noise, and electronic music project.
 #+END_music
 
 #+BEGIN_emacs
@@ -53,7 +53,7 @@ Always remember emacs is programmable and you don't need to use the builtin key 
 - [[https://fernandoipar.com/emacs/notes/2019/01/23/emacs-org-mode-workflow.html][Emacs Org Mode Workflow]]
 - [[https://fernandoipar.com/emacs/notes/2018/01/02/emacs-hyper-key.html][Emacs Hyper Key]]
 
-On [[./content/emacs/emacs_config_notes.html][this page]] I will try to maintain a short summary of how my emacs configuration is organized. 
+On [[./content/emacs/emacs_config_notes.html][this page]] I  will try to maintain a short summary of how my emacs configuration is organized.
 #+END_emacs
 
 #+begin_export html
