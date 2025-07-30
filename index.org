@@ -34,10 +34,6 @@ Recent (for large enough values of "Recent") work-related writings:
 My [[./content/etc/zsh.html][.zshrc]] file.
 #+END_etc
 
-#+BEGIN_music
-[[https://semicolony.bandcamp.com][Semicolony]] is my ambient, noise, and electronic music project.
-#+END_music
-
 #+BEGIN_emacs
 The journey to emacs proficiency is a lifetime one, and it includes developing the skill of knowing when you've customized it enough.
 
