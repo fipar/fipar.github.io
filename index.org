@@ -13,7 +13,7 @@
 #+BEGIN_work
 
 I'm currently working as a [[https://www.linkedin.com/in/fipar][DBRE]] at [[https://www.life360.com][Life360]].
-I've created a short page for [[https://fernandoipar.com/recruiters/][recruiters]], and [[https://fernandoipar.com/presentations/][here]]'s where I keep links to some of my presentations.
+I've created a short page for [[https://fernandoipar.com/content/work/recruiters.html][recruiters]], and [[https://fernandoipar.com/presentations/][here]]'s where I keep links to some of my presentations.
 [[https://fernandoipar.com/everything/][This]] is the list of all posts from the old blog, and [[https://gnuserland.blogspot.com][this]] is an even older blog, if you have time to waste.
 Random list of things I've done professionally:
 - MySQL performance analysis and optimization (independently, at Percona, and at Pythian).
