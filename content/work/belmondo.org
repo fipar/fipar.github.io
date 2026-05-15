@@ -1,6 +1,8 @@
 #+TITLE: Belmondo
 #+OPTIONS: ^:nil
 
+Published on 2026-05-15
+
 Let’s call a multimodal agent system Belmondo, to make this company or model-agnostic.
 
 You propose a hypothesis. There is always uncertainty and you can always be wrong, but that’s why you state a hypothesis and not a fact.

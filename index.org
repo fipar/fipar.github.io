@@ -31,7 +31,8 @@ Recent (for large enough values of "Recent") work-related writings:
 #+END_work
 
 #+BEGIN_etc
-My [[./content/etc/zsh.html][.zshrc]] file.
+- My [[./content/etc/zsh.html][.zshrc]] file.
+- Life in the [[./content/work/belmondo.html][Agentic AI]] World.
 #+END_etc
 
 #+BEGIN_emacs
