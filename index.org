@@ -33,6 +33,7 @@ Recent (for large enough values of "Recent") work-related writings:
 #+BEGIN_etc
 - My [[./content/etc/zsh.html][.zshrc]] file.
 - Life in the [[./content/work/belmondo.html][Agentic AI]] World.
+- The good and bad things of working with [[./content/work/genai.html][GenAI]].
 #+END_etc
 
 #+BEGIN_emacs
