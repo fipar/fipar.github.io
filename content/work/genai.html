@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-07-21 Tue 21:24 -->
+<!-- 2026-07-22 Wed 20:30 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Working (and living) with Generative AI</title>
@@ -41,7 +41,7 @@
     <p><i>"Tell my wife I love her very much, she knows"</i></p>
 
 
-<figure id="org421a2fe">
+<figure id="orgb6e02ad">
 <img src="./deus_ex.gif" alt="deus_ex.gif" width="100%">
 
 <figcaption><span class="figure-number">Figure 1: </span>Deus Ex Machina for the Spectrum. I never played it, but, at my second job, had a coworker that swore by it. I just never got ahold of the right cassette :( In any case, I think it's a good retro title to go with an always-under-construction page about working in the GenAI age.</figcaption>
@@ -51,7 +51,7 @@
 
 <p>
 Published on 2026-07-21.
-Updated on: Not updated yet.
+Updated on: 2026-07-22.
 </p>
 
 
@@ -75,6 +75,8 @@ I just want a central place I can point people to when this comes up in conversa
 <li>Coding agents are very, and I mean <b>very</b> useful helpers when exploring a new codebase.</li>
 
 <li>I've found that the harness is typically more important (in terms of outcome quality) than the model.</li>
+
+<li>The best approach that works for me is usually: use the models to help me write more tools, but then eventually only use the deterministic tools when investigating or troubleshooting.</li>
 </ul>
 
 <p>
@@ -95,6 +97,19 @@ I just want a central place I can point people to when this comes up in conversa
 <li>Local models are still too slow. One day they'll get there, but for now, I only use them to learn, but not to actually do things.</li>
 </ul>
 
+
+<p>
+<b>Addendum: challenges</b>
+</p>
+
+<ul class="org-ul">
+<li>LLMs are usually too verbose. They can be used to summarize text, but the more you press in that direction, the higher the risk of missing or wrong information.
+Someone who solves the "Get a good, reliable summary of &lt;something&gt;" properly would hit it big.</li>
+
+<li>Models tend to not make that good use of visual information. In my work on bots, I've incorporated sparklines and inline graphics with reasonable success, but I'm still not where I'd    like to be (my goal is somewhere close to what Edward Tufte explains in The Visual Display of Quantitative Information).</li>
+
+<li>Agents can be, even within the same session, both very confident yet wrong, and very right yet quick to apologize and change course (to the wrong course).</li>
+</ul>
 
 <p><i>"This machine will not communicate these thoughts and the strain I am under."</i></p>
 

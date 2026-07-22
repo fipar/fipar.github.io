@@ -17,7 +17,7 @@
 
 
 Published on 2026-07-21.
-Updated on: Not updated yet.
+Updated on: 2026-07-22.
 
 
 
@@ -36,6 +36,8 @@ I just want a central place I can point people to when this comes up in conversa
 
 - I've found that the harness is typically more important (in terms of outcome quality) than the model.
 
+- The best approach that works for me is usually: use the models to help me write more tools, but then eventually only use the deterministic tools when investigating or troubleshooting.
+
 *The bad*
 
 - There are days where the cognitive load feels too much to bear. I now need to stay on top of multiple lines of work at the same time, and my involvement is high-level. Yes, I do review all the code generated, but, at least to me, reading is not the same as writing. To truly *understand* how something works, I have to go and build it (or write it, or do it, whatever the metaphor is for the thing I am trying to understand). I'm more suitable for long-term, deep focus tasks, than to shor-term always-multitasking ones. I can do both, which is why I worked in Support and Incident Response, but I prefer deep work when possible, and these days, that's not always possible.
@@ -48,8 +50,17 @@ I just want a central place I can point people to when this comes up in conversa
 
 - Some people just trust the output of code harnesses completely. Some even have other models (or even the same model with another prompt) review the code. If I'm signing off on something, *I'm* signing off on something. If a bot is doing that, fine. But I'm not hopping on a bot-reviewed airplane anytime soon.
 
-- Local models are still too slow. One day they'll get there, but for now, I only use them to learn, but not to actually do things. 
+- Local models are still too slow. One day they'll get there, but for now, I only use them to learn, but not to actually do things.
 
+
+*Addendum: challenges*
+
+- LLMs are usually too verbose. They can be used to summarize text, but the more you press in that direction, the higher the risk of missing or wrong information.
+  Someone who solves the "Get a good, reliable summary of <something>" properly would hit it big.
+
+- Models tend to not make that good use of visual information. In my work on bots, I've incorporated sparklines and inline graphics with reasonable success, but I'm still not where I'd    like to be (my goal is somewhere close to what Edward Tufte explains in The Visual Display of Quantitative Information).
+
+- Agents can be, even within the same session, both very confident yet wrong, and very right yet quick to apologize and change course (to the wrong course).
 
 #+begin_export html
 <p><i>"This machine will not communicate these thoughts and the strain I am under."</i></p>
