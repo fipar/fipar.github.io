@@ -24,7 +24,7 @@ Updated on: Not updated yet.
 On this page I'll list the good, and bad things of working with GenAI.
 I just want a central place I can point people to when this comes up in conversation.
 
-# The good
+*The good*
 
 - I get more done. Sometimes *a lot* and, other times, just more. I'm measuring in results, which include usable software artifacts, or digital artifacts (documents, images, sounds, etc.), not lines of code, or amount of words.
 
@@ -36,7 +36,7 @@ I just want a central place I can point people to when this comes up in conversa
 
 - I've found that the harness is typically more important (in terms of outcome quality) than the model.
 
-# The bad
+*The bad*
 
 - There are days where the cognitive load feels too much to bear. I now need to stay on top of multiple lines of work at the same time, and my involvement is high-level. Yes, I do review all the code generated, but, at least to me, reading is not the same as writing. To truly *understand* how something works, I have to go and build it (or write it, or do it, whatever the metaphor is for the thing I am trying to understand). I'm more suitable for long-term, deep focus tasks, than to shor-term always-multitasking ones. I can do both, which is why I worked in Support and Incident Response, but I prefer deep work when possible, and these days, that's not always possible.
 
