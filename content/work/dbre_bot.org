@@ -22,7 +22,8 @@ If so, this poorly organized notes may be helpful to you. You may also find [[ht
 
 Some people say every agent starts with a model, so I've drawn a model first. I know I can't draw, but bear with me.
 
-The model is the program that takes tokens as input and produces tokens as output. In the context of a DBRE bot, the tokens will mostly be text, but multi-model agents exists and image models definitely have a place in systems troubleshooting.
+The model is the program that takes tokens as input and produces tokens as output. In the context of a DBRE bot, the tokens will mostly be text, but multi-model agents exist 
+as do multi-modal models, and image models definitely have a place in systems troubleshooting.
 
 Unless you have access to a lot of GPUs you're probably using a hosted model through an API. I recommend (to the extent this is possible) to support a degraded mode of execution in case your desired model is going through downtime (if you're new to this, you should know hosted models tend to be down every now and then).
 
