@@ -116,6 +116,8 @@ This would be that I recommend using the full power of agents (so that includes 
 Let's use a stupid (I hope) example: frontier models may be able to come up with a realistic step by step plan for a database failover, and it may even work at the first time.
 However, what you should do instead is leverage their power to write (and test, several times) the failover process, and once it's solid, use the model *at most* to decide that a failover is needed, but then have it initiate it by calling `failover_cluster` instead of just giving the agent a shell and let it run its plan every time.
 
+Strongly related to this is a reminder that the harness is both your first and last line of defense. Prompt engineering is even less an engineering than software engineering is, and even when it works, it's a "hope for the best" approach, because the model may ignore your instructions. Never forget they just predict the next token and, while incredibly useful, they can (and will) get things wrong. Your only line of defense is the deterministic side of things. No matter what wording you use in the prompt to avoid writing to the database, the only thing that will guarantee this won't happen is the agent having no access to the DB, or having read-only access.
+
 Because my drawings are bad, here's one from gemini on this subject:
 #+CAPTION: That scaffolding is load-bearing.
 

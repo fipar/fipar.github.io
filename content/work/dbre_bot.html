@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-07-28 Tue 16:21 -->
+<!-- 2026-07-28 Tue 18:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>So you want to create your own DBRE bot</title>
@@ -54,7 +54,7 @@ If so, this poorly organized notes may be helpful to you. You may also find <a h
 </p>
 
 
-<figure id="orgc9d20ad">
+<figure id="orgd4c0a4f">
 <img src="./small_agent.png" alt="small_agent.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>Hi there, I'm a model! I sometimes make up facts that are false with complete confidence. To make up for that, I sometimes apologize and quickly yield in an argument even though my side is the right one.</figcaption>
@@ -65,7 +65,8 @@ Some people say every agent starts with a model, so I've drawn a model first. I 
 </p>
 
 <p>
-The model is the program that takes tokens as input and produces tokens as output. In the context of a DBRE bot, the tokens will mostly be text, but multi-model agents exist, as do multi-modal models, and image models definitely have a place in systems troubleshooting.
+The model is the program that takes tokens as input and produces tokens as output. In the context of a DBRE bot, the tokens will mostly be text, but multi-model agents exist 
+as do multi-modal models, and image models definitely have a place in systems troubleshooting.
 </p>
 
 <p>
@@ -77,7 +78,7 @@ My opinion, however, is that every agent starts with a harness.
 </p>
 
 
-<figure id="org76065c7">
+<figure id="orgd59f870">
 <img src="./small_harness.png" alt="small_harness.png">
 
 <figcaption><span class="figure-number">Figure 2: </span>Someone put a harness on me. For that reason, I'm now angry and giving that someone the middle finger. Apologies for the rudeness, but my sycophancy has its limits.</figcaption>
@@ -161,7 +162,7 @@ As the codebase grows, it's useful to have direct access to deterministic functi
 </p>
 
 
-<figure id="org89b68ec">
+<figure id="org3e23cfc">
 <img src="./small_scaffolding.png" alt="small_scaffolding.png">
 
 <figcaption><span class="figure-number">Figure 3: </span>At least they set up a scaffolding for me! Maybe this harness will end up being useful and I shouldn't have been so angry after getting it.</figcaption>
@@ -232,10 +233,14 @@ However, what you should do instead is leverage their power to write (and test, 
 </p>
 
 <p>
+Strongly related to this is a reminder that the harness is both your first and last line of defense. Prompt engineering is even less an engineering than software engineering is, and even when it works, it's a "hope for the best" approach, because the model may ignore your instructions. Never forget they just predict the next token and, while incredibly useful, they can (and will) get things wrong. Your only line of defense is the deterministic side of things. No matter what wording you use in the prompt to avoid writing to the database, the only thing that will guarantee this won't happen is the agent having no access to the DB, or having read-only access.
+</p>
+
+<p>
 Because my drawings are bad, here's one from gemini on this subject:
 </p>
 
-<figure id="org3dd2969">
+<figure id="org58e4bf8">
 <img src="./gemini-scaffolding.png" alt="gemini-scaffolding.png">
 
 </figure>
