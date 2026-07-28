@@ -1,0 +1,125 @@
+#+TITLE: So you want to create your own DBRE bot
+#+OPTIONS: ^:nil
+
+#+begin_export html
+    <style>
+      body {
+          font-family: Raleway, monospace;
+      }
+    </style>
+        <p><i>"Tell my wife I love her very much, she knows"</i></p>
+#+end_export
+
+
+Published on 2026-07-28.
+
+*So you want to build a chat bot to help your team, and other teams, using this fantastic new AI technology, right?*
+
+If so, this poorly organized notes may be helpful to you. You may also find [[https://www.youtube.com/watch?v=yiTagAkf4X4][this presentation]] I co-delivered with Andrew Morgan from [[https://sixta.ai][Sixta]] interesting.
+
+#+CAPTION: Hi there, I'm a model! I sometimes make up facts that are false with complete confidence. To make up for that, I sometimes apologize and quickly yield in an argument even though my side is the right one.
+[[./small_agent.png]]
+
+Some people say every agent starts with a model, so I've drawn a model first. I know I can't draw, but bear with me.
+
+The model is the program that takes tokens as input and produces tokens as output. In the context of a DBRE bot, the tokens will mostly be text, but multi-model agents exists and image models definitely have a place in systems troubleshooting.
+
+Unless you have access to a lot of GPUs you're probably using a hosted model through an API. I recommend (to the extent this is possible) to support a degraded mode of execution in case your desired model is going through downtime (if you're new to this, you should know hosted models tend to be down every now and then).
+
+My opinion, however, is that every agent starts with a harness.
+
+#+CAPTION: Someone put a harness on me. For that reason, I'm now angry and giving that someone the middle finger. Apologies for the rudeness, but my sycophancy has its limits.
+[[./small_harness.png]]
+
+There may be a better definition, but mine is that the harness is the deterministic layer around the model. A non-exhaustive list includes:
+- its memory,
+- its tools,
+- safety measures (e.g., rate limiting, smart error retry),
+- knowledge about what the user has approved and what not.
+
+The main reason why I think this is what every agent starts with can be summarized as follows:
+
+With a good harness, even a mediocre model can achieve good results, but with a poor one, even a frontier model can lead to downtime, dataloss, and terrible pain.
+
+Of course, you can always use the best model money can buy, but:
+- it's not always obvious which one that is, and there most likely isn't a model that's great at everything.
+- as stated before, a particular model can become unavailable. your harness is local to your deployment, so it's uptime is better (and if your whole deployment is down, your harness' availability is probably low on your concerns, though it's certainly nice to have your friendly bot around if you need to troubleshoot a major outage).
+- good engineering includes looking at the cost side of things. Just using the most expensive model even when a cheaper one would yield similar results is bad engineering, and, more important, a bad business practice.
+
+
+My main advice in terms of harness and a DBRE bot is:
+
+- Never give the bot free access to your databases. Not even in read-only mode.
+- If you want to break the previous rule, fine, it's your data. Still: if you give it read-only access, make sure the user's permissions enforce the read-onlyness of it.
+- Use tools (good old deterministic computer programs, bugs included) for anything where you don't need the power of the model and where you do need the power of determinism. What falls under this category will change from place to place, but good examples include math, listing infrastructure elements, getting the actual value of a setting (as opposed to inferring it from context).
+- The risk surface is wildly different for an LLM-powered bot that you'll expose outside of your org (e.g., you plan on selling a DBRE bot as a service) than for one you'll only run in house (where you still need to take precautions, but you can expose more of the internals, since most people will probably have access to the code already).
+- I recommend including a bypass word that, when detected by your harness, will skip the LLM completely.
+
+
+That last one may require a better explanation.
+
+Your harness is what will connect to your chat provider (e.g., Slack), watch for certain events (messages, mentions, etc.), and pass that to the model along with additional context.
+What I'm recommending you do is have a bypass word that, if present, causes your harness to take a different path that does not include the model at all.
+
+I use `command` for this, so that:
+
+#+begin_src text :results output raw
+@bot Can you take a look at <some cluster>? We're getting alerts about increased latency on upstream services
+#+end_src
+
+
+Causes the harness to send that text verbatim to the model, along with the system prompt, relevant tool output, and other context information, but:
+
+#+begin_src text :results output raw
+@bot command list_clusters
+#+end_src
+
+Bypasses the model and just runs a deterministic function `list_clusters` and sends the result back to the user.
+
+As the codebase grows, it's useful to have direct access to deterministic functions, including things to terminate a runaway bot process, or cleanup after a mess (removing lots of duplicate messages, say).
+
+#+CAPTION: At least they set up a scaffolding for me! Maybe this harness will end up being useful and I shouldn't have been so angry after getting it.
+[[./small_scaffolding.png]]
+
+Some [[https://huggingface.co/blog/agent-glossary][people]] consider things like the system prompt to be part of the scaffolding and not the harness.
+
+My first recommendation is to remember you can have as many system prompts as use cases.
+
+The system prompt is a good way to make the same model be a better fit for some particular task. To be more specific, you'll have a different system prompt when you want a model to do a PR review from the point of view of database reliability and performance, than when you want it to give you ideas about what could be causing an outage.
+
+Tools are part of the harness, but their description are part of the scaffolding. The tool registry is very important because it is the model that requests access to tools, so this is not deterministic. A good tool registry improves the chances of the model (and hence the agent) doing the right thing, but it's not a guarantee.
+
+Another advantage of good tool descriptions is that the harness can also make use of this, combined with the output from the model, to try to reduce hallucinations a bit (this is relevant to us because, in the case of using AI for DBRE work, a common form of hallucinations is the model saying "instance <X> has very high cpu" without ever actually checking metrics for the instance (never forget that LLMs predict text; you don't have to be a hater to be realistic)).
+
+Regarding context, a bot that can share memory across threads is far more useful than one that can't.
+
+To illustrate it, think of the following scenario:
+
+Alice gets paged for latency in <AppY>, which she knows for a fact uses <dbSPF>, a database that the monolith, and lots of microservices in the company, use. She starts loading dashboards and also asks @bot to see if there are any problems with <dbSPF>, since one of its upstream apps is having high latency.
+
+
+While working on a deployment of <AppX>, which uses <dbX> (and, Bob doesn't know, because he's new, also uses <dbSPF>) Bob notices an increase in latency and errors. He gets everything ready to revert his change and asks @bot to see if there are any issues with <dbX>, with the hope that may be it's a database problem and he doesn't need to do a rollback).
+
+
+A bot that can link those requests and even get Alice and Bot connected will be more useful that one that can't.
+
+If the bot can start the response to Bob with "I'll look at that, but heads up that Alice got paged for latency in <AppY> and I'm investigating a potential issue with <dbSPF> for her," that's more useful than if Alice and Bob keep their line of work in parallel until they eventually converge on the same incident response room.
+
+
+Memory is also useful as a way to inject patterns of behavior into the context for each analysis. A bot that "knows" that, for historical reasons, <AppZ> needs a rolling restart of its pods everytime there's a failover in <dbSPF> will be more useful than one that doesn't.
+
+*The most important piece of advice*
+
+This would be that I recommend using the full power of agents (so that includes the models) for diagnostics, exploring hypothesis, etc., and then fall back to traditional, deterministic tools for actually making changes.
+
+Let's use a stupid (I hope) example: frontier models may be able to come up with a realistic step by step plan for a database failover, and it may even work at the first time.
+However, what you should do instead is leverage their power to write (and test, several times) the failover process, and once it's solid, use the model *at most* to decide that a failover is needed, but then have it initiate it by calling `failover_cluster` instead of just giving the agent a shell and let it run its plan every time.
+
+Because my drawings are bad, here's one from gemini on this subject:
+#+CAPTION: That scaffolding is load-bearing.
+
+[[./gemini-scaffolding.png]]
+
+#+begin_export html
+<p><i>"Harness your hopes on just one person because you know a harness was only made for one."</i></p>
+#+end_export

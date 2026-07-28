@@ -24,6 +24,7 @@ Random list of things I've done professionally:
 - Technical reviewer for [[https://hackmysql.com/book-5/][Efficient MySQL Performance]] and [[https://link.springer.com/content/pdf/bfm:978-1-4842-8224-3/1][Practical CockroachDB]].
 
 Recent (for large enough values of "Recent") work-related writings:
+- [[https://fernandoipar.com/content/work/dbre_bot.html][So you want to create your own DBRE bot]].
 - [[https://fernandoipar.com/notes/2019/09/05/top-8-things-every-database-practitioner-should-know.html][Top 8 things every database practitioner should know]].
 - [[https://fernandoipar.com/notes/2019/09/25/minimal-networking-knowledge-recommended-for-dbas.html][Minimal networking knowledge recommended for DBAs]].
 - [[https://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html][What is a good cache hit ratio?]]
