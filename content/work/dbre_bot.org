@@ -15,7 +15,7 @@ Published on 2026-07-28.
 
 *So you want to build a chat bot to help your team, and other teams, using this fantastic new AI technology, right?*
 
-If so, this poorly organized notes may be helpful to you. You may also find [[https://www.youtube.com/watch?v=yiTagAkf4X4][this presentation]] I co-delivered with Andrew Morgan from [[https://sixta.ai][Sixta]] interesting.
+If so, these poorly organized notes may be helpful to you. You may also find [[https://www.youtube.com/watch?v=yiTagAkf4X4][this presentation]] I co-delivered with Andrew Morgan from [[https://sixta.ai][Sixta]] interesting.
 
 #+CAPTION: Hi there, I'm a model! I sometimes make up facts that are false with complete confidence. To make up for that, I sometimes apologize and quickly yield in an argument even though my side is the right one.
 [[./small_agent.png]]
