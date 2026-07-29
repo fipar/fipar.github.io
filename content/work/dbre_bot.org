@@ -102,7 +102,7 @@ Alice gets paged for latency in <AppY>, which she knows for a fact uses <dbSPF>,
 While working on a deployment of <AppX>, which uses <dbX> (and, Bob doesn't know, because he's new, also uses <dbSPF>) Bob notices an increase in latency and errors. He gets everything ready to revert his change and asks @bot to see if there are any issues with <dbX>, with the hope that may be it's a database problem and he doesn't need to do a rollback).
 
 
-A bot that can link those requests and even get Alice and Bot connected will be more useful that one that can't.
+A bot that can link those requests and even get Alice and Bob connected will be more useful that one that can't.
 
 If the bot can start the response to Bob with "I'll look at that, but heads up that Alice got paged for latency in <AppY> and I'm investigating a potential issue with <dbSPF> for her," that's more useful than if Alice and Bob keep their line of work in parallel until they eventually converge on the same incident response room.
 
