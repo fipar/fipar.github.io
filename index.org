@@ -29,6 +29,9 @@ Recent (for large enough values of "Recent") work-related writings:
 - [[https://fernandoipar.com/notes/2019/09/25/minimal-networking-knowledge-recommended-for-dbas.html][Minimal networking knowledge recommended for DBAs]].
 - [[https://fernandoipar.com/practice/2018/05/19/what-is-a-good-cache-hit-ratio.html][What is a good cache hit ratio?]]
 
+Do not follow this [[./content/animal_family/index.html][link]] unless you like animal families.
+
+
 #+END_work
 
 #+BEGIN_etc

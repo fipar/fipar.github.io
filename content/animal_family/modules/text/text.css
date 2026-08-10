@@ -1,0 +1,16 @@
+.text {
+	/* default padding/font-size for text objects - overridden inline by
+	   text-padding-x/text-padding-y/text-font-size when the user changes
+	   them via the editor (see module_text.inc.php's text_alter_render_early()) */
+	font-size: 18px;
+	padding: 12px 15px;
+}
+
+.text a {
+	/* css/main.css sets text-decoration:inherit globally so an object-level
+	   link (wrapping e.g. a whole image/video object) doesn't force an
+	   underline where there's no visible text to underline anyway - but an
+	   inline link inside a text object's own content (see the "make link"
+	   button in text-edit.js) needs to actually look like a link */
+	text-decoration: underline;
+}
