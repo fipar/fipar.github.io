@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>PixelArt Studio - Local-First Retro Pixel Editor</title>
+  <meta name="description" content="Local-first pixel art editor targeting Safari on macOS and iOS with retro videogame palettes, guide image overlay, customizable grid, and PNG export.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app-container">
+
+    <!-- Header Navigation -->
+    <header id="app-header">
+      <div class="header-left">
+        <div class="app-brand" title="PixelArt Studio">
+          <div class="brand-icon">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+          </div>
+          <h1>PixelArt Studio</h1>
+        </div>
+
+        <div class="header-divider"></div>
+
+        <button id="dimension-badge" class="dimension-badge" title="Click to Resize Grid">
+          <span id="dimension-label">125 × 125</span>
+          <span class="edit-hint">Resize</span>
+        </button>
+      </div>
+
+      <div class="header-center">
+        <button id="btn-clear" class="btn btn-danger" title="Clear all pixels on canvas">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+          Clear Drawing
+        </button>
+      </div>
+
+      <div class="header-right">
+        <input type="file" id="file-input-load" accept=".pixelart,.json" style="display: none;">
+        <button id="btn-load" class="btn" title="Load saved .pixelart project file">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Load
+        </button>
+
+        <button id="btn-save" class="btn" title="Save current drawing state to a .pixelart file">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save
+        </button>
+
+        <button id="btn-export" class="btn btn-primary" title="Export drawing as high-res or 1:1 PNG">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export PNG
+        </button>
+
+        <button id="mobile-sidebar-toggle" class="btn btn-icon-only mobile-sidebar-toggle" title="Toggle Palettes & Guide Panel">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Left Toolbar -->
+    <aside id="app-toolbar">
+      <div class="tool-group">
+        <!-- Pencil -->
+        <button class="tool-btn active" data-tool="pencil" title="Pencil Tool (B)">
+          <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        </button>
+
+        <!-- Eraser -->
+        <button class="tool-btn" data-tool="eraser" title="Eraser Tool (E)">
+          <svg viewBox="0 0 24 24"><path d="M15.14 3c-.51 0-1.02.2-1.41.59L2.59 14.73c-.78.78-.78 2.05 0 2.83L6.44 21.4c.78.78 2.05.78 2.83 0l11.14-11.14c.78-.78.78-2.05 0-2.83l-3.85-3.84c-.39-.39-.9-.59-1.42-.59zm-3.71 5.12l3.54 3.54-6.36 6.36-3.54-3.54 6.36-6.36z"/></svg>
+        </button>
+
+        <!-- Paint Bucket -->
+        <button class="tool-btn" data-tool="bucket" title="Paint Bucket / Flood Fill (G)">
+          <svg viewBox="0 0 24 24"><path d="M16.56 8.94L7.62 0 6.21 1.41l2.38 2.38-5.15 5.15c-.59.59-.59 1.54 0 2.12l5.5 5.5c.29.29.68.44 1.06.44s.77-.15 1.06-.44l5.5-5.5c.59-.58.59-1.53 0-2.12zM5.21 10L10 5.21 14.79 10H5.21zM19 11.5s-2 2.17-2 3.5c0 1.1.9 2 2 2s2-.9 2-2c0-1.33-2-3.5-2-3.5z"/></svg>
+        </button>
+
+        <!-- Eyedropper -->
+        <button class="tool-btn" data-tool="eyedropper" title="Eyedropper / Color Picker (I)">
+          <svg viewBox="0 0 24 24"><path d="M20.71 5.63l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-3.12 3.12-1.93-1.91-1.41 1.41 1.42 1.42L3 16.25V21h4.75l8.92-8.92 1.42 1.42 1.41-1.41-1.92-1.92 3.12-3.12c.4-.4.4-1.03.01-1.42zM6.92 19L5 17.08l8.06-8.06 1.92 1.92L6.92 19z"/></svg>
+        </button>
+      </div>
+
+      <div class="toolbar-divider"></div>
+
+      <div class="tool-group">
+        <!-- Line -->
+        <button class="tool-btn" data-tool="line" title="Line Tool (L)">
+          <svg viewBox="0 0 24 24"><line x1="4" y1="20" x2="20" y2="4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </button>
+
+        <!-- Rectangle Outline -->
+        <button class="tool-btn" data-tool="rect" title="Rectangle Tool (U)">
+          <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+
+        <!-- Rectangle Filled -->
+        <button class="tool-btn" data-tool="rect-fill" title="Filled Rectangle Tool">
+          <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" fill="currentColor"/></svg>
+        </button>
+
+        <!-- Circle Outline -->
+        <button class="tool-btn" data-tool="circle" title="Circle Tool (C)">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+
+        <!-- Circle Filled -->
+        <button class="tool-btn" data-tool="circle-fill" title="Filled Circle Tool">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="currentColor"/></svg>
+        </button>
+      </div>
+
+      <div class="toolbar-divider"></div>
+
+      <div class="tool-group">
+        <!-- Move Guide Tool -->
+        <button class="tool-btn" data-tool="move-guide" title="Move Guide Image (V)">
+          <svg viewBox="0 0 24 24"><path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"/></svg>
+        </button>
+
+        <!-- Pan Canvas -->
+        <button class="tool-btn" data-tool="pan" title="Pan Viewport (H or Space + Drag)">
+          <svg viewBox="0 0 24 24"><path d="M23 5.5V20c0 2.2-1.8 4-4 4h-7.3c-1.08 0-2.1-.43-2.85-1.19L1 14.83s1.26-1.23 1.3-1.25c.3-.26.68-.4 1.08-.4.42 0 .81.16 1.11.45l2.51 2.37V3.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V11h1V1.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V11h1V2.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V11h1V5.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5z"/></svg>
+        </button>
+      </div>
+
+      <div class="toolbar-divider"></div>
+
+      <div class="tool-group">
+        <!-- Undo -->
+        <button class="tool-btn" id="tool-undo" data-action="undo" title="Undo (Cmd+Z)">
+          <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+        </button>
+
+        <!-- Redo -->
+        <button class="tool-btn" id="tool-redo" data-action="redo" title="Redo (Cmd+Shift+Z / Cmd+Y)">
+          <svg viewBox="0 0 24 24"><path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z"/></svg>
+        </button>
+
+        <!-- Grid Lines Toggle -->
+        <button class="tool-btn active" id="tool-toggle-grid" data-action="toggle-grid" title="Toggle Grid Lines">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Viewport Canvas -->
+    <main id="canvas-viewport-container">
+      <!-- Floating Viewport Controls -->
+      <div class="viewport-floating-controls">
+        <button id="floating-zoom-out" class="zoom-btn" title="Zoom Out (-)">−</button>
+        <span id="floating-zoom-label" class="zoom-label">600%</span>
+        <button id="floating-zoom-in" class="zoom-btn" title="Zoom In (+)">+</button>
+        <button id="floating-zoom-reset" class="zoom-btn" title="Fit Grid in View (0)">⤢</button>
+      </div>
+    </main>
+
+    <!-- Right Sidebar (Palettes & Guide Image Overlay) -->
+    <aside id="app-sidebar">
+      <div class="sidebar-tab-header">
+        <button id="tab-palettes" class="tab-btn active">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+          Palettes
+        </button>
+        <button id="tab-guide" class="tab-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+          Guide Image
+        </button>
+      </div>
+
+      <div class="sidebar-content">
+        <!-- Panel 1: Palettes -->
+        <section id="panel-palettes" class="sidebar-panel active">
+          <!-- Active Color Picker -->
+          <div class="panel-section">
+            <div class="panel-section-title">
+              <span>Active Color</span>
+            </div>
+            <div class="active-color-row">
+              <div id="active-color-box" class="color-preview-box" title="Click to Pick Custom Color">
+                <input type="color" id="active-color-picker" class="color-input-hidden" value="#000000">
+              </div>
+              <div class="color-details">
+                <input type="text" id="active-color-hex" class="color-hex-input" value="#000000" maxlength="7" spellcheck="false">
+                <button id="btn-add-color" class="btn btn-sm" title="Add this color to active palette">
+                  + Add to Palette
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Retro & Custom Palettes Selection -->
+          <div class="panel-section">
+            <div class="panel-section-title">
+              <span>Retro Palettes</span>
+              <button id="btn-new-palette" class="btn btn-sm" title="Create a new custom palette">+ New</button>
+            </div>
+            <div class="palette-select-wrapper">
+              <select id="palette-select" class="select-input"></select>
+            </div>
+            <!-- Swatches Grid -->
+            <div id="palette-swatches-grid" class="palette-swatches-grid"></div>
+          </div>
+
+          <!-- Recent Colors -->
+          <div class="panel-section">
+            <div class="panel-section-title">
+              <span>Recent Colors</span>
+            </div>
+            <div id="recent-swatches-grid" class="recent-swatches-grid"></div>
+          </div>
+        </section>
+
+        <!-- Panel 2: Guide Image Overlay -->
+        <section id="panel-guide" class="sidebar-panel">
+          <div class="panel-section">
+            <div class="panel-section-title">
+              <span>Reference / Guide Image</span>
+            </div>
+            <input type="file" id="file-input-guide" accept="image/*" style="display: none;">
+            <button id="btn-load-guide" class="btn btn-primary" style="width: 100%;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Load Guide Image
+            </button>
+
+            <!-- Guide Image Details -->
+            <div id="guide-preview-card" class="guide-preview-card" style="display: none;">
+              <img id="guide-thumb" class="guide-thumb" alt="Guide preview">
+              <div class="guide-info">
+                <div id="guide-name" class="guide-name">guide_image.png</div>
+                <div id="guide-meta" class="guide-meta">800 × 600 px</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guide Controls -->
+          <div class="panel-section">
+            <div class="panel-section-title">
+              <span>Guide Adjustments</span>
+            </div>
+
+            <!-- Visible Toggle -->
+            <div class="control-row">
+              <label class="control-label" for="guide-visible-check">Show Guide</label>
+              <input type="checkbox" id="guide-visible-check" checked disabled>
+            </div>
+
+            <!-- Opacity Slider -->
+            <div class="control-row">
+              <label class="control-label" for="guide-opacity-slider">Opacity (<span id="guide-opacity-val">45%</span>)</label>
+              <input type="range" id="guide-opacity-slider" class="range-input" min="0" max="100" value="45" disabled>
+            </div>
+
+            <!-- Scale % -->
+            <div class="control-row">
+              <label class="control-label" for="guide-scale-input">Scale (%)</label>
+              <div style="display: flex; gap: 4px; align-items: center;">
+                <button id="guide-scale-minus" class="btn btn-sm btn-icon-only" disabled>−</button>
+                <input type="number" id="guide-scale-input" class="number-input" value="100" min="1" max="5000" disabled>
+                <button id="guide-scale-plus" class="btn btn-sm btn-icon-only" disabled>+</button>
+              </div>
+            </div>
+            <input type="range" id="guide-scale-slider" class="range-input" min="1" max="500" value="100" disabled>
+
+            <!-- Quick Scale Presets -->
+            <div class="presets-grid" style="margin-top: 2px;">
+              <button class="preset-btn guide-scale-preset" data-scale="25" disabled>25%</button>
+              <button class="preset-btn guide-scale-preset" data-scale="50" disabled>50%</button>
+              <button class="preset-btn guide-scale-preset" data-scale="100" disabled>100%</button>
+              <button class="preset-btn guide-scale-preset" data-scale="200" disabled>200%</button>
+            </div>
+
+            <!-- Position Offset X / Y -->
+            <div class="control-row" style="margin-top: 6px;">
+              <label class="control-label">Offset (X, Y)</label>
+              <div style="display: flex; gap: 6px;">
+                <input type="number" id="guide-pos-x" class="number-input" value="0" placeholder="X" disabled>
+                <input type="number" id="guide-pos-y" class="number-input" value="0" placeholder="Y" disabled>
+              </div>
+            </div>
+
+            <!-- Guide Actions -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px;">
+              <button id="btn-guide-center" class="btn btn-sm" disabled>Center Guide</button>
+              <button id="btn-guide-fit" class="btn btn-sm" disabled>Fit to Grid</button>
+            </div>
+
+            <button id="btn-guide-move-tool" class="btn btn-sm" style="margin-top: 4px;" disabled>
+              Drag Guide on Canvas (V)
+            </button>
+
+            <button id="btn-guide-clear" class="btn btn-sm btn-danger" style="margin-top: 4px;" disabled>
+              Remove Guide Image
+            </button>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <!-- Footer Status Bar -->
+    <footer id="app-footer">
+      <div class="footer-item">
+        <span class="status-dot"></span>
+        <span id="status-coords">-- : --</span>
+      </div>
+      <div class="footer-item">
+        <span id="status-size">125 × 125 px</span>
+      </div>
+      <div class="footer-item">
+        <span id="status-zoom">600%</span>
+      </div>
+      <div class="footer-item">
+        <span id="status-tool">Pencil (B)</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal: Resize Grid -->
+  <div id="modal-resize" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title">Resize Grid Dimensions</h2>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color: var(--text-secondary); font-size: 12px;">
+          Adjust the grid dimensions. Existing drawings will be preserved unless resized to a smaller dimension.
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="modal-input-group">
+            <label for="resize-width">Width (pixels)</label>
+            <input type="number" id="resize-width" class="modal-text-input" value="125" min="1" max="1024">
+          </div>
+          <div class="modal-input-group">
+            <label for="resize-height">Height (pixels)</label>
+            <input type="number" id="resize-height" class="modal-text-input" value="125" min="1" max="1024">
+          </div>
+        </div>
+
+        <div class="modal-input-group">
+          <label>Quick Presets</label>
+          <div class="presets-grid">
+            <button class="preset-btn" data-size="16">16 × 16</button>
+            <button class="preset-btn" data-size="32">32 × 32</button>
+            <button class="preset-btn" data-size="64">64 × 64</button>
+            <button class="preset-btn" data-size="125">125 × 125</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-modal-cancel">Cancel</button>
+        <button id="btn-resize-apply" class="btn btn-primary">Apply Resize</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Export PNG -->
+  <div id="modal-export" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title">Export PNG Image</h2>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-input-group">
+          <label for="export-scale-select">Resolution Scale</label>
+          <select id="export-scale-select" class="select-input">
+            <option value="1">1× (Native Grid Size)</option>
+            <option value="2">2× (Crisp 2x)</option>
+            <option value="4">4× (Crisp 4x)</option>
+            <option value="8" selected>8× (Crisp 8x - Recommended)</option>
+            <option value="16">16× (Crisp 16x - High Definition)</option>
+          </select>
+        </div>
+
+        <div class="modal-input-group">
+          <label for="export-bg-select">Background</label>
+          <select id="export-bg-select" class="select-input">
+            <option value="transparent">Transparent Background</option>
+            <option value="black">Solid Black (#000000)</option>
+            <option value="white">Solid White (#FFFFFF)</option>
+          </select>
+        </div>
+
+        <div class="control-row" style="margin-top: 4px;">
+          <label class="control-label" for="export-include-guide">Include Guide Image in Export</label>
+          <input type="checkbox" id="export-include-guide">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-modal-cancel">Cancel</button>
+        <button id="btn-export-confirm" class="btn btn-primary">Download PNG</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Clear Drawing Confirmation -->
+  <div id="modal-clear" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title">Clear Canvas?</h2>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color: var(--text-secondary); font-size: 13px;">
+          Are you sure you want to clear the drawing? You can undo this action with <strong style="color: var(--text-primary);">Cmd+Z</strong>.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-modal-cancel">Cancel</button>
+        <button id="btn-clear-confirm" class="btn btn-danger">Clear Drawing</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: New Palette -->
+  <div id="modal-new-palette" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title">Create Custom Palette</h2>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-input-group">
+          <label for="new-palette-name">Palette Name</label>
+          <input type="text" id="new-palette-name" class="modal-text-input" placeholder="e.g. My 8-Bit Palette" maxlength="30">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-modal-cancel">Cancel</button>
+        <button id="btn-create-palette-confirm" class="btn btn-primary">Create Palette</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="js/palettes.js"></script>
+  <script src="js/tools.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/canvas.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
