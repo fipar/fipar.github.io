@@ -38,6 +38,7 @@ Do not follow this [[./content/animal_family/index.html][link]] unless you like 
 - My [[./content/etc/zsh.html][.zshrc]] file.
 - Life in the [[./content/work/belmondo.html][Agentic AI]] World.
 - The good and bad things of working with [[./content/work/genai.html][GenAI]].
+- A [[https://fernandoipar.com/pixelart/][pixelart]] mini editor Gemini wrote for me with Antigravity.
 #+END_etc
 
 #+BEGIN_emacs
