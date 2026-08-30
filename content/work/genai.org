@@ -17,7 +17,7 @@
 
 
 Published on 2026-07-21.
-Updated on: 2026-08-05.
+Updated on: 2026-08-29.
 
 
 
@@ -26,17 +26,18 @@ I just want a central place I can point people to when this comes up in conversa
 
 *The good*
 
-- I get more done. Sometimes *a lot* and, other times, just more. I'm measuring in results, which include usable software artifacts, or digital artifacts (documents, images, sounds, etc.), not lines of code, or amount of words.
+- I get more done. Sometimes *a lot* and, other times, just more. I'm measuring in results, which include usable software artifacts, digital artifacts (documents, images, sounds, etc.), and problems solved; not lines of code, or amount of words.
 
 - I get to discuss ideas with a responsive rubber duck, which can be quite helpful. The rubber duck is sometimes very wrong but, if you're aware of this, and keep your guard, that doesn't matter that much. What I mean by "keep your guard" is you must always validate what comes out of the ducks' mouth. How to do this isn't always easy, but nothing in life is.
+  - Subnote: some colleagues and myself are noticing that, in the specific case of Claude Code, the agent seems to be trying to validate what *we* say. For example, we can say "Connect to X which is the reader" and the agent's thinking output will say "Validating that X is the reader." It would be very funny if this was because enough posts from us human complaining about hallucinations ended up training the agents to protect against ours.
 
 - Exploring ideas is now super simple. I've done more prototyping (including hardware) in the last 12 months than in the previous 5 years, if not more. It is much easier now to explore an idea quickly to see if it's worth pursuing it more or not.
 
 - Coding agents are very, and I mean *very* useful helpers when exploring a new codebase.
 
-- I've found that the harness is typically more important (in terms of outcome quality) than the model.
+- I've found that the harness is typically more important (in terms of outcome quality) than the model (this is in the context of writing agents).
 
-- The best approach that works for me is usually: use the models to help me write more tools, but then eventually only use the deterministic tools when investigating or troubleshooting.
+- The best approach that works for me is usually: use the models to help me write more tools, but then eventually only use the deterministic tools when investigating or troubleshooting. An exception is I run the output to tools by a model as getting a second opinion, but I only do this when I'm an expert in the problem domain. Otherwise, it's too risky to get fooled by a confidently-stated hallucination.
 
 *The bad*
 
@@ -57,10 +58,11 @@ I just want a central place I can point people to when this comes up in conversa
 
 *Addendum: challenges*
 
-- LLMs are usually too verbose. They can be used to summarize text, but the more you press in that direction, the higher the risk of missing or wrong information.
-  Someone who solves the "Get a good, reliable summary of <something>" properly would hit it big.
+- LLMs are usually too verbose. They can be used to summarize text, but the more you press in that direction, the higher the risk of missing or wrong information. Codebases can get bloated quickly, especially with useless comments. Some would argue the comments are using for agents, but I'm not yet convinced of that, since they seem to do a pretty decent job already at figuring out what poorly documented codebases do anyway, and the more context they need to deal with, the higher the risk of things going wrong.
 
-- Models tend to not make that good use of visual information. In my work on bots, I've incorporated sparklines and inline graphics with reasonable success, but I'm still not where I'd    like to be (my goal is somewhere close to what Edward Tufte explains in The Visual Display of Quantitative Information).
+- Someone who solves the "Get a good, reliable summary of <something>" properly would hit it big.
+
+- Models tend to not make that good use of visual information. In my work on bots, I've incorporated sparklines and inline graphics with reasonable success, but I'm still not where I'd like to be (my goal is somewhere close to what Edward Tufte explains in The Visual Display of Quantitative Information).
 
 - Agents can be, even within the same session, both very confident yet wrong, and very right yet quick to apologize and change course (to the wrong one, that is).
 
