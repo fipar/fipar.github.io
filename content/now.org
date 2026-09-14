@@ -1,0 +1,39 @@
+#+TITLE: What I'm up to now
+#+OPTIONS: toc:nil num:nil ^:nil
+
+#+begin_export html
+    <style>
+      body {
+          font-family: Raleway, monospace;
+      }
+    </style>
+        <p><i>"Tell my wife I love her very much, she knows"</i></p>
+#+end_export
+
+*What I'm up to now, updated whenever.*
+
+2026-09-14 17:47
+
+Almost finished my upcoming Percona University presentation (TiDB 101).
+
+I may add another diagram or two but, other than that, it's mostly done.
+No need to rehearse much other than one round to estimate timing, since I'm doing a alot of TiDB-related work recently:
+- Deploying it to EKS several times
+- Moving data from Aurora MySQL to it several times
+
+Improving a DBRE Slack bot.
+
+
+Looking at ways to visualize different parts of an LLM state depending on the input prompt.
+
+Several one-off DAW plugins to use from Renoise and Logic Pro.
+
+A theremin-like midi controller using Arduino.
+
+Helping my son with some agent-drive (Google AI Studio) web app. They started playing with app generators for a project and, soon enough, things got out of control and I have something new to deploy.
+
+Helping my daughter build an online portfolio for her illustrations.
+
+#+begin_export html
+<p><i>"Makes much more sense to live in the present tense."</i></p>
+#+end_export
