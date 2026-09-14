@@ -31,6 +31,7 @@ Recent (for large enough values of "Recent") work-related writings:
 
 Do not follow this [[./content/animal_family/index.html][link]] unless you like animal families.
 
+I may or may not keep [[./content/now.html][this page]] up to date with what I'm up to.
 
 #+END_work
 
