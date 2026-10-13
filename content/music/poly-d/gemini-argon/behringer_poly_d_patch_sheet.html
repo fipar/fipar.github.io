@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Behringer Poly D - Interactive Patch Sheet</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --ink: #000000;
+      --paper: #ffffff;
+      --marker-accent: #000000;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f3f4f6;
+      color: #111827;
+      margin: 0;
+      padding: 0;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    /* Technical condensed font matching Behringer / Moog silkscreen */
+    .synth-svg {
+      font-family: 'Barlow Condensed', 'Arial Narrow', 'Helvetica Condensed', sans-serif;
+      background-color: #ffffff;
+      display: block;
+      width: 100%;
+      height: auto;
+      shape-rendering: geometricPrecision;
+      text-rendering: geometricPrecision;
+    }
+
+    .synth-svg text {
+      fill: #000000;
+      text-anchor: middle;
+      dominant-baseline: central;
+      letter-spacing: 0.03em;
+      pointer-events: none;
+    }
+
+    .interactive-control {
+      cursor: pointer;
+    }
+
+    .interactive-control:hover .hover-ring {
+      stroke: #2563eb;
+      stroke-width: 1.5;
+      stroke-dasharray: 3, 2;
+      opacity: 0.85;
+    }
+
+    .knob-pointer {
+      transition: transform 0.04s linear;
+    }
+
+    /* Print styling so it prints like an official manual sheet from Safari */
+    @media print {
+      @page {
+        size: landscape;
+        margin: 6mm;
+      }
+      body {
+        background: #ffffff !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .sheet-container {
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .patch-header-print {
+        border-bottom: 1.5px solid #000 !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-4 px-2 sm:px-6">
+
+  <!-- ===================================================================== -->
+  <!-- EASY-TO-EDIT PATCH CONFIGURATION (Copy this file & edit values here!) -->
+  <!-- ===================================================================== -->
+  <script>
+    /**
+     * HOW TO CREATE NEW PATCH FILES BY HAND OR IN SAFARI:
+     * -------------------------------------------------------------------------
+     * Method 1 (In Browser): Adjust switches and knobs directly by clicking or
+     * dragging on the sheet, then click "Save Copy as HTML" in the top bar!
+     * It will download a brand new self-contained .html file with your patch
+     * baked right into DEFAULT_PATCH below.
+     *
+     * Method 2 (In Code Editor): Duplicate this .html file and edit DEFAULT_PATCH:
+     * - 2-Way Switches: 'left' (OFF), 'right' (ON), or null (blank/unmarked)
+     *   (For vertical 2-way switches like osc4_control or noise_type: 'up', 'down', or null)
+     * - 3-Way Switches:
+     *   - mode: 'mono' (left), 'uni' (center), 'poly' (right), or null (blank)
+     *   - transpose: 'up', 'norm', 'down', or null (blank)
+     * - Knobs:
+     *   - null = Unmarked/blank knob (just like your chamaleon-bass.jpg!)
+     *   - Number = Value on the printed scale:
+     *     - Standard 0..10 knobs: 0 to 10 (e.g. 5.0 is straight up 12 o'clock)
+     *     - TUNE knob: -3 to +3 (0 is straight up)
+     *     - OSC 2/3/4 FREQUENCY: -7 to +7 (0 is straight up)
+     *     - CUTOFF FREQUENCY: -5 to +5 (0 is straight up)
+     *     - OSC RANGE stepped knob: 'LO', '32', '16', '8', '4', '2', or null
+     *     - OSC WAVEFORM stepped knob: 0 (Tri), 1 (Tri-Saw/RevSaw), 2 (Saw),
+     *       3 (Wide Pulse), 4 (Med Pulse), 5 (Narrow Pulse), or null
+     *     - Envelope Attack/Decay knobs: 0 to 10 (where 0=10ms, 2.5=200ms, 5=1s, 7.5=5s, 10=10s)
+     */
+    const DEFAULT_PATCH = {
+      name: "Chameleon Bass",
+      author: "Custom Patch",
+      category: "Bass",
+      date: "2026-10-13",
+      notes: "Exact switch layout from chamaleon-bass.jpg. Click any switch to toggle its black block, or drag any knob to draw a pointer line (double-click a knob to leave it blank).",
+      markerColor: "#000000", // Try "#000000" for classic black or "#d90429" for red pen!
+
+      switches: {
+        // CONTROLLERS SECTION
+        osc_modulation: "left",      // 'left' (OFF) | 'right' (ON) | null
+        mode: "mono",                // 'mono' | 'uni' | 'poly' | null
+        auto_damp: "left",           // 'left' (OFF) | 'right' (ON) | null
+        mod_src_left: "left",        // 'left' (OSC 4) | 'right' (FILTER EG) | null
+        mod_src_right: "right",      // 'left' (NOISE/MOD SRC) | 'right' (LFO) | null
+
+        // OSCILLATOR BANK SECTION
+        osc4_control: "up",          // 'up' (ON) | 'down' (OFF) | null
+
+        // MIXER SECTION
+        mix_osc1_on: "right",        // 'left' (OFF) | 'right' (ON) | null
+        mix_ext_on: "left",          // 'left' (OFF) | 'right' (ON) | null
+        mix_osc2_on: "left",         // 'left' (OFF) | 'right' (ON) | null
+        mix_osc3_on: "left",         // 'left' (OFF) | 'right' (ON) | null
+        mix_noise_on: "left",        // 'left' (OFF) | 'right' (ON) | null
+        mix_osc4_on: "left",         // 'left' (OFF) | 'right' (ON) | null
+        noise_type: null,            // 'up' (WHITE) | 'down' (PINK) | null
+
+        // FILTER & LOUDNESS CONTOUR SECTION
+        filter_mode: "left",         // 'left' (LO) | 'right' (HI) | null
+        filter_modulation: "right",  // 'left' (OFF) | 'right' (ON) | null
+        kbd_control_1: "left",       // 'left' (OFF) | 'right' (ON) | null
+        kbd_control_2: "left",       // 'left' (OFF) | 'right' (ON) | null
+        decay_on: "right",           // 'left' (OFF) | 'right' (ON) | null
+
+        // EFFECTS & OUTPUT SECTION
+        distortion_on: "right",      // 'left' (OFF) | 'right' (ON) | null
+        chorus_1: false,             // true | false
+        chorus_2: false,             // true | false
+        chorus_on: "left",           // 'left' (OFF) | 'right' (ON) | null
+        power: null,                 // 'up' | 'down' | null
+
+        // LOWER LEFT KEYBOARD CONTROL PANEL
+        lfo_wave: "left",            // 'left' (TRI) | 'right' (SQR) | null (outline box in chamaleon-bass.jpg)
+        glide_on: "left",            // 'left' (OFF) | 'right' (ON) | null
+        transpose: "down"            // 'up' | 'norm' | 'down' | null
+      },
+
+      knobs: {
+        // Set to null to leave blank (like chamaleon-bass.jpg), or set a numeric/step value!
+        // CONTROLLERS
+        tune: null,                  // -3 to +3
+        glide: null,                 // 0 to 10
+        mod_mix: null,               // 0 to 10
+
+        // OSCILLATOR 1
+        osc1_range: null,            // 'LO', '32', '16', '8', '4', '2', or null
+        osc1_wave: null,             // 0..5 or null
+
+        // OSCILLATOR 2
+        osc2_range: null,            // 'LO', '32', '16', '8', '4', '2', or null
+        osc2_freq: null,             // -7 to +7
+        osc2_wave: null,             // 0..5 or null
+
+        // OSCILLATOR 3
+        osc3_range: null,            // 'LO', '32', '16', '8', '4', '2', or null
+        osc3_freq: null,             // -7 to +7
+        osc3_wave: null,             // 0..5 or null
+
+        // OSCILLATOR 4
+        osc4_range: null,            // 'LO', '32', '16', '8', '4', '2', or null
+        osc4_freq: null,             // -7 to +7
+        osc4_wave: null,             // 0..5 or null
+
+        // MIXER
+        vol_osc1: null,              // 0 to 10
+        vol_osc2: null,              // 0 to 10
+        vol_osc3: null,              // 0 to 10
+        vol_osc4: null,              // 0 to 10
+        vol_ext: null,               // 0 to 10
+        vol_noise: null,             // 0 to 10
+
+        // FILTER
+        cutoff: null,                // -5 to +5
+        emphasis: null,              // 0 to 10
+        contour_amt: null,           // 0 to 10
+        flt_attack: null,            // 0 to 10
+        flt_decay: null,             // 0 to 10
+        flt_sustain: null,           // 0 to 10
+
+        // LOUDNESS CONTOUR
+        amp_attack: null,            // 0 to 10
+        amp_decay: null,             // 0 to 10
+        amp_sustain: null,           // 0 to 10
+
+        // DISTORTION & SEQUENCER & OUTPUT
+        dist_drive: null,            // 0 to 10
+        dist_tone: null,             // 0 to 10
+        dist_level: null,            // 0 to 10
+        seq_tempo: null,             // 0 to 10
+        master_vol: null,            // 0 to 10
+        phones_vol: null,            // 0 to 10
+
+        // LOWER PANEL
+        lfo_rate: null               // 0 to 10
+      }
+    };
+  </script>
+
+  <!-- ===================================================================== -->
+  <!-- TOP INTERACTIVE TOOLBAR (Hidden when printing / exporting PDF)        -->
+  <!-- ===================================================================== -->
+  <header class="no-print w-full max-w-[1440px] mb-3 bg-white border border-gray-300 rounded-xl shadow-sm p-3 sm:p-4">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="bg-black text-white font-bold px-2.5 py-1 rounded text-sm tracking-wider flex items-center gap-1.5">
+          <span>POLY</span>
+          <span class="border border-white px-1 rounded-sm">D</span>
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold text-gray-900 leading-tight">Behringer Poly D Patch Sheet</h1>
+          <p class="text-xs text-gray-500">
+            <strong>Click</strong> any switch to cycle its black block • <strong>Click/Drag</strong> any knob to set pointer • <strong>Double-click</strong> a knob to clear
+          </p>
+        </div>
+      </div>
+
+      <!-- Preset & Action Buttons -->
+      <div class="flex flex-wrap items-center gap-2">
+        <label class="text-xs font-semibold text-gray-600 mr-1" for="presetSelect">Load Preset:</label>
+        <select id="presetSelect" class="text-xs sm:text-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg px-2.5 py-1.5 font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none">
+          <option value="chameleon">Chameleon Bass (Your Image - Switches Only)</option>
+          <option value="chameleon_knobs">Chameleon Bass (With Example Knob Positions)</option>
+          <option value="blank">Blank Patch Sheet (poly-d-patch.jpg)</option>
+          <option value="paraphonic_brass">Paraphonic 4-Voice Poly Brass</option>
+        </select>
+
+        <div class="h-5 w-px bg-gray-300 mx-1 hidden sm:block"></div>
+
+        <label class="text-xs font-semibold text-gray-600 flex items-center gap-1.5 bg-gray-50 border border-gray-300 rounded-lg px-2.5 py-1 cursor-pointer" title="Switch between authentic black fill or colored marker">
+          <span>Ink:</span>
+          <input type="color" id="markerColorPicker" value="#000000" class="w-5 h-5 rounded cursor-pointer border-0 bg-transparent p-0">
+        </label>
+
+        <button id="btnClearKnobs" type="button" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium px-3 py-1.5 rounded-lg border border-gray-300 transition">
+          Clear Knobs
+        </button>
+
+        <button id="btnExportHtml" type="button" class="text-xs bg-blue-600 hover:bg-blue-700 text-white font-semibold px-3 py-1.5 rounded-lg shadow-sm transition flex items-center gap-1.5" title="Downloads a standalone .html copy with your current settings saved as default">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>Save Copy as HTML</span>
+        </button>
+
+        <button id="btnToggleJson" type="button" class="text-xs bg-gray-800 hover:bg-gray-900 text-white font-medium px-3 py-1.5 rounded-lg transition">
+          JSON / Code
+        </button>
+
+        <button id="btnPrint" type="button" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-3 py-1.5 rounded-lg shadow-sm transition flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          <span>Print / PDF</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible JSON Inspector / Editor for quick copy-pasting -->
+    <div id="jsonDrawer" class="hidden mt-3 pt-3 border-t border-gray-200">
+      <div class="flex items-center justify-between mb-1.5">
+        <span class="text-xs font-semibold text-gray-700">Live `DEFAULT_PATCH` JavaScript Object (Edit & click Apply, or Copy into a duplicate file):</span>
+        <div class="flex gap-2">
+          <button id="btnCopyJson" type="button" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold px-2.5 py-1 rounded border border-gray-300">Copy Code</button>
+          <button id="btnApplyJson" type="button" class="text-xs bg-blue-600 hover:bg-blue-700 text-white font-semibold px-2.5 py-1 rounded">Apply Changes</button>
+        </div>
+      </div>
+      <textarea id="jsonTextarea" rows="7" class="w-full font-mono text-xs p-2.5 bg-gray-900 text-emerald-400 rounded-lg border border-gray-700 focus:outline-none"></textarea>
+      <p id="jsonStatus" class="text-xs text-emerald-600 mt-1 hidden"></p>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- PRINTABLE / INTERACTIVE PATCH SHEET CONTAINER                         -->
+  <!-- ===================================================================== -->
+  <main class="sheet-container w-full max-w-[1440px] bg-white border border-gray-300 rounded-xl shadow-md p-3 sm:p-6">
+    
+    <!-- Editable Patch Metadata Header -->
+    <div class="patch-header-print flex flex-wrap items-end justify-between gap-4 pb-3 mb-3 border-b-2 border-black">
+      <div class="flex-1 min-w-[220px]">
+        <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-500">Patch Name</label>
+        <input id="inputPatchName" type="text" value="Chameleon Bass" placeholder="Enter patch name..."
+          class="w-full text-xl sm:text-2xl font-bold text-black bg-transparent border-b border-transparent hover:border-gray-300 focus:border-black focus:outline-none py-0.5">
+      </div>
+      <div class="w-36 sm:w-44">
+        <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-500">Category / Mode</label>
+        <input id="inputPatchCategory" type="text" value="Bass" placeholder="Bass / Lead / Pad"
+          class="w-full text-sm font-semibold text-black bg-transparent border-b border-transparent hover:border-gray-300 focus:border-black focus:outline-none py-0.5">
+      </div>
+      <div class="w-32 sm:w-36">
+        <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-500">Date</label>
+        <input id="inputPatchDate" type="text" value="2026-10-13" placeholder="YYYY-MM-DD"
+          class="w-full text-sm font-semibold text-black bg-transparent border-b border-transparent hover:border-gray-300 focus:border-black focus:outline-none py-0.5">
+      </div>
+      <div class="flex-[2] min-w-[260px]">
+        <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-500">Patch Notes / Performance Tips</label>
+        <input id="inputPatchNotes" type="text" value="Exact switch layout from chamaleon-bass.jpg." placeholder="Add patch notes..."
+          class="w-full text-sm text-gray-800 bg-transparent border-b border-transparent hover:border-gray-300 focus:border-black focus:outline-none py-0.5">
+      </div>
+    </div>
+
+    <!-- High-Precision Vector SVG Matching poly-d-patch.jpg & chamaleon-bass.jpg -->
+    <div class="w-full overflow-x-auto">
+      <svg id="polyDSvg" class="synth-svg" viewBox="0 0 1800 815" xmlns="http://www.w3.org/2000/svg">
+        <!-- SVG content is dynamically constructed by the clean vector engine below so all knobs, tick marks, waveforms, and switches stay crisp and interactive -->
+      </svg>
+    </div>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- VECTOR GRAPHICS & INTERACTIVE ENGINE (Safari & All Modern Browsers)   -->
+  <!-- ===================================================================== -->
+  <script>
+    (function () {
+      const SVG_NS = "http://www.w3.org/2000/svg";
+      const svg = document.getElementById("polyDSvg");
+
+      // Deep clone utility
+      function cloneData(obj) {
+        return JSON.parse(JSON.stringify(obj));
+      }
+
+      // Current live patch state initialized from DEFAULT_PATCH
+      let patchState = cloneData(DEFAULT_PATCH);
+
+      // Built-in presets for instant comparison
+      const PRESETS = {
+        chameleon: cloneData(DEFAULT_PATCH),
+        chameleon_knobs: (function () {
+          const p = cloneData(DEFAULT_PATCH);
+          p.name = "Chameleon Bass (With Example Knobs)";
+          p.notes = "Your Chameleon Bass switch settings paired with classic punchy Osc-1 + Osc-4 mod bass knob positions.";
+          Object.assign(p.knobs, {
+            tune: 0,
+            glide: 2.0,
+            mod_mix: 3.5,
+            osc1_range: "16",
+            osc1_wave: 2, // Sawtooth
+            osc2_range: "16",
+            osc2_freq: -0.2,
+            osc2_wave: 2,
+            osc3_range: "32",
+            osc3_freq: 0,
+            osc3_wave: 0,
+            osc4_range: "LO",
+            osc4_freq: 1.5,
+            osc4_wave: 0,
+            vol_osc1: 8.5,
+            vol_osc2: 0,
+            vol_osc3: 0,
+            vol_osc4: 0,
+            vol_ext: 0,
+            vol_noise: 0,
+            cutoff: -1.2,
+            emphasis: 4.5,
+            contour_amt: 6.5,
+            flt_attack: 0.3,
+            flt_decay: 3.8,
+            flt_sustain: 2.0,
+            amp_attack: 0.1,
+            amp_decay: 4.5,
+            amp_sustain: 6.5,
+            dist_drive: 3.0,
+            dist_tone: 5.5,
+            dist_level: 7.0,
+            seq_tempo: 5.0,
+            master_vol: 7.5,
+            phones_vol: 6.0,
+            lfo_rate: 4.2
+          });
+          return p;
+        })(),
+        blank: (function () {
+          const p = cloneData(DEFAULT_PATCH);
+          p.name = "Blank Patch Sheet";
+          p.category = "";
+          p.notes = "Unmarked blank sheet identical to poly-d-patch.jpg.";
+          Object.keys(p.switches).forEach(k => p.switches[k] = null);
+          p.switches.chorus_1 = false;
+          p.switches.chorus_2 = false;
+          Object.keys(p.knobs).forEach(k => p.knobs[k] = null);
+          return p;
+        })(),
+        paraphonic_brass: (function () {
+          const p = cloneData(DEFAULT_PATCH);
+          p.name = "Poly 4-Voice Vintage Brass";
+          p.category = "Poly / Brass";
+          p.notes = "Paraphonic 4-oscillator mode with slow filter swell and Stereo Chorus I+II.";
+          Object.assign(p.switches, {
+            osc_modulation: "left",
+            mode: "poly",
+            auto_damp: "right",
+            mod_src_left: "right",
+            mod_src_right: "right",
+            osc4_control: "up",
+            mix_osc1_on: "right",
+            mix_ext_on: "left",
+            mix_osc2_on: "right",
+            mix_osc3_on: "right",
+            mix_noise_on: "left",
+            mix_osc4_on: "right",
+            noise_type: "down",
+            filter_mode: "left",
+            filter_modulation: "left",
+            kbd_control_1: "right",
+            kbd_control_2: "right",
+            decay_on: "right",
+            distortion_on: "left",
+            chorus_1: true,
+            chorus_2: true,
+            chorus_on: "right",
+            power: "up",
+            lfo_wave: "left",
+            glide_on: "left",
+            transpose: "norm"
+          });
+          Object.assign(p.knobs, {
+            tune: 0,
+            glide: 1.0,
+            mod_mix: 8.0,
+            osc1_range: "8",
+            osc1_wave: 2,
+            osc2_range: "8",
+            osc2_freq: 0.15,
+            osc2_wave: 2,
+            osc3_range: "8",
+            osc3_freq: -0.15,
+            osc3_wave: 2,
+            osc4_range: "8",
+            osc4_freq: 0.25,
+            osc4_wave: 2,
+            vol_osc1: 7.0,
+            vol_osc2: 7.0,
+            vol_osc3: 7.0,
+            vol_osc4: 7.0,
+            vol_ext: 0,
+            vol_noise: 0,
+            cutoff: -0.5,
+            emphasis: 3.0,
+            contour_amt: 5.5,
+            flt_attack: 2.2,
+            flt_decay: 5.0,
+            flt_sustain: 6.0,
+            amp_attack: 1.5,
+            amp_decay: 5.5,
+            amp_sustain: 8.0,
+            dist_drive: 0,
+            dist_tone: 5.0,
+            dist_level: 5.0,
+            seq_tempo: 5.0,
+            master_vol: 8.0,
+            phones_vol: 7.0,
+            lfo_rate: 5.5
+          });
+          return p;
+        })()
+      };
+
+      // Helper to create SVG elements
+      function el(tag, attrs = {}, parent = null) {
+        const node = document.createElementNS(SVG_NS, tag);
+        for (const [k, v] of Object.entries(attrs)) {
+          if (v !== null && v !== undefined) {
+            node.setAttribute(k, String(v));
+          }
+        }
+        if (parent) parent.appendChild(node);
+        return node;
+      }
+
+      function addText(parent, x, y, str, size = 10, weight = "600", anchor = "middle") {
+        const t = el("text", {
+          x,
+          y,
+          "font-size": size,
+          "font-weight": weight,
+          "text-anchor": anchor
+        }, parent);
+        t.textContent = str;
+        return t;
+      }
+
+      // Polar to Cartesian where angleDeg = 0 is straight UP (12 o'clock)
+      function polar(cx, cy, r, angleDeg) {
+        const rad = ((angleDeg - 90) * Math.PI) / 180;
+        return {
+          x: cx + r * Math.cos(rad),
+          y: cy + r * Math.sin(rad)
+        };
+      }
+
+      // Draw tiny waveform icons around the WAVEFORM knobs
+      function drawWaveIcon(parent, x, y, type) {
+        const g = el("g", {
+          transform: `translate(${x.toFixed(1)}, ${y.toFixed(1)})`,
+          fill: "none",
+          stroke: "#000",
+          "stroke-width": "1.1",
+          "stroke-linecap": "round",
+          "stroke-linejoin": "round"
+        }, parent);
+
+        let d = "";
+        switch (type) {
+          case "tri": // Triangle
+            d = "M -5,2.5 L 0,-3.5 L 5,2.5";
+            break;
+          case "trisaw": // Triangle-Sawtooth hybrid (Osc 1, 2, 3)
+            d = "M -5,2.5 L -1,-3.5 L 2,0 L 2,-3.5 L 5,2.5";
+            break;
+          case "revsaw": // Reverse Sawtooth (Osc 4 & LFO)
+            d = "M -4.5,2.5 L -4.5,-3.5 L 4.5,2.5";
+            break;
+          case "saw": // Ascending Sawtooth
+            d = "M -4.5,2.5 L 4.5,-3.5 L 4.5,2.5";
+            break;
+          case "sq_wide": // Square / Wide Pulse
+            d = "M -5,2.5 L -5,-3 L 0,-3 L 0,2.5 L 5,2.5";
+            break;
+          case "sq_med": // Medium Pulse
+            d = "M -5,2.5 L -5,-3 L -1.5,-3 L -1.5,2.5 L 5,2.5";
+            break;
+          case "sq_nar": // Narrow Pulse
+            d = "M -5,2.5 L -5,-3 L -3,-3 L -3,2.5 L 5,2.5";
+            break;
+        }
+        el("path", { d }, g);
+      }
+
+      const KNOB_DEFS = {};
+
+      function registerKnob(def) {
+        KNOB_DEFS[def.id] = def;
+      }
+
+      // Standard 0..10 scale ticks (-150 deg to +150 deg, major every 2, minor every 1)
+      function makeScale0to10() {
+        const ticks = [];
+        for (let i = 0; i <= 10; i++) {
+          const angle = -150 + (i / 10) * 300;
+          const isMajor = i % 2 === 0;
+          ticks.push({
+            angle,
+            major: isMajor,
+            label: isMajor ? String(i) : null,
+            val: i
+          });
+        }
+        return {
+          type: "continuous",
+          min: 0,
+          max: 10,
+          startAngle: -150,
+          endAngle: 150,
+          ticks
+        };
+      }
+
+      // Tune scale (-3 to +3)
+      function makeScaleTune() {
+        const ticks = [];
+        for (let i = -3; i <= 3; i++) {
+          const angle = (i / 3) * 145;
+          ticks.push({
+            angle,
+            major: true,
+            label: i === 0 ? "0" : (i > 0 ? `+${i}` : `${i}`),
+            val: i
+          });
+        }
+        return {
+          type: "continuous",
+          min: -3,
+          max: 3,
+          startAngle: -145,
+          endAngle: 145,
+          ticks
+        };
+      }
+
+      // Osc 2/3/4 Frequency scale (-7 to +7 with semitone ticks)
+      function makeScaleOscFreq() {
+        const ticks = [];
+        const labeled = [-7, -5, -3, -1, 0, 1, 3, 5, 7];
+        for (let i = -8; i <= 8; i++) {
+          const angle = (i / 8) * 155;
+          const hasLabel = labeled.includes(i);
+          ticks.push({
+            angle,
+            major: hasLabel || i % 2 === 0,
+            label: hasLabel ? String(i) : null,
+            val: i
+          });
+        }
+        return {
+          type: "continuous",
+          min: -7,
+          max: 7,
+          startAngle: -150,
+          endAngle: 150,
+          ticks
+        };
+      }
+
+      // Cutoff Frequency scale (-5 to +5)
+      function makeScaleCutoff() {
+        const ticks = [];
+        for (let i = -5; i <= 5; i++) {
+          const angle = (i / 5) * 150;
+          const isLabeled = i % 2 !== 0 || i === 0 || Math.abs(i) === 4;
+          const showLabel = [-4, -2, 0, 2, 4].includes(i);
+          ticks.push({
+            angle,
+            major: showLabel || Math.abs(i) === 5,
+            label: showLabel ? String(Math.abs(i)) : null,
+            val: i
+          });
+        }
+        return {
+          type: "continuous",
+          min: -5,
+          max: 5,
+          startAngle: -150,
+          endAngle: 150,
+          ticks
+        };
+      }
+
+      // Envelope Attack / Decay scale (10ms, 200ms, 600ms, 1s, 5s, 10s)
+      function makeScaleEnvelope(isDecay = false) {
+        const labels = {
+          0: "10",
+          2: "200",
+          4: isDecay ? "600" : "600",
+          6: "1",
+          8: "5",
+          10: "10"
+        };
+        const ticks = [];
+        for (let i = 0; i <= 10; i++) {
+          const angle = -150 + (i / 10) * 300;
+          const lbl = labels[i] || null;
+          ticks.push({
+            angle,
+            major: lbl !== null,
+            label: lbl,
+            val: i
+          });
+        }
+        return {
+          type: "continuous",
+          min: 0,
+          max: 10,
+          startAngle: -150,
+          endAngle: 150,
+          ticks
+        };
+      }
+
+      // Stepped RANGE scale ('LO', '32', '16', '8', '4', '2')
+      function makeScaleRange() {
+        const steps = [
+          { val: "LO", label: "LO", angle: -115 },
+          { val: "32", label: "32'", angle: -70 },
+          { val: "16", label: "16'", angle: -25 },
+          { val: "8",  label: "8'",  angle: 25 },
+          { val: "4",  label: "4'",  angle: 70 },
+          { val: "2",  label: "2'",  angle: 115 }
+        ];
+        return {
+          type: "stepped",
+          steps
+        };
+      }
+
+      // Stepped WAVEFORM scale (0..5)
+      function makeScaleWave(isOsc4 = false) {
+        const steps = [
+          { val: 0, wave: "tri",                     angle: -110 },
+          { val: 1, wave: isOsc4 ? "revsaw" : "trisaw", angle: -66 },
+          { val: 2, wave: "saw",                     angle: -22 },
+          { val: 3, wave: "sq_wide",                 angle: 22 },
+          { val: 4, wave: "sq_med",                  angle: 66 },
+          { val: 5, wave: "sq_nar",                  angle: 110 }
+        ];
+        return {
+          type: "stepped",
+          steps
+        };
+      }
+
+      // Render a knob and wire up interactive pointer rotation
+      function drawKnob(parent, cfg) {
+        registerKnob(cfg);
+        const { id, cx, cy, r = 30, titleTop, titleTop2, subLeft, subRight, scale } = cfg;
+
+        const g = el("g", {
+          class: "interactive-control",
+          "data-knob-id": id
+        }, parent);
+
+        // Top label(s)
+        if (titleTop2) {
+          addText(g, cx, cy - r - 26, titleTop, 10.5, "700");
+          addText(g, cx, cy - r - 15, titleTop2, 10.5, "700");
+        } else if (titleTop) {
+          addText(g, cx, cy - r - 17, titleTop, 10.5, "700");
+        }
+
+        // Bottom left / right sublabels (e.g. M-SEC / SEC or OSC 4 / NOISE)
+        if (subLeft) {
+          if (Array.isArray(subLeft)) {
+            addText(g, cx - r + 2, cy + r + 11, subLeft[0], 7.5, "600");
+            addText(g, cx - r + 2, cy + r + 19, subLeft[1], 7.5, "600");
+          } else {
+            addText(g, cx - r + 6, cy + r + 11, subLeft, 8, "600");
+          }
+        }
+        if (subRight) {
+          if (Array.isArray(subRight)) {
+            addText(g, cx + r - 2, cy + r + 11, subRight[0], 7.5, "600");
+            addText(g, cx + r - 2, cy + r + 19, subRight[1], 7.5, "600");
+          } else {
+            addText(g, cx + r - 6, cy + r + 11, subRight, 8, "600");
+          }
+        }
+
+        // Draw ticks & scale labels
+        if (scale.type === "continuous") {
+          scale.ticks.forEach(t => {
+            const p1 = polar(cx, cy, r, t.angle);
+            const tickLen = t.major ? 4.5 : 2.5;
+            const p2 = polar(cx, cy, r + tickLen, t.angle);
+            el("line", {
+              x1: p1.x.toFixed(1),
+              y1: p1.y.toFixed(1),
+              x2: p2.x.toFixed(1),
+              y2: p2.y.toFixed(1),
+              stroke: "#000",
+              "stroke-width": t.major ? "1.2" : "0.9"
+            }, g);
+
+            if (t.label !== null) {
+              const pl = polar(cx, cy, r + tickLen + 6.5, t.angle);
+              addText(g, pl.x.toFixed(1), pl.y.toFixed(1), t.label, 8.5, "600");
+            }
+          });
+        } else if (scale.type === "stepped") {
+          scale.steps.forEach(st => {
+            const p1 = polar(cx, cy, r, st.angle);
+            const p2 = polar(cx, cy, r + 4.5, st.angle);
+            el("line", {
+              x1: p1.x.toFixed(1),
+              y1: p1.y.toFixed(1),
+              x2: p2.x.toFixed(1),
+              y2: p2.y.toFixed(1),
+              stroke: "#000",
+              "stroke-width": "1.2"
+            }, g);
+
+            if (st.label) {
+              const pl = polar(cx, cy, r + 12, st.angle);
+              addText(g, pl.x.toFixed(1), pl.y.toFixed(1), st.label, 8.5, "600");
+            } else if (st.wave) {
+              const pw = polar(cx, cy, r + 12.5, st.angle);
+              drawWaveIcon(g, pw.x, pw.y, st.wave);
+            }
+          });
+        }
+
+        // Hover ring for interactive feedback
+        el("circle", {
+          cx,
+          cy,
+          r: r + 2,
+          fill: "none",
+          class: "hover-ring"
+        }, g);
+
+        // Main knob circle
+        el("circle", {
+          cx,
+          cy,
+          r,
+          fill: "#ffffff",
+          stroke: "#000000",
+          "stroke-width": "1.25"
+        }, g);
+
+        // Dynamic pointer group (updated by renderState)
+        const pointerGroup = el("g", {
+          id: `knob-ptr-${id}`,
+          class: "knob-pointer"
+        }, g);
+
+        // Pointer line from center (or inner radius) to rim + center dot
+        el("circle", {
+          cx,
+          cy,
+          r: 2.5,
+          fill: patchState.markerColor || "#000",
+          class: "marker-fill"
+        }, pointerGroup);
+
+        el("line", {
+          x1: cx,
+          y1: cy,
+          x2: cx,
+          y2: cy - r + 1.5,
+          stroke: patchState.markerColor || "#000",
+          "stroke-width": "3.2",
+          "stroke-linecap": "round",
+          class: "marker-stroke"
+        }, pointerGroup);
+
+        // Bind mouse / touch interaction
+        g.addEventListener("mousedown", (e) => startKnobDrag(e, cfg));
+        g.addEventListener("touchstart", (e) => startKnobDrag(e, cfg), { passive: false });
+        g.addEventListener("dblclick", (e) => {
+          e.preventDefault();
+          patchState.knobs[id] = null;
+          renderPatchState();
+        });
+      }
+
+      const SWITCH_DEFS = {};
+
+      // Draw a 2-position or 3-position rocker switch matching the Poly D patch sheet
+      function drawSwitch(parent, cfg) {
+        SWITCH_DEFS[cfg.id] = cfg;
+        const {
+          id,
+          x,
+          y,
+          w = 50,
+          h = 20,
+          orientation = "h", // 'h' or 'v'
+          positions = 2,     // 2 or 3
+          topLabel,
+          topLabel2,
+          bottomLabel,
+          bottomRightLabel,
+          leftLabel,
+          rightLabel,
+          subLabels3,        // e.g. ['MONO', 'UNI', 'POLY'] or ['UP', 'NORM', 'DOWN']
+          boldFrame = false
+        } = cfg;
+
+        const g = el("g", {
+          class: "interactive-control",
+          "data-switch-id": id
+        }, parent);
+
+        // Labels above switch
+        if (topLabel2) {
+          addText(g, x + w / 2, y - 16, topLabel, 9, "700");
+          addText(g, x + w / 2, y - 7, topLabel2, 9, "700");
+        } else if (topLabel) {
+          addText(g, x + w / 2, y - 8, topLabel, 9.5, "700");
+        }
+
+        // Standard ON label under right side of horizontal switch
+        if (bottomRightLabel) {
+          addText(g, x + w - 5, y + h + 8, bottomRightLabel, 8.5, "700");
+        }
+        if (bottomLabel) {
+          addText(g, x + w / 2, y + h + 8, bottomLabel, 8.5, "700");
+        }
+        if (leftLabel) {
+          addText(g, x - 6, y + h / 2, leftLabel, 8.5, "700", "end");
+        }
+        if (rightLabel) {
+          addText(g, x + w + 6, y + h / 2, rightLabel, 8.5, "700", "start");
+        }
+
+        // 3-position labels (like MONO / UNI / POLY or LO / HI)
+        if (subLabels3 && orientation === "h") {
+          if (subLabels3.length === 3) {
+            addText(g, x + 4, y + h + 8, subLabels3[0], 8.5, "700");
+            addText(g, x + w / 2, y + h + 8, subLabels3[1], 8.5, "700");
+            addText(g, x + w - 4, y + h + 8, subLabels3[2], 8.5, "700");
+          } else if (subLabels3.length === 2) {
+            addText(g, x + 5, y + h + 8, subLabels3[0], 8.5, "700");
+            addText(g, x + w - 5, y + h + 8, subLabels3[1], 8.5, "700");
+          }
+        } else if (subLabels3 && orientation === "v") {
+          if (subLabels3.length === 3) {
+            addText(g, x + w / 2, y - 7, subLabels3[0], 8.5, "700");
+            addText(g, x + w + 12, y + h / 2, subLabels3[1], 8, "700");
+            addText(g, x + w / 2, y + h + 8, subLabels3[2], 8.5, "700");
+          }
+        }
+
+        // Hover indicator
+        el("rect", {
+          x: x - 2,
+          y: y - 2,
+          width: w + 4,
+          height: h + 4,
+          rx: 2,
+          fill: "none",
+          class: "hover-ring"
+        }, g);
+
+        // Outer switch rectangle
+        el("rect", {
+          x,
+          y,
+          width: w,
+          height: h,
+          rx: 1.5,
+          fill: "#ffffff",
+          stroke: "#000000",
+          "stroke-width": boldFrame ? "1.8" : "1.25"
+        }, g);
+
+        // Active black block (drawn inside the switch when set, just like chamaleon-bass.jpg!)
+        el("rect", {
+          id: `sw-fill-${id}`,
+          x,
+          y,
+          width: 0,
+          height: 0,
+          fill: patchState.markerColor || "#000000",
+          class: "marker-fill"
+        }, g);
+
+        g.addEventListener("click", (e) => {
+          e.stopPropagation();
+          cycleSwitch(cfg, e);
+        });
+      }
+
+      function buildSynthSVG() {
+        svg.innerHTML = "";
+
+        // ===================================================================
+        // 1. UPPER PANEL OUTER CHASSIS & SECTION DIVIDERS
+        // ===================================================================
+        const topPanel = el("g", { id: "upper-panel" }, svg);
+
+        // Wood end-cheeks & top/bottom metal frame lines matching poly-d-patch.jpg
+        el("rect", { x: 25, y: 12, width: 1750, height: 560, fill: "#ffffff", stroke: "#000000", "stroke-width": "1.5" }, topPanel);
+        // Left & right double trim lines
+        el("line", { x1: 68, y1: 12, x2: 68, y2: 550, stroke: "#000", "stroke-width": "1.3" }, topPanel);
+        el("line", { x1: 79, y1: 18, x2: 79, y2: 538, stroke: "#000", "stroke-width": "1.3" }, topPanel);
+        el("line", { x1: 1721, y1: 18, x2: 1721, y2: 538, stroke: "#000", "stroke-width": "1.3" }, topPanel);
+        el("line", { x1: 1732, y1: 12, x2: 1732, y2: 550, stroke: "#000", "stroke-width": "1.3" }, topPanel);
+
+        // Inner control panel border
+        el("rect", { x: 79, y: 18, width: 1642, height: 520, fill: "none", stroke: "#000000", "stroke-width": "1.6" }, topPanel);
+        // Bottom shelf lines
+        el("line", { x1: 68, y1: 550, x2: 1732, y2: 550, stroke: "#000", "stroke-width": "1.4" }, topPanel);
+
+        // Vertical Section Dividers
+        // 1) Between CONTROLLERS and OSCILLATOR BANK (x = 266)
+        el("line", { x1: 266, y1: 30, x2: 266, y2: 530, stroke: "#000", "stroke-width": "1.6" }, topPanel);
+        // 2) Between OSCILLATOR BANK and MIXER (x = 630)
+        el("line", { x1: 630, y1: 30, x2: 630, y2: 530, stroke: "#000", "stroke-width": "1.6" }, topPanel);
+        // 3) Between MIXER and FILTER/CONTOUR (x = 974)
+        el("line", { x1: 974, y1: 30, x2: 974, y2: 530, stroke: "#000", "stroke-width": "1.6" }, topPanel);
+        // 4) Between FILTER/CONTOUR and DISTORTION/CHORUS/SEQ (x = 1288)
+        el("line", { x1: 1288, y1: 30, x2: 1288, y2: 400, stroke: "#000", "stroke-width": "1.6" }, topPanel);
+        // 5) Between DISTORTION/CHORUS/SEQ and OUTPUT (x = 1642)
+        el("line", { x1: 1642, y1: 30, x2: 1642, y2: 530, stroke: "#000", "stroke-width": "1.6" }, topPanel);
+
+        // Horizontal Sub-section Dividers
+        // Filter / Loudness Contour divider
+        el("line", { x1: 1004, y1: 286, x2: 1288, y2: 286, stroke: "#000", "stroke-width": "1.5" }, topPanel);
+        // Bottom of Loudness Contour (above Sequencer)
+        el("line", { x1: 974, y1: 400, x2: 1288, y2: 400, stroke: "#000", "stroke-width": "1.5" }, topPanel);
+        // Distortion / Chorus divider
+        el("line", { x1: 1288, y1: 178, x2: 1642, y2: 178, stroke: "#000", "stroke-width": "1.5" }, topPanel);
+        // Chorus / Sequencer divider
+        el("line", { x1: 1288, y1: 286, x2: 1642, y2: 286, stroke: "#000", "stroke-width": "1.5" }, topPanel);
+
+        // Main Section Titles along the bottom edge
+        addText(topPanel, 172, 520, "CONTROLLERS", 21, "500");
+        addText(topPanel, 448, 520, "OSCILLATOR BANK", 21, "500");
+        addText(topPanel, 802, 520, "MIXER", 21, "500");
+        addText(topPanel, 1310, 520, "SEQUENCER", 21, "500");
+        addText(topPanel, 1682, 520, "OUTPUT", 21, "500");
+
+        // Sub-panel Titles
+        addText(topPanel, 1142, 276, "FILTER", 14.5, "600");
+        addText(topPanel, 1142, 390, "LOUDNESS CONTOUR", 14.5, "600");
+        addText(topPanel, 1465, 168, "DISTORTION", 14.5, "600");
+        addText(topPanel, 1465, 276, "CHORUS", 14.5, "600");
+
+        // ===================================================================
+        // 2. SECTION 1: CONTROLLERS
+        // ===================================================================
+        drawKnob(topPanel, {
+          id: "tune",
+          cx: 170,
+          cy: 175,
+          r: 34,
+          titleTop: "TUNE",
+          scale: makeScaleTune()
+        });
+
+        // OSCILLATOR MODULATION switch straddling the divider at x=266
+        drawSwitch(topPanel, {
+          id: "osc_modulation",
+          x: 235,
+          y: 168,
+          w: 54,
+          h: 22,
+          orientation: "h",
+          positions: 2,
+          topLabel: "OSCILLATOR",
+          topLabel2: "MODULATION",
+          bottomRightLabel: "ON",
+          boldFrame: true
+        });
+
+        // MODE (MONO / UNI / POLY) & AUTO DAMP switches
+        drawSwitch(topPanel, {
+          id: "mode",
+          x: 100,
+          y: 250,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 3,
+          topLabel: "MODE",
+          subLabels3: ["MONO", "UNI", "POLY"]
+        });
+
+        drawSwitch(topPanel, {
+          id: "auto_damp",
+          x: 188,
+          y: 250,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          topLabel: "AUTO DAMP",
+          bottomRightLabel: "ON"
+        });
+
+        // GLIDE & MODULATION MIX knobs
+        drawKnob(topPanel, {
+          id: "glide",
+          cx: 126,
+          cy: 342,
+          r: 28,
+          titleTop: "GLIDE",
+          scale: makeScale0to10()
+        });
+
+        drawKnob(topPanel, {
+          id: "mod_mix",
+          cx: 214,
+          cy: 342,
+          r: 28,
+          titleTop: "MODULATION MIX",
+          subLeft: ["OSC 4/", "FILTER EG"],
+          subRight: ["NOISE/", "LFO"],
+          scale: makeScale0to10()
+        });
+
+        // Bottom two modulation source switches
+        drawSwitch(topPanel, {
+          id: "mod_src_left",
+          x: 100,
+          y: 448,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          subLabels3: ["OSC 4", "FILTER EG"]
+        });
+
+        drawSwitch(topPanel, {
+          id: "mod_src_right",
+          x: 188,
+          y: 448,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          subLabels3: ["NOISE", "LFO"]
+        });
+        addText(topPanel, 198, 484, "(MOD SRC)", 7.5, "600");
+
+        // ===================================================================
+        // 3. SECTION 2: OSCILLATOR BANK
+        // ===================================================================
+        // Vertical OSC 4 CONTROL switch on bottom-left of Oscillator Bank
+        drawSwitch(topPanel, {
+          id: "osc4_control",
+          x: 276,
+          y: 432,
+          w: 21,
+          h: 52,
+          orientation: "v",
+          positions: 2,
+          topLabel: "OSC 4",
+          topLabel2: "CONTROL"
+        });
+
+        const oscRowsY = [115, 228, 341, 454];
+        oscRowsY.forEach((ry, idx) => {
+          const oscNum = idx + 1;
+
+          // RANGE stepped knob
+          drawKnob(topPanel, {
+            id: `osc${oscNum}_range`,
+            cx: 356,
+            cy: ry,
+            r: 30,
+            titleTop: oscNum === 1 ? "RANGE" : null,
+            scale: makeScaleRange()
+          });
+
+          // Small tune LED circle next to Osc 1/2/3/4 range
+          el("circle", { cx: 392, cy: ry - 27, r: 3.5, fill: "none", stroke: "#000", "stroke-width": "1" }, topPanel);
+
+          // FREQUENCY center column
+          if (oscNum === 1) {
+            addText(topPanel, 464, ry - 44, "OSCILLATOR-1", 11.5, "700");
+            addText(topPanel, 464, ry - 31, "FREQUENCY", 11.5, "700");
+          } else {
+            drawKnob(topPanel, {
+              id: `osc${oscNum}_freq`,
+              cx: 464,
+              cy: ry,
+              r: 34,
+              titleTop: `OSCILLATOR-${oscNum}`,
+              scale: makeScaleOscFreq()
+            });
+          }
+
+          // WAVEFORM stepped knob
+          drawKnob(topPanel, {
+            id: `osc${oscNum}_wave`,
+            cx: 572,
+            cy: ry,
+            r: 30,
+            titleTop: oscNum === 1 ? "WAVEFORM" : null,
+            scale: makeScaleWave(oscNum === 4)
+          });
+        });
+
+        // ===================================================================
+        // 4. SECTION 3: MIXER (With POLY D Logo)
+        // ===================================================================
+        // POLY D Header Logo
+        addText(topPanel, 758, 65, "POLY", 26, "700");
+        // Rounded square 'D' badge
+        el("rect", { x: 808, y: 38, width: 60, height: 52, rx: 12, fill: "none", stroke: "#000", "stroke-width": "3.8" }, topPanel);
+        el("path", {
+          d: "M 822,49 L 844,49 C 853,49 858,55 858,64 C 858,73 853,79 844,79 L 822,79 Z M 830,56 L 830,72 L 842,72 C 847,72 850,69 850,64 C 850,59 847,56 842,56 Z",
+          fill: "#000",
+          "fill-rule": "evenodd"
+        }, topPanel);
+
+        // 4 Oscillator Volume Knobs + ON Switches + Connecting Lines
+        const mixOscIds = ["osc1", "osc2", "osc3", "osc4"];
+        oscRowsY.forEach((ry, idx) => {
+          const idSuffix = mixOscIds[idx];
+          drawKnob(topPanel, {
+            id: `vol_${idSuffix}`,
+            cx: 678,
+            cy: ry,
+            r: 28,
+            titleTop: "VOLUME",
+            scale: makeScale0to10()
+          });
+
+          // Horizontal link line from knob to switch
+          el("line", { x1: 716, y1: ry, x2: 730, y2: ry, stroke: "#000", "stroke-width": "1.1" }, topPanel);
+
+          drawSwitch(topPanel, {
+            id: `mix_${idSuffix}_on`,
+            x: 730,
+            y: ry - 10.5,
+            w: 52,
+            h: 21,
+            orientation: "h",
+            positions: 2,
+            bottomRightLabel: "ON"
+          });
+        });
+
+        // EXT IN VOLUME & Switch & OVERLOAD LED
+        drawSwitch(topPanel, {
+          id: "mix_ext_on",
+          x: 730,
+          y: 162,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          bottomRightLabel: "ON"
+        });
+        el("line", { x1: 782, y1: 172.5, x2: 804, y2: 172.5, stroke: "#000", "stroke-width": "1.1" }, topPanel);
+
+        drawKnob(topPanel, {
+          id: "vol_ext",
+          cx: 842,
+          cy: 172.5,
+          r: 28,
+          titleTop: "EXT IN",
+          titleTop2: "VOLUME",
+          scale: makeScale0to10()
+        });
+
+        addText(topPanel, 906, 162, "OVERLOAD", 8.5, "700");
+        el("circle", { cx: 906, cy: 176, r: 4, fill: "none", stroke: "#000", "stroke-width": "1.1" }, topPanel);
+
+        // NOISE VOLUME & Switch & WHITE/PINK Switch
+        drawSwitch(topPanel, {
+          id: "mix_noise_on",
+          x: 730,
+          y: 388,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          bottomRightLabel: "ON"
+        });
+        el("line", { x1: 782, y1: 398.5, x2: 804, y2: 398.5, stroke: "#000", "stroke-width": "1.1" }, topPanel);
+
+        drawKnob(topPanel, {
+          id: "vol_noise",
+          cx: 842,
+          cy: 398.5,
+          r: 28,
+          titleTop: "NOISE",
+          titleTop2: "VOLUME",
+          scale: makeScale0to10()
+        });
+
+        drawSwitch(topPanel, {
+          id: "noise_type",
+          x: 896,
+          y: 374,
+          w: 21,
+          h: 52,
+          orientation: "v",
+          positions: 2,
+          topLabel: "WHITE",
+          bottomLabel: "PINK"
+        });
+
+        // ===================================================================
+        // 5. SECTION 4: FILTER & LOUDNESS CONTOUR
+        // ===================================================================
+        // Left column of 5 switches straddling the x=974 divider
+        drawSwitch(topPanel, {
+          id: "filter_mode",
+          x: 948,
+          y: 112,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          topLabel: "FILTER MODE",
+          subLabels3: ["LO", "HI"]
+        });
+
+        drawSwitch(topPanel, {
+          id: "filter_modulation",
+          x: 948,
+          y: 166,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          topLabel: "FILTER",
+          topLabel2: "MODULATION",
+          bottomRightLabel: "ON"
+        });
+
+        drawSwitch(topPanel, {
+          id: "kbd_control_1",
+          x: 948,
+          y: 222,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          leftLabel: "1",
+          bottomRightLabel: "ON"
+        });
+
+        addText(topPanel, 974, 256, "KEYBOARD", 9, "700");
+        addText(topPanel, 974, 265, "CONTROL", 9, "700");
+
+        drawSwitch(topPanel, {
+          id: "kbd_control_2",
+          x: 948,
+          y: 274,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          leftLabel: "2",
+          bottomRightLabel: "ON"
+        });
+
+        drawSwitch(topPanel, {
+          id: "decay_on",
+          x: 948,
+          y: 336,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          topLabel: "DECAY",
+          bottomRightLabel: "ON"
+        });
+
+        // Filter Row 1: CUTOFF FREQUENCY, EMPHASIS, AMOUNT OF CONTOUR
+        drawKnob(topPanel, {
+          id: "cutoff",
+          cx: 1058,
+          cy: 115,
+          r: 28,
+          titleTop: "CUTOFF",
+          titleTop2: "FREQUENCY",
+          scale: makeScaleCutoff()
+        });
+
+        drawKnob(topPanel, {
+          id: "emphasis",
+          cx: 1150,
+          cy: 115,
+          r: 28,
+          titleTop: "EMPHASIS",
+          scale: makeScale0to10()
+        });
+
+        drawKnob(topPanel, {
+          id: "contour_amt",
+          cx: 1242,
+          cy: 115,
+          r: 28,
+          titleTop: "AMOUNT",
+          titleTop2: "OF CONTOUR",
+          scale: makeScale0to10()
+        });
+
+        // Filter Row 2: ATTACK, DECAY, SUSTAIN
+        drawKnob(topPanel, {
+          id: "flt_attack",
+          cx: 1058,
+          cy: 228,
+          r: 28,
+          titleTop: "ATTACK",
+          subLeft: "M-SEC",
+          subRight: "SEC",
+          scale: makeScaleEnvelope(false)
+        });
+
+        drawKnob(topPanel, {
+          id: "flt_decay",
+          cx: 1150,
+          cy: 228,
+          r: 28,
+          titleTop: "DECAY",
+          subLeft: "M-SEC",
+          subRight: "SEC",
+          scale: makeScaleEnvelope(true)
+        });
+
+        drawKnob(topPanel, {
+          id: "flt_sustain",
+          cx: 1242,
+          cy: 228,
+          r: 28,
+          titleTop: "SUSTAIN",
+          scale: makeScale0to10()
+        });
+
+        // Loudness Contour Row: ATTACK, DECAY, SUSTAIN
+        drawKnob(topPanel, {
+          id: "amp_attack",
+          cx: 1058,
+          cy: 341,
+          r: 28,
+          titleTop: "ATTACK",
+          subLeft: "M-SEC",
+          subRight: "SEC",
+          scale: makeScaleEnvelope(false)
+        });
+
+        drawKnob(topPanel, {
+          id: "amp_decay",
+          cx: 1150,
+          cy: 341,
+          r: 28,
+          titleTop: "DECAY",
+          subLeft: "M-SEC",
+          subRight: "SEC",
+          scale: makeScaleEnvelope(true)
+        });
+
+        drawKnob(topPanel, {
+          id: "amp_sustain",
+          cx: 1242,
+          cy: 341,
+          r: 28,
+          titleTop: "SUSTAIN",
+          scale: makeScale0to10()
+        });
+
+        // ===================================================================
+        // 6. SECTION 5: DISTORTION, CHORUS & SEQUENCER
+        // ===================================================================
+        // DISTORTION
+        drawKnob(topPanel, {
+          id: "dist_drive",
+          cx: 1334,
+          cy: 115,
+          r: 28,
+          titleTop: "DIST",
+          scale: makeScale0to10()
+        });
+
+        drawKnob(topPanel, {
+          id: "dist_tone",
+          cx: 1426,
+          cy: 115,
+          r: 28,
+          titleTop: "TONE",
+          scale: makeScale0to10()
+        });
+
+        drawKnob(topPanel, {
+          id: "dist_level",
+          cx: 1518,
+          cy: 115,
+          r: 28,
+          titleTop: "LEVEL",
+          scale: makeScale0to10()
+        });
+
+        drawSwitch(topPanel, {
+          id: "distortion_on",
+          x: 1574,
+          y: 112,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          bottomRightLabel: "ON"
+        });
+
+        // CHORUS Buttons I and II + ON switch
+        [
+          { id: "chorus_1", x: 1358, label: "I" },
+          { id: "chorus_2", x: 1450, label: "II" }
+        ].forEach(btn => {
+          const bg = el("g", { class: "interactive-control" }, topPanel);
+          el("circle", {
+            id: `led-${btn.id}`,
+            cx: btn.x + 19,
+            cy: 196,
+            r: 4,
+            fill: "#ffffff",
+            stroke: "#000",
+            "stroke-width": "1.1"
+          }, bg);
+          el("rect", {
+            id: `btn-${btn.id}`,
+            x: btn.x,
+            y: 208,
+            width: 38,
+            height: 38,
+            fill: "#ffffff",
+            stroke: "#000",
+            "stroke-width": "1.25"
+          }, bg);
+          addText(bg, btn.x + 19, 258, btn.label, 11, "700");
+          bg.addEventListener("click", () => {
+            patchState.switches[btn.id] = !patchState.switches[btn.id];
+            renderPatchState();
+          });
+        });
+
+        drawSwitch(topPanel, {
+          id: "chorus_on",
+          x: 1574,
+          y: 218,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          bottomRightLabel: "ON"
+        });
+
+        // SEQUENCER: TEMPO / GATE LENGTH knob
+        drawKnob(topPanel, {
+          id: "seq_tempo",
+          cx: 1380,
+          cy: 341,
+          r: 28,
+          titleTop: "TEMPO/GATE LENGTH",
+          scale: makeScale0to10()
+        });
+        el("rect", { x: 1364, y: 378, width: 32, height: 10, fill: "none", stroke: "#000", "stroke-width": "1" }, topPanel);
+        addText(topPanel, 1380, 383, "RATE CV", 7, "700");
+
+        // Behringer Triangle Logo + Text
+        const behLogo = el("g", { transform: "translate(1515, 345)" }, topPanel);
+        el("path", {
+          d: "M 0,-28 L 32,16 L -32,16 Z",
+          fill: "none",
+          stroke: "#000",
+          "stroke-width": "1.6",
+          "stroke-linejoin": "round"
+        }, behLogo);
+        el("path", {
+          d: "M -12,8 C -12,-6 4,-12 10,-4 C 15,2 6,12 -2,8 M -4,2 C 2,-2 6,4 0,6",
+          fill: "none",
+          stroke: "#000",
+          "stroke-width": "1.3",
+          "stroke-linecap": "round"
+        }, behLogo);
+        addText(behLogo, 0, 28, "behringer", 18, "700");
+
+        // Sequencer left 2x4 function buttons
+        const seqTopBtns = [
+          { x: 1002, l1: "HOLD/", l2: "REST" },
+          { x: 1041, l1: "RESET/", l2: "ACCENT" },
+          { x: 1080, l1: "ARP", l2: "SET END" },
+          { x: 1119, l1: "PATTERN", l2: "BANK" }
+        ];
+        seqTopBtns.forEach(b => {
+          el("rect", { x: b.x, y: 422, width: 34, height: 15, fill: "none", stroke: "#000", "stroke-width": "1.3" }, topPanel);
+          addText(topPanel, b.x + 17, 444, b.l1, 7.5, "700");
+          addText(topPanel, b.x + 17, 453, b.l2, 7.5, "700");
+        });
+
+        const seqBotBtns = [
+          { x: 1002, l1: "OCTAVE" },
+          { x: 1041, l1: "PAGE" },
+          { x: 1080, l1: "PLAY/STOP" },
+          { x: 1119, l1: "REC" }
+        ];
+        seqBotBtns.forEach(b => {
+          el("rect", { x: b.x, y: 465, width: 34, height: 15, fill: "none", stroke: "#000", "stroke-width": "1.3" }, topPanel);
+          addText(topPanel, b.x + 17, 488, b.l1, 7.5, "700");
+        });
+
+        // 8 LED pill enclosure + < > buttons
+        el("rect", { x: 1175, y: 422, width: 114, height: 18, rx: 9, fill: "none", stroke: "#000", "stroke-width": "1.1" }, topPanel);
+        for (let i = 0; i < 8; i++) {
+          const lx = 1186 + i * 13;
+          el("circle", { cx: lx, cy: 431, r: 4, fill: "none", stroke: "#000", "stroke-width": "1" }, topPanel);
+          addText(topPanel, lx, 447, String(i + 1), 8, "600");
+        }
+
+        // Left / Right triangles and 2 step shift buttons
+        el("polygon", { points: "1180,473 1190,467 1190,479", fill: "#000" }, topPanel);
+        el("rect", { x: 1196, y: 465, width: 34, height: 15, fill: "none", stroke: "#000", "stroke-width": "1.3" }, topPanel);
+        addText(topPanel, 1213, 488, "STEP", 7.5, "700");
+
+        el("rect", { x: 1235, y: 465, width: 34, height: 15, fill: "none", stroke: "#000", "stroke-width": "1.3" }, topPanel);
+        addText(topPanel, 1252, 488, "SWING", 7.5, "700");
+        el("polygon", { points: "1285,473 1275,467 1275,479", fill: "#000" }, topPanel);
+
+        // 8 Step Buttons (1..8)
+        for (let i = 0; i < 8; i++) {
+          const sx = 1316 + i * 38;
+          el("rect", { x: sx, y: 436, width: 35, height: 34, fill: "none", stroke: "#000", "stroke-width": "1.4" }, topPanel);
+          addText(topPanel, sx + 17.5, 482, String(i + 1), 9, "700");
+        }
+
+        // ===================================================================
+        // 7. SECTION 6: OUTPUT
+        // ===================================================================
+        drawKnob(topPanel, {
+          id: "master_vol",
+          cx: 1682,
+          cy: 115,
+          r: 28,
+          titleTop: "VOLUME",
+          scale: makeScale0to10()
+        });
+
+        drawKnob(topPanel, {
+          id: "phones_vol",
+          cx: 1682,
+          cy: 228,
+          r: 28,
+          titleTop: "PHONES",
+          scale: makeScale0to10()
+        });
+
+        el("line", { x1: 1682, y1: 274, x2: 1682, y2: 308, stroke: "#000", "stroke-width": "0.8" }, topPanel);
+        // Phones 1/4" jack circle
+        el("circle", { cx: 1682, cy: 341, r: 19, fill: "none", stroke: "#000", "stroke-width": "1.25" }, topPanel);
+
+        // Power LED, label, and vertical switch
+        el("circle", { cx: 1682, cy: 398, r: 4, fill: "none", stroke: "#000", "stroke-width": "1.1" }, topPanel);
+        addText(topPanel, 1682, 416, "POWER", 10, "700");
+
+        drawSwitch(topPanel, {
+          id: "power",
+          x: 1672,
+          y: 428,
+          w: 20,
+          h: 52,
+          orientation: "v",
+          positions: 2
+        });
+
+        // ===================================================================
+        // 8. LOWER PANEL: LEFT HAND CONTROLLERS (LFO, GLIDE, TRANSPOSE) & KEYBOARD
+        // ===================================================================
+        const botPanel = el("g", { id: "lower-panel" }, svg);
+
+        // Outer frame of lower keyboard assembly matching poly-d-patch.jpg
+        el("line", { x1: 25, y1: 12, x2: 25, y2: 810, stroke: "#000", "stroke-width": "1.5" }, botPanel);
+        el("line", { x1: 1775, y1: 12, x2: 1775, y2: 810, stroke: "#000", "stroke-width": "1.5" }, botPanel);
+
+        el("rect", { x: 68, y: 650, width: 1664, height: 162, fill: "#ffffff", stroke: "#000", "stroke-width": "1.5" }, botPanel);
+        el("line", { x1: 79, y1: 655, x2: 1721, y2: 655, stroke: "#000", "stroke-width": "1.2" }, botPanel);
+        el("line", { x1: 79, y1: 655, x2: 79, y2: 812, stroke: "#000", "stroke-width": "1.2" }, botPanel);
+        el("line", { x1: 1721, y1: 655, x2: 1721, y2: 812, stroke: "#000", "stroke-width": "1.2" }, botPanel);
+
+        // Divider between LFO/Transpose block and Keyboard
+        el("line", { x1: 312, y1: 655, x2: 312, y2: 812, stroke: "#000", "stroke-width": "1.6" }, botPanel);
+
+        // LFO RATE Knob
+        drawKnob(botPanel, {
+          id: "lfo_rate",
+          cx: 126,
+          cy: 738,
+          r: 28,
+          titleTop: "LFO RATE",
+          scale: makeScale0to10()
+        });
+        el("circle", { cx: 160, cy: 707, r: 3.5, fill: "none", stroke: "#000", "stroke-width": "1.1" }, botPanel);
+
+        // LFO Waveform Switch (Triangle / Square)
+        drawSwitch(botPanel, {
+          id: "lfo_wave",
+          x: 180,
+          y: 696,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          boldFrame: true
+        });
+        drawWaveIcon(botPanel, 186, 728, "tri");
+        drawWaveIcon(botPanel, 226, 728, "sq_wide");
+
+        // GLIDE ON Switch
+        drawSwitch(botPanel, {
+          id: "glide_on",
+          x: 180,
+          y: 762,
+          w: 52,
+          h: 21,
+          orientation: "h",
+          positions: 2,
+          topLabel: "GLIDE",
+          bottomRightLabel: "ON",
+          boldFrame: true
+        });
+
+        // TRANSPOSE 3-Position Vertical Switch (UP / NORM / DOWN)
+        drawSwitch(botPanel, {
+          id: "transpose",
+          x: 260,
+          y: 716,
+          w: 21,
+          h: 52,
+          orientation: "v",
+          positions: 3,
+          topLabel: "TRANSPOSE",
+          subLabels3: ["UP", "NORM", "DOWN"],
+          boldFrame: true
+        });
+
+        // ===================================================================
+        // 9. KEYBOARD KEYS (37-Note F-to-F Pattern matching poly-d-patch.jpg)
+        // ===================================================================
+        const kbdStartX = 318;
+        const kbdEndX = 1721;
+        const numWhiteKeys = 22; // F to F across 3+ octaves
+        const whiteKeyW = (kbdEndX - kbdStartX) / numWhiteKeys;
+        const kbdTopY = 655;
+        const kbdBotY = 812;
+
+        // Draw white key vertical dividers
+        for (let i = 0; i <= numWhiteKeys; i++) {
+          const kx = kbdStartX + i * whiteKeyW;
+          el("line", {
+            x1: kx.toFixed(1),
+            y1: kbdTopY,
+            x2: kx.toFixed(1),
+            y2: kbdBotY,
+            stroke: "#000",
+            "stroke-width": "1.4"
+          }, botPanel);
+        }
+
+        // In an F-starting keyboard (F0, G0, A0, B0 | C1, D1, E1, F1, G1, A1, B1 ...):
+        // Black keys appear after white key index i where (i % 7) is:
+        // 0 (F#), 1 (G#), 2 (A#), 4 (C#), 5 (D#) — no black key after 3 (B) or 6 (E).
+        const blackKeyW = whiteKeyW * 0.54;
+        const blackKeyH = 157;
+        for (let i = 0; i < numWhiteKeys - 1; i++) {
+          const mod = i % 7;
+          if (mod === 0 || mod === 1 || mod === 2 || mod === 4 || mod === 5) {
+            const boundaryX = kbdStartX + (i + 1) * whiteKeyW;
+            const bx = boundaryX - blackKeyW / 2;
+            el("rect", {
+              x: bx.toFixed(1),
+              y: kbdTopY,
+              width: blackKeyW.toFixed(1),
+              height: blackKeyH,
+              fill: "#ffffff",
+              stroke: "#000000",
+              "stroke-width": "1.4"
+            }, botPanel);
+          }
+        }
+      }
+
+      function getKnobAngle(cfg, val) {
+        if (val === null || val === undefined) return null;
+        const { scale } = cfg;
+        if (scale.type === "continuous") {
+          const clamped = Math.max(scale.min, Math.min(scale.max, Number(val)));
+          const ratio = (clamped - scale.min) / (scale.max - scale.min);
+          return scale.startAngle + ratio * (scale.endAngle - scale.startAngle);
+        } else if (scale.type === "stepped") {
+          const found = scale.steps.find(s => String(s.val) === String(val));
+          return found ? found.angle : null;
+        }
+        return null;
+      }
+
+      function renderPatchState() {
+        const ink = patchState.markerColor || "#000000";
+
+        // Update metadata inputs
+        document.getElementById("inputPatchName").value = patchState.name || "";
+        document.getElementById("inputPatchCategory").value = patchState.category || "";
+        document.getElementById("inputPatchDate").value = patchState.date || "";
+        document.getElementById("inputPatchNotes").value = patchState.notes || "";
+        document.getElementById("markerColorPicker").value = ink;
+
+        // 1. Render all switches
+        Object.values(SWITCH_DEFS).forEach(cfg => {
+          const rect = document.getElementById(`sw-fill-${cfg.id}`);
+          if (!rect) return;
+          const val = patchState.switches[cfg.id];
+          rect.setAttribute("fill", ink);
+
+          if (!val) {
+            rect.setAttribute("width", "0");
+            rect.setAttribute("height", "0");
+            return;
+          }
+
+          const pad = 1.5;
+          if (cfg.orientation === "h" && cfg.positions === 2) {
+            const blockW = cfg.w * 0.34;
+            rect.setAttribute("y", String(cfg.y + pad));
+            rect.setAttribute("height", String(cfg.h - pad * 2));
+            rect.setAttribute("width", String(blockW));
+            if (val === "left") {
+              rect.setAttribute("x", String(cfg.x + pad));
+            } else if (val === "right") {
+              rect.setAttribute("x", String(cfg.x + cfg.w - blockW - pad));
+            } else {
+              rect.setAttribute("width", "0");
+            }
+          } else if (cfg.orientation === "h" && cfg.positions === 3) {
+            const blockW = cfg.w * 0.31;
+            rect.setAttribute("y", String(cfg.y + pad));
+            rect.setAttribute("height", String(cfg.h - pad * 2));
+            rect.setAttribute("width", String(blockW));
+            if (val === "mono" || val === "left") {
+              rect.setAttribute("x", String(cfg.x + pad));
+            } else if (val === "uni" || val === "center") {
+              rect.setAttribute("x", String(cfg.x + (cfg.w - blockW) / 2));
+            } else if (val === "poly" || val === "right") {
+              rect.setAttribute("x", String(cfg.x + cfg.w - blockW - pad));
+            } else {
+              rect.setAttribute("width", "0");
+            }
+          } else if (cfg.orientation === "v" && cfg.positions === 2) {
+            const blockH = cfg.h * 0.38;
+            rect.setAttribute("x", String(cfg.x + pad));
+            rect.setAttribute("width", String(cfg.w - pad * 2));
+            rect.setAttribute("height", String(blockH));
+            if (val === "up") {
+              rect.setAttribute("y", String(cfg.y + pad));
+            } else if (val === "down") {
+              rect.setAttribute("y", String(cfg.y + cfg.h - blockH - pad));
+            } else {
+              rect.setAttribute("height", "0");
+            }
+          } else if (cfg.orientation === "v" && cfg.positions === 3) {
+            const blockH = cfg.h * 0.32;
+            rect.setAttribute("x", String(cfg.x + pad));
+            rect.setAttribute("width", String(cfg.w - pad * 2));
+            rect.setAttribute("height", String(blockH));
+            if (val === "up") {
+              rect.setAttribute("y", String(cfg.y + pad));
+            } else if (val === "norm" || val === "center") {
+              rect.setAttribute("y", String(cfg.y + (cfg.h - blockH) / 2));
+            } else if (val === "down") {
+              rect.setAttribute("y", String(cfg.y + cfg.h - blockH - pad));
+            } else {
+              rect.setAttribute("height", "0");
+            }
+          }
+        });
+
+        // Chorus buttons I & II
+        ["chorus_1", "chorus_2"].forEach(cid => {
+          const led = document.getElementById(`led-${cid}`);
+          const btn = document.getElementById(`btn-${cid}`);
+          const active = Boolean(patchState.switches[cid]);
+          if (led) led.setAttribute("fill", active ? ink : "#ffffff");
+          if (btn) btn.setAttribute("stroke-width", active ? "2.6" : "1.25");
+        });
+
+        // 2. Render all knobs
+        Object.values(KNOB_DEFS).forEach(cfg => {
+          const ptr = document.getElementById(`knob-ptr-${cfg.id}`);
+          if (!ptr) return;
+          const val = patchState.knobs[cfg.id];
+          const angle = getKnobAngle(cfg, val);
+
+          if (angle === null) {
+            ptr.setAttribute("visibility", "hidden");
+          } else {
+            ptr.setAttribute("visibility", "visible");
+            ptr.setAttribute("transform", `rotate(${angle.toFixed(1)}, ${cfg.cx}, ${cfg.cy})`);
+            const dot = ptr.querySelector(".marker-fill");
+            const line = ptr.querySelector(".marker-stroke");
+            if (dot) dot.setAttribute("fill", ink);
+            if (line) line.setAttribute("stroke", ink);
+          }
+        });
+
+        // Refresh live JSON drawer if open
+        const jsonArea = document.getElementById("jsonTextarea");
+        if (jsonArea) {
+          jsonArea.value = `const DEFAULT_PATCH = ${JSON.stringify(patchState, null, 2)};`;
+        }
+      }
+
+      // Cycle switch state when clicked (or click specific side of switch!)
+      function cycleSwitch(cfg, evt) {
+        const cur = patchState.switches[cfg.id];
+        let seq = [];
+        if (cfg.orientation === "h" && cfg.positions === 2) {
+          seq = ["left", "right", null];
+        } else if (cfg.orientation === "h" && cfg.positions === 3) {
+          seq = ["mono", "uni", "poly", null];
+        } else if (cfg.orientation === "v" && cfg.positions === 2) {
+          seq = ["up", "down", null];
+        } else if (cfg.orientation === "v" && cfg.positions === 3) {
+          seq = ["up", "norm", "down", null];
+        }
+        const idx = seq.indexOf(cur);
+        patchState.switches[cfg.id] = seq[(idx + 1) % seq.length];
+        renderPatchState();
+      }
+
+      // Convert mouse/touch position relative to knob center into scale value
+      function updateKnobFromPointer(clientX, clientY, cfg) {
+        const pt = svg.createSVGPoint();
+        pt.x = clientX;
+        pt.y = clientY;
+        const ctm = svg.getScreenCTM();
+        if (!ctm) return;
+        const svgP = pt.matrixTransform(ctm.inverse());
+
+        const dx = svgP.x - cfg.cx;
+        const dy = svgP.y - cfg.cy;
+        // Angle in degrees where 0 is straight up (12 o'clock), -180..+180
+        let deg = (Math.atan2(dy, dx) * 180) / Math.PI + 90;
+        if (deg > 180) deg -= 360;
+
+        const { scale } = cfg;
+        if (scale.type === "continuous") {
+          const clampedDeg = Math.max(scale.startAngle, Math.min(scale.endAngle, deg));
+          const ratio = (clampedDeg - scale.startAngle) / (scale.endAngle - scale.startAngle);
+          const rawVal = scale.min + ratio * (scale.max - scale.min);
+          patchState.knobs[cfg.id] = Math.round(rawVal * 10) / 10;
+        } else if (scale.type === "stepped") {
+          let bestStep = scale.steps[0];
+          let bestDist = Infinity;
+          scale.steps.forEach(s => {
+            const d = Math.abs(deg - s.angle);
+            if (d < bestDist) {
+              bestDist = d;
+              bestStep = s;
+            }
+          });
+          patchState.knobs[cfg.id] = bestStep.val;
+        }
+        renderPatchState();
+      }
+
+      function startKnobDrag(e, cfg) {
+        e.preventDefault();
+        if (e.shiftKey) {
+          patchState.knobs[cfg.id] = null;
+          renderPatchState();
+          return;
+        }
+
+        const getXY = (ev) => {
+          if (ev.touches && ev.touches.length > 0) {
+            return { x: ev.touches[0].clientX, y: ev.touches[0].clientY };
+          }
+          return { x: ev.clientX, y: ev.clientY };
+        };
+
+        const initial = getXY(e);
+        updateKnobFromPointer(initial.x, initial.y, cfg);
+
+        const onMove = (moveEv) => {
+          moveEv.preventDefault();
+          const pos = getXY(moveEv);
+          updateKnobFromPointer(pos.x, pos.y, cfg);
+        };
+
+        const onUp = () => {
+          window.removeEventListener("mousemove", onMove);
+          window.removeEventListener("mouseup", onUp);
+          window.removeEventListener("touchmove", onMove);
+          window.removeEventListener("touchend", onUp);
+        };
+
+        window.addEventListener("mousemove", onMove);
+        window.addEventListener("mouseup", onUp);
+        window.addEventListener("touchmove", onMove, { passive: false });
+        window.addEventListener("touchend", onUp);
+      }
+
+      function initUIControls() {
+        // Metadata inputs
+        document.getElementById("inputPatchName").addEventListener("input", (e) => {
+          patchState.name = e.target.value;
+          renderPatchState();
+        });
+        document.getElementById("inputPatchCategory").addEventListener("input", (e) => {
+          patchState.category = e.target.value;
+          renderPatchState();
+        });
+        document.getElementById("inputPatchDate").addEventListener("input", (e) => {
+          patchState.date = e.target.value;
+          renderPatchState();
+        });
+        document.getElementById("inputPatchNotes").addEventListener("input", (e) => {
+          patchState.notes = e.target.value;
+          renderPatchState();
+        });
+
+        // Preset selector
+        document.getElementById("presetSelect").addEventListener("change", (e) => {
+          const key = e.target.value;
+          if (PRESETS[key]) {
+            patchState = cloneData(PRESETS[key]);
+            renderPatchState();
+          }
+        });
+
+        // Ink color picker
+        document.getElementById("markerColorPicker").addEventListener("input", (e) => {
+          patchState.markerColor = e.target.value;
+          renderPatchState();
+        });
+
+        // Clear all knobs button (to return to switch-only style like chamaleon-bass.jpg)
+        document.getElementById("btnClearKnobs").addEventListener("click", () => {
+          Object.keys(patchState.knobs).forEach(k => patchState.knobs[k] = null);
+          renderPatchState();
+        });
+
+        // Toggle JSON inspector drawer
+        const jsonDrawer = document.getElementById("jsonDrawer");
+        document.getElementById("btnToggleJson").addEventListener("click", () => {
+          jsonDrawer.classList.toggle("hidden");
+        });
+
+        // Copy JSON code
+        const statusEl = document.getElementById("jsonStatus");
+        document.getElementById("btnCopyJson").addEventListener("click", () => {
+          const textarea = document.getElementById("jsonTextarea");
+          textarea.select();
+          document.execCommand("copy");
+          statusEl.textContent = "Copied DEFAULT_PATCH code to clipboard!";
+          statusEl.classList.remove("hidden");
+          setTimeout(() => statusEl.classList.add("hidden"), 2500);
+        });
+
+        // Apply edited JSON
+        document.getElementById("btnApplyJson").addEventListener("click", () => {
+          const raw = document.getElementById("jsonTextarea").value
+            .replace(/^\s*const\s+DEFAULT_PATCH\s*=\s*/, "")
+            .replace(/;\s*$/, "");
+          try {
+            const parsed = JSON.parse(raw);
+            patchState = parsed;
+            renderPatchState();
+            statusEl.textContent = "Applied patch data!";
+            statusEl.classList.remove("hidden", "text-red-600");
+            statusEl.classList.add("text-emerald-600");
+            setTimeout(() => statusEl.classList.add("hidden"), 2500);
+          } catch (err) {
+            statusEl.textContent = "Invalid JSON syntax: " + err.message;
+            statusEl.classList.remove("hidden", "text-emerald-600");
+            statusEl.classList.add("text-red-600");
+          }
+        });
+
+        // Save Copy as Standalone HTML file (works directly in Safari!)
+        document.getElementById("btnExportHtml").addEventListener("click", () => {
+          const slug = (patchState.name || "poly-d-patch")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "") || "poly-d-patch";
+
+          const currentDoc = document.documentElement.outerHTML;
+          const replacement = `const DEFAULT_PATCH = ${JSON.stringify(patchState, null, 2)};`;
+          const updatedHtml = "<!DOCTYPE html>\n" + currentDoc.replace(
+            /const DEFAULT_PATCH = \{[\s\S]*?\n    \};/,
+            replacement
+          );
+
+          const blob = new Blob([updatedHtml], { type: "text/html;charset=utf-8" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `${slug}.html`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+
+        // Print / Save as PDF
+        document.getElementById("btnPrint").addEventListener("click", () => {
+          window.print();
+        });
+      }
+
+      // Initialize on load
+      window.addEventListener("DOMContentLoaded", () => {
+        buildSynthSVG();
+        initUIControls();
+        renderPatchState();
+      });
+    })();
+  </script>
+</body>
+</html>
