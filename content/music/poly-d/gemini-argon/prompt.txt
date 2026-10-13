@@ -1,0 +1,2 @@
+These files are patch sheets for the Behringer Poly-D (a sort of minimoog remake with a few other changes, notably paraphonic). The poly-d-patch.jpg file is a blank patch page, and the other one shows one manually filled by me.
+I need you to create for me an html-5 version that works well at least on Safari, ideally on all contemporary browsers, that looks just like this, and that I can easily modify (creating copies) to document other patches. You can use my entries in the chamaleon bass patch as an example.
